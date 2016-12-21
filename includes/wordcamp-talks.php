@@ -141,7 +141,27 @@ final class WordCamp_Talks {
 		require( $this->includes_dir . 'comments/widgets.php' );
 
 		require( $this->includes_dir . 'talks/functions.php' );
-		require( $this->includes_dir . 'talks/classes.php' );
+
+		/** Talk Class ****************************************************************/
+
+		if ( ! class_exists( 'WordCamp_Talks_Talk' ) ) :
+			require( $this->includes_dir . 'talks/wordcamp-talks-talk.php' );
+		endif;
+
+		/** Talks Loop ****************************************************************/
+
+		if ( ! class_exists( 'WordCamp_Talks_Loop_Talks' ) ) :
+			require( $this->includes_dir . 'talks/wordcamp-talks-loop-talks.php' );
+		endif;
+
+		if ( ! class_exists( 'WordCamp_Talk_Metas' ) ) :
+			require( $this->includes_dir . 'talks/wordcamp-talk-metas.php' );
+		endif;
+
+		if ( ! class_exists( 'WordCamp_Talks_Talks_Thumbnail' ) ) :
+			require( $this->includes_dir . 'talks/wordcamp-talks-talks-thumbnail.php' );
+		endif;
+
 		require( $this->includes_dir . 'talks/tags.php' );
 		require( $this->includes_dir . 'talks/widgets.php' );
 
