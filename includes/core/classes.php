@@ -25,5 +25,9 @@ endif;
 
 if ( ! class_exists( 'WordCamp_Talks_Loop' ) ) :
 	require( 'wordcamp-talks-loop.php' );
-
 endif;
+
+require( 'post_statuses/wp_custom_post_status.php' );
+require( 'post_statuses/rejected.php' );
+require( 'post_statuses/selected.php' );
+require( 'post_statuses/shortlist.php' );
