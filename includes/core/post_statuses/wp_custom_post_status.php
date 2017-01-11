@@ -59,6 +59,7 @@ class WP_Custom_Post_Status {
 			}
 		}
 		add_action( 'admin_footer-edit.php', array( $this, 'add_to_quickedit' ) );
+		add_filter( 'display_post_states', array( $this, 'display_status_label' ) );
 	}
 
 
@@ -125,7 +126,7 @@ class WP_Custom_Post_Status {
 			$this->post_status,
 			wp_parse_args(
 				$this->args,
-				$defaults,
+				$defaults
 			 )
 		);
 	}
@@ -134,8 +135,8 @@ class WP_Custom_Post_Status {
 		// Abort if we're on the wrong post type, but only if we got a restriction
 		if ( isset( $this->post_type ) ) {
 			global $post_type;
-			if ( ! is_array( $this->post_type ) ) {
-				if ( in_array( $post_type, $this->post_type ) ) {
+			if ( is_array( $this->post_type ) ) {
+				if ( ! in_array( $post_type, $this->post_type ) ) {
 					return;
 				}
 			} elseif ( $this->post_type !== $post_type ) {
@@ -232,5 +233,15 @@ class WP_Custom_Post_Status {
 	        } );
 		</script>
 		<?php
+	}
+
+	function display_status_label( $statuses ) {
+		global $post; // we need it to check current post status
+		if ( get_query_var( 'post_status' ) !== $this->post_status ) { // not for pages with all posts of this status
+			if ( $post->post_status == $this->post_status ) { // если статус поста - Архив
+				return array( $this->post_status ); // returning our status label
+			}
+		}
+		return $statuses; // returning the array with default statuses
 	}
 }
