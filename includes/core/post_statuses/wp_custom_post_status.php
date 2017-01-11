@@ -55,9 +55,10 @@ class WP_Custom_Post_Status {
 
 		foreach ( array( 'post', 'post-new' ) as $hook ) {
 			if ( ! has_action( "admin_footer-{$hook}.php", array( $this, 'extend_submitdiv_post_status' ) ) ) {
-				add_action( "admin_footer-{$hook}.php", array( $this,'extend_submitdiv_post_status' ) );
+				add_action( "admin_footer-{$hook}.php", array( $this, 'extend_submitdiv_post_status' ) );
 			}
 		}
+		add_action( 'admin_footer-edit.php', array( $this, 'add_to_quickedit' ) );
 	}
 
 
@@ -114,19 +115,53 @@ class WP_Custom_Post_Status {
 		// Care about counters:
 		// If FALSE, will be set to array( $args->label, $args->label ), which is not desired
 		$defaults['label_count'] = _n_noop(
-			 "{$defaults['label']} <span class='count'>(%s)</span>"
-			,"{$defaults['label']} <span class='count'>(%s)</span>"
-			,'cps_textdomain'
+			"{$defaults['label']} <span class='count'>(%s)</span>",
+			"{$defaults['label']} <span class='count'>(%s)</span>",
+			'cps_textdomain'
 		);
 
 		// Register the status: Merge Args with defaults
 		register_post_status(
-			 $this->post_status
-			, wp_parse_args(
-				 $this->args
-				, $defaults
+			$this->post_status,
+			wp_parse_args(
+				$this->args,
+				$defaults,
 			 )
 		);
+	}
+
+	function add_to_quickedit() {
+		// Abort if we're on the wrong post type, but only if we got a restriction
+		if ( isset( $this->post_type ) ) {
+			global $post_type;
+			if ( ! is_array( $this->post_type ) ) {
+				if ( in_array( $post_type, $this->post_type ) ) {
+					return;
+				}
+			} elseif ( $this->post_type !== $post_type ) {
+				return;
+			}
+		}
+
+		if ( self::$jquery_ran ) {
+			return;
+		}
+		self::$jquery_ran = true;
+		echo "<script>
+		jQuery(document).ready( function() {\n";
+
+		// Our post status and post type objects
+		global $wp_post_statuses;
+
+		foreach ( $wp_post_statuses as $status ) {
+			if ( ! $status->_builtin ) {
+				?>
+				jQuery( 'select[name=\"_status\"]' ).append( '<option value=\"<?php echo esc_attr( $status->name );?>\"><?php echo esc_html( $status->label ); ?></option>' );
+				<?php
+			}
+		}
+		echo '});
+		</script>';
 	}
 
 
@@ -172,7 +207,7 @@ class WP_Custom_Post_Status {
 		}
 		?>
 		<script type="text/javascript">
-	        jQuery( document ).ready( function($) 
+	        jQuery( document ).ready( function($)
 	        {
 	            var appended = false;
 	            <?php
