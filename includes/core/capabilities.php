@@ -253,9 +253,7 @@ function wct_map_meta_caps( $caps = array(), $cap = '', $user_id = 0, $args = ar
 			case 'rate_talks'          :
 			case 'view_talk_rates'     :
 			case 'view_talk_comments'  :
-				if ( 'private' === wct_default_talk_status() ) {
-					$caps = array( 'manage_options' );
-				} elseif ( 'rate_talks' === $cap && empty( $user_id ) ) {
+				if ( 'rate_talks' === $cap && empty( $user_id ) ) {
 					$caps = array( 'do_not_allow' );
 				} else {
 					$caps = array( 'exist' );
@@ -264,17 +262,7 @@ function wct_map_meta_caps( $caps = array(), $cap = '', $user_id = 0, $args = ar
 				break;
 
 			case 'view_other_profiles' :
-				if ( 'private' === wct_default_talk_status() ) {
-					$caps = array( 'manage_options' );
-
-					if ( ! empty( $args[0] ) && ! empty( $user_id ) && (int) $args[0] === (int) $user_id ) {
-						$caps = array( 'exist' );
-					}
-
-				} else {
-					$caps = array( 'exist' );
-				}
-
+				$caps = array( 'exist' );
 				break;
 
 			case 'edit_comment' :

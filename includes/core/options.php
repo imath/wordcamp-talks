@@ -124,41 +124,6 @@ function wct_get_closing_date( $timestamp = false ) {
 }
 
 /**
- * Default publishing status (private/publish/pending)
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @param  string $default default value
- * @return string default value or customized one
- */
-function wct_default_talk_status( $default = 'private' ) {
-	$default_status = get_option( '_wc_talks_submit_status', $default );
-
-	// Make sure admins will have a publish status whatever the settings choice
-	if ( 'pending' === $default_status && wct_user_can( 'wct_talks_admin' ) ) {
-		$wct            = wct();
-		$current_screen = false;
-
-		if ( function_exists( 'get_current_screen' ) ) {
-			$current_screen = get_current_screen();
-		}
-
-		// In administration screens we need to be able to change the status
-		if ( empty( $wct->admin->is_plugin_settings ) && ( empty( $current_screen->post_type ) || 'talks' !== $current_screen->post_type ) ) {
-			$default_status = 'publish';
-		}
-	}
-
-	/**
-	 * @param  string $default_status
-	 */
-	return apply_filters( 'wct_default_talk_status', $default_status );
-}
-
-/**
  * Should the editor include the add image url button ?
  *
  * @package WordCamp Talks
