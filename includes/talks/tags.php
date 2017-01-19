@@ -526,7 +526,7 @@ function wct_talks_the_classes() {
 		 */
 		$classes = apply_filters( 'wct_talks_get_classes', $classes );
 
-		return 'class="' . join( ' ', $classes ) . '"';
+		return 'class="' . esc_attr( join( ' ', $classes ) ) . '"';
 	}
 
 /**
