@@ -346,7 +346,7 @@ function wct_comments_the_comment_title_attribute() {
 
 		if ( ! empty( $talk->post_password ) ) {
 			$title = _x( 'Protected:', 'talk permalink title protected attribute', 'wordcamp-talks' ) . ' ';
-		} else if ( ! empty( $talk->post_status ) && 'private' == $talk->post_status ) {
+		} else if ( ! empty( $talk->post_status ) ) {
 			$title = _x( 'Private:', 'talk permalink title private attribute', 'wordcamp-talks' ) . ' ';
 		}
 
@@ -411,7 +411,7 @@ function wct_comments_the_comment_title() {
  * @since 1.0.0
  */
 function wct_comments_the_comment_excerpt() {
-	echo wct_comments_get_comment_excerpt();
+	echo wp_kses_post( wct_comments_get_comment_excerpt() );
 }
 
 	/**
@@ -440,7 +440,7 @@ function wct_comments_the_comment_excerpt() {
 			$excerpt = __( 'The talk the comment was posted on is password protected: you will need the password to view its content.', 'wordcamp-talks' );
 
 		// Private
-		} else if ( ! empty( $talk->post_status ) && 'private' == $talk->post_status && ! wct_user_can( 'read_talk', $talk->ID ) ) {
+		} else if ( ! empty( $talk->post_status ) && 'publish' !== $talk->post_status && ! wct_user_can( 'read_talk', $talk->ID ) ) {
 			$excerpt = __( 'The talk the comment was posted on is private: you cannot view its content.', 'wordcamp-talks' );
 
 		// Public
@@ -463,7 +463,7 @@ function wct_comments_the_comment_excerpt() {
  * @since 1.0.0
  */
 function wct_comments_the_comment_footer() {
-	echo wct_comments_get_comment_footer();
+	echo wp_kses_post( wct_comments_get_comment_footer() );
 }
 
 	/**

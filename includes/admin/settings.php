@@ -419,8 +419,8 @@ function wct_editor_link_setting_callback() {
 function wct_moderation_message_setting_callback() {
 	?>
 
-	<label for="_wc_talks_moderation_message"><?php esc_html_e( 'In cases where &#34;Pending&#34; is the status for all talks, you can customize the moderation message', 'wordcamp-talks' ); ?></label>
-	<textarea name="_wc_talks_moderation_message" id="_wc_talks_moderation_message" rows="10" cols="50" class="large-text code" <?php wct_setting_disabled( 'wct_default_talk_status', 'pending', '!=' ); ?>><?php echo esc_textarea( wct_moderation_message() );?></textarea>
+	<label for="_wc_talks_moderation_message"><?php esc_html_e( 'Customize the moderation message', 'wordcamp-talks' ); ?></label>
+	<textarea name="_wc_talks_moderation_message" id="_wc_talks_moderation_message" rows="10" cols="50" class="large-text code"><?php echo esc_textarea( wct_moderation_message() );?></textarea>
 
 	<?php
 }
@@ -662,24 +662,6 @@ function wct_sanitize_closing_date( $option = '' ) {
 	} else {
 		return $option;
 	}
-}
-
-/**
- * Sanitize the status setting
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
- *
- * @since 1.0.0
- *
- * @param  string $option the value choosed by the admin
- * @return string         the sanitized value
- */
-function wct_sanitize_status( $option = '' ) {
-	/**
-	 * @param string $option the sanitized option
-	 */
-	return apply_filters( 'wct_sanitize_status', sanitize_key( $option ) );
 }
 
 /**
