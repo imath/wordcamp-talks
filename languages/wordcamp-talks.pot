@@ -312,12 +312,6 @@ msgid ""
 "on the number of comma separated captions you defined in this setting."
 msgstr ""
 
-#: includes/admin/admin.php:1359
-msgid ""
-"Sticky talks: choose whether to allow or not Administrators to stick talks "
-"to the top of the WordCamp Talks&#39;s archive first page."
-msgstr ""
-
 #: includes/admin/admin.php:1360
 msgid ""
 "Talk comments: if on, comments about talks will be separated from other "
@@ -507,10 +501,6 @@ msgstr ""
 msgid "Disable the &quot;To rate&quot; tab for the user's profile"
 msgstr ""
 
-#: includes/admin/settings.php:155
-msgid "Sticky talks"
-msgstr ""
-
 #: includes/admin/settings.php:163
 msgid "Talk comments"
 msgstr ""
@@ -657,12 +647,6 @@ msgstr ""
 msgid "&quot;To rate&quot; user's profile tab."
 msgstr ""
 
-#: includes/admin/settings.php:762
-msgid ""
-"Allow talks to be made &#34;sticky&#34; (they will stay at the top of "
-"WordCamp Talks first page)"
-msgstr ""
-
 #: includes/admin/settings.php:781
 msgid "Separate comments made on talks from the other post types."
 msgstr ""
@@ -713,40 +697,6 @@ msgstr ""
 
 #: includes/admin/settings.php:1483
 msgid "Save Changes"
-msgstr ""
-
-#: includes/admin/sticky.php:142
-msgid "Sticky"
-msgstr ""
-
-#: includes/admin/sticky.php:173
-msgid "This talk cannot be sticky"
-msgstr ""
-
-#: includes/admin/sticky.php:180
-msgid "Select whether or not to make the talk sticky."
-msgstr ""
-
-#: includes/admin/sticky.php:181
-msgid "Mark as sticky"
-msgstr ""
-
-#: includes/admin/sticky.php:292
-msgid "Private or password protected talks cannot be marked as sticky"
-msgstr ""
-
-#: includes/admin/sticky.php:293
-msgid "Talk successfully removed from stickies"
-msgstr ""
-
-#: includes/admin/sticky.php:294
-msgid "Talk successfully added to stickies"
-msgstr ""
-
-#: includes/admin/sticky.php:398
-msgid ""
-"The Sticky metabox allows you to stick a published talk (not password "
-"protected) to the top of the front talks archive first page."
 msgstr ""
 
 #: includes/comments/classes.php:342
@@ -1585,18 +1535,6 @@ msgstr ""
 msgctxt "Child blog possible conflict"
 msgid "child blog slug"
 msgstr ""
-
-#: includes/admin/sticky.php:317
-msgctxt "talk list table row state"
-msgid "Sticky"
-msgstr ""
-
-#: includes/admin/sticky.php:353
-msgctxt "admin talks sticky view"
-msgid "Sticky <span class=\"count\">(%s)</span>"
-msgid_plural "Sticky <span class=\"count\">(%s)</span>"
-msgstr[0] ""
-msgstr[1] ""
 
 #: includes/comments/tags.php:348 includes/talks/tags.php:698
 msgctxt "talk permalink title protected attribute"
