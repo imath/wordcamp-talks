@@ -553,10 +553,6 @@ function wct_talks_before_talk_title() {
 	function wct_talks_get_before_talk_title() {
 		$output = '';
 
-		if ( wct_talks_is_sticky_talk() ) {
-			$output = '<span class="sticky-talk"></span> ';
-		}
-
 		/**
 		 * @param  string  $output the avatar output
 		 * @param  int     the talk ID
