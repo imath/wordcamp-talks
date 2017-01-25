@@ -1243,7 +1243,7 @@ function wct_talks_the_talk_footer() {
 
 		// The author will use the front end edit form
 		} else if ( wct_talks_can_edit( $talk ) ) {
-			$edit_url = wct_get_form_url( wct_edit_slug(), $talk->post_name );
+			$edit_url = wct_get_form_url( 'edit', $talk->post_name );
 		}
 
 		if ( ! empty( $edit_url ) ) {

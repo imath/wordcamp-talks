@@ -603,21 +603,6 @@ function wct_addnew_slug( $default = '' ) {
 }
 
 /**
- * Customize the edit (action) slug of the plugin
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @param  string $default default value
- * @return string       the add (action) slug
- */
-function wct_edit_slug( $default = '' ) {
-	return 'edit';
-}
-
-/**
  * Build the signup slug (root + signup one)
  *
  * @package WordCamp Talks
@@ -644,11 +629,7 @@ function wct_signup_slug( $default = '' ) {
  * @return string       the comment pagination slug
  */
 function wct_cpage_slug( $default = '' ) {
-	if ( empty( $default ) ) {
-		$default = _x( 'cpage', 'default comments pagination slug', 'wordcamp-talks' );
-	}
-
-	return apply_filters( 'wct_cpage_slug', get_option( '_wc_talks_cpage_slug', $default ) );
+	return 'cpage';
 }
 
 /**

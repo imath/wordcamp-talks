@@ -241,7 +241,7 @@ function wct_parse_query( $posts_query = null ) {
 			$posts_query->set( 'p', -1 );
 
 		// Edit action ?
-		} else if ( wct_edit_slug() == $action ) {
+		} else if ( 'edit' == $action ) {
 			// Yes so set the corresponding var
 			wct_set_global( 'is_edit', true );
 

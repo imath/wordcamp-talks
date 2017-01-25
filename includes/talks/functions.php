@@ -1179,7 +1179,7 @@ function wct_talks_update_talk() {
 		$feedback_message['error'][] = 10;
 
 		// Redirect to the form
-		$redirect = wct_get_form_url( wct_edit_slug(), $talk_name );
+		$redirect = wct_get_form_url( 'edit', $talk_name );
 
 	// Redirect to the talk
 	} else {

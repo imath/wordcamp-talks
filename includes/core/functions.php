@@ -508,7 +508,7 @@ function wct_get_form_url( $type = '', $talk_name = '' ) {
 		$url = add_query_arg( array( wct_action_rewrite_id() => $type ), home_url( '/' ) );
 	}
 
-	if ( $type == wct_edit_slug() && ! empty( $talk_name ) ) {
+	if ( $type === 'edit' && ! empty( $talk_name ) ) {
 		$url = add_query_arg( 'talks', $talk_name, $url );
 	}
 
