@@ -1390,19 +1390,6 @@ class WordCamp_Talks_Admin {
 			),
 		);
 
-		if ( wct_is_pretty_links() ) {
-			$help['settings_page_wc_talks']['add_help_tab'][] = array(
-				'id'      => 'settings-slugs',
-				'title'   => esc_html__( 'Pretty Links', 'wordcamp-talks' ),
-				'content' => array(
-					esc_html__( 'The Pretty Links section allows you to control the permalink structure of the plugin by defining custom slugs.', 'wordcamp-talks' ),
-					esc_html__( 'The WordCamp Talks root slug is the most important one. Make sure the slug you chose is unique. Once saved, WordCamp Talks will check for an eventual slug collision with WordPress (Posts, Pages or subsites in case of a MultiSite Config), and will display a warning next to the option field.', 'wordcamp-talks' ),
-					esc_html__( 'In the case of a slug collision, we strongly advise you to change the WordCamp Talks root slug.', 'wordcamp-talks' ),
-					esc_html__( 'About the text you will enter in the slug fields, make sure it is all lowercase and contains only letters, numbers, and/or hyphens.', 'wordcamp-talks' ),
-				),
-			);
-		}
-
 		/**
 		 * @param array $help associative array to list the help tabs
 		 */
