@@ -431,7 +431,7 @@ function wct_users_get_user_rates_url( $user_id = 0, $user_nicename = '' ) {
 
 	// Pretty permalinks
 	if ( $wp_rewrite->using_permalinks() ) {
-		$url = $wp_rewrite->root . wct_user_slug() . '/%' . wct_user_rewrite_id() . '%/' . wct_user_rates_slug();
+		$url = $wp_rewrite->root . wct_user_slug() . '/%' . wct_user_rewrite_id() . '%/ratings';
 
 		// Get username if not passed
 		if ( empty( $user_nicename ) ) {
@@ -701,7 +701,7 @@ function wct_users_get_profile_nav_items( $user_id = 0, $username ='', $nofilter
 			'title'   => __( 'Rated', 'wordcamp-talks' ),
 			'url'     => wct_users_get_user_rates_url( $user_id, $username ),
 			'current' => wct_is_user_profile_rates(),
-			'slug'    => wct_user_rates_slug(),
+			'slug'    => 'ratings',
 		);
 
 		if ( ! wct_is_user_to_rate_disabled( 0, false ) ) {

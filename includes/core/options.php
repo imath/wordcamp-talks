@@ -435,37 +435,7 @@ function wct_tag_slug() {
  * @return string the user slug (prefixed by the root one)
  */
 function wct_user_slug() {
-	return apply_filters( 'wct_user_slug', 'talks' . '/' . wct_get_user_slug() );
-}
-
-/**
- * Customize the user's profile slug of the plugin
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @param  string $default default value
- * @return string       the user slug
- */
-function wct_get_user_slug( $default = '' ) {
-	return 'user';
-}
-
-/**
- * Customize the user's profile rates slug of the plugin
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @param  string $default default value
- * @return string       the user's profile rates slug
- */
-function wct_user_rates_slug( $default = '' ) {
-	return 'ratings';
+	return apply_filters( 'wct_user_slug', 'talks/user' );
 }
 
 /**

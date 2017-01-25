@@ -66,7 +66,7 @@ class WordCamp_Talks_Rewrites {
 
 		$this->user_slug          = wct_user_slug();
 		$this->user_comments_slug = wct_user_comments_slug();
-		$this->user_rates_slug    = wct_user_rates_slug();
+		$this->user_rates_slug    = 'ratings';
 		$this->user_to_rate_slug  = wct_user_to_rate_slug();
 		$this->user_talks_slug    = wct_user_talks_slug();
 		$this->cpage_slug         = wct_cpage_slug();
