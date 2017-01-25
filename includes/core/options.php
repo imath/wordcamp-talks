@@ -383,25 +383,6 @@ function wct_is_user_to_rate_disabled( $default = 0, $rates_disabled = null ) {
 }
 
 /**
- * Customize the root slug of the plugin
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @param  string $default default value
- * @return string       the root slug
- */
-function wct_root_slug( $default = '' ) {
-	if ( empty( $default ) ) {
-		$default = _x( 'talks', 'default root slug', 'wordcamp-talks' );
-	}
-
-	return apply_filters( 'wct_root_slug', get_option( '_wc_talks_root_slug', $default ) );
-}
-
-/**
  * Build the talk slug (root + talk ones)
  *
  * @package WordCamp Talks
@@ -412,7 +393,7 @@ function wct_root_slug( $default = '' ) {
  * @return string       the talk slug (prefixed by the root one)
  */
 function wct_talk_slug() {
-	return apply_filters( 'wct_talk_slug', wct_root_slug() . '/' . wct_get_talk_slug() );
+	return apply_filters( 'wct_talk_slug', 'talks' . '/' . wct_get_talk_slug() );
 }
 
 	/**
@@ -445,7 +426,7 @@ function wct_talk_slug() {
  * @return string the category slug (prefixed by the root one)
  */
 function wct_category_slug() {
-	return apply_filters( 'wct_category_slug', wct_root_slug() . '/' . wct_get_category_slug() );
+	return apply_filters( 'wct_category_slug', 'talks' . '/' . wct_get_category_slug() );
 }
 
 	/**
@@ -478,7 +459,7 @@ function wct_category_slug() {
  * @return string       the tag slug (prefixed by the root one)
  */
 function wct_tag_slug() {
-	return apply_filters( 'wct_tag_slug', wct_root_slug() . '/' . wct_get_tag_slug() );
+	return apply_filters( 'wct_tag_slug', 'talks' . '/' . wct_get_tag_slug() );
 }
 
 	/**
@@ -511,7 +492,7 @@ function wct_tag_slug() {
  * @return string the user slug (prefixed by the root one)
  */
 function wct_user_slug() {
-	return apply_filters( 'wct_user_slug', wct_root_slug() . '/' . wct_get_user_slug() );
+	return apply_filters( 'wct_user_slug', 'talks' . '/' . wct_get_user_slug() );
 }
 
 	/**
@@ -584,7 +565,7 @@ function wct_user_to_rate_slug( $default = '' ) {
  */
 function wct_user_talks_slug( $default = '' ) {
 	if ( empty( $default ) ) {
-		$default = wct_root_slug();
+		$default = 'talks';
 	}
 
 	return apply_filters( 'wct_user_talks_slug', $default );
@@ -620,7 +601,7 @@ function wct_user_comments_slug( $default = '' ) {
  * @return string       the action slug (prefixed by the root one)
  */
 function wct_action_slug() {
-	return apply_filters( 'wct_action_slug', wct_root_slug() . '/' . wct_get_action_slug() );
+	return apply_filters( 'wct_action_slug', 'talks' . '/' . wct_get_action_slug() );
 }
 
 	/**

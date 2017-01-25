@@ -230,7 +230,7 @@ final class WordCamp_Talks {
 				'slug'            => wct_talk_slug(),
 				'with_front'      => false
 			),
-			'has_archive'         => wct_root_slug(),
+			'has_archive'         => 'talks',
 			'exclude_from_search' => true,
 			'show_in_nav_menus'   => false,
 			'show_in_admin_bar'   => wct_user_can( 'wct_talks_admin' ),
