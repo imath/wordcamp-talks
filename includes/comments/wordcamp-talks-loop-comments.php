@@ -115,7 +115,7 @@ class WordCamp_Talks_Loop_Comments extends WordCamp_Talks_Loop {
 		$paginate_args = array();
 
 		$paginate_args['base']   = trailingslashit( wct_users_get_displayed_profile_url( 'comments') ) . '%_%';
-		$paginate_args['format'] = wct_cpage_slug() . '/%#%/';
+		$paginate_args['format'] = 'cpage/%#%/';
 
 		parent::start( $params, apply_filters( 'wct_comments_pagination_args', $paginate_args ) );
 	}

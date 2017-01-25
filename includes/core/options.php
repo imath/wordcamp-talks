@@ -383,66 +383,6 @@ function wct_is_user_to_rate_disabled( $default = 0, $rates_disabled = null ) {
 }
 
 /**
- * Customize the user's profile to rate slug of the plugin
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @param  string $default default value
- * @return string       the user's profile to rate slug
- */
-function wct_user_to_rate_slug( $default = '' ) {
-	return 'to-rate';
-}
-
-/**
- * Customize the user's profile talks section slug of the plugin
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @param  string $default default value
- * @return string          the user's profile talks section slug
- */
-function wct_user_talks_slug( $default = '' ) {
-	return 'talks';
-}
-
-/**
- * Build the signup slug (root + signup one)
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @param  string the default signup slug
- * @return string the signup slug (prefixed by the root one)
- */
-function wct_signup_slug( $default = '' ) {
-	return 'sign-up';
-}
-
-/**
- * Customize the comment pagination slug of the plugin in user's profile
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @param  string $default default value
- * @return string       the comment pagination slug
- */
-function wct_cpage_slug( $default = '' ) {
-	return 'cpage';
-}
-
-/**
  * Should the plugin manage signups for the blog?
  *
  * @package WordCamp Talks

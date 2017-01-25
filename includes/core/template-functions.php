@@ -246,7 +246,7 @@ function wct_parse_query( $posts_query = null ) {
 			wct_set_global( 'is_edit', true );
 
 		// Signup support
-		} else if ( wct_signup_slug() == $action && wct_is_signup_allowed_for_current_blog() ) {
+		} else if ( 'sign-up' === $action && wct_is_signup_allowed_for_current_blog() ) {
 			// Set the signup global var
 			wct_set_global( 'is_signup', true );
 

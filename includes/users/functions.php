@@ -371,7 +371,7 @@ function wct_users_get_user_talks_url( $user_id = 0, $user_nicename = '' ) {
 
 	// Pretty permalinks
 	if ( $wp_rewrite->using_permalinks() ) {
-		$url = $wp_rewrite->root . 'talks/user/%' . wct_user_rewrite_id() . '%/' . wct_user_talks_slug();
+		$url = $wp_rewrite->root . 'talks/user/%' . wct_user_rewrite_id() . '%/talks';
 
 		// Get username if not passed
 		if ( empty( $user_nicename ) ) {
@@ -490,7 +490,7 @@ function wct_users_get_user_to_rate_url( $user_id = 0, $user_nicename = '' ) {
 
 	// Pretty permalinks
 	if ( $wp_rewrite->using_permalinks() ) {
-		$url = $wp_rewrite->root . 'talks/user/%' . wct_user_rewrite_id() . '%/' . wct_user_to_rate_slug();
+		$url = $wp_rewrite->root . 'talks/user/%' . wct_user_rewrite_id() . '%/to-rate';
 
 		// Get username if not passed
 		if ( empty( $user_nicename ) ) {
@@ -604,12 +604,12 @@ function wct_users_get_signup_url() {
 	if ( $wp_rewrite->using_permalinks() ) {
 		$signup_url = $wp_rewrite->root . 'talks/action/%' . wct_action_rewrite_id() . '%';
 
-		$signup_url = str_replace( '%' . wct_action_rewrite_id() . '%', wct_signup_slug(), $signup_url );
+		$signup_url = str_replace( '%' . wct_action_rewrite_id() . '%', 'sign-up', $signup_url );
 		$signup_url = home_url( user_trailingslashit( $signup_url ) );
 
 	// Unpretty permalinks
 	} else {
-		$signup_url = add_query_arg( array( wct_action_rewrite_id() => wct_signup_slug() ), home_url( '/' ) );
+		$signup_url = add_query_arg( array( wct_action_rewrite_id() => 'sign-up' ), home_url( '/' ) );
 	}
 
 	/**
