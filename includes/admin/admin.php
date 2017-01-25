@@ -658,11 +658,6 @@ class WordCamp_Talks_Admin {
 		// First restore settings feedback lost as $parent file is no more options-general.php
 		add_action( 'all_admin_notices', array( $this, 'restore_settings_feedback' ) );
 
-		// Then flush rewrite rules if needed.
-		if ( wct_is_pretty_links() && isset( $_GET['settings-updated'] ) && isset( $_GET['page'] ) ) {
-			flush_rewrite_rules();
-		}
-
 		$this->is_plugin_settings = true;
 	}
 
