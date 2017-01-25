@@ -94,7 +94,7 @@ function wct_get_rater_caps() {
 		'view_talk_comments'  => true,
 	);
 
-	$post_type_object = get_post_type_object( wct_get_post_type() );
+	$post_type_object = get_post_type_object( 'talks' );
 
 	if ( ! empty( $post_type_object->cap ) ) {
 		$caps = array_merge( $caps, array(
@@ -284,7 +284,7 @@ function wct_map_meta_caps( $caps = array(), $cap = '', $user_id = 0, $args = ar
 
 				if ( ! is_admin() ) {
 
-					if ( ! empty( $_comment ) && wct_get_post_type() == get_post_type( $_comment->comment_post_ID ) ) {
+					if ( ! empty( $_comment ) && 'talks' == get_post_type( $_comment->comment_post_ID ) ) {
 						$caps = array( 'manage_options' );
 					}
 

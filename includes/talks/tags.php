@@ -32,11 +32,7 @@ function wct_talks_search_form() {
 		$search_value = esc_html( $search_value );
 	}
 
-	if ( ! wct_is_pretty_links() ) {
-		$hidden = "\n" . '<input type="hidden" name="post_type" value="' . wct_get_post_type() . '"/>';
-	} else {
-		$action = apply_filters( 'wct_talks_search_form_action_url', wct_get_root_url() );
-	}
+	$action = apply_filters( 'wct_talks_search_form_action_url', wct_get_root_url() );
 
 	$search_form_html = '<form action="' . esc_url( $action ) . '" method="get" id="talks-search-form" class="nav-form">' . $hidden;
 	$search_form_html .= '<label><input type="text" name="' . wct_search_rewrite_id() . '" id="talks-search-box" placeholder="'. esc_attr( $placeholder ) .'" value="' . $search_value . '" /></label>';
@@ -69,37 +65,25 @@ function wct_talks_order_form() {
 		$order_value = 'date';
 	}
 
-	if ( ! wct_is_pretty_links() ) {
-		if ( ! empty( $category ) ) {
-			$hidden = "\n" . '<input type="hidden" name="' . esc_attr( wct_get_category() ). '" value="' . $category . '"/>';
-		} else if ( ! empty( $tag ) ) {
-			$hidden = "\n" . '<input type="hidden" name="' . esc_attr( wct_get_tag() ). '" value="' . $tag . '"/>';
-		} else {
-			$hidden = "\n" . '<input type="hidden" name="post_type" value="' . wct_get_post_type() . '"/>';
-		}
+	// Viewing tags
+	if ( wct_is_tag() ) {
+		$action = wct_get_tag_url( $tag );
 
-	// We need to set the action url
+	// Viewing categgories
+	} else if ( wct_is_category() ) {
+		$action = wct_get_category_url( $category );
+
+	// Defaults to roout url
 	} else {
-		// Viewing tags
-		if ( wct_is_tag() ) {
-			$action = wct_get_tag_url( $tag );
-
-		// Viewing categgories
-		} else if ( wct_is_category() ) {
-			$action = wct_get_category_url( $category );
-
-		// Defaults to roout url
-		} else {
-			$action = wct_get_root_url();
-		}
-
-		/**
-		 * @param string $action the action form attribute
-		 * @param string the current category term slug if set
-		 * @param string the current tag term slug if set
-		 */
-		$action = apply_filters( 'wct_talks_order_form_action_url', $action, $category, $tag );
+		$action = wct_get_root_url();
 	}
+
+	/**
+	 * @param string $action the action form attribute
+	 * @param string the current category term slug if set
+	 * @param string the current tag term slug if set
+	 */
+	$action = apply_filters( 'wct_talks_order_form_action_url', $action, $category, $tag );
 
 	$order_form_html = '<form action="' . esc_url( $action ) . '" method="get" id="talks-order-form" class="nav-form">' . $hidden;
 	$order_form_html .= '<label><select name="orderby" id="talks-order-box">';
@@ -1259,7 +1243,7 @@ function wct_talks_the_talk_footer() {
 
 		// The author will use the front end edit form
 		} else if ( wct_talks_can_edit( $talk ) ) {
-			$edit_url = wct_get_form_url( wct_edit_slug(), $talk->post_name );
+			$edit_url = wct_get_form_url( 'edit', $talk->post_name );
 		}
 
 		if ( ! empty( $edit_url ) ) {
@@ -1988,7 +1972,7 @@ add_action( 'wct_media_buttons', 'wct_buddydrive_button' );
 function wct_talks_embed_meta() {
 	$talk = get_post();
 
-	if ( ! isset( $talk->post_type ) || wct_get_post_type() !== $talk->post_type || wct_is_rating_disabled() ) {
+	if ( ! isset( $talk->post_type ) || 'talks' !== $talk->post_type || wct_is_rating_disabled() ) {
 		return;
 	}
 

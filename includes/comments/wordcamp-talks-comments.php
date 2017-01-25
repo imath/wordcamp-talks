@@ -55,7 +55,7 @@ class WordCamp_Talks_Comments {
 	 */
 	private function setup_globals() {
 		/** Rewrite ids ***************************************************************/
-		$this->post_type = wct_get_post_type();
+		$this->post_type = 'talks';
 		$this->comments_count = false;
 		$this->talk_comments_count = false;
 	}
@@ -246,7 +246,7 @@ class WordCamp_Talks_Comments {
 		$comment = wct_comments_get_comment( $comment_id );
 
 		// check if it relates to an talk
-		if ( empty( $comment->comment_post_type ) || wct_get_post_type() != $comment->comment_post_type ) {
+		if ( empty( $comment->comment_post_type ) || 'talks' != $comment->comment_post_type ) {
 			return $emails;
 		}
 
@@ -296,7 +296,7 @@ class WordCamp_Talks_Comments {
 		}
 
 		// Return if no user_id or the comment does not relate to an talk
-		if ( empty( $comment->comment_post_author ) || empty( $comment->comment_post_type ) || wct_get_post_type() != $comment->comment_post_type ) {
+		if ( empty( $comment->comment_post_author ) || empty( $comment->comment_post_type ) || 'talks' != $comment->comment_post_type ) {
 			return $message;
 		}
 
@@ -305,7 +305,7 @@ class WordCamp_Talks_Comments {
 
 		if ( ! empty( $matches[2] ) ) {
 			foreach ( $matches[2] as $action ) {
-				$message = str_replace( $action, $action . '&post_type=' . wct_get_post_type(), $message );
+				$message = str_replace( $action, $action . '&post_type=talks', $message );
 			}
 		}
 
@@ -354,7 +354,7 @@ class WordCamp_Talks_Comments {
 		if ( ! empty( $pieces ) ) {
 			$pieces = array(
 				'join'  => "JOIN {$wpdb->posts} ON {$wpdb->posts}.ID = {$wpdb->comments}.comment_post_ID",
-				'where' => $pieces['where'] . ' ' . $wpdb->prepare( "AND {$wpdb->posts}.post_type != %s", wct_get_post_type() ),
+				'where' => $pieces['where'] . ' ' . $wpdb->prepare( "AND {$wpdb->posts}.post_type != %s", 'talks' ),
 			);
 		}
 
@@ -386,7 +386,7 @@ class WordCamp_Talks_Comments {
 
 		$sql['select']  = 'SELECT COUNT( * )';
 		$sql['from']    = "FROM {$wpdb->comments} LEFT JOIN {$wpdb->posts} ON ( {$wpdb->posts}.ID = {$wpdb->comments}.comment_post_ID )";
-		$sql['where'][] = $wpdb->prepare( "{$wpdb->posts}.post_type = %s", wct_get_post_type() );
+		$sql['where'][] = $wpdb->prepare( "{$wpdb->posts}.post_type = %s", 'talks' );
 		$sql['where'][] = $wpdb->prepare( "{$wpdb->comments}.user_id = %d", $user_id );
 		$sql['where'][] = $wpdb->prepare( "{$wpdb->comments}.comment_approved = %d", 1 );
 
@@ -420,7 +420,7 @@ class WordCamp_Talks_Comments {
 
 		$sql['select']  = 'SELECT comment_approved, COUNT( * ) AS num_comments';
 		$sql['from']    = "FROM {$wpdb->comments} LEFT JOIN {$wpdb->posts} ON ( {$wpdb->posts}.ID = {$wpdb->comments}.comment_post_ID )";
-		$sql['where']   = $wpdb->prepare( "WHERE {$wpdb->posts}.post_type = %s", wct_get_post_type() );
+		$sql['where']   = $wpdb->prepare( "WHERE {$wpdb->posts}.post_type = %s", 'talks' );
 		$sql['groupby'] = 'GROUP BY comment_approved';
 
 		$query = apply_filters( 'wct_count_talks_comments_query', join( ' ', $sql ), $sql );
@@ -486,7 +486,7 @@ class WordCamp_Talks_Comments {
 		$comment = wct_comments_get_comment( $comment_id );
 
 		// check if it relates to a talk
-		if ( empty( $comment->comment_post_type ) || wct_get_post_type() !== $comment->comment_post_type ) {
+		if ( empty( $comment->comment_post_type ) || 'talks' !== $comment->comment_post_type ) {
 			return $emails;
 		}
 

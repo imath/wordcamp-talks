@@ -53,7 +53,7 @@ class WordCamp_Talks_Loop_Comments extends WordCamp_Talks_Loop {
 		}
 
 		$comments_args = array(
-			'post_type'   => wct_get_post_type(),
+			'post_type'   => 'talks',
 			'post_status' => $r['post_status'],
 			'status'      => $r['status'],
 			'user_id'     => (int) $r['user_id'],
@@ -83,7 +83,7 @@ class WordCamp_Talks_Loop_Comments extends WordCamp_Talks_Loop {
 			$post_ids = wp_list_pluck( $comments, 'comment_post_ID' );
 
 			// Get all posts in the object cache.
-			$posts = get_posts( array( 'include' => $post_ids, 'post_type' => wct_get_post_type() ) );
+			$posts = get_posts( array( 'include' => $post_ids, 'post_type' => 'talks' ) );
 
 			// Reset will need to be done at the end of the loop
 			wct_set_global( 'needs_reset', true );
@@ -114,12 +114,8 @@ class WordCamp_Talks_Loop_Comments extends WordCamp_Talks_Loop {
 
 		$paginate_args = array();
 
-		if ( ! wct_is_pretty_links() ) {
-			$paginate_args['base'] = add_query_arg( wct_cpage_rewrite_id(), '%#%' );
-		} else {
-			$paginate_args['base']   = trailingslashit( wct_users_get_displayed_profile_url( 'comments') ) . '%_%';
-			$paginate_args['format'] = wct_cpage_slug() . '/%#%/';
-		}
+		$paginate_args['base']   = trailingslashit( wct_users_get_displayed_profile_url( 'comments') ) . '%_%';
+		$paginate_args['format'] = 'cpage/%#%/';
 
 		parent::start( $params, apply_filters( 'wct_comments_pagination_args', $paginate_args ) );
 	}

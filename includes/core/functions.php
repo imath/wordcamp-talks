@@ -206,75 +206,6 @@ function wct_get_global( $var_key = '' ) {
 /** Post Type (talks) *********************************************************/
 
 /**
- * Outputs the post type identifier (talks) for the plugin
- *
- * @package WordCamp Talks
- * @subpackage core/functions
- *
- * @since 1.0.0
- *
- * @return string the post type identifier
- */
-function wct_post_type() {
-	echo wct_get_post_type();
-}
-
-	/**
-	 * Gets the post type identifier (talks)
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage core/functions
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return string the post type identifier
-	 */
-	function wct_get_post_type() {
-		return apply_filters( 'wct_get_post_type', wct()->post_type );
-	}
-
-/**
- * Gets plugin's main post type init arguments
- *
- * @package WordCamp Talks
- * @subpackage core/functions
- *
- * @since 1.0.0
- *
- * @return array the init arguments for the 'talks' post type
- */
-function wct_post_type_register_args() {
-	$supports = array( 'title', 'editor', 'author', 'comments', 'revisions' );
-
-	if ( wct_featured_images_allowed() ) {
-		$supports[] = 'thumbnail';
-	}
-
-	return apply_filters( 'wct_post_type_register_args', array(
-		'public'              => true,
-		'query_var'           => wct_get_post_type(),
-		'rewrite'             => array(
-			'slug'            => wct_talk_slug(),
-			'with_front'      => false
-		),
-		'has_archive'         => wct_root_slug(),
-		'exclude_from_search' => true,
-		'show_in_nav_menus'   => false,
-		'show_in_admin_bar'   => wct_user_can( 'wct_talks_admin' ),
-		'menu_icon'           => 'dashicons-megaphone',
-		'supports'            => $supports,
-		'taxonomies'          => array(
-			wct_get_category(),
-			wct_get_tag()
-		),
-		'capability_type'     => array( 'talk', 'talks' ),
-		'capabilities'        => wct_get_post_type_caps(),
-		'delete_with_user'    => true,
-		'can_export'          => true,
-	) );
-}
-
-/**
  * Gets the labels for the plugin's post type
  *
  * @package WordCamp Talks
@@ -335,7 +266,7 @@ function wct_get_category() {
 function wct_category_register_args() {
 	return apply_filters( 'wct_category_register_args', array(
 		'rewrite'               => array(
-			'slug'              => wct_category_slug(),
+			'slug'              => 'talks/category',
 			'with_front'        => false,
 			'hierarchical'      => false,
 		),
@@ -403,7 +334,7 @@ function wct_get_tag() {
 function wct_tag_register_args() {
 	return apply_filters( 'wct_tag_register_args', array(
 		'rewrite'               => array(
-			'slug'              => wct_tag_slug(),
+			'slug'              => 'talks/tag',
 			'with_front'        => false,
 			'hierarchical'      => false,
 		),
@@ -459,7 +390,7 @@ function wct_tag_register_labels() {
  * @return string root url for the post type
  */
 function wct_get_root_url() {
-	return apply_filters( 'wct_get_root_url', get_post_type_archive_link( wct_get_post_type() ) );
+	return apply_filters( 'wct_get_root_url', get_post_type_archive_link( 'talks' ) );
 }
 
 /**
@@ -550,7 +481,7 @@ function wct_get_form_url( $type = '', $talk_name = '' ) {
 	global $wp_rewrite;
 
 	if ( empty( $type ) ) {
-		$type = wct_addnew_slug();
+		$type = 'add';
 	}
 
 	/**
@@ -567,7 +498,7 @@ function wct_get_form_url( $type = '', $talk_name = '' ) {
 
 	// Pretty permalinks
 	if ( $wp_rewrite->using_permalinks() ) {
-		$url = $wp_rewrite->root . wct_action_slug() . '/%' . wct_action_rewrite_id() . '%';
+		$url = $wp_rewrite->root . 'talks/action/%' . wct_action_rewrite_id() . '%';
 
 		$url = str_replace( '%' . wct_action_rewrite_id() . '%', $type, $url );
 		$url = home_url( user_trailingslashit( $url ) );
@@ -577,8 +508,8 @@ function wct_get_form_url( $type = '', $talk_name = '' ) {
 		$url = add_query_arg( array( wct_action_rewrite_id() => $type ), home_url( '/' ) );
 	}
 
-	if ( $type == wct_edit_slug() && ! empty( $talk_name ) ) {
-		$url = add_query_arg( wct_get_post_type(), $talk_name, $url );
+	if ( $type === 'edit' && ! empty( $talk_name ) ) {
+		$url = add_query_arg( 'talks', $talk_name, $url );
 	}
 
 	/**
@@ -1402,7 +1333,7 @@ function wct_adminbar_menu( $wp_admin_bar = null ){
 	}
 
 	if ( ! empty( $wp_admin_bar ) && wct_user_can( 'edit_talks' ) ) {
-		$menu_url = add_query_arg( 'post_type', wct_get_post_type(), admin_url( 'edit.php' ) );
+		$menu_url = add_query_arg( 'post_type', 'talks', admin_url( 'edit.php' ) );
 		$wp_admin_bar->add_menu( array(
 			'parent' => 'appearance',
 			'id'     => 'wc_talks',

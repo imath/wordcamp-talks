@@ -66,7 +66,7 @@ if ( ! class_exists( 'WordCamp_Talk_Recent_Comments' ) ) :
 	 */
 	public function override_comment_args( $comment_args = array() ) {
 		// It's that simple !!
-		$comment_args['post_type'] = wct_get_post_type();
+		$comment_args['post_type'] = 'talks';
 
 		// Now return these args
 		return $comment_args;

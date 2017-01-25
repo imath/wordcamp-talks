@@ -88,7 +88,7 @@ class WordCamp_Talks_Admin_Comments {
 	 * @since 1.0.0
 	 */
 	private function setup_globals() {
-		$this->post_type          = wct_get_post_type();
+		$this->post_type          = 'talks';
 		$this->talk_comment_count = false;
 	}
 
@@ -413,7 +413,7 @@ class WordCamp_Talks_Admin_Comments {
 			// As WP_List_Table->comments_bubble() function is protected and no filter... last option is JS
 			$( '.post-com-count' ).each( function() {
 				original = $( this ).prop( 'href' );
-				$( this ).prop( 'href', original + '&post_type=<?php wct_post_type(); ?>' );
+				$( this ).prop( 'href', original + '&post_type=talks' );
 			} );
 
 		} )(jQuery);

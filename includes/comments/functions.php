@@ -45,7 +45,7 @@ function wct_comments_get_comment( $comment_id = 0 ) {
 	// Get and append post type if an talk one
 	$post = get_post( $comment->comment_post_ID );
 
-	if ( wct_get_post_type() == $post->post_type ) {
+	if ( 'talks' === $post->post_type ) {
 		$comment->comment_post_type   = $post->post_type;
 		$comment->comment_post_author = $post->post_author;
 		$comment->comment_post_title  = $post->post_title;
@@ -71,7 +71,7 @@ function wct_comments_get_comment( $comment_id = 0 ) {
  */
 function wct_comments_get_comments( $args = array() ) {
 	$comments_args = wp_parse_args( $args, array(
-		'post_type'   => wct_get_post_type(),
+		'post_type'   => 'talks',
 		'post_status' => 'publish',
 		'status'      => 'approve',
 		'number'      => false,
@@ -112,7 +112,7 @@ function wct_comments_clean_count_cache( $comment_id = 0, $status = '' ) {
 	$comment = wct_comments_get_comment( $comment_id );
 
 	// Make sure the comment has been made on an talk post type
-	if ( empty( $comment->comment_post_type ) || wct_get_post_type() != $comment->comment_post_type ) {
+	if ( empty( $comment->comment_post_type ) || 'talks' !== $comment->comment_post_type ) {
 		return;
 	}
 
@@ -227,11 +227,11 @@ function wct_edit_comment_link( $location = '' ) {
 	$comment_id = absint( $matches[1] );
 	$comment    = wct_comments_get_comment( $comment_id );
 
-	if ( empty( $comment->comment_post_type ) || wct_get_post_type() != $comment->comment_post_type ) {
+	if ( empty( $comment->comment_post_type ) || 'talks' !== $comment->comment_post_type ) {
 		return $location;
 	}
 
-	$new_location = add_query_arg( 'post_type', wct_get_post_type(), $location );
+	$new_location = add_query_arg( 'post_type', 'talks', $location );
 
 	/**
 	 * @param  string $new_location the new comment edit link
@@ -371,7 +371,7 @@ function wct_edit_comments_number( $count = 0, $post_id = 0 ) {
 
 	$post_type = get_post_type( $post_id );
 
-	if ( wct_get_post_type() !== $post_type ) {
+	if ( 'talks' !== $post_type ) {
 		return $count;
 	}
 
@@ -406,7 +406,7 @@ function wct_comment_reply_link( $reply_link = '', $args = array(), $comment = n
 
 	$post_type = get_post_type( $post );
 
-	if ( wct_get_post_type() !== $post_type ) {
+	if ( 'talks' !== $post_type ) {
 		return $reply_link;
 	}
 
@@ -453,7 +453,7 @@ function wct_comment_reply_link( $reply_link = '', $args = array(), $comment = n
  */
 function wct_comment_feed_limits( $limit = '', $wp_query = null ) {
 	// Force the comments query to return nothing
-	if ( ! empty( $wp_query->query['post_type'] ) && wct_get_post_type() === $wp_query->query['post_type'] && ! wct_user_can( 'comment_talks' ) ) {
+	if ( ! empty( $wp_query->query['post_type'] ) && 'talks' === $wp_query->query['post_type'] && ! wct_user_can( 'comment_talks' ) ) {
 		$limit = 'LIMIT 0';
 	}
 

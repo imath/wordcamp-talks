@@ -939,7 +939,7 @@ function wct_talks_get_order_options() {
  */
 function wct_talks_private_title_prefix( $prefix = '', $talk = null ) {
 	// Not an talk ? Bail.
-	if ( empty( $talk ) || wct_get_post_type() != $talk->post_type ) {
+	if ( empty( $talk ) || 'talks' !== $talk->post_type ) {
 		return $prefix;
 	}
 
@@ -964,7 +964,7 @@ function wct_talks_private_title_prefix( $prefix = '', $talk = null ) {
  */
 function wct_talks_protected_title_prefix( $prefix = '', $talk = null ) {
 	// Not an talk ? Bail.
-	if ( empty( $talk ) || wct_get_post_type() != $talk->post_type ) {
+	if ( empty( $talk ) || 'talks' != $talk->post_type ) {
 		return $prefix;
 	}
 
@@ -1095,7 +1095,7 @@ function wct_talks_update_talk() {
 	$redirect = wct_get_redirect_url();
 
 	// Get talk name
-	$talk_name = get_query_var( wct_get_post_type() );
+	$talk_name = get_query_var( 'talks' );
 
 	// Get Talk Object
 	$talk = get_queried_object();
@@ -1179,7 +1179,7 @@ function wct_talks_update_talk() {
 		$feedback_message['error'][] = 10;
 
 		// Redirect to the form
-		$redirect = wct_get_form_url( wct_edit_slug(), $talk_name );
+		$redirect = wct_get_form_url( 'edit', $talk_name );
 
 	// Redirect to the talk
 	} else {

@@ -321,7 +321,7 @@ function wct_set_template( $template = '' ) {
 			);
 
 			// Main plugin's archive page
-			if ( is_post_type_archive( wct_get_post_type() ) ) {
+			if ( is_post_type_archive( 'talks' ) ) {
 				$template_args['context'] = 'archive';
 			}
 

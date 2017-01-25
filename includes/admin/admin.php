@@ -92,7 +92,7 @@ class WordCamp_Talks_Admin {
 	 * @since 1.0.0
 	 */
 	private function setup_globals() {
-		$this->post_type     = wct_get_post_type();
+		$this->post_type     = 'talks';
 		$this->includes_dir  = trailingslashit( wct()->includes_dir . 'admin' );
 		$this->parent_slug   = false;
 
@@ -657,11 +657,6 @@ class WordCamp_Talks_Admin {
 	public function settings_load() {
 		// First restore settings feedback lost as $parent file is no more options-general.php
 		add_action( 'all_admin_notices', array( $this, 'restore_settings_feedback' ) );
-
-		// Then flush rewrite rules if needed.
-		if ( wct_is_pretty_links() && isset( $_GET['settings-updated'] ) && isset( $_GET['page'] ) ) {
-			flush_rewrite_rules();
-		}
 
 		$this->is_plugin_settings = true;
 	}
@@ -1395,19 +1390,6 @@ class WordCamp_Talks_Admin {
 			),
 		);
 
-		if ( wct_is_pretty_links() ) {
-			$help['settings_page_wc_talks']['add_help_tab'][] = array(
-				'id'      => 'settings-slugs',
-				'title'   => esc_html__( 'Pretty Links', 'wordcamp-talks' ),
-				'content' => array(
-					esc_html__( 'The Pretty Links section allows you to control the permalink structure of the plugin by defining custom slugs.', 'wordcamp-talks' ),
-					esc_html__( 'The WordCamp Talks root slug is the most important one. Make sure the slug you chose is unique. Once saved, WordCamp Talks will check for an eventual slug collision with WordPress (Posts, Pages or subsites in case of a MultiSite Config), and will display a warning next to the option field.', 'wordcamp-talks' ),
-					esc_html__( 'In the case of a slug collision, we strongly advise you to change the WordCamp Talks root slug.', 'wordcamp-talks' ),
-					esc_html__( 'About the text you will enter in the slug fields, make sure it is all lowercase and contains only letters, numbers, and/or hyphens.', 'wordcamp-talks' ),
-				),
-			);
-		}
-
 		/**
 		 * @param array $help associative array to list the help tabs
 		 */
@@ -1613,7 +1595,7 @@ class WordCamp_Talks_Admin {
 			return;
 		}
 
-		if ( 'edit-' . wct_get_post_type() !== $current_screen->id ) {
+		if ( 'edit-talks' !== $current_screen->id ) {
 			return;
 		}
 

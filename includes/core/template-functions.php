@@ -83,7 +83,7 @@ function wct_parse_query( $posts_query = null ) {
 	}
 
 	// Talks post type for a later use
-	$talk_post_type = wct_get_post_type();
+	$talk_post_type = 'talks';
 
 	/** User's profile ************************************************************/
 
@@ -230,7 +230,7 @@ function wct_parse_query( $posts_query = null ) {
 		wct_set_global( 'is_action', true );
 
 		// Is the new talk form requested ?
-		if ( wct_addnew_slug() == $action ) {
+		if ( 'add' === $action ) {
 			// Yes so set the corresponding var
 			wct_set_global( 'is_new', true );
 
@@ -241,12 +241,12 @@ function wct_parse_query( $posts_query = null ) {
 			$posts_query->set( 'p', -1 );
 
 		// Edit action ?
-		} else if ( wct_edit_slug() == $action ) {
+		} else if ( 'edit' == $action ) {
 			// Yes so set the corresponding var
 			wct_set_global( 'is_edit', true );
 
 		// Signup support
-		} else if ( wct_signup_slug() == $action && wct_is_signup_allowed_for_current_blog() ) {
+		} else if ( 'sign-up' === $action && wct_is_signup_allowed_for_current_blog() ) {
 			// Set the signup global var
 			wct_set_global( 'is_signup', true );
 
@@ -423,7 +423,7 @@ function wct_is_admin() {
 	$current_screen = get_current_screen();
 
 	// Make sure the current screen post type is step and is the talks one
-	if ( ! empty( $current_screen->post_type ) && wct_get_post_type() == $current_screen->post_type ) {
+	if ( ! empty( $current_screen->post_type ) && 'talks' == $current_screen->post_type ) {
 		$retval = true;
 	}
 
@@ -497,7 +497,7 @@ function wct_is_signup() {
  * @return bool true if on a single talk template, false otherwise
  */
 function wct_is_single_talk() {
-	return (bool) apply_filters( 'wct_is_single_talk', is_singular( wct_get_post_type() ) );
+	return (bool) apply_filters( 'wct_is_single_talk', is_singular( 'talks' ) );
 }
 
 /**
@@ -527,7 +527,7 @@ function wct_get_single_talk_id() {
 function wct_is_talks_archive() {
 	$retval = false;
 
-	if ( is_post_type_archive( wct_get_post_type() ) || wct_get_global( 'is_talks_archive' ) ) {
+	if ( is_post_type_archive( 'talks' ) || wct_get_global( 'is_talks_archive' ) ) {
 		$retval = true;
 	}
 
