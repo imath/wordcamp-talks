@@ -343,7 +343,7 @@ function wct_root_slug_conflict_check( $slug = 'talks' ) {
 	 * '/%postname%/' In that case a post will be listed in post archive pages but the
 	 * single post may arrive on the main Archive page.
 	 */
-	if ( '/%postname%/' == wct()->pretty_links ) {
+	if ( '/%postname%/' == get_option( 'permalink_structure' ) ) {
 		// Check for posts having a post name == root slug
 		$post = get_posts( array( 'name' => $slug, 'post_type' => array( 'post', 'page' ) ) );
 

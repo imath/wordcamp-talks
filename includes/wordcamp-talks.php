@@ -86,9 +86,6 @@ final class WordCamp_Talks {
 		$this->category  = 'talk_categories';
 		$this->tag       = 'talk_tags';
 
-		// Pretty links ?
-		$this->pretty_links = get_option( 'permalink_structure' );
-
 		// template globals
 		$this->is_talks    = false;
 		$this->template_file    = false;

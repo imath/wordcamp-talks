@@ -55,25 +55,6 @@ function wct_get_default_options() {
 		'_wc_talks_autolog_enabled'     => 0,
 	);
 
-	// Pretty links customization
-	if ( wct_is_pretty_links() ) {
-		$default_options = array_merge( $default_options, array(
-			'_wc_talks_root_slug'          => _x( 'talks', 'default root slug', 'wordcamp-talks' ),
-			'_wc_talks_talk_slug'          => _x( 'talk', 'default talk slug', 'wordcamp-talks' ),
-			'_wc_talks_category_slug'      => _x( 'category', 'default category slug', 'wordcamp-talks' ),
-			'_wc_talks_tag_slug'           => _x( 'tag', 'default tag slug', 'wordcamp-talks' ),
-			'_wc_talks_user_slug'          => _x( 'user', 'default user slug', 'wordcamp-talks' ),
-			'_wc_talks_user_comments_slug' => _x( 'comments', 'default comments slug', 'wordcamp-talks' ),
-			'_wc_talks_user_rates_slug'    => _x( 'ratings', 'default ratings slug', 'wordcamp-talks' ),
-			'_wc_talks_user_to_rate_slug'  => _x( 'to-rate', 'default to rate slug', 'wordcamp-talks' ),
-			'_wc_talks_signup_slug'        => _x( 'sign-up', 'default sign-up action slug', 'wordcamp-talks' ),
-			'_wc_talks_action_slug'        => _x( 'action', 'default action slug', 'wordcamp-talks' ),
-			'_wc_talks_addnew_slug'        => _x( 'add', 'default add talk action slug', 'wordcamp-talks' ),
-			'_wc_talks_edit_slug'          => _x( 'edit', 'default edit talk action slug', 'wordcamp-talks' ),
-			'_wc_talks_cpage_slug'         => _x( 'cpage', 'default comments pagination slug', 'wordcamp-talks' ),
-		) );
-	}
-
 	// Multisite options
 	if ( is_multisite() ) {
 		$default_options = array_merge( $default_options, array(
