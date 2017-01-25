@@ -393,23 +393,8 @@ function wct_is_user_to_rate_disabled( $default = 0, $rates_disabled = null ) {
  * @return string       the talk slug (prefixed by the root one)
  */
 function wct_talk_slug() {
-	return apply_filters( 'wct_talk_slug', 'talks' . '/' . wct_get_talk_slug() );
+	return apply_filters( 'wct_talk_slug', 'talks/talk' );
 }
-
-	/**
-	 * Customize the talk (post type) slug of the plugin
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage core/options
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param  string $default default value
-	 * @return string       the talk slug
-	 */
-	function wct_get_talk_slug( $default = '' ) {
-		return 'talk';
-	}
 
 /**
  * Build the category slug (root + category ones)
@@ -422,22 +407,7 @@ function wct_talk_slug() {
  * @return string the category slug (prefixed by the root one)
  */
 function wct_category_slug() {
-	return apply_filters( 'wct_category_slug', 'talks' . '/' . wct_get_category_slug() );
-}
-
-/**
- * Customize the category (hierarchical taxonomy) slug of the plugin
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @param  string $default default value
- * @return string       the category slug
- */
-function wct_get_category_slug( $default = '' ) {
-	return 'category';
+	return apply_filters( 'wct_category_slug', 'talks/category' );
 }
 
 /**
@@ -451,22 +421,7 @@ function wct_get_category_slug( $default = '' ) {
  * @return string       the tag slug (prefixed by the root one)
  */
 function wct_tag_slug() {
-	return apply_filters( 'wct_tag_slug', 'talks' . '/' . wct_get_tag_slug() );
-}
-
-/**
- * Customize the tag (non hierarchical taxonomy) slug of the plugin
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @param  string $default default value
- * @return string          the tag slug
- */
-function wct_get_tag_slug( $default = '' ) {
-	return 'tag';
+	return apply_filters( 'wct_tag_slug', 'talks/tag' );
 }
 
 /**
