@@ -150,14 +150,6 @@ function wct_get_settings_fields() {
 				'args'              => array()
 			),
 
-			// Disable stickies ?
-			'_wc_talks_sticky_talks' => array(
-				'title'             => __( 'Sticky talks', 'wordcamp-talks' ),
-				'callback'          => 'wct_sticky_talks_setting_callback',
-				'sanitize_callback' => 'wct_sticky_sanitize',
-				'args'              => array()
-			),
-
 			// Disable comments disjoin ?
 			'_wc_talks_disjoin_comments' => array(
 				'title'             => __( 'Talk comments', 'wordcamp-talks' ),
@@ -746,25 +738,6 @@ function wct_to_rate_profile_setting_callback() {
 }
 
 /**
- * Sticky talks callback
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
- *
- * @since 1.0.0
- *
- * @return string HTML output
- */
-function wct_sticky_talks_setting_callback() {
-	?>
-
-	<input name="_wc_talks_sticky_talks" id="_wc_talks_sticky_talks" type="checkbox" value="1" <?php checked( wct_is_sticky_enabled() ); ?> />
-	<label for="_wc_talks_sticky_talks"><?php esc_html_e( 'Allow talks to be made &#34;sticky&#34; (they will stay at the top of WordCamp Talks first page)', 'wordcamp-talks' ); ?></label>
-
-	<?php
-}
-
-/**
  * Disjoin talk comments callback
  *
  * @package WordCamp Talks
@@ -1320,25 +1293,6 @@ function wct_sanitize_user_fields_list( $option = '' ) {
 	 * @param array $fields the sanitized fields
 	 */
 	return apply_filters( 'wct_sanitize_user_fields_list', $fields );
-}
-
-/**
- * Make sure sticky talks are removed if the sticky setting is disabled
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
- *
- * @since 1.0.0
- *
- * @param  int $option the sticky setting
- * @return int         the new sticky setting
- */
-function wct_sticky_sanitize( $option = 0 ) {
-	if ( empty( $option ) ) {
-		delete_option( 'sticky_talks' );
-	}
-
-	return absint( $option );
 }
 
 /**

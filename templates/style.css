@@ -22,7 +22,6 @@ WordCamp Talks stylesheet
 
 #wordcamp-talks .icon:before,
 #wordcamp-talks #rate i:before,
-span.sticky-talk:before,
 span.private-talk:before,
 span.protected-talk:before,
 #wordcamp-talks .tag span:before,
@@ -79,11 +78,6 @@ body.single-talks .talk-title-sep:before {
 
 .talk-title-sep:before {
 	content: "\f139";
-	vertical-align: middle;
-}
-
-span.sticky-talk:before {
-	content: "\f109";
 	vertical-align: middle;
 }
 
@@ -274,12 +268,6 @@ span.wp-talk-stream-group:before {
 	list-style: none;
 	position: relative;
 	margin:5px 0;
-}
-
-#wordcamp-talks ul.talk-list li.sticky-talk {
-	background-color: rgba(230, 230, 230, 0.5);
-	background: rgba(230, 230, 230, 0.5);
-	padding: 15px 10px 10px;
 }
 
 #wordcamp-talks ul.talk-list .talk-avatar,

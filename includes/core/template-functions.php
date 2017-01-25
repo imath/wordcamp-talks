@@ -39,11 +39,6 @@ function wct_parse_query( $posts_query = null ) {
 	// Handle the specific queries in the plugin's Admin screens
 	if ( wct_is_admin() ) {
 
-		// Display sticky talks if requested
-		if ( wct_is_sticky_enabled() && ! empty( $_GET['sticky_talks'] ) ) {
-			$posts_query->set( 'post__in', wct_talks_get_stickies() );
-		}
-
 		// Build meta_query if orderby rates is set
 		if ( ! wct_is_rating_disabled() && ! empty( $_GET['orderby'] ) && 'rates_count' == $_GET['orderby'] ) {
 			$posts_query->set( 'meta_query', array(
@@ -209,9 +204,6 @@ function wct_parse_query( $posts_query = null ) {
 				wct_set_global( 'is_user_home', true );
 			}
 		}
-
-		// No stickies on user's profile
-		$posts_query->set( 'ignore_sticky_posts', true );
 
 		// Set the displayed user.
 		wct_set_global( 'displayed_user', $user );

@@ -47,7 +47,6 @@ function wct_get_default_options() {
 		'_wc_talks_private_fields_list' => array(),
 		'_wc_talks_public_fields_list'  => array(),
 		'_wc_talks_signup_fields'       => array(),
-		'_wc_talks_sticky_talks'        => 1,
 		'_wc_talks_disjoin_comments'    => 1,
 		'_wc_talks_allow_comments'      => 1,
 		'_wc_talks_embed_profile'       => 0,
@@ -320,21 +319,6 @@ function wct_user_signup_fields( $default = array() ) {
  */
 function wct_user_autolog_after_signup( $default = 0 ) {
 	return (bool) apply_filters( 'wct_user_autolog_after_signup', (bool) get_option( '_wc_talks_autolog_enabled', $default ) );
-}
-
-/**
- * Do talks can be stick to the front of first archive page ?
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @param  bool $default default value
- * @return bool         True if enabled, false otherwise
- */
-function wct_is_sticky_enabled( $default = 1 ) {
-	return (bool) apply_filters( 'wct_is_sticky_enabled', (bool) get_option( '_wc_talks_sticky_talks', $default ) );
 }
 
 /**
