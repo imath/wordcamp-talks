@@ -95,54 +95,47 @@ class WordCamp_Talks_Loop_Talks extends WordCamp_Talks_Loop {
 
 		$paginate_args = array();
 
-		// No pretty links
-		if ( ! wct_is_pretty_links() ) {
-			$paginate_args['base'] = add_query_arg( 'paged', '%#%' );
+		// Is it the main archive page ?
+		if ( wct_is_talks_archive() ) {
+			$base = trailingslashit( wct_get_root_url() ) . '%_%';
 
+		// Or the category archive page ?
+		} else if ( wct_is_category() ) {
+			$base = trailingslashit( wct_get_category_url() ) . '%_%';
+
+		// Or the tag archive page ?
+		} else if ( wct_is_tag() ) {
+			$base = trailingslashit( wct_get_tag_url() ) . '%_%';
+
+		// Or the displayed user rated talks ?
+		} else if ( wct_is_user_profile_rates() ) {
+			$base = trailingslashit( wct_users_get_displayed_profile_url( 'rates' ) ) . '%_%';
+
+		// Or the displayed user talks "to rate"  ?
+		} else if ( wct_is_user_profile_to_rate() ) {
+			$base = trailingslashit( wct_users_get_displayed_profile_url( 'to_rate' ) ) . '%_%';
+
+		// Or the displayed user published talks ?
+		} else if ( wct_is_user_profile_talks() ) {
+			$base = trailingslashit( wct_users_get_displayed_profile_url( 'talks' ) ) . '%_%';
+
+		// Or the displayed user home page ?
+		} else if ( wct_is_user_profile_home() ) {
+			$base = trailingslashit( wct_users_get_displayed_profile_url() ) . '%_%';
+
+		// Or nothing i've planed ?
 		} else {
 
-			// Is it the main archive page ?
-			if ( wct_is_talks_archive() ) {
-				$base = trailingslashit( wct_get_root_url() ) . '%_%';
-
-			// Or the category archive page ?
-			} else if ( wct_is_category() ) {
-				$base = trailingslashit( wct_get_category_url() ) . '%_%';
-
-			// Or the tag archive page ?
-			} else if ( wct_is_tag() ) {
-				$base = trailingslashit( wct_get_tag_url() ) . '%_%';
-
-			// Or the displayed user rated talks ?
-			} else if ( wct_is_user_profile_rates() ) {
-				$base = trailingslashit( wct_users_get_displayed_profile_url( 'rates' ) ) . '%_%';
-
-			// Or the displayed user talks "to rate"  ?
-			} else if ( wct_is_user_profile_to_rate() ) {
-				$base = trailingslashit( wct_users_get_displayed_profile_url( 'to_rate' ) ) . '%_%';
-
-			// Or the displayed user published talks ?
-			} else if ( wct_is_user_profile_talks() ) {
-				$base = trailingslashit( wct_users_get_displayed_profile_url( 'talks' ) ) . '%_%';
-
-			// Or the displayed user home page ?
-			} else if ( wct_is_user_profile_home() ) {
-				$base = trailingslashit( wct_users_get_displayed_profile_url() ) . '%_%';
-
-			// Or nothing i've planed ?
-			} else {
-
-				/**
-				 * Create your own pagination base if not handled by the plugin
-				 *
-				 * @param string empty string
-				 */
-				$base = apply_filters( 'wct_talks_pagination_base', '' );
-			}
-
-			$paginate_args['base']   = $base;
-			$paginate_args['format'] = wct_paged_slug() . '/%#%/';
+			/**
+			 * Create your own pagination base if not handled by the plugin
+			 *
+			 * @param string empty string
+			 */
+			$base = apply_filters( 'wct_talks_pagination_base', '' );
 		}
+
+		$paginate_args['base']   = $base;
+		$paginate_args['format'] = wct_paged_slug() . '/%#%/';
 
 		// Is this a search ?
 		if ( wct_get_global( 'is_search' ) ) {
