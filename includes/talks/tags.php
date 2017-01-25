@@ -32,11 +32,7 @@ function wct_talks_search_form() {
 		$search_value = esc_html( $search_value );
 	}
 
-	if ( ! wct_is_pretty_links() ) {
-		$hidden = "\n" . '<input type="hidden" name="post_type" value="' . wct_get_post_type() . '"/>';
-	} else {
-		$action = apply_filters( 'wct_talks_search_form_action_url', wct_get_root_url() );
-	}
+	$action = apply_filters( 'wct_talks_search_form_action_url', wct_get_root_url() );
 
 	$search_form_html = '<form action="' . esc_url( $action ) . '" method="get" id="talks-search-form" class="nav-form">' . $hidden;
 	$search_form_html .= '<label><input type="text" name="' . wct_search_rewrite_id() . '" id="talks-search-box" placeholder="'. esc_attr( $placeholder ) .'" value="' . $search_value . '" /></label>';
