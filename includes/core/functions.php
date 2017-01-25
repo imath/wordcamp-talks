@@ -206,34 +206,6 @@ function wct_get_global( $var_key = '' ) {
 /** Post Type (talks) *********************************************************/
 
 /**
- * Outputs the post type identifier (talks) for the plugin
- *
- * @package WordCamp Talks
- * @subpackage core/functions
- *
- * @since 1.0.0
- *
- * @return string the post type identifier
- */
-function wct_post_type() {
-	echo wct_get_post_type();
-}
-
-/**
- * Gets the post type identifier (talks)
- *
- * @package WordCamp Talks
- * @subpackage core/functions
- *
- * @since 1.0.0
- *
- * @return string the post type identifier
- */
-function wct_get_post_type() {
-	return apply_filters( 'wct_get_post_type', wct()->post_type );
-}
-
-/**
  * Gets the labels for the plugin's post type
  *
  * @package WordCamp Talks
@@ -418,7 +390,7 @@ function wct_tag_register_labels() {
  * @return string root url for the post type
  */
 function wct_get_root_url() {
-	return apply_filters( 'wct_get_root_url', get_post_type_archive_link( wct_get_post_type() ) );
+	return apply_filters( 'wct_get_root_url', get_post_type_archive_link( 'talks' ) );
 }
 
 /**
@@ -537,7 +509,7 @@ function wct_get_form_url( $type = '', $talk_name = '' ) {
 	}
 
 	if ( $type == wct_edit_slug() && ! empty( $talk_name ) ) {
-		$url = add_query_arg( wct_get_post_type(), $talk_name, $url );
+		$url = add_query_arg( 'talks', $talk_name, $url );
 	}
 
 	/**
@@ -1361,7 +1333,7 @@ function wct_adminbar_menu( $wp_admin_bar = null ){
 	}
 
 	if ( ! empty( $wp_admin_bar ) && wct_user_can( 'edit_talks' ) ) {
-		$menu_url = add_query_arg( 'post_type', wct_get_post_type(), admin_url( 'edit.php' ) );
+		$menu_url = add_query_arg( 'post_type', 'talks', admin_url( 'edit.php' ) );
 		$wp_admin_bar->add_menu( array(
 			'parent' => 'appearance',
 			'id'     => 'wc_talks',

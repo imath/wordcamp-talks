@@ -225,7 +225,7 @@ final class WordCamp_Talks {
 
 		$args = apply_filters( 'wct_post_type_register_args', array(
 			'public'              => true,
-			'query_var'           => wct_get_post_type(),
+			'query_var'           => 'talks',
 			'rewrite'             => array(
 				'slug'            => wct_talk_slug(),
 				'with_front'      => false
@@ -283,7 +283,7 @@ final class WordCamp_Talks {
 		// Register the category taxonomy
 		register_taxonomy(
 			wct_get_category(),
-			wct_get_post_type(),
+			'talks',
 			array_merge(
 				wct_category_register_labels(),
 				wct_category_register_args()
@@ -293,7 +293,7 @@ final class WordCamp_Talks {
 		// Register the tag taxonomy
 		register_taxonomy(
 			wct_get_tag(),
-			wct_get_post_type(),
+			'talks',
 			array_merge(
 				wct_tag_register_labels(),
 				wct_tag_register_args()

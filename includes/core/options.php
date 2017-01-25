@@ -149,7 +149,7 @@ function wct_default_talk_status( $default = 'private' ) {
 		}
 
 		// In administration screens we need to be able to change the status
-		if ( empty( $wct->admin->is_plugin_settings ) && ( empty( $current_screen->post_type ) || wct_get_post_type() !== $current_screen->post_type ) ) {
+		if ( empty( $wct->admin->is_plugin_settings ) && ( empty( $current_screen->post_type ) || 'talks' !== $current_screen->post_type ) ) {
 			$default_status = 'publish';
 		}
 	}

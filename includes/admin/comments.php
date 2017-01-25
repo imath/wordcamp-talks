@@ -88,7 +88,7 @@ class WordCamp_Talks_Admin_Comments {
 	 * @since 1.0.0
 	 */
 	private function setup_globals() {
-		$this->post_type          = wct_get_post_type();
+		$this->post_type          = 'talks';
 		$this->talk_comment_count = false;
 	}
 

@@ -53,7 +53,7 @@ class WordCamp_Talks_Loop_Comments extends WordCamp_Talks_Loop {
 		}
 
 		$comments_args = array(
-			'post_type'   => wct_get_post_type(),
+			'post_type'   => 'talks',
 			'post_status' => $r['post_status'],
 			'status'      => $r['status'],
 			'user_id'     => (int) $r['user_id'],
@@ -83,7 +83,7 @@ class WordCamp_Talks_Loop_Comments extends WordCamp_Talks_Loop {
 			$post_ids = wp_list_pluck( $comments, 'comment_post_ID' );
 
 			// Get all posts in the object cache.
-			$posts = get_posts( array( 'include' => $post_ids, 'post_type' => wct_get_post_type() ) );
+			$posts = get_posts( array( 'include' => $post_ids, 'post_type' => 'talks' ) );
 
 			// Reset will need to be done at the end of the loop
 			wct_set_global( 'needs_reset', true );

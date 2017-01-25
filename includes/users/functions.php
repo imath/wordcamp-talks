@@ -859,7 +859,7 @@ function wct_users_talks_count_by_user( $max = 10 ) {
 	$sql = array();
 	$sql['select']  = "SELECT p.post_author, COUNT(p.ID) as count_talks, u.user_nicename";
 	$sql['from']    = "FROM {$wpdb->posts} p LEFT JOIN {$wpdb->users} u ON ( p.post_author = u.ID )";
-	$sql['where']   = get_posts_by_author_sql( wct_get_post_type(), true, null, true );
+	$sql['where']   = get_posts_by_author_sql( 'talks', true, null, true );
 	$sql['groupby'] = 'GROUP BY p.post_author';
 	$sql['order']   = 'ORDER BY count_talks DESC';
 	$sql['limit']   = $wpdb->prepare( 'LIMIT 0, %d', $max );
@@ -1412,7 +1412,7 @@ function wct_users_get_stat_for( $type = '', $user_id = 0 ) {
 	}
 
 	if ( 'talks' === $type ) {
-		$count = count_user_posts( $user_id, wct_get_post_type() );
+		$count = count_user_posts( $user_id, 'talks' );
 	} elseif ( 'comments' === $type ) {
 		$count = wct_comments_count_comments( $user_id );
 	} elseif ( 'rates' === $type ) {

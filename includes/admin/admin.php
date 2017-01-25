@@ -92,7 +92,7 @@ class WordCamp_Talks_Admin {
 	 * @since 1.0.0
 	 */
 	private function setup_globals() {
-		$this->post_type     = wct_get_post_type();
+		$this->post_type     = 'talks';
 		$this->includes_dir  = trailingslashit( wct()->includes_dir . 'admin' );
 		$this->parent_slug   = false;
 
@@ -1595,7 +1595,7 @@ class WordCamp_Talks_Admin {
 			return;
 		}
 
-		if ( 'edit-' . wct_get_post_type() !== $current_screen->id ) {
+		if ( 'edit-talks' !== $current_screen->id ) {
 			return;
 		}
 

@@ -195,7 +195,7 @@ class WordCamp_Talks_Talk {
 		$post_args = array(
 			'post_author'  => $this->author,
 			'post_title'   => $this->title,
-			'post_type'    => wct_get_post_type(),
+			'post_type'    => 'talks',
 			'post_content' => $this->description,
 			'post_status'  => $this->status,
 			'tax_input'    => $this->taxonomies,
@@ -335,7 +335,7 @@ class WordCamp_Talks_Talk {
 	public static function get_talk_by_name( $name = '' ) {
 		global $wpdb;
 
-		$where = $wpdb->prepare( 'post_name = %s AND post_type = %s', $name, wct_get_post_type() );
+		$where = $wpdb->prepare( 'post_name = %s AND post_type = %s', $name, 'talks' );
 		$id = $wpdb->get_var( "SELECT ID FROM {$wpdb->posts} WHERE {$where}" );
 
 		return get_post( $id );

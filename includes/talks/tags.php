@@ -1972,7 +1972,7 @@ add_action( 'wct_media_buttons', 'wct_buddydrive_button' );
 function wct_talks_embed_meta() {
 	$talk = get_post();
 
-	if ( ! isset( $talk->post_type ) || wct_get_post_type() !== $talk->post_type || wct_is_rating_disabled() ) {
+	if ( ! isset( $talk->post_type ) || 'talks' !== $talk->post_type || wct_is_rating_disabled() ) {
 		return;
 	}
 

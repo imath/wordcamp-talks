@@ -154,7 +154,7 @@ function wct_enqueue_scripts() {
  */
 function wct_enqueue_embed_scripts() {
 	// Bail if not an talk or not an embed profile
-	if ( ( wct_get_post_type() === get_query_var( 'post_type' ) && ! wct_is_rating_disabled() )
+	if ( ( 'talks' === get_query_var( 'post_type' ) && ! wct_is_rating_disabled() )
 		|| ( wct_get_global( 'is_user_embed' ) && wct_is_embed_profile() )
 	) {
 		do_action( 'wct_enqueue_embed_scripts' );
