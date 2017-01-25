@@ -32,14 +32,6 @@ function wct_get_settings_sections() {
 		),
 	);
 
-	if ( wct_is_pretty_links() ) {
-		$settings_sections['wc_talks_settings_rewrite'] = array(
-			'title'    => __( 'Pretty Links', 'wordcamp-talks' ),
-			'callback' => 'wct_settings_rewrite_section_callback',
-			'page'     => 'wc_talks',
-		);
-	}
-
 	if ( is_multisite() ) {
 		$settings_sections['wc_talks_settings_multisite'] = array(
 			'title'    => __( 'Network users settings', 'wordcamp-talks' ),
@@ -207,116 +199,6 @@ function wct_get_settings_fields() {
 			),
 		)
 	);
-
-	if ( wct_is_pretty_links() ) {
-		/** Rewrite Section ***********************************************************/
-		$setting_fields['wc_talks_settings_rewrite'] = array(
-
-			// Root slug
-			'_wc_talks_root_slug' => array(
-				'title'             => __( 'WordCamp Talks root slug', 'wordcamp-talks' ),
-				'callback'          => 'wct_root_slug_setting_callback',
-				'sanitize_callback' => 'wct_sanitize_slug',
-				'args'              => array()
-			),
-
-			// Single talk slug
-			'_wc_talks_talk_slug' => array(
-				'title'             => __( 'Single talk slug', 'wordcamp-talks' ),
-				'callback'          => 'wct_talk_slug_setting_callback',
-				'sanitize_callback' => 'wct_sanitize_slug',
-				'args'              => array()
-			),
-
-			// Talk Categories slug
-			'_wc_talks_category_slug' => array(
-				'title'             => __( 'Category slug', 'wordcamp-talks' ),
-				'callback'          => 'wct_category_slug_setting_callback',
-				'sanitize_callback' => 'wct_sanitize_slug',
-				'args'              => array()
-			),
-
-			// Talk Tags slug
-			'_wc_talks_tag_slug' => array(
-				'title'             => __( 'Tag slug', 'wordcamp-talks' ),
-				'callback'          => 'wct_tag_slug_setting_callback',
-				'sanitize_callback' => 'wct_sanitize_slug',
-				'args'              => array()
-			),
-
-			// User slug
-			'_wc_talks_user_slug' => array(
-				'title'             => __( 'User slug', 'wordcamp-talks' ),
-				'callback'          => 'wct_user_slug_setting_callback',
-				'sanitize_callback' => 'wct_sanitize_slug',
-				'args'              => array()
-			),
-
-			// User comments slug
-			'_wc_talks_user_comments_slug' => array(
-				'title'             => __( 'User comments slug', 'wordcamp-talks' ),
-				'callback'          => 'wct_user_comments_slug_setting_callback',
-				'sanitize_callback' => 'wct_sanitize_slug',
-				'args'              => array()
-			),
-
-			// Comments page slug
-			'_wc_talks_cpage_slug' => array(
-				'title'             => __( 'User comments paging slug', 'wordcamp-talks' ),
-				'callback'          => 'wct_cpage_slug_setting_callback',
-				'sanitize_callback' => 'wct_sanitize_comments_page_slug',
-				'args'              => array()
-			),
-
-			// User rates slug
-			'_wc_talks_user_rates_slug' => array(
-				'title'             => __( 'User ratings slug', 'wordcamp-talks' ),
-				'callback'          => 'wct_user_rates_slug_setting_callback',
-				'sanitize_callback' => 'wct_sanitize_slug',
-				'args'              => array()
-			),
-
-			// User rates slug
-			'_wc_talks_user_to_rate_slug' => array(
-				'title'             => __( 'User &quot;to rate&quot; slug', 'wordcamp-talks' ),
-				'callback'          => 'wct_user_to_rate_slug_setting_callback',
-				'sanitize_callback' => 'wct_sanitize_slug',
-				'args'              => array()
-			),
-
-			// Signup slug
-			'_wc_talks_signup_slug' => array(
-				'title'             => __( 'Sign-up slug', 'wordcamp-talks' ),
-				'callback'          => 'wct_signup_slug_setting_callback',
-				'sanitize_callback' => 'wct_sanitize_slug',
-				'args'              => array()
-			),
-
-			// Action slug (so far 1 action is available > add )
-			'_wc_talks_action_slug' => array(
-				'title'             => __( 'Action slug', 'wordcamp-talks' ),
-				'callback'          => 'wct_action_slug_setting_callback',
-				'sanitize_callback' => 'wct_sanitize_slug',
-				'args'              => array()
-			),
-
-			// Add new slug
-			'_wc_talks_addnew_slug' => array(
-				'title'             => __( 'New form slug', 'wordcamp-talks' ),
-				'callback'          => 'wct_addnew_slug_setting_callback',
-				'sanitize_callback' => 'wct_sanitize_slug',
-				'args'              => array()
-			),
-
-			// Edit slug
-			'_wc_talks_edit_slug' => array(
-				'title'             => __( 'Edit form slug', 'wordcamp-talks' ),
-				'callback'          => 'wct_edit_slug_setting_callback',
-				'sanitize_callback' => 'wct_sanitize_slug',
-				'args'              => array()
-			),
-		);
-	}
 
 	/**
 	 * Disable some settings if ratings are disabled.
