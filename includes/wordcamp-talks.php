@@ -219,11 +219,40 @@ final class WordCamp_Talks {
 	 */
 	public function register_post_type() {
 		//register the Talks post-type
+		//
+		$supports = array( 'title', 'editor', 'author', 'comments', 'revisions' );
+
+		if ( wct_featured_images_allowed() ) {
+			$supports[] = 'thumbnail';
+		}
+
+		$args = apply_filters( 'wct_post_type_register_args', array(
+			'public'              => true,
+			'query_var'           => wct_get_post_type(),
+			'rewrite'             => array(
+				'slug'            => wct_talk_slug(),
+				'with_front'      => false
+			),
+			'has_archive'         => wct_root_slug(),
+			'exclude_from_search' => true,
+			'show_in_nav_menus'   => false,
+			'show_in_admin_bar'   => wct_user_can( 'wct_talks_admin' ),
+			'menu_icon'           => 'dashicons-megaphone',
+			'supports'            => $supports,
+			'taxonomies'          => array(
+				wct_get_category(),
+				wct_get_tag()
+			),
+			'capability_type'     => array( 'talk', 'talks' ),
+			'capabilities'        => wct_get_post_type_caps(),
+			'delete_with_user'    => true,
+			'can_export'          => true,
+		) );
 		register_post_type(
-			wct_get_post_type(),
+			$this->post_type,
 			array_merge(
 				wct_post_type_register_labels(),
-				wct_post_type_register_args()
+				$args
 			)
 		);
 

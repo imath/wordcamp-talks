@@ -219,59 +219,18 @@ function wct_post_type() {
 	echo wct_get_post_type();
 }
 
-	/**
-	 * Gets the post type identifier (talks)
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage core/functions
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return string the post type identifier
-	 */
-	function wct_get_post_type() {
-		return apply_filters( 'wct_get_post_type', wct()->post_type );
-	}
-
 /**
- * Gets plugin's main post type init arguments
+ * Gets the post type identifier (talks)
  *
  * @package WordCamp Talks
  * @subpackage core/functions
  *
  * @since 1.0.0
  *
- * @return array the init arguments for the 'talks' post type
+ * @return string the post type identifier
  */
-function wct_post_type_register_args() {
-	$supports = array( 'title', 'editor', 'author', 'comments', 'revisions' );
-
-	if ( wct_featured_images_allowed() ) {
-		$supports[] = 'thumbnail';
-	}
-
-	return apply_filters( 'wct_post_type_register_args', array(
-		'public'              => true,
-		'query_var'           => wct_get_post_type(),
-		'rewrite'             => array(
-			'slug'            => wct_talk_slug(),
-			'with_front'      => false
-		),
-		'has_archive'         => wct_root_slug(),
-		'exclude_from_search' => true,
-		'show_in_nav_menus'   => false,
-		'show_in_admin_bar'   => wct_user_can( 'wct_talks_admin' ),
-		'menu_icon'           => 'dashicons-megaphone',
-		'supports'            => $supports,
-		'taxonomies'          => array(
-			wct_get_category(),
-			wct_get_tag()
-		),
-		'capability_type'     => array( 'talk', 'talks' ),
-		'capabilities'        => wct_get_post_type_caps(),
-		'delete_with_user'    => true,
-		'can_export'          => true,
-	) );
+function wct_get_post_type() {
+	return apply_filters( 'wct_get_post_type', wct()->post_type );
 }
 
 /**
