@@ -266,7 +266,7 @@ function wct_get_category() {
 function wct_category_register_args() {
 	return apply_filters( 'wct_category_register_args', array(
 		'rewrite'               => array(
-			'slug'              => wct_category_slug(),
+			'slug'              => 'talks/category',
 			'with_front'        => false,
 			'hierarchical'      => false,
 		),
@@ -334,7 +334,7 @@ function wct_get_tag() {
 function wct_tag_register_args() {
 	return apply_filters( 'wct_tag_register_args', array(
 		'rewrite'               => array(
-			'slug'              => wct_tag_slug(),
+			'slug'              => 'talks/tag',
 			'with_front'        => false,
 			'hierarchical'      => false,
 		),
@@ -481,7 +481,7 @@ function wct_get_form_url( $type = '', $talk_name = '' ) {
 	global $wp_rewrite;
 
 	if ( empty( $type ) ) {
-		$type = wct_addnew_slug();
+		$type = 'add';
 	}
 
 	/**
@@ -498,7 +498,7 @@ function wct_get_form_url( $type = '', $talk_name = '' ) {
 
 	// Pretty permalinks
 	if ( $wp_rewrite->using_permalinks() ) {
-		$url = $wp_rewrite->root . wct_action_slug() . '/%' . wct_action_rewrite_id() . '%';
+		$url = $wp_rewrite->root . 'talks/action/%' . wct_action_rewrite_id() . '%';
 
 		$url = str_replace( '%' . wct_action_rewrite_id() . '%', $type, $url );
 		$url = home_url( user_trailingslashit( $url ) );

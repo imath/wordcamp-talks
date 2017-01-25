@@ -383,62 +383,6 @@ function wct_is_user_to_rate_disabled( $default = 0, $rates_disabled = null ) {
 }
 
 /**
- * Build the talk slug (root + talk ones)
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @return string       the talk slug (prefixed by the root one)
- */
-function wct_talk_slug() {
-	return apply_filters( 'wct_talk_slug', 'talks/talk' );
-}
-
-/**
- * Build the category slug (root + category ones)
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @return string the category slug (prefixed by the root one)
- */
-function wct_category_slug() {
-	return apply_filters( 'wct_category_slug', 'talks/category' );
-}
-
-/**
- * Build the tag slug (root + tag ones)
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @return string       the tag slug (prefixed by the root one)
- */
-function wct_tag_slug() {
-	return apply_filters( 'wct_tag_slug', 'talks/tag' );
-}
-
-/**
- * Build the user's profile slug (root + user ones)
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @return string the user slug (prefixed by the root one)
- */
-function wct_user_slug() {
-	return apply_filters( 'wct_user_slug', 'talks/user' );
-}
-
-/**
  * Customize the user's profile to rate slug of the plugin
  *
  * @package WordCamp Talks
@@ -466,65 +410,6 @@ function wct_user_to_rate_slug( $default = '' ) {
  */
 function wct_user_talks_slug( $default = '' ) {
 	return 'talks';
-}
-
-/**
- * Customize the user's profile comments slug of the plugin
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @param  string $default default value
- * @return string       the user's profile comments slug
- */
-function wct_user_comments_slug( $default = '' ) {
-	return 'comments';
-}
-
-/**
- * Build the action slug (root + action ones)
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @return string       the action slug (prefixed by the root one)
- */
-function wct_action_slug() {
-	return apply_filters( 'wct_action_slug', 'talks' . '/' . wct_get_action_slug() );
-}
-
-/**
- * Customize the action slug of the plugin
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @param  string $default default value
- * @return string       the action slug
- */
-function wct_get_action_slug( $default = '' ) {
-	return 'action';
-}
-
-/**
- * Customize the add (action) slug of the plugin
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @param  string $default default value
- * @return string       the add (action) slug
- */
-function wct_addnew_slug( $default = '' ) {
-	return 'add';
 }
 
 /**

@@ -227,7 +227,7 @@ final class WordCamp_Talks {
 			'public'              => true,
 			'query_var'           => 'talks',
 			'rewrite'             => array(
-				'slug'            => wct_talk_slug(),
+				'slug'            => 'talks/talk',
 				'with_front'      => false
 			),
 			'has_archive'         => 'talks',

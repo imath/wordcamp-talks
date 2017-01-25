@@ -230,7 +230,7 @@ function wct_parse_query( $posts_query = null ) {
 		wct_set_global( 'is_action', true );
 
 		// Is the new talk form requested ?
-		if ( wct_addnew_slug() == $action ) {
+		if ( 'add' === $action ) {
 			// Yes so set the corresponding var
 			wct_set_global( 'is_new', true );
 
