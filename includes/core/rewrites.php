@@ -18,21 +18,6 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Checks whether the current site is using default permalink settings or custom one
- *
- * @package WordCamp Talks
- * @subpackage core/rewrites
- *
- * @since 1.0.0
- *
- * @return bool True if custom permalink are one, false otherwise
- */
-function wct_is_pretty_links() {
-	$pretty_links = wct_get_global( 'pretty_links' );
-	return (bool) apply_filters( 'wct_is_pretty_links', ! empty( $pretty_links ) );
-}
-
-/**
  * Get the slug used for paginated requests
  *
  * @package WordCamp Talks
