@@ -1041,15 +1041,6 @@ function wct_talks_post_talk() {
 			'info'    => array(),
 		);
 
-		if ( ! empty( $posted['_the_thumbnail'] ) ) {
-			$thumbnail = reset( $posted['_the_thumbnail'] );
-			$sideload = WordCamp_Talks_Talks_Thumbnail::start( $thumbnail, $id );
-
-			if ( is_wp_error( $sideload->result ) ) {
-				$feedback_message['error'][] = 6;
-			}
-		}
-
 		if ( 'pending' == $talk->post_status ) {
 			// Build pending message.
 			$feedback_message['info'][] = 2;

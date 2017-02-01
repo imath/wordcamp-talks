@@ -154,10 +154,6 @@ final class WordCamp_Talks {
 			require( $this->includes_dir . 'talks/wordcamp-talk-metas.php' );
 		endif;
 
-		if ( ! class_exists( 'WordCamp_Talks_Talks_Thumbnail' ) ) :
-			require( $this->includes_dir . 'talks/wordcamp-talks-talks-thumbnail.php' );
-		endif;
-
 		require( $this->includes_dir . 'talks/tags.php' );
 
 		require( $this->includes_dir . 'users/functions.php' );
