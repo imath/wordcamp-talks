@@ -14,7 +14,6 @@ defined( 'ABSPATH' ) || exit;
 add_action( 'plugins_loaded',           'wct_loaded',                 11 );
 add_action( 'init',                     'wct_init',                   9  );
 add_action( 'parse_query',              'wct_parse_query',            2  );
-add_action( 'widgets_init',             'wct_widgets_init',           10 );
 add_action( 'wp_enqueue_scripts',       'wct_enqueue_scripts',        10 );
 add_action( 'enqueue_embed_scripts',    'wct_enqueue_embed_scripts',  10 );
 add_action( 'wp_head',                  'wct_head',                   10 );
@@ -69,11 +68,7 @@ add_action( 'wct_admin_init', 'wct_admin_register_settings', 11 );
 add_action( 'wct_admin_init', 'wct_maybe_upgrade',          999 );
 
 // Widgets
-add_action( 'wct_widgets_init', array( 'WordCamp_Talks_Navig',                  'register_widget' ), 10 );
-add_action( 'wct_widgets_init', array( 'WordCamp_Talk_Widget_Categories',       'register_widget' ), 11 );
-add_action( 'wct_widgets_init', array( 'WordCamp_Talk_Widget_Popular',          'register_widget' ), 12 );
-add_action( 'wct_widgets_init', array( 'WordCamp_Talk_Widget_Top_Contributors', 'register_widget' ), 14 );
-add_action( 'wct_widgets_init', array( 'WordCamp_Talk_Recent_Comments',         'register_widget' ), 15 );
+add_action( 'widgets_init', array( 'WordCamp_Talks_Navig', 'register_widget' ), 10 );
 
 // User deleted
 add_action( 'deleted_user', 'wct_users_delete_user_data', 10, 1 );
@@ -114,20 +109,6 @@ function wct_init() {
  */
 function wct_loaded() {
 	do_action( 'wct_loaded' );
-}
-
-/**
- * Fire the 'wct_widgets_init' action.
- *
- * Used to register widgets.
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_widgets_init() {
-	do_action( 'wct_widgets_init' );
 }
 
 /**
