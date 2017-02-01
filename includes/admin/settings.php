@@ -86,22 +86,6 @@ function wct_get_settings_fields() {
 				'args'              => array()
 			),
 
-			// Can we add images to content ?
-			'_wc_talks_editor_image' => array(
-				'title'             => __( 'Images', 'wordcamp-talks' ),
-				'callback'          => 'wct_editor_image_setting_callback',
-				'sanitize_callback' => 'absint',
-				'args'              => array()
-			),
-
-			// Can we add featured images to the talk ?
-			'_wc_talks_featured_images' => array(
-				'title'             => __( 'Featured images', 'wordcamp-talks' ),
-				'callback'          => 'wct_editor_featured_images_setting_callback',
-				'sanitize_callback' => 'wct_editor_featured_images_sanitize',
-				'args'              => array()
-			),
-
 			// Can we add links to content ?
 			'_wc_talks_editor_link' => array(
 				'title'             => __( 'Links', 'wordcamp-talks' ),
@@ -386,42 +370,6 @@ function wct_submit_status_setting_callback() {
 
 	</select>
 	<p class="description"><?php esc_html_e( 'The default status for all talks. Depending on this setting, the moderation message setting will be available', 'wordcamp-talks' ); ?></p>
-	<?php
-}
-
-/**
- * WP Editor's image button callback
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
- *
- * @since 1.0.0
- *
- * @return string HTML output
- */
-function wct_editor_image_setting_callback() {
-	?>
-
-	<input name="_wc_talks_editor_image" id="_wc_talks_editor_image" type="checkbox" value="1" <?php checked( wct_talk_editor_image() ); ?> />
-	<label for="_wc_talks_editor_image"><?php esc_html_e( 'Allow users to add images to their talks', 'wordcamp-talks' ); ?></label>
-	<p class="description"><?php esc_html_e( 'Depending on this setting, the featured images setting will be available', 'wordcamp-talks' ); ?></p>
-
-	<?php
-}
-
-/**
- * WP Editor's Featured images callback
- *
- * @since 1.0.0
- *
- * @return string HTML output
- */
-function wct_editor_featured_images_setting_callback() {
-	?>
-
-	<input name="_wc_talks_featured_images" id="_wc_talks_featured_images" type="checkbox" value="1" <?php checked( wct_featured_images_allowed() ); ?> <?php disabled( wct_talk_editor_image(), false ); ?>/>
-	<label for="_wc_talks_featured_images"><?php esc_html_e( 'If users can add images, you can allow them to choose the featured image for their talks', 'wordcamp-talks' ); ?></label>
-
 	<?php
 }
 
@@ -785,23 +733,6 @@ function wct_sanitize_user_fields_list( $option = '' ) {
 	 * @param array $fields the sanitized fields
 	 */
 	return apply_filters( 'wct_sanitize_user_fields_list', $fields );
-}
-
-/**
- * Sanitize the featured image option.
- *
- * @since 1.0.0
- *
- * @param  int $option the featured image setting
- * @return int         the new featured image setting
- */
-function wct_editor_featured_images_sanitize( $option = 0 ) {
-	// People need to insert image before selecting a featured one.
-	if ( ! wct_talk_editor_image() ) {
-		return 0;
-	}
-
-	return absint( $option );
 }
 
 /**
