@@ -216,10 +216,6 @@ final class WordCamp_Talks {
 		//
 		$supports = array( 'title', 'editor', 'author', 'comments', 'revisions' );
 
-		if ( wct_featured_images_allowed() ) {
-			$supports[] = 'thumbnail';
-		}
-
 		$args = apply_filters( 'wct_post_type_register_args', array(
 			'public'              => true,
 			'query_var'           => 'talks',

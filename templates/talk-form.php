@@ -22,8 +22,6 @@
 
 			<?php wct_talks_the_editor(); ?>
 
-			<?php wct_talks_the_images_list() ;?>
-
 			<div class="category-list">
 
 				<?php wct_talks_the_category_edit(); ?>

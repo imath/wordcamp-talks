@@ -276,21 +276,6 @@ msgid ""
 "be possible to edit the moderation message once this setting has been saved."
 msgstr ""
 
-#: includes/admin/admin.php:1354
-msgid ""
-"Images & Links are settings about the WordCamp Talks&#39;s editor. If you "
-"wish to disable the image or link buttons, you can disable the "
-"corresponding setting."
-msgstr ""
-
-#: includes/admin/admin.php:1355
-msgid ""
-"Featured images is a setting that requires the Editor Images button to be "
-"active. It allows your users to select an image they inserted and set it as "
-"the featured image for the talk. You must know this image will be uploaded "
-"inside your WordPress site."
-msgstr ""
-
 #: includes/admin/admin.php:1356
 msgid ""
 "Moderation message: if New talks status is defined to Pending, it is the "
@@ -466,14 +451,6 @@ msgstr ""
 msgid "New talks status"
 msgstr ""
 
-#: includes/admin/settings.php:99
-msgid "Images"
-msgstr ""
-
-#: includes/admin/settings.php:107
-msgid "Featured images"
-msgstr ""
-
 #: includes/admin/settings.php:115
 msgid "Links"
 msgstr ""
@@ -594,20 +571,6 @@ msgstr ""
 msgid ""
 "The default status for all talks. Depending on this setting, the moderation "
 "message setting will be available"
-msgstr ""
-
-#: includes/admin/settings.php:632
-msgid "Allow users to add images to their talks"
-msgstr ""
-
-#: includes/admin/settings.php:633
-msgid "Depending on this setting, the featured images setting will be available"
-msgstr ""
-
-#: includes/admin/settings.php:649
-msgid ""
-"If users can add images, you can allow them to choose the featured image "
-"for their talks"
 msgstr ""
 
 #: includes/admin/settings.php:668
@@ -954,10 +917,6 @@ msgstr ""
 msgid "Something went wrong while trying to save your talk."
 msgstr ""
 
-#: includes/core/functions.php:648
-msgid "There was a problem saving the featured image, sorry."
-msgstr ""
-
 #: includes/core/functions.php:649
 msgid "Please choose a username having at least 4 characters."
 msgstr ""
@@ -1084,10 +1043,6 @@ msgstr ""
 
 #: includes/talks/classes.php:650
 msgid "No custom fields available"
-msgstr ""
-
-#: includes/talks/classes.php:860
-msgid "This image file type is not supported."
 msgstr ""
 
 #: includes/talks/functions.php:801
@@ -1262,10 +1217,6 @@ msgstr ""
 
 #: includes/talks/tags.php:1476
 msgid "Description"
-msgstr ""
-
-#: includes/talks/tags.php:1606
-msgid "Select the featured image for your talk."
 msgstr ""
 
 #: includes/talks/tags.php:1713
