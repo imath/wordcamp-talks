@@ -160,7 +160,6 @@ final class WordCamp_Talks {
 		endif;
 
 		require( $this->includes_dir . 'talks/tags.php' );
-		require( $this->includes_dir . 'talks/widgets.php' );
 
 		require( $this->includes_dir . 'users/functions.php' );
 		require( $this->includes_dir . 'users/tags.php' );
