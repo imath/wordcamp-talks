@@ -1348,7 +1348,6 @@ class WordCamp_Talks_Admin {
 								esc_html__( 'Rating stars hover captions: fill a comma separated list of captions to replace default one. On front end, the number of rating stars will depend on the number of comma separated captions you defined in this setting.', 'wordcamp-talks' ),
 								esc_html__( 'Talk comments: if on, comments about talks will be separated from other post types comments and you will be able to moderate comments about talks from the comments submenu of the WordCamp Talks&#39;s main Administration menu. If you uncheck this setting, talks comments will be mixed up with other post types comments into the main Comments Administration menu', 'wordcamp-talks' ),
 								esc_html__( 'Comments: you can completely disable commenting about talks by activating this option', 'wordcamp-talks' ),
-								esc_html__( 'Embed profile: if this setting is active, your users profiles will include a sharing button to let your visitors copy the embed code and share it into their website.', 'wordcamp-talks' ),
 							),
 						),
 					),

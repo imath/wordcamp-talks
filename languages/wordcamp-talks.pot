@@ -327,13 +327,6 @@ msgid ""
 "this option"
 msgstr ""
 
-#: includes/admin/admin.php:1362
-msgid ""
-"Embed profile: if this setting is active, your users profiles will include "
-"a sharing button to let your visitors copy the embed code and share it into "
-"their website."
-msgstr ""
-
 #: includes/admin/admin.php:1374
 msgid ""
 "Talk Categories can only be created by the site Administrator. To add a new "
@@ -521,10 +514,6 @@ msgstr ""
 msgid "Signups Autolog"
 msgstr ""
 
-#: includes/admin/settings.php:211
-msgid "Embed Profile"
-msgstr ""
-
 #: includes/admin/settings.php:225
 msgid "WordCamp Talks root slug"
 msgstr ""
@@ -663,10 +652,6 @@ msgstr ""
 
 #: includes/admin/settings.php:878
 msgid "Automagically log in just signed up users."
-msgstr ""
-
-#: includes/admin/settings.php:894
-msgid "Allow users profiles to be embed"
 msgstr ""
 
 #: includes/admin/settings.php:914
@@ -1726,14 +1711,4 @@ msgstr ""
 #: includes/users/functions.php:1262
 msgctxt "Use the same translation as WP Core"
 msgid "[%s] Your username and password info"
-msgstr ""
-
-#: includes/users/tags.php:123
-msgctxt "embed profile type of stat"
-msgid "%s talks"
-msgstr ""
-
-#: includes/users/tags.php:283
-msgctxt "Screen reader text for embed user display name for the more link"
-msgid "%s&#39;s"
 msgstr ""

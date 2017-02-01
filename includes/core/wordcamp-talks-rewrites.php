@@ -125,7 +125,6 @@ class WordCamp_Talks_Rewrites {
 
 		$page_slug  = wct_paged_slug();
 		$paged_rule = '/([^/]+)/' . $page_slug . '/?([0-9]{1,})/?$';
-		$embed_rule = '/([^/]+)/embed/?$';
 
 		// User Comments
 		$user_comments_rule        = '/([^/]+)/' . $this->user_comments_slug . '/?$';
@@ -152,7 +151,6 @@ class WordCamp_Talks_Rewrites {
 		add_rewrite_rule( $this->user_slug . $user_to_rate_rule,        'index.php?' . $this->user_rid . '=$matches[1]&' . $this->user_to_rate_rid .  '=1',                                      $priority );
 		add_rewrite_rule( $this->user_slug . $user_talks_paged_rule,    'index.php?' . $this->user_rid . '=$matches[1]&' . $this->user_talks_rid   .  '=1&' . $this->page_rid . '=$matches[2]',  $priority );
 		add_rewrite_rule( $this->user_slug . $user_talks_rule,          'index.php?' . $this->user_rid . '=$matches[1]&' . $this->user_talks_rid   .  '=1',                                      $priority );
-		add_rewrite_rule( $this->user_slug . $embed_rule,               'index.php?' . $this->user_rid . '=$matches[1]&embed=true',                                                              $priority );
 		add_rewrite_rule( $this->user_slug . $root_rule,                'index.php?' . $this->user_rid . '=$matches[1]',                                                                         $priority );
 
 		// Action rules (only add a new talk right now)

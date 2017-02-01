@@ -151,44 +151,4 @@
 		$( '#wordcamp-talks .submit input[name="wct[save]"]' ).remove();
 	} );
 
-	if ( typeof wct_vars.is_profile !== 'undefined' ) {
-		var reset_height = $( '#item-header-content' ).innerHeight() || 0;
-
-		$( '.wp-embed-share-input' ).on( 'click', function ( e ) {
-			e.target.select();
-		} );
-
-		$( '.wp-embed-share-dialog-open' ).on( 'click', function () {
-			$( '#item-header-content' ).css( {
-				'width'  : '600px',
-				'height' : '200px'
-			} );
-
-			$( '.wp-embed-share-dialog' ).removeClass( 'hidden' );
-			$( '.wp-embed-share-tab-button [aria-selected="true"]' ).focus();
-		} );
-
-		$( '.wp-embed-share-dialog-close' ).on( 'click', function () {
-			$( '.wp-embed-share-dialog' ).addClass( 'hidden' );
-			$( '.wp-embed-share-dialog-open' ).focus();
-
-			$( '#item-header-content' ).css( {
-				'width'  : 'auto',
-				'height' : reset_height + 'px'
-			} );
-		} );
-
-		$( '.wp-embed-share-tab-button button' ).on( 'click', function( e ) {
-			var control = $( e.target ).attr( 'aria-controls' );
-
-			$( '.wp-embed-share-tab' ).each( function( t, tab ) {
-				if ( control === $( tab ).prop( 'id' ) ) {
-					$( tab ).attr( 'aria-hidden', 'false' );
-				} else {
-					$( tab ).attr( 'aria-hidden', 'true' );
-				}
-			} );
-		} );
-	}
-
 })( jQuery );

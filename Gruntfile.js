@@ -77,7 +77,7 @@ module.exports = function( grunt ) {
 				extDot: 'last',
 				expand: true,
 				ext: '.min.css',
-				src: ['templates/embed-style.css', '!*.min.css'],
+				src: [ '!*.min.css'],
 				options: {
 					banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
 					'<%= grunt.template.today("UTC:yyyy-mm-dd h:MM:ss TT Z") %> - ' +
