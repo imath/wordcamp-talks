@@ -164,7 +164,6 @@ final class WordCamp_Talks {
 
 		require( $this->includes_dir . 'users/functions.php' );
 		require( $this->includes_dir . 'users/tags.php' );
-		require( $this->includes_dir . 'users/widgets.php' );
 
 		require( $this->includes_dir . 'core/actions.php' );
 		require( $this->includes_dir . 'core/filters.php' );
