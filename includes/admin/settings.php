@@ -142,14 +142,6 @@ function wct_get_settings_fields() {
 				'args'              => array()
 			),
 
-			// Disable comments disjoin ?
-			'_wc_talks_disjoin_comments' => array(
-				'title'             => __( 'Talk comments', 'wordcamp-talks' ),
-				'callback'          => 'wct_disjoin_comments_setting_callback',
-				'sanitize_callback' => 'absint',
-				'args'              => array()
-			),
-
 			// Disable comments in talks post type
 			'_wc_talks_allow_comments' => array(
 				'title'             => __( 'Comments', 'wordcamp-talks' ),
@@ -523,25 +515,6 @@ function wct_to_rate_profile_setting_callback() {
 
 	<input name="_wc_talks_to_rate_disabled" id="_wc_talks_to_rate_disabled" type="checkbox" value="1" <?php checked( wct_is_user_to_rate_disabled() ); ?> />
 	<label for="_wc_talks_to_rate_disabled"><?php esc_html_e( '&quot;To rate&quot; user\'s profile tab.', 'wordcamp-talks' ); ?></label>
-
-	<?php
-}
-
-/**
- * Disjoin talk comments callback
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
- *
- * @since 1.0.0
- *
- * @return string HTML output
- */
-function wct_disjoin_comments_setting_callback() {
-	?>
-
-	<input name="_wc_talks_disjoin_comments" id="_wc_talks_disjoin_comments" type="checkbox" value="1" <?php checked( wct_is_comments_disjoined() ); ?> />
-	<label for="_wc_talks_disjoin_comments"><?php esc_html_e( 'Separate comments made on talks from the other post types.', 'wordcamp-talks' ); ?></label>
 
 	<?php
 }

@@ -111,9 +111,7 @@ class WordCamp_Talks_Admin {
 	 */
 	private function includes() {
 		// By default, comments are disjoined from the other post types.
-		if ( wct_is_comments_disjoined() ) {
-			require( $this->includes_dir . 'comments.php' );
-		}
+		require( $this->includes_dir . 'comments.php' );
 
 		// Settings
 		require( $this->includes_dir . 'settings.php' );
