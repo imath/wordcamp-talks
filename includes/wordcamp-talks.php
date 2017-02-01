@@ -135,7 +135,6 @@ final class WordCamp_Talks {
 		require( $this->includes_dir . 'comments/functions.php' );
 		require( $this->includes_dir . 'comments/classes.php' );
 		require( $this->includes_dir . 'comments/tags.php' );
-		require( $this->includes_dir . 'comments/widgets.php' );
 
 		require( $this->includes_dir . 'talks/functions.php' );
 
@@ -160,11 +159,9 @@ final class WordCamp_Talks {
 		endif;
 
 		require( $this->includes_dir . 'talks/tags.php' );
-		require( $this->includes_dir . 'talks/widgets.php' );
 
 		require( $this->includes_dir . 'users/functions.php' );
 		require( $this->includes_dir . 'users/tags.php' );
-		require( $this->includes_dir . 'users/widgets.php' );
 
 		require( $this->includes_dir . 'core/actions.php' );
 		require( $this->includes_dir . 'core/filters.php' );
