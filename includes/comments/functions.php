@@ -116,10 +116,7 @@ function wct_comments_clean_count_cache( $comment_id = 0, $status = '' ) {
 		return;
 	}
 
-	// Clean global talk comment count cache if needed.
-	if ( wct_is_comments_disjoined() ) {
-		wp_cache_delete( "talk_comment_count_0", 'wct' );
-	}
+	wp_cache_delete( "talk_comment_count_0", 'wct' );
 
 	// Clean user count cache
 	if ( ! empty( $comment->user_id ) ) {
