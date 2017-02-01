@@ -135,7 +135,6 @@ final class WordCamp_Talks {
 		require( $this->includes_dir . 'comments/functions.php' );
 		require( $this->includes_dir . 'comments/classes.php' );
 		require( $this->includes_dir . 'comments/tags.php' );
-		require( $this->includes_dir . 'comments/widgets.php' );
 
 		require( $this->includes_dir . 'talks/functions.php' );
 
