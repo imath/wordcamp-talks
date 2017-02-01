@@ -39,7 +39,6 @@ function wct_get_default_options() {
 		'_wc_talks_archive_title'       => 'Talks',
 		'_wc_talks_closing_date'        => '',
 		'_wc_talks_submit_status'       => 'private',
-		'_wc_talks_editor_image'        => 1,
 		'_wc_talks_editor_link'         => 1,
 		'_wc_talks_moderation_message'  => '',
 		'_wc_talks_login_message'       => '',
@@ -48,7 +47,6 @@ function wct_get_default_options() {
 		'_wc_talks_public_fields_list'  => array(),
 		'_wc_talks_signup_fields'       => array(),
 		'_wc_talks_allow_comments'      => 1,
-		'_wc_talks_featured_images'     => 1,
 		'_wc_talks_to_rate_disabled'    => 0,
 		'_wc_talks_autolog_enabled'     => 0,
 	);
@@ -156,21 +154,6 @@ function wct_default_talk_status( $default = 'private' ) {
 	 * @param  string $default_status
 	 */
 	return apply_filters( 'wct_default_talk_status', $default_status );
-}
-
-/**
- * Should the editor include the add image url button ?
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @param  int $default default value
- * @return bool         True if enabled, false otherwise
- */
-function wct_talk_editor_image( $default = 1 ) {
-	return (bool) apply_filters( 'wct_talk_editor_image(', (bool) get_option( '_wc_talks_editor_image', $default ) );
 }
 
 /**
@@ -318,18 +301,6 @@ function wct_user_autolog_after_signup( $default = 0 ) {
  */
 function wct_is_comments_allowed( $default = 1 ) {
 	return (bool) apply_filters( 'wct_is_comments_allowed', (bool) get_option( '_wc_talks_allow_comments', $default ) );
-}
-
-/**
- * Featured images for talks ?
- *
- * @since 1.0.0
- *
- * @param  int $default default value
- * @return bool         True if enabled, false otherwise
- */
-function wct_featured_images_allowed( $default = 1 ) {
-	return (bool) apply_filters( 'wct_featured_images_allowed', (bool) get_option( '_wc_talks_featured_images', $default ) );
 }
 
 /**

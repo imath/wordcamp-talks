@@ -154,10 +154,6 @@ final class WordCamp_Talks {
 			require( $this->includes_dir . 'talks/wordcamp-talk-metas.php' );
 		endif;
 
-		if ( ! class_exists( 'WordCamp_Talks_Talks_Thumbnail' ) ) :
-			require( $this->includes_dir . 'talks/wordcamp-talks-talks-thumbnail.php' );
-		endif;
-
 		require( $this->includes_dir . 'talks/tags.php' );
 
 		require( $this->includes_dir . 'users/functions.php' );
@@ -215,10 +211,6 @@ final class WordCamp_Talks {
 		//register the Talks post-type
 		//
 		$supports = array( 'title', 'editor', 'author', 'comments', 'revisions' );
-
-		if ( wct_featured_images_allowed() ) {
-			$supports[] = 'thumbnail';
-		}
 
 		$args = apply_filters( 'wct_post_type_register_args', array(
 			'public'              => true,
