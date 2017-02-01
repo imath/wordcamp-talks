@@ -89,7 +89,6 @@ function wct_parse_query( $posts_query = null ) {
 
 	// Are we requesting the user-profile template ?
 	$user       = $posts_query->get( wct_user_rewrite_id() );
-	$embed_page = wct_is_embed_profile();
 
 	if ( ! empty( $user ) ) {
 
@@ -104,12 +103,6 @@ function wct_parse_query( $posts_query = null ) {
 		// No user id: no profile!
 		if ( empty( $user->ID ) || true === apply_filters( 'wct_users_is_spammy', is_multisite() && is_user_spammy( $user ), $user ) ) {
 			$posts_query->set_404();
-
-			// Make sure the WordPress Embed Template will be used
-			if ( ( 'true' === get_query_var( 'embed' ) || true === get_query_var( 'embed' ) ) ) {
-				$posts_query->is_embed = true;
-				$posts_query->set( 'p', -1 );
-			}
 
 			return;
 		}
@@ -190,19 +183,7 @@ function wct_parse_query( $posts_query = null ) {
 			$posts_query->set( 'author', $user->ID  );
 
 		} else {
-			if ( ( 'true' === get_query_var( 'embed' ) || true === get_query_var( 'embed' ) ) ) {
-				$posts_query->is_embed = true;
-				$posts_query->set( 'p', -1 );
-
-				if ( $embed_page ) {
-					wct_set_global( 'is_user_embed', true );
-				} else {
-					$posts_query->set_404();
-					return;
-				}
-			} else {
-				wct_set_global( 'is_user_home', true );
-			}
+			wct_set_global( 'is_user_home', true );
 		}
 
 		// Set the displayed user.
@@ -378,25 +359,6 @@ function wct_enqueue_style() {
 	if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
 		$min = '';
 	}
-
-	if ( wct_is_user_profile() && wct_is_embed_profile() ) {
-		wp_enqueue_style( 'wc-talks-sharing-profile', includes_url( "css/wp-embed-template{$min}.css" ), array(), wct_get_version() );
-	}
-}
-
-/**
- * Loads the embed stylesheet to be used inside embed templates
- *
- * @since 1.0.0
- */
-function wct_enqueue_embed_style() {
-	$min = '.min';
-
-	if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
-		$min = '';
-	}
-
-	wp_enqueue_style( 'wc-talks-embed-style', wct_get_stylesheet( "embed-style{$min}" ), array(), wct_get_version() );
 }
 
 /** Conditional template tags *************************************************/
@@ -1130,45 +1092,4 @@ function wct_edit_post_link( $edit_link = '', $post_id = 0 ) {
 	return $edit_link;
 }
 
-/**
- * Use the Embed Profile template when an Embed profile is requested
- *
- * @since 1.0.0
- *
- * @param  string $template The WordPress Embed template
- * @return string           The appropriate template to use
- */
-function wct_embed_profile( $template = '' ) {
-	if ( ! wct_get_global( 'is_user_embed' ) || ! wct_get_global( 'is_user' ) ) {
-		return $template;
-	}
 
-	return wct_get_template_part( 'embed', 'profile', false );
-}
-
-/**
- * Adds oEmbed discovery links in the website <head> for the Talk user's profile root page.
- *
- * @since 1.0.0
- */
-function wct_oembed_add_discovery_links() {
-	if ( ! wct_is_user_profile_home() || ! wct_is_embed_profile() ) {
-		return;
-	}
-
-	$user_link = wct_users_get_user_profile_url( wct_users_displayed_user_id(), '', true );
-	$output = '<link rel="alternate" type="application/json+oembed" href="' . esc_url( get_oembed_endpoint_url( $user_link ) ) . '" />' . "\n";
-
-	if ( class_exists( 'SimpleXMLElement' ) ) {
-		$output .= '<link rel="alternate" type="text/xml+oembed" href="' . esc_url( get_oembed_endpoint_url( $user_link, 'xml' ) ) . '" />' . "\n";
-	}
-
-	/**
-	 * Filter the oEmbed discovery links HTML.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $output HTML of the discovery links.
-	 */
-	echo apply_filters( 'wct_users_oembed_add_discovery_links', $output );
-}

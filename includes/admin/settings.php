@@ -189,14 +189,6 @@ function wct_get_settings_fields() {
 				'sanitize_callback' => 'absint',
 				'args'              => array()
 			),
-
-			// Are users profiles embeddable ?
-			'_wc_talks_embed_profile' => array(
-				'title'             => __( 'Embed Profile', 'wordcamp-talks' ),
-				'callback'          => 'wct_embed_profile_setting_callback',
-				'sanitize_callback' => 'wct_sanitize_embed_profile',
-				'args'              => array()
-			),
 		)
 	);
 
@@ -647,22 +639,6 @@ function wct_autolog_signups_fields_setting_callback() {
 
 	<input name="_wc_talks_autolog_enabled" id="_wc_talks_autolog_enabled" type="checkbox" value="1" <?php checked( (bool) wct_user_autolog_after_signup() ); ?> />
 	<label for="_wc_talks_autolog_enabled"><?php esc_html_e( 'Automagically log in just signed up users.', 'wordcamp-talks' ); ?></label>
-
-	<?php
-}
-
-/**
- * Embed User Profiles callback
- *
- * @since 1.0.0
- *
- * @return string HTML output
- */
-function wct_embed_profile_setting_callback() {
-	?>
-
-	<input name="_wc_talks_embed_profile" id="_wc_talks_embed_profile" type="checkbox" value="1" <?php checked( (bool) wct_is_embed_profile() ); ?> />
-	<label for="_wc_talks_embed_profile"><?php esc_html_e( 'Allow users profiles to be embed', 'wordcamp-talks' ); ?></label>
 
 	<?php
 }

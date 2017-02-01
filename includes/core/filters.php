@@ -70,7 +70,6 @@ add_filter( 'wct_talks_get_content', 'wptexturize'          );
 add_filter( 'wct_talks_get_content', 'convert_smilies'      );
 add_filter( 'wct_talks_get_content', 'convert_chars'        );
 add_filter( 'wct_talks_get_content', 'wpautop'              );
-add_filter( 'wct_talks_get_content', 'wct_do_embed',      8 );
 add_filter( 'wct_talks_get_content', 'wp_unslash',        5 );
 add_filter( 'wct_talks_get_content', 'make_clickable',    9 );
 add_filter( 'wct_talks_get_content', 'force_balance_tags'   );
@@ -90,5 +89,3 @@ add_filter( 'wct_comments_get_comment_excerpt', 'wp_unslash',        5 );
 add_filter( 'wct_comments_get_comment_excerpt', 'make_clickable',    9 );
 
 add_filter( 'wct_users_public_value', 'wct_users_sanitize_public_profile_field', 10, 2 );
-
-add_filter( 'embed_template', 'wct_embed_profile', 10, 1 );

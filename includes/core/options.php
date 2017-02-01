@@ -49,7 +49,6 @@ function wct_get_default_options() {
 		'_wc_talks_signup_fields'       => array(),
 		'_wc_talks_disjoin_comments'    => 1,
 		'_wc_talks_allow_comments'      => 1,
-		'_wc_talks_embed_profile'       => 0,
 		'_wc_talks_featured_images'     => 1,
 		'_wc_talks_to_rate_disabled'    => 0,
 		'_wc_talks_autolog_enabled'     => 0,
@@ -335,18 +334,6 @@ function wct_is_comments_disjoined( $default = 1 ) {
  */
 function wct_is_comments_allowed( $default = 1 ) {
 	return (bool) apply_filters( 'wct_is_comments_allowed', (bool) get_option( '_wc_talks_allow_comments', $default ) );
-}
-
-/**
- * Can profile be embed ?
- *
- * @since 1.0.0
- *
- * @param  bool $default default value
- * @return bool          The id of the Page Utility if enabled, 0 otherwise
- */
-function wct_is_embed_profile( $default = 0 ) {
-	return (int) apply_filters( 'wct_is_embed_profile', get_option( '_wc_talks_embed_profile', $default ) );
 }
 
 /**
