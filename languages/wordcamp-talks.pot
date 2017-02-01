@@ -514,10 +514,6 @@ msgstr ""
 msgid "Signups Autolog"
 msgstr ""
 
-#: includes/admin/settings.php:211
-msgid "Embed Profile"
-msgstr ""
-
 #: includes/admin/settings.php:225
 msgid "WordCamp Talks root slug"
 msgstr ""

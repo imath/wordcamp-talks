@@ -262,8 +262,6 @@ function wct_users_the_signup_submit() {
  * Edit/Share profile buttons.
  *
  * Displays the edit profile URL for Admins/self profiles.
- * Displays the sharing dialog box on user's profile so
- * that people can easily get the embed code.
  *
  * @since 1.0.0
  */
