@@ -68,7 +68,7 @@ if ( ! class_exists( 'WordCamp_Talks_Post_Status' ) ) :
 					 * published/private posts would be impossible to see, which would be difficult
 					 * to debug
 					 */
-					$q->set( 'post_status', array( 'draft', 'rejected', 'selected', 'shortlisted' ) );
+					$q->set( 'post_status', array( 'draft', 'pending', 'rejected', 'selected', 'shortlisted' ) );
 				}
 
 				// If the user cannot select talks, they must be a speaker, only show talks belonging to them
