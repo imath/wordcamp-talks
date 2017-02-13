@@ -814,38 +814,6 @@ body.single-talks #comments .comment-reply-link:hover {
 	font-size: 80%;
 }
 
-#wordcamp-talks .standard-form #talk-images-list.hidden {
-	display: none;
-}
-
-#wordcamp-talks .standard-form #talk-images-list ul {
-	overflow: hidden;
-	list-style: none;
-	clear:both;
-}
-
-#wordcamp-talks .standard-form #talk-images-list ul li {
-	position:relative;
-	overflow: hidden;
-	float: left;
-	width: 100px;
-	margin: 0 1em 1em 0;
-	height: 100px;
-	border: solid 1px #ccc;
-}
-
-#wordcamp-talks .standard-form #talk-images-list ul li img {
-	max-width: 100%;
-}
-
-#wordcamp-talks .standard-form #talk-images-list ul li .cb-container {
-	position: absolute;
-	bottom: 0;
-	background-color: #fff;
-	width: 100%;
-	text-align: center;
-}
-
 /*--------------------------------------------------------------
 9 - Widgets
 --------------------------------------------------------------*/

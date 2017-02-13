@@ -1022,15 +1022,6 @@ function wct_talks_post_talk() {
 			'info'    => array(),
 		);
 
-		if ( ! empty( $posted['_the_thumbnail'] ) ) {
-			$thumbnail = reset( $posted['_the_thumbnail'] );
-			$sideload = WordCamp_Talks_Talks_Thumbnail::start( $thumbnail, $id );
-
-			if ( is_wp_error( $sideload->result ) ) {
-				$feedback_message['error'][] = 6;
-			}
-		}
-
 		if ( 'pending' == $talk->post_status ) {
 			// Build pending message.
 			$feedback_message['info'][] = 2;
@@ -1121,37 +1112,6 @@ function wct_talks_update_talk() {
 		'info'    => array(),
 	);
 
-	// Take care of the featured image
-	$thumbnail_id = (int) get_post_thumbnail_id( $talk );
-
-	if ( ! empty( $updated['_the_thumbnail'] ) ) {
-		$thumbnail_src = key( $updated['_the_thumbnail'] );
-		$thumbnail     = reset( $updated['_the_thumbnail'] );
-
-		// Update the Featured image
-		if ( ! is_numeric( $thumbnail ) || $thumbnail_id !== (int) $thumbnail ) {
-			if ( is_numeric( $thumbnail ) ) {
-				// validate the attachment
-				if ( ! get_post( $thumbnail ) ) {
-					$feedback_message['error'][] = 6;
-				// Set the new Featured image
-				} else {
-					set_post_thumbnail( $talk->ID, $thumbnail );
-				}
-			} else {
-				$sideload = WordCamp_Talks_Talks_Thumbnail::start( $thumbnail_src, $talk->ID );
-
-				if ( is_wp_error( $sideload->result ) ) {
-					$feedback_message['error'][] = 6;
-				}
-			}
-		}
-
-	// Delete the featured image
-	} elseif ( ! empty( $thumbnail_id ) ) {
-		delete_post_thumbnail( $talk );
-	}
-
 	// Update the talk
 	$id = wct_talks_save_talk( $updated );
 
@@ -1170,29 +1130,6 @@ function wct_talks_update_talk() {
 
 	wp_safe_redirect( wct_add_feedback_args( array_filter( $feedback_message ), $redirect ) );
 	exit();
-}
-
-/** Featured images ***********************************************************/
-
-/**
- * Simulate a tinymce plugin to intercept images once added to the
- * WP Editor
- *
- * @since 1.0.0
- *
- * @param  array $tinymce_plugins Just what the name of the param says!
- * @return array Tiny MCE plugins
- */
-function wct_talks_tiny_mce_plugins( $tinymce_plugins = array() ) {
-	if ( ! wct_featured_images_allowed() || ! current_theme_supports( 'post-thumbnails' ) ) {
-		return $tinymce_plugins;
-	}
-
-	if ( ! wct_is_addnew() && ! wct_is_edit() ) {
-		return $tinymce_plugins;
-	}
-
-	return array_merge( $tinymce_plugins, array( 'wpTalkStreamListImages' => wct_get_js_script( 'featured-images' ) ) );
 }
 
 function wct_do_embed( $content ) {

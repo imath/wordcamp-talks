@@ -576,7 +576,6 @@ function wct_get_feedback_messages( $type = '', $id = false ) {
 			3  => __( 'You are not allowed to publish talks',                    'wordcamp-talks' ),
 			4  => __( 'Title and description are required fields.',              'wordcamp-talks' ),
 			5  => __( 'Something went wrong while trying to save your talk.',    'wordcamp-talks' ),
-			6  => __( 'There was a problem saving the featured image, sorry.',   'wordcamp-talks' ),
 			7  => __( 'Please choose a username having at least 4 characters.',  'wordcamp-talks' ),
 			8  => __( 'Please fill all required fields.',                        'wordcamp-talks' ),
 			9  => __( 'The talk you are trying to edit does not seem to exist.', 'wordcamp-talks' ),
@@ -1267,12 +1266,6 @@ function wct_teeny_button_filter( $buttons = array() ) {
 
 	// Remove unused buttons
 	$buttons = array_diff( $buttons, $remove_buttons );
-
-	// Eventually add the image button
-	if ( wct_talk_editor_image() ) {
-		$buttons = array_diff( $buttons, array( 'fullscreen' ) );
-		array_push( $buttons, 'image', 'fullscreen' );
-	}
 
 	return $buttons;
 }
