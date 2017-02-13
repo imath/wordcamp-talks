@@ -983,7 +983,7 @@ function wct_ajax_rate() {
 	$new_average_rate = wct_add_rate( $talk, $user_id, $rate );
 
 	// If the user can't see other ratings, simply return the rating he just gave.
-	if ( 'private' === wct_default_talk_status() && ! wct_user_can( 'view_talk_rates' ) ) {
+	if ( ! wct_user_can( 'view_talk_rates' ) ) {
 		$new_average_rate = number_format( $rate, 1 );
 	}
 
@@ -1214,10 +1214,6 @@ function wct_tag_cloud_args( $args = array() ) {
  */
 function wct_generate_tag_cloud( $number = 10, $args = array() ) {
 	$r = array( 'number' => $number, 'orderby' => 'count', 'order' => 'DESC' );
-
-	if ( 'private' === wct_default_talk_status() ) {
-		$r = array( 'hide_empty' => false, 'orderby' => 'name', 'order' => 'ASC' );
-	}
 
 	$tags = get_terms( wct_get_tag(), apply_filters( 'wct_generate_tag_cloud_args', $r ) );
 

@@ -378,25 +378,6 @@ function wct_talks_get_terms( $taxonomy = '', $args = array() ) {
 }
 
 /**
- * Sets the post status of an talk
- *
- * @package WordCamp Talks
- * @subpackage talks/functions
- *
- * @since 1.0.0
- *
- * @param  array  $talkarr the posted arguments
- * @return string          the post status of the talk
- */
-function wct_talks_insert_status( $talkarr = array() ) {
-	/**
-	 * @param  string  the default post status for an talk
-	 * @param  array   $talkarr  the arguments of the talk to save
-	 */
-	return apply_filters( 'wct_talks_insert_status', wct_default_talk_status(), $talkarr );
-}
-
-/**
  * Checks if another user is editing an talk, if not
  * locks the talk for the current user.
  *
@@ -603,7 +584,7 @@ function wct_talks_save_talk( $talkarr = array() ) {
 	} else {
 		$talk         = new WordCamp_Talks_Talk();
 		$talk->author = wct_users_current_user_id();
-		$talk->status = wct_talks_insert_status( $talkarr );
+		$talk->status = 'pending';
 	}
 
 	// Set the title and description of the talk
@@ -783,7 +764,7 @@ function wct_talks_enqueue_scripts() {
 	if ( wct_is_single_talk() && ! wct_is_edit() && ! wct_is_rating_disabled() ) {
 		$user_id = wct_users_current_user_id();
 
-		if ( 'private' === wct_default_talk_status() && ! wct_user_can( 'view_talk_rates' ) ) {
+		if ( ! wct_user_can( 'view_talk_rates' ) ) {
 			$talk_id = 0;
 
 			if ( ! empty( wct()->query_loop->talk->ID ) ) {

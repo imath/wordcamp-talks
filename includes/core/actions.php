@@ -28,6 +28,7 @@ add_action( 'wct_init', 'wct_add_rewrite_tags',                    6 );
 add_action( 'wct_init', 'wct_add_rewrite_rules',                   8 );
 add_action( 'wct_init', 'wct_add_permastructs',                    9 );
 add_action( 'wct_init', array( 'WordCamp_Talk_Metas', 'start' ), 100 );
+add_action( 'wct_init', array( 'WordCamp_Talks_Post_Status', 'start' ), 100 );
 
 // Actions hooking loaded (rewrites/comments disjoin)
 add_action( 'wct_loaded', array( 'WordCamp_Talks_Rewrites', 'start' ), 1 );
