@@ -264,10 +264,20 @@ class WordCamp_Talks_Talk {
 		$r = wp_parse_args( $args, $defaults );
 
 		/**
-		 * Allow status to be filtered
+		 * Allow default status to be filtered
 		 * @see wct_talks_get_status()
 		 */
 		$talks_status = wct_talks_get_status();
+
+		// Reviewers can see all talks
+		if ( wct_user_can( 'list_all_talks' ) ) {
+			$talks_status = array( 'draft', 'pending', 'rejected', 'selected', 'shortlisted' );
+
+		// Speakers can only see their talks.
+		} elseif ( is_user_logged_in() ) {
+			$r['author']  = get_current_user_id();
+			$talks_status = 'any';
+		}
 
 		$query_args = array(
 			'post_status'    => $talks_status,

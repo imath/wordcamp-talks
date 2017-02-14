@@ -72,7 +72,7 @@ if ( ! class_exists( 'WordCamp_Talks_Post_Status' ) ) :
 				}
 
 				// If the user cannot select talks, they must be a speaker, only show talks belonging to them
-				if ( ! wct_user_can( 'manage_options' ) && ! wct_user_can( 'rate_talks' ) ) {
+				if ( ! wct_user_can( 'list_all_talks' ) ) {
 					$q->set( 'author', get_current_user_id() );
 					$q->set( 'post_status', 'any' );
 				}

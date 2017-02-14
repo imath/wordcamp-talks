@@ -92,6 +92,7 @@ function wct_get_rater_caps() {
 		'rate_talks'          => true,
 		'view_talk_rates'     => true,
 		'view_talk_comments'  => true,
+		'list_all_talks'      => true,
 	);
 
 	$post_type_object = get_post_type_object( 'talks' );
@@ -154,6 +155,7 @@ function wct_register_roles() {
 			'assign_talk_categories' => true,
 			'assign_talk_tags'       => true,
 			'select_talks'           => true,
+			'list_all_talks'         => true,
 		) );
 
 		add_role( 'juror', __( 'Juror', 'wordcamp-talks' ), $juror_caps );
@@ -239,26 +241,24 @@ function wct_map_meta_caps( $caps = array(), $cap = '', $user_id = 0, $args = ar
 
 				break;
 
+			// Specific to talks' workflow
 			case 'edit_talks'           :
 			case 'edit_others_talks'    :
 			case 'edit_private_talks'   :
 			case 'edit_published_talks' :
 			case 'read_private_talks'   :
-			case 'select_talks'         :
 			case 'create_talks'         :
 				$caps = array( 'manage_options' );
 				break;
 
+			// Specific to review
 			case 'comment_talks'       :
 			case 'rate_talks'          :
 			case 'view_talk_rates'     :
 			case 'view_talk_comments'  :
-				if ( 'rate_talks' === $cap && empty( $user_id ) ) {
-					$caps = array( 'do_not_allow' );
-				} else {
-					$caps = array( 'exist' );
-				}
-
+			case 'select_talks'        :
+			case 'list_all_talks'      :
+				$caps = array( 'manage_options' );
 				break;
 
 			case 'view_other_profiles' :

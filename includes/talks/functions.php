@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Default status used in talk 'get' queries
  *
- * By default, 'publish'
+ * By default, 'selected'
  *
  * @package WordCamp Talks
  * @subpackage talks/functions
@@ -28,11 +28,7 @@ defined( 'ABSPATH' ) || exit;
  * @return array          the post status of talks to retrieve
  */
 function wct_talks_get_status() {
-	$status = array( 'publish' );
-
-	if ( wct_user_can( 'read_private_talks' ) ) {
-		$status[] = 'private';
-	}
+	$status = array( 'selected' );
 
 	/**
 	 * Use this filter to override post status of talks to retieve
