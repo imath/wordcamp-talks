@@ -70,11 +70,6 @@ class WordCamp_Talks_Comments {
 	 * @since 1.0.0
 	 */
 	private function hooks() {
-
-		add_filter( 'get_post_status', array( $this, 'get_post_status' ), 10, 2 );
-		add_filter( 'comment_post_redirect', array( $this, 'comment_post_redirect' ), 10, 2 );
-
-
 		add_action( 'pre_get_comments',     array( $this, 'maybe_talk_comments' ),       10, 1 );
 
 		add_action( 'wct_init',  array( $this, 'cache_comments_count' ) );
@@ -86,22 +81,6 @@ class WordCamp_Talks_Comments {
 		add_filter( 'comment_moderation_recipients', array( $this, 'moderation_recipients' ), 10, 2 );
 		add_filter( 'comment_notification_text',     array( $this, 'comment_notification' ),  10, 2 );
 		add_filter( 'comment_moderation_text',       array( $this, 'comment_notification' ),  10, 2 );
-	}
-
-	function get_post_status( $post_status, WP_Post $post ) {
-		if ( '/wp-comments-post.php' !== $_SERVER['PHP_SELF'] ) {
-			return $post_status;
-		}
-		if ( 'talks' === $post->post_type ) {
-			return 'publish';
-		}
-	}
-
-	function comment_post_redirect( $location, WP_Comment $comment) {
-		if ( 'talks' === get_post_type( $comment->comment_post_ID ) ) {
-			wp_die( get_permalink( $comment->comment_post_ID ) );
-		}
-		return $location;
 	}
 
 	/**
