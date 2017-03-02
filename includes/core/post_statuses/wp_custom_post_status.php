@@ -175,7 +175,7 @@ class WP_Custom_Post_Status {
 		// Abort if we're on the wrong post type, but only if we got a restriction
 		if ( isset( $this->post_type ) ) {
 			global $post_type;
-			if ( ! is_array( $this->post_type ) ) {
+			if ( is_array( $this->post_type ) ) {
 				if ( in_array( $post_type, $this->post_type ) ) {
 					return;
 				}

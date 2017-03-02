@@ -70,7 +70,6 @@ class WordCamp_Talks_Comments {
 	 * @since 1.0.0
 	 */
 	private function hooks() {
-
 		add_action( 'pre_get_comments',     array( $this, 'maybe_talk_comments' ),       10, 1 );
 
 		add_action( 'wct_init',  array( $this, 'cache_comments_count' ) );
