@@ -4,9 +4,9 @@
 ! defined( 'ABSPATH' ) and exit;
 
 /**
-* Registers the talk status taxonomy
+* Adjusts the list of filters at the top of the talk proposals posts screen from statuses to tax terms
 */
-class Talk_Status_Taxonomy {
+class Talk_Status_View_Posts_List {
 	function __construct() {
 		//
 	}
@@ -17,10 +17,10 @@ class Talk_Status_Taxonomy {
 	 * @return void
 	 */
 	public function run() {
-		add_action( 'init', [ $this, 'init' ] );
+		add_action( 'admin_init', [ $this, 'admin_init' ] );
 	}
 
-	public function init() {
+	public function admin_init() {
 		//
 	}
 }
