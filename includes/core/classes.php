@@ -9,17 +9,6 @@
 // Exit if accessed directly
 defined( 'ABSPATH' ) || exit;
 
-/** Post Statuses  ************************************************************/
-
-require( 'post_statuses/wp_custom_post_status.php' );
-require( 'post_statuses/shortlist.php' );
-require( 'post_statuses/selected.php' );
-require( 'post_statuses/rejected.php' );
-
-if ( ! class_exists( 'WordCamp_Talks_Post_Status' ) ) :
-	require( 'poststatus.php' );
-endif;
-
 /** Rewrites ******************************************************************/
 
 if ( ! class_exists( 'WordCamp_Talks_Rewrites' ) ) :
