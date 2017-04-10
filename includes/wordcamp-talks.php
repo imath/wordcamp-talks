@@ -241,23 +241,6 @@ final class WordCamp_Talks {
 				$args
 			)
 		);
-
-		// Register a private utility post type
-		register_post_type(
-			'wct_utility',
-			array(
-				'label'              => 'wct_utility',
-				'public'             => false,
-				'publicly_queryable' => false,
-				'show_ui'            => false,
-				'show_in_menu'       => false,
-				'show_in_nav_menus'  => false,
-				'query_var'          => false,
-				'rewrite'            => false,
-				'has_archive'        => false,
-				'hierarchical'       => true,
-			)
-		);
 	}
 
 	/**

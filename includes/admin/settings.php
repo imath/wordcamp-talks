@@ -718,45 +718,6 @@ function wct_sanitize_user_fields_list( $option = '' ) {
 }
 
 /**
- * Create the Utility page for embed profile if needed
- *
- * @since 1.0.0
- *
- * @param  int $option the embed profile setting
- * @return int         the new embed profile setting
- */
-function wct_sanitize_embed_profile( $option = 0 ) {
-	$utility_page_id = wct_is_embed_profile();
-
-	if ( $utility_page_id ) {
-		$utility_page = get_post( $utility_page_id );
-	}
-
-	if ( isset( $utility_page->post_type ) && 'wct_utility' !== $utility_page->post_type ) {
-		$utility_page = null;
-	}
-
-	if ( ! empty( $option ) ) {
-		if ( empty( $utility_page->ID ) ) {
-			$option = wp_insert_post( array(
-				'comment_status' => 'closed',
-				'ping_status'    => 'closed',
-				'post_status'    => 'publish',
-				'post_title'     => 'wc_talks_user_page',
-				'post_type'      => 'wct_utility',
-			) );
-		} else {
-			$option = $utility_page->ID;
-		}
-
-	} elseif ( ! empty( $utility_page->ID ) ) {
-		wp_delete_post( $utility_page->ID, true );
-	}
-
-	return absint( $option );
-}
-
-/**
  * Displays the settings page
  *
  * @package WordCamp Talks
