@@ -27,21 +27,8 @@ if ( ! class_exists( 'WordCamp_Talks_Post_Status' ) ) :
 
 		public function __construct() {
 			// register the various hooks
-			add_action( 'admin_head-post.php', array( $this, 'set_publishing_actions' ) );
 			add_action( 'admin_head-post-new.php', array( $this, 'set_publishing_actions' ) );
 			add_action( 'pre_get_posts', array( $this, 'filter_talks' ) );
-		}
-
-		function set_publishing_actions() {
-			global $post;
-			if ( 'talks' === $post->post_type ) {
-				echo '<style type="text/css">
-				.misc-pub-section.misc-pub-visibility,
-				.misc-pub-section.curtime.misc-pub-curtime {
-					display: none;
-				}
-				</style>';
-			}
 		}
 
 		/**
