@@ -9,6 +9,15 @@
 // Exit if accessed directly
 defined( 'ABSPATH' ) || exit;
 
+/** Status ********************************************************************/
+
+require_once( 'status/views/publish-box.php');
+require_once( 'status/views/posts-list.php');
+require_once( 'status/view.php');
+require_once( 'status/taxonomy.php');
+require_once( 'status/post-status.php');
+require_once( 'status/controller.php');
+
 /** Rewrites ******************************************************************/
 
 if ( ! class_exists( 'WordCamp_Talks_Rewrites' ) ) :
