@@ -29,6 +29,15 @@ final class WordCamp_Talks {
 		$this->setup_globals( $file );
 		$this->includes();
 		$this->setup_hooks();
+
+		$posts_list = new Talk_Status_View_Posts_List();
+		$publish_box = new Talk_Status_View_Publish_Box ;
+
+		$post_status = new Talk_Status_Post_Status();
+		$taxonomy = new Talk_Status_Taxonomy();
+		$view = new Talk_Status_View( $posts_list, $publish_box );
+
+		$this->status_controller = new Talk_Status_Controller( $post_status, $taxonomy, $view );
 	}
 
 	/**
