@@ -18,9 +18,9 @@ add_action( 'init', array( 'WordCamp_Talk_Metas', 'start' ), 100 );
 add_action( 'init', array( 'WordCamp_Talks_Post_Status', 'start' ), 100 );
 
 // Actions hooking loaded (rewrites/comments disjoin)
-add_action( 'plugins_loaded', array( 'WordCamp_Talks_Rewrites', 'start' ), 1 );
-add_action( 'plugins_loaded', 'wct_cache_global_group' );
-add_action( 'plugins_loaded', array( 'WordCamp_Talks_Comments', 'start' ) );
+add_action( 'init', array( 'WordCamp_Talks_Rewrites', 'start' ), 1 );
+add_action( 'init', 'wct_cache_global_group' );
+add_action( 'init', array( 'WordCamp_Talks_Comments', 'start' ) );
 
 // Comments actions
 add_action( 'wp_set_comment_status', 'wct_comments_clean_count_cache', 10, 2 );

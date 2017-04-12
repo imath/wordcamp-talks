@@ -86,7 +86,7 @@ class WordCamp_Talks_Rewrites {
 		add_action( 'init',  array( $this, 'add_rewrite_tags' )  );
 
 		// Register the rewrite rules
-		add_action( 'wct_add_rewrite_rules', array( $this, 'add_rewrite_rules' ) );
+		add_action( 'init', array( $this, 'add_rewrite_rules' ) );
 
 		// Register the permastructs
 		add_action( 'init',  array( $this, 'add_permastructs' )  );
