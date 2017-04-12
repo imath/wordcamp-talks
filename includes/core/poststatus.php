@@ -43,8 +43,9 @@ if ( ! class_exists( 'WordCamp_Talks_Post_Status' ) ) :
 				 * logged out users should only be able to see those talks that have been picked
 				 */
 				if ( ! is_user_logged_in() ) {
-					$q->set( 'post_status', 'private' );
-					$q->set( 'post_status', 'private' );
+					// logged out users shouldn't be able to see any of these,
+					// that's what sessions are for
+					$q->set( 'post__in', [ 0 ] );
 					return;
 				}
 
