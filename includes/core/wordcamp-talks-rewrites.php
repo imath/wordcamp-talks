@@ -83,13 +83,13 @@ class WordCamp_Talks_Rewrites {
 	 */
 	private function hooks() {
 		// Register rewrite tags.
-		add_action( 'wct_add_rewrite_tags',  array( $this, 'add_rewrite_tags' )  );
+		add_action( 'init',  array( $this, 'add_rewrite_tags' )  );
 
 		// Register the rewrite rules
-		add_action( 'wct_add_rewrite_rules', array( $this, 'add_rewrite_rules' ) );
+		add_action( 'init', array( $this, 'add_rewrite_rules' ) );
 
 		// Register the permastructs
-		add_action( 'wct_add_permastructs',  array( $this, 'add_permastructs' )  );
+		add_action( 'init',  array( $this, 'add_permastructs' )  );
 	}
 
 	/**

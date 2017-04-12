@@ -105,7 +105,7 @@ class WordCamp_Talks_Admin_Comments {
 		/** Actions *******************************************************************/
 
 		// Add a bubble to plugin's parent menu if some talk comments are pending
-		add_action( 'wct_admin_head',  array( $this, 'admin_head' ), 10 );
+		add_action( 'admin_head',  array( $this, 'admin_head' ), 10 );
 
 		// Check the post type if actions were made clicking on a moderation link from an email
 		add_action( 'load-edit-comments.php', array( $this, 'maybe_force_post_type' ) );
@@ -425,4 +425,4 @@ class WordCamp_Talks_Admin_Comments {
 
 endif;
 
-add_action( 'wct_loaded', array( 'WordCamp_Talks_Admin_Comments', 'start' ), 6 );
+add_action( 'plugins_loaded', array( 'WordCamp_Talks_Admin_Comments', 'start' ), 6 );

@@ -133,62 +133,62 @@ final class WordCamp_Talks {
 	 * @uses  is_admin() to check for WordPress Administration
 	 */
 	private function includes() {
-		require( $this->includes_dir . 'core/options.php' );
-		require( $this->includes_dir . 'core/functions.php' );
-		require( $this->includes_dir . 'core/rewrites.php' );
-		require( $this->includes_dir . 'core/classes.php' );
-		require( $this->includes_dir . 'core/capabilities.php' );
-		require( $this->includes_dir . 'core/upgrade.php' );
-		require( $this->includes_dir . 'core/template-functions.php' );
-		require( $this->includes_dir . 'core/template-loader.php' );
-		require( $this->includes_dir . 'core/widgets.php' );
+		require_once( $this->includes_dir . 'core/options.php' );
+		require_once( $this->includes_dir . 'core/functions.php' );
+		require_once( $this->includes_dir . 'core/rewrites.php' );
+		require_once( $this->includes_dir . 'core/classes.php' );
+		require_once( $this->includes_dir . 'core/capabilities.php' );
+		require_once( $this->includes_dir . 'core/upgrade.php' );
+		require_once( $this->includes_dir . 'core/template-functions.php' );
+		require_once( $this->includes_dir . 'core/template-loader.php' );
+		require_once( $this->includes_dir . 'core/widgets.php' );
 
-		require( $this->includes_dir . 'comments/functions.php' );
-		require( $this->includes_dir . 'comments/classes.php' );
-		require( $this->includes_dir . 'comments/tags.php' );
+		require_once( $this->includes_dir . 'comments/functions.php' );
+		require_once( $this->includes_dir . 'comments/classes.php' );
+		require_once( $this->includes_dir . 'comments/tags.php' );
 
-		require( $this->includes_dir . 'talks/functions.php' );
+		require_once( $this->includes_dir . 'talks/functions.php' );
 
 		/** Talk Class ****************************************************************/
 
 		if ( ! class_exists( 'WordCamp_Talks_Talk' ) ) :
-			require( $this->includes_dir . 'talks/wordcamp-talks-talk.php' );
+			require_once( $this->includes_dir . 'talks/wordcamp-talks-talk.php' );
 		endif;
 
 		/** Talks Loop ****************************************************************/
 
 		if ( ! class_exists( 'WordCamp_Talks_Loop_Talks' ) ) :
-			require( $this->includes_dir . 'talks/wordcamp-talks-loop-talks.php' );
+			require_once( $this->includes_dir . 'talks/wordcamp-talks-loop-talks.php' );
 		endif;
 
 		if ( ! class_exists( 'WordCamp_Talk_Metas' ) ) :
-			require( $this->includes_dir . 'talks/wordcamp-talk-metas.php' );
+			require_once( $this->includes_dir . 'talks/wordcamp-talk-metas.php' );
 		endif;
 
-		require( $this->includes_dir . 'talks/tags.php' );
+		require_once( $this->includes_dir . 'talks/tags.php' );
 
-		require( $this->includes_dir . 'users/functions.php' );
-		require( $this->includes_dir . 'users/tags.php' );
+		require_once( $this->includes_dir . 'users/functions.php' );
+		require_once( $this->includes_dir . 'users/tags.php' );
 
-		require( $this->includes_dir . 'core/actions.php' );
-		require( $this->includes_dir . 'core/filters.php' );
+		require_once( $this->includes_dir . 'core/actions.php' );
+		require_once( $this->includes_dir . 'core/filters.php' );
 
 		if ( is_admin() ) {
-			require( $this->includes_dir . 'admin/admin.php' );
+			require_once( $this->includes_dir . 'admin/admin.php' );
 		}
 
 		/**
 		 * Add specific functions for the current site
 		 */
 		if ( file_exists( WP_PLUGIN_DIR . '/wct-functions.php' ) ) {
-			require( WP_PLUGIN_DIR . '/wct-functions.php' );
+			require_once( WP_PLUGIN_DIR . '/wct-functions.php' );
 		}
 
 		/**
 		 * On multisite configs, load current blog's specific functions
 		 */
 		if ( is_multisite() && file_exists( WP_PLUGIN_DIR . '/wct-' . get_current_blog_id() . '- functions.php' ) ) {
-			require( WP_PLUGIN_DIR . '/wct-' . get_current_blog_id() . '- functions.php' );
+			require_once( WP_PLUGIN_DIR . '/wct-' . get_current_blog_id() . '- functions.php' );
 		}
 	}
 
@@ -204,11 +204,11 @@ final class WordCamp_Talks {
 	 */
 	private function setup_hooks() {
 		// Main hooks
-		add_action( 'wct_loaded',              array( $this, 'load_textdomain'     ), 0 );
-		add_action( 'wct_register_post_types', array( $this, 'register_post_type'  )    );
-		add_action( 'wct_register_taxonomies', array( $this, 'register_taxonomies' )    );
-		add_action( 'wct_setup_current_user',  array( $this, 'setup_current_user'  )    );
-		add_action( 'wct_enqueue_scripts',     array( $this, 'enqueue_scripts'     ), 1 );
+		add_action( 'plugins_loaded',          array( $this, 'load_textdomain'     ), 0 );
+		add_action( 'init', array( $this, 'register_post_type'  )    );
+		add_action( 'init', array( $this, 'register_taxonomies' )    );
+		add_action( 'set_current_user',  array( $this, 'setup_current_user'  )    );
+		add_action( 'wp_enqueue_scripts',     array( $this, 'enqueue_scripts'     ), 1 );
 	}
 
 	/**

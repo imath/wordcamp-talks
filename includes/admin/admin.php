@@ -111,17 +111,10 @@ if ( ! class_exists( 'WordCamp_Talks_Admin' ) ) :
 		 */
 		private function includes() {
 			// By default, comments are disjoined from the other post types.
-			if ( true ) {
-				require( $this->includes_dir . 'comments.php' );
-			}
-
-			// By default, talks can be sticked to front post type archive page.
-			if ( false ) {
-				require( $this->includes_dir . 'sticky.php' );
-			}
+			require_once( $this->includes_dir . 'comments.php' );
 
 			// Settings
-			require( $this->includes_dir . 'settings.php' );
+			require_once( $this->includes_dir . 'settings.php' );
 		}
 
 		/**
@@ -154,7 +147,7 @@ if ( ! class_exists( 'WordCamp_Talks_Admin' ) ) :
 			add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 
 			// Register the settings
-			add_action( 'wct_admin_register_settings', array( $this, 'register_admin_settings' ) );
+			add_action( 'admin_init', array( $this, 'register_admin_settings' ) );
 
 			add_action( 'load-settings_page_wc_talks', array( $this, 'settings_load' ) );
 
@@ -162,10 +155,10 @@ if ( ! class_exists( 'WordCamp_Talks_Admin' ) ) :
 			add_action( "manage_{$this->post_type}_posts_custom_column", array( $this, 'column_data' ), 10, 2 );
 
 			// Maybe neutralize quick edit
-			add_action( 'post_row_actions', array( $this, 'talk_row_actions'), 10, 2 );
+			add_action( 'post_row_actions', array( $this, 'talk_row_actions' ), 10, 2 );
 
 			// Do some global stuff here (custom css rule)
-			add_action( 'wct_admin_head', array( $this, 'admin_head' ), 10 );
+			add_action( 'admin_head', array( $this, 'admin_head' ), 10 );
 
 			/** Filters *******************************************************************/
 
@@ -1578,4 +1571,4 @@ if ( ! class_exists( 'WordCamp_Talks_Admin' ) ) :
 
 endif;
 
-add_action( 'wct_loaded', array( 'WordCamp_Talks_Admin', 'start' ), 5 );
+WordCamp_Talks_Admin::start();
