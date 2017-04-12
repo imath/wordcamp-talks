@@ -26,10 +26,6 @@ add_filter( 'comments_open',             'wct_comments_open',                10,
 add_filter( 'heartbeat_received',        'wct_talks_heartbeat_check_locked', 10, 2 );
 add_filter( 'heartbeat_nopriv_received', 'wct_talks_heartbeat_check_locked', 10, 2 );
 
-// Prefix talk's title in case of private/protected
-add_filter( 'private_title_format',   'wct_talks_private_title_prefix',   10, 2 );
-add_filter( 'protected_title_format', 'wct_talks_protected_title_prefix', 10, 2 );
-
 // Order by rates count
 add_filter( 'posts_clauses', 'wct_set_rates_count_orderby', 10, 2 );
 

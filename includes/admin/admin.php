@@ -1275,7 +1275,6 @@ if ( ! class_exists( 'WordCamp_Talks_Admin' ) ) :
 							esc_html__( 'In the Main Settings you have a number of options:', 'wordcamp-talks' ),
 							array(
 								esc_html__( 'WordCamp Talks archive page: you can customize the title of this page. It will appear on every WordCamp Talks&#39;s page, except the single talk one.', 'wordcamp-talks' ),
-								esc_html__( 'New talks status: this is the default status to apply to the talks submitted by the user. If this setting is set to &#34;Pending&#34;, it will be possible to edit the moderation message once this setting has been saved.', 'wordcamp-talks' ),
 								esc_html__( 'Moderation message: if New talks status is defined to Pending, it is the place to customize the awaiting moderation message the user will see once he submited his talk.', 'wordcamp-talks' ),
 								esc_html__( 'Not logged in message: if a user reaches the WordCamp Talks&#39;s front end submit form without being logged in, a message will invite him to do so. If you wish to use a custom message, use this setting.', 'wordcamp-talks' ),
 								esc_html__( 'Rating stars hover captions: fill a comma separated list of captions to replace default one. On front end, the number of rating stars will depend on the number of comma separated captions you defined in this setting.', 'wordcamp-talks' ),

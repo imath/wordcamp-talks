@@ -22,8 +22,6 @@ WordCamp Talks stylesheet
 
 #wordcamp-talks .icon:before,
 #wordcamp-talks #rate i:before,
-span.private-talk:before,
-span.protected-talk:before,
 #wordcamp-talks .tag span:before,
 .talk-title-sep:before {
 	display: inline-block;
@@ -78,15 +76,6 @@ body.single-talks .talk-title-sep:before {
 
 .talk-title-sep:before {
 	content: "\f139";
-	vertical-align: middle;
-}
-
-span.private-talk:before {
-	content: "\f332";
-	vertical-align: middle;
-}
-span.protected-talk:before {
-	content: "\f178";
 	vertical-align: middle;
 }
 

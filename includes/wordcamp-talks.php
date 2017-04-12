@@ -29,6 +29,17 @@ final class WordCamp_Talks {
 		$this->setup_globals( $file );
 		$this->includes();
 		$this->setup_hooks();
+
+		$posts_list = new Talk_Status_View_Posts_List();
+		$publish_box = new Talk_Status_View_Publish_Box();
+
+		$post_status = new Talk_Status_Post_Status();
+		$taxonomy = new Talk_Status_Taxonomy();
+		$view = new Talk_Status_View( $posts_list, $publish_box );
+
+		$this->status_controller = new Talk_Status_Controller( $post_status, $taxonomy, $view );
+
+		$this->status_controller->run();
 	}
 
 	/**
@@ -43,7 +54,7 @@ final class WordCamp_Talks {
 	public static function start( $file ) {
 
 		// If the single instance hasn't been set, set it now.
-		if ( null == self::$instance ) {
+		if ( empty( self::$instance ) ) {
 			self::$instance = new self( $file );
 		}
 
@@ -239,23 +250,6 @@ final class WordCamp_Talks {
 			array_merge(
 				wct_post_type_register_labels(),
 				$args
-			)
-		);
-
-		// Register a private utility post type
-		register_post_type(
-			'wct_utility',
-			array(
-				'label'              => 'wct_utility',
-				'public'             => false,
-				'publicly_queryable' => false,
-				'show_ui'            => false,
-				'show_in_menu'       => false,
-				'show_in_nav_menus'  => false,
-				'query_var'          => false,
-				'rewrite'            => false,
-				'has_archive'        => false,
-				'hierarchical'       => true,
 			)
 		);
 	}

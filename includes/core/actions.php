@@ -15,7 +15,6 @@ add_action( 'parse_query', 'wct_parse_query', 2 );
 
 // Actions to register post_type, metas, taxonomies & rewrite stuff
 add_action( 'init', array( 'WordCamp_Talk_Metas', 'start' ), 100 );
-add_action( 'init', array( 'WordCamp_Talks_Post_Status', 'start' ), 100 );
 
 // Actions hooking loaded (rewrites/comments disjoin)
 add_action( 'init', array( 'WordCamp_Talks_Rewrites', 'start' ), 1 );
