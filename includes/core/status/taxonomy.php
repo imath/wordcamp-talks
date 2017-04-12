@@ -22,7 +22,7 @@ class Talk_Status_Taxonomy {
 
 	public function init() {
 		$labels = array(
-			'name'                       => _x( 'Talks Statuses', 'Taxonomy General Name', 'wordcamp-talks' ),
+			'name'                       => _x( 'Talk Status', 'Taxonomy General Name', 'wordcamp-talks' ),
 			'singular_name'              => _x( 'Talk Status', 'Taxonomy Singular Name', 'wordcamp-talks' ),
 			'menu_name'                  => __( 'Talk Statuses', 'wordcamp-talks' ),
 			'all_items'                  => __( 'All Statuses', 'wordcamp-talks' ),
