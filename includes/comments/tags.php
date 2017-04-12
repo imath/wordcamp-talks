@@ -346,8 +346,6 @@ function wct_comments_the_comment_title_attribute() {
 
 		if ( ! empty( $talk->post_password ) ) {
 			$title = _x( 'Protected:', 'talk permalink title protected attribute', 'wordcamp-talks' ) . ' ';
-		} else if ( ! empty( $talk->post_status ) ) {
-			$title = _x( 'Private:', 'talk permalink title private attribute', 'wordcamp-talks' ) . ' ';
 		}
 
 		$title .= $talk->post_title;
