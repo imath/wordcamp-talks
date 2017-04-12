@@ -161,7 +161,7 @@ function wct_register_roles() {
 		add_role( 'juror', __( 'Juror', 'wordcamp-talks' ), $juror_caps );
 	}
 }
-add_action( 'wct_admin_init', 'wct_register_roles' );
+add_action( 'admin_init', 'wct_register_roles' );
 
 /**
  * Maps Talks capabilities

@@ -147,7 +147,7 @@ if ( ! class_exists( 'WordCamp_Talks_Admin' ) ) :
 			add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 
 			// Register the settings
-			add_action( 'wct_admin_register_settings', array( $this, 'register_admin_settings' ) );
+			add_action( 'admin_init', array( $this, 'register_admin_settings' ) );
 
 			add_action( 'load-settings_page_wc_talks', array( $this, 'settings_load' ) );
 
@@ -155,10 +155,10 @@ if ( ! class_exists( 'WordCamp_Talks_Admin' ) ) :
 			add_action( "manage_{$this->post_type}_posts_custom_column", array( $this, 'column_data' ), 10, 2 );
 
 			// Maybe neutralize quick edit
-			add_action( 'post_row_actions', array( $this, 'talk_row_actions'), 10, 2 );
+			add_action( 'post_row_actions', array( $this, 'talk_row_actions' ), 10, 2 );
 
 			// Do some global stuff here (custom css rule)
-			add_action( 'wct_admin_head', array( $this, 'admin_head' ), 10 );
+			add_action( 'admin_head', array( $this, 'admin_head' ), 10 );
 
 			/** Filters *******************************************************************/
 
@@ -1570,7 +1570,5 @@ if ( ! class_exists( 'WordCamp_Talks_Admin' ) ) :
 	}
 
 endif;
-//add_action( 'admin_init', function() { wp_die('boo');});
-//add_action( 'admin_init', array( 'WordCamp_Talks_Admin', 'start' ) );
 
 WordCamp_Talks_Admin::start();
