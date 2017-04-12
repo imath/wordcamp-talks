@@ -43,7 +43,8 @@ if ( ! class_exists( 'WordCamp_Talks_Post_Status' ) ) :
 				 * logged out users should only be able to see those talks that have been picked
 				 */
 				if ( ! is_user_logged_in() ) {
-					$q->set( 'post_status', 'selected' );
+					$q->set( 'post_status', 'private' );
+					$q->set( 'post_status', 'private' );
 					return;
 				}
 
@@ -55,13 +56,12 @@ if ( ! class_exists( 'WordCamp_Talks_Post_Status' ) ) :
 					 * published/private posts would be impossible to see, which would be difficult
 					 * to debug
 					 */
-					$q->set( 'post_status', array( 'draft', 'pending', 'rejected', 'selected', 'shortlisted' ) );
+					$q->set( 'post_status', array( 'private' ) );
 				}
 
 				// If the user cannot select talks, they must be a speaker, only show talks belonging to them
 				if ( ! wct_user_can( 'list_all_talks' ) ) {
 					$q->set( 'author', get_current_user_id() );
-					$q->set( 'post_status', 'any' );
 				}
 			}
 		}
