@@ -54,7 +54,7 @@ final class WordCamp_Talks {
 	public static function start( $file ) {
 
 		// If the single instance hasn't been set, set it now.
-		if ( null == self::$instance ) {
+		if ( empty( self::$instance ) ) {
 			self::$instance = new self( $file );
 		}
 

@@ -9,6 +9,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 * Adjusts the publish box in the admin UI for talk proposals
 */
 class Talk_Status_View_Publish_Box {
+
+	private static $ran = false;
 	function __construct() {
 		//
 	}
@@ -19,7 +21,7 @@ class Talk_Status_View_Publish_Box {
 	 * @return void
 	 */
 	public function run() {
-		add_action( 'admin_head-post.php', [ $this, 'set_publishing_actions' ] );
+		add_action( 'post_submitbox_misc_actions', [ $this, 'set_publishing_actions' ] );
 		add_action( 'post_submitbox_misc_actions', [ $this, 'selection_control' ] );
 	}
 
@@ -48,9 +50,14 @@ class Talk_Status_View_Publish_Box {
 	}
 
 	function selection_control() {
+		if ( false == self::$ran ) {
+			self::$ran = true;
+		} else {
+			// only appear once @TODO: figure out why there are two instances of this control
+			return;
+		}
 		global $post;
 		if ( get_post_type( $post ) == 'talks' ) {
-			echo '';
 			wp_nonce_field( plugin_basename(__FILE__), 'article_or_box_nonce' );
 			//$val = get_post_meta( $post->ID, '_article_or_box', true ) ? get_post_meta( $post->ID, '_article_or_box', true ) : 'article';
 			$status = '';
