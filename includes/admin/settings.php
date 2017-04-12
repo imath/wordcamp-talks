@@ -78,14 +78,6 @@ function wct_get_settings_fields() {
 				'args'              => array()
 			),
 
-			// Default post type status
-			'_wc_talks_submit_status' => array(
-				'title'             => __( 'New talks status', 'wordcamp-talks' ),
-				'callback'          => 'wct_submit_status_setting_callback',
-				'sanitize_callback' => 'wct_sanitize_status',
-				'args'              => array()
-			),
-
 			// Can we add links to content ?
 			'_wc_talks_editor_link' => array(
 				'title'             => __( 'Links', 'wordcamp-talks' ),
@@ -340,36 +332,6 @@ function wct_closing_date_setting_callback() {
 	?>
 	<input name="_wc_talks_closing_date" id="_wc_talks_closing_date" type="text" class="regular-text code" placeholder="YYYY-MM-DD HH:II" value="<?php echo esc_attr( $closing ); ?>" />
 	<p class="description"><?php esc_html_e( 'Date when the call for speakers will end.', 'wordcamp-talks' ); ?></p>
-	<?php
-}
-
-/**
- * Submit Status callback
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
- *
- * @since 1.0.0
- *
- * @return string HTML output
- */
-function wct_submit_status_setting_callback() {
-	$current_status = wct_default_talk_status();
-	$stati          = array_diff_key( get_post_stati( array( 'show_in_admin_all_list' => true ), 'objects' ), array(
-		'draft'  => false,
-		'future' => false,
-	) );
-	?>
-	<select name="_wc_talks_submit_status" id="_wc_talks_submit_status">
-
-		<?php foreach ( $stati as $status ) : ?>
-
-			<option value="<?php echo esc_attr( $status->name ); ?>" <?php selected( $current_status, $status->name );?>><?php echo esc_html( $status->label );?></option>
-
-		<?php endforeach; ?>
-
-	</select>
-	<p class="description"><?php esc_html_e( 'The default status for all talks. Depending on this setting, the moderation message setting will be available', 'wordcamp-talks' ); ?></p>
 	<?php
 }
 

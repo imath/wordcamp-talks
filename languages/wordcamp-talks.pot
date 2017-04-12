@@ -269,13 +269,6 @@ msgid ""
 "will appear on every WordCamp Talks&#39;s page, except the single talk one."
 msgstr ""
 
-#: includes/admin/admin.php:1353
-msgid ""
-"New talks status: this is the default status to apply to the talks "
-"submitted by the user. If this setting is set to &#34;Pending&#34;, it will "
-"be possible to edit the moderation message once this setting has been saved."
-msgstr ""
-
 #: includes/admin/admin.php:1356
 msgid ""
 "Moderation message: if New talks status is defined to Pending, it is the "
@@ -453,10 +446,6 @@ msgstr ""
 
 #: includes/admin/settings.php:115
 msgid "Links"
-msgstr ""
-
-#: includes/admin/settings.php:123
-msgid "Moderation message"
 msgstr ""
 
 #: includes/admin/settings.php:131
