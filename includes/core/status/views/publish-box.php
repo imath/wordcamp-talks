@@ -11,8 +11,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Talk_Status_View_Publish_Box {
 
 	private static $ran = false;
+	private $statuses = [];
+
 	function __construct() {
-		//
+		$this->statuses = [
+			'' => 'Newly submitted',
+			'rejected' => 'Rejected',
+			'shortlisted' => 'Shortlisted',
+			'selected' => 'Selected',
+			'backup' => 'Backup',
+		];
 	}
 
 	/**
@@ -67,20 +75,13 @@ class Talk_Status_View_Publish_Box {
 		if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
 			$status = $terms[0]->slug;
 		}
-		$statuses = [
-			'' => 'Newly submitted',
-			'rejected' => 'Rejected',
-			'shortlisted' => 'Shortlisted',
-			'selected' => 'Selected',
-			'backup' => 'Backup',
-		];
 		?>
 		<div class="misc-pub-section misc-pub-section-last" id="talk_status" style="border-top: 1px solid #eee;">
 			<label>
 				Status: 
 				<select name="wct_talk_status">
 				<?php
-				foreach ( $statuses as $key => $value ) {
+				foreach ( $this->statuses as $key => $value ) {
 					?>
 					<option <?php selected( $status, $key ); ?> value="<?php echo esc_attr( $key ) ?>"><?php echo esc_html( $value ); ?></option>
 					<?php
@@ -115,10 +116,19 @@ class Talk_Status_View_Publish_Box {
 		if ( ! isset( $_POST['wct_talk_status'] ) ) {
 			return $post_id;
 		}
-
 		$status = sanitize_title( wp_unslash( $_POST['wct_talk_status'] ) );
-		if ( !empty( $status ) ) {
-			wp_set_object_terms( $post_id, $status, 'wordcamp-talks-status', false );
+		if ( empty( $status ) ) {
+			return $post_id;
 		}
+		if ( ! array_key_exists( $status, $this->statuses ) ) {
+			wp_die( 'Error: Illegal talk status "'.esc_html( $status ).'"' );
+		}
+		// if the term doesn't exist, create it with the appropriate details
+		if ( ! term_exists( $status, 'wordcamp-talks-status' ) ) {
+			wp_insert_term( $this->statuses[ $status ], 'wordcamp-talks-status', [
+				'slug' => $status,
+			] );
+		}
+		wp_set_object_terms( $post_id, $status, 'wordcamp-talks-status', false );
 	}
 }
