@@ -11,13 +11,9 @@
 // Exit if accessed directly
 defined( 'ABSPATH' ) || exit;
 
-add_action( 'parse_query',              'wct_parse_query',            2  );
+add_action( 'parse_query', 'wct_parse_query', 2 );
 
 // Actions to register post_type, metas, taxonomies & rewrite stuff
-add_action( 'init', 'wct_register_post_types',                 2 );
-add_action( 'init', 'wct_register_taxonomies',                 4 );
-add_action( 'init', 'wct_add_rewrite_tags',                    6 );
-add_action( 'init', 'wct_add_rewrite_rules',                   8 );
 add_action( 'init', 'wct_add_permastructs',                    9 );
 add_action( 'init', array( 'WordCamp_Talk_Metas', 'start' ), 100 );
 add_action( 'init', array( 'WordCamp_Talks_Post_Status', 'start' ), 100 );
@@ -72,59 +68,6 @@ add_action( 'login_form_rp',         'wct_user_setpassword_redirect', 10    );
 
 // Admin Menu Bar
 add_action( 'admin_bar_menu', 'wct_adminbar_menu', 999 );
-
-/**
- * Fire the 'wct_register_post_types' action.
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_register_post_types() {
-	do_action( 'wct_register_post_types' );
-}
-
-/**
- * Fire the 'wct_register_taxonomies' action.
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_register_taxonomies() {
-	do_action( 'wct_register_taxonomies' );
-}
-
-/**
- * Fire the 'wct_add_rewrite_tags' action.
- *
- * Used in core/rewrites to add user's profile, search & action
- * custom tags
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_add_rewrite_tags() {
-	do_action( 'wct_add_rewrite_tags' );
-}
-
-/**
- * Fire the 'wct_add_rewrite_rules' action.
- *
- * Used in core/rewrites to add user's profile custom rule
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_add_rewrite_rules() {
-	do_action( 'wct_add_rewrite_rules' );
-}
 
 /**
  * Fire the 'wct_add_permastructs' action.
