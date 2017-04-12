@@ -111,17 +111,10 @@ if ( ! class_exists( 'WordCamp_Talks_Admin' ) ) :
 		 */
 		private function includes() {
 			// By default, comments are disjoined from the other post types.
-			if ( true ) {
-				require( $this->includes_dir . 'comments.php' );
-			}
-
-			// By default, talks can be sticked to front post type archive page.
-			if ( false ) {
-				require( $this->includes_dir . 'sticky.php' );
-			}
+			require_once( $this->includes_dir . 'comments.php' );
 
 			// Settings
-			require( $this->includes_dir . 'settings.php' );
+			require_once( $this->includes_dir . 'settings.php' );
 		}
 
 		/**
@@ -1577,5 +1570,7 @@ if ( ! class_exists( 'WordCamp_Talks_Admin' ) ) :
 	}
 
 endif;
+//add_action( 'admin_init', function() { wp_die('boo');});
+//add_action( 'admin_init', array( 'WordCamp_Talks_Admin', 'start' ) );
 
-add_action( 'plugins_loaded', array( 'WordCamp_Talks_Admin', 'start' ), 5 );
+WordCamp_Talks_Admin::start();
