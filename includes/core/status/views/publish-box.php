@@ -29,6 +29,7 @@ class Talk_Status_View_Publish_Box {
 		global $post;
 		if ( 'talks' === $post->post_type ) {
 			echo '<style type="text/css">
+			#minor-publishing-actions,
 			.misc-pub-section.misc-pub-visibility,
 			.misc-pub-section.misc-pub-post-status,
 			.misc-pub-section.curtime.misc-pub-curtime {
