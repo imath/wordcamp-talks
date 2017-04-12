@@ -12,11 +12,6 @@
 defined( 'ABSPATH' ) || exit;
 
 add_action( 'parse_query',              'wct_parse_query',            2  );
-add_action( 'wp_head',                  'wct_head',                   10 );
-add_action( 'wp_footer',                'wct_footer',                 10 );
-add_action( 'set_current_user',         'wct_setup_current_user',     10 );
-add_action( 'after_setup_theme',        'wct_after_setup_theme',      10 );
-add_action( 'template_redirect',        'wct_template_redirect',      8  );
 
 // Actions to register post_type, metas, taxonomies & rewrite stuff
 add_action( 'init', 'wct_register_post_types',                 2 );
@@ -46,7 +41,7 @@ add_action( 'wct_talk_header',             'wct_users_the_user_talk_rating', 1 )
 add_action( 'wct_before_archive_main_nav', 'wct_talks_taxonomy_description'    );
 
 // Actions to handle user actions (eg: submit new talk)
-add_action( 'wct_template_redirect', 'wct_actions',                             4 );
+add_action( 'template_redirect',     'wct_actions',                             4 );
 add_action( 'wct_actions',           'wct_set_user_feedback',                   5 );
 add_action( 'wct_actions',           'wct_talks_post_talk'                        );
 add_action( 'wct_actions',           'wct_talks_update_talk'                      );
@@ -77,56 +72,6 @@ add_action( 'login_form_rp',         'wct_user_setpassword_redirect', 10    );
 
 // Admin Menu Bar
 add_action( 'admin_bar_menu', 'wct_adminbar_menu', 999 );
-
-/**
- * Fire the 'wct_head' action.
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_head() {
-	do_action( 'wct_head' );
-}
-
-/**
- * Fire the 'wct_footer' action.
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_footer() {
-	do_action( 'wct_footer' );
-}
-
-/**
- * Fire the 'wct_setup_current_user' action.
- *
- * Used to set the logged in user
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_setup_current_user() {
-	do_action( 'wct_setup_current_user' );
-}
-
-/**
- * Fire the 'wct_template_redirect' action.
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_template_redirect() {
-	do_action( 'wct_template_redirect' );
-}
 
 /**
  * Fire the 'wct_register_post_types' action.
@@ -194,18 +139,6 @@ function wct_add_rewrite_rules() {
  */
 function wct_add_permastructs() {
 	do_action( 'wct_add_permastructs' );
-}
-
-/**
- * Fire the 'wct_after_setup_theme' action.
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_after_setup_theme() {
-	do_action( 'wct_after_setup_theme' );
 }
 
 /**
