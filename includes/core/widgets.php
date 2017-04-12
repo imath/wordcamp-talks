@@ -36,7 +36,7 @@ if ( ! class_exists( 'WordCamp_Talks_Navig' ) ) :
 		parent::__construct( false, $name = __( 'WordCamp Talks Nav', 'wordcamp-talks' ), $widget_ops );
 
 		// We need to wait for the talks post type to be registered
-		add_action( 'wct_init', array( $this, 'set_available_nav_items' ) );
+		add_action( 'init', array( $this, 'set_available_nav_items' ) );
 	}
 
 	/**
