@@ -17,6 +17,7 @@ class Talk_Status_View_Posts_List {
 	 * @return void
 	 */
 	public function run() {
+		add_filter( 'display_post_states', '__return_false' );
 		add_action( 'admin_init', [ $this, 'admin_init' ] );
 		add_filter( 'views_edit-talks', [ $this, 'update_subsubsub' ] );
 	}
