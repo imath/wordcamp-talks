@@ -193,11 +193,11 @@ final class WordCamp_Talks {
 	 */
 	private function setup_hooks() {
 		// Main hooks
-		add_action( 'wct_loaded',              array( $this, 'load_textdomain'     ), 0 );
+		add_action( 'plugins_loaded',          array( $this, 'load_textdomain'     ), 0 );
 		add_action( 'wct_register_post_types', array( $this, 'register_post_type'  )    );
 		add_action( 'wct_register_taxonomies', array( $this, 'register_taxonomies' )    );
 		add_action( 'wct_setup_current_user',  array( $this, 'setup_current_user'  )    );
-		add_action( 'wct_enqueue_scripts',     array( $this, 'enqueue_scripts'     ), 1 );
+		add_action( 'wp_enqueue_scripts',     array( $this, 'enqueue_scripts'     ), 1 );
 	}
 
 	/**

@@ -425,4 +425,4 @@ class WordCamp_Talks_Admin_Comments {
 
 endif;
 
-add_action( 'wct_loaded', array( 'WordCamp_Talks_Admin_Comments', 'start' ), 6 );
+add_action( 'plugins_loaded', array( 'WordCamp_Talks_Admin_Comments', 'start' ), 6 );

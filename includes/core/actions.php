@@ -11,10 +11,7 @@
 // Exit if accessed directly
 defined( 'ABSPATH' ) || exit;
 
-add_action( 'plugins_loaded',           'wct_loaded',                 11 );
-add_action( 'init',                     'wct_init',                   9  );
 add_action( 'parse_query',              'wct_parse_query',            2  );
-add_action( 'wp_enqueue_scripts',       'wct_enqueue_scripts',        10 );
 add_action( 'wp_head',                  'wct_head',                   10 );
 add_action( 'wp_footer',                'wct_footer',                 10 );
 add_action( 'set_current_user',         'wct_setup_current_user',     10 );
@@ -22,18 +19,18 @@ add_action( 'after_setup_theme',        'wct_after_setup_theme',      10 );
 add_action( 'template_redirect',        'wct_template_redirect',      8  );
 
 // Actions to register post_type, metas, taxonomies & rewrite stuff
-add_action( 'wct_init', 'wct_register_post_types',                 2 );
-add_action( 'wct_init', 'wct_register_taxonomies',                 4 );
-add_action( 'wct_init', 'wct_add_rewrite_tags',                    6 );
-add_action( 'wct_init', 'wct_add_rewrite_rules',                   8 );
-add_action( 'wct_init', 'wct_add_permastructs',                    9 );
-add_action( 'wct_init', array( 'WordCamp_Talk_Metas', 'start' ), 100 );
-add_action( 'wct_init', array( 'WordCamp_Talks_Post_Status', 'start' ), 100 );
+add_action( 'init', 'wct_register_post_types',                 2 );
+add_action( 'init', 'wct_register_taxonomies',                 4 );
+add_action( 'init', 'wct_add_rewrite_tags',                    6 );
+add_action( 'init', 'wct_add_rewrite_rules',                   8 );
+add_action( 'init', 'wct_add_permastructs',                    9 );
+add_action( 'init', array( 'WordCamp_Talk_Metas', 'start' ), 100 );
+add_action( 'init', array( 'WordCamp_Talks_Post_Status', 'start' ), 100 );
 
 // Actions hooking loaded (rewrites/comments disjoin)
-add_action( 'wct_loaded', array( 'WordCamp_Talks_Rewrites', 'start' ), 1 );
-add_action( 'wct_loaded', 'wct_cache_global_group' );
-add_action( 'wct_loaded', array( 'WordCamp_Talks_Comments', 'start' ) );
+add_action( 'plugins_loaded', array( 'WordCamp_Talks_Rewrites', 'start' ), 1 );
+add_action( 'plugins_loaded', 'wct_cache_global_group' );
+add_action( 'plugins_loaded', array( 'WordCamp_Talks_Comments', 'start' ) );
 
 // Comments actions
 add_action( 'wp_set_comment_status', 'wct_comments_clean_count_cache', 10, 2 );
@@ -41,8 +38,8 @@ add_action( 'delete_comment',        'wct_comments_clean_count_cache', 10, 1 );
 add_action( 'wp_insert_comment',     'wct_comments_clean_count_cache', 10, 2 );
 
 // Actions hooking enqueue_scripts (tags, rates UI)
-add_action( 'wct_enqueue_scripts', 'wct_talks_enqueue_scripts', 10 );
-add_action( 'wct_enqueue_scripts', 'wct_users_enqueue_scripts', 11 );
+add_action( 'wp_enqueue_scripts', 'wct_talks_enqueue_scripts', 10 );
+add_action( 'wp_enqueue_scripts', 'wct_users_enqueue_scripts', 11 );
 
 // Template actions
 add_action( 'wct_talk_header',             'wct_users_the_user_talk_rating', 1 );
@@ -80,44 +77,6 @@ add_action( 'login_form_rp',         'wct_user_setpassword_redirect', 10    );
 
 // Admin Menu Bar
 add_action( 'admin_bar_menu', 'wct_adminbar_menu', 999 );
-
-/**
- * Fire the 'wct_init' action.
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_init() {
-	do_action( 'wct_init' );
-}
-
-/**
- * Fire the 'wct_loaded' action.
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_loaded() {
-	do_action( 'wct_loaded' );
-}
-
-/**
- * Fire the 'wct_enqueue_scripts' action.
- *
- * Used to register and enqueue custom scripts
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_enqueue_scripts() {
-	do_action( 'wct_enqueue_scripts' );
-}
 
 /**
  * Fire the 'wct_head' action.

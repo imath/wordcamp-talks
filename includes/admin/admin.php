@@ -1578,4 +1578,4 @@ if ( ! class_exists( 'WordCamp_Talks_Admin' ) ) :
 
 endif;
 
-add_action( 'wct_loaded', array( 'WordCamp_Talks_Admin', 'start' ), 5 );
+add_action( 'plugins_loaded', array( 'WordCamp_Talks_Admin', 'start' ), 5 );
