@@ -23,7 +23,8 @@ class Talk_Status_Post_Status {
 		// @TODO: Set the default status in the editor UI of new posts to private
 		// @TODO: Remove the bolded private marker Core adds in the posts list as it's pointless here
  
-		add_filter( 'the_title', [ $this, 'the_title_trim' ] );
+		add_filter( 'private_title_format', [ $this, 'the_title_trim' ]);
+		add_filter( 'protected_title_format', [ $this, 'the_title_trim' ] );
 	}
 
 	/**
@@ -41,9 +42,7 @@ class Talk_Status_Post_Status {
 	}
 
 	function the_title_trim( $title ) {
-		$title = str_replace( 'Private: ', '', $title );
-		$title = str_replace( 'Protected: ', '', $title );
-		return $title;
+		return '%s';
 	}
 	
 }
