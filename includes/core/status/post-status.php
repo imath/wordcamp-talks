@@ -19,7 +19,7 @@ class Talk_Status_Post_Status {
 	public function run() {
 		// @TODO: Set the private status via filter so the actual post status is irrelevant
 		add_filter( 'wp_insert_post_data', [ $this, 'force_type_private' ] );
-		
+
 		// @TODO: Set the default status in the editor UI of new posts to private
 		// @TODO: Remove the bolded private marker Core adds in the posts list as it's pointless here
 	}
@@ -31,10 +31,10 @@ class Talk_Status_Post_Status {
 	 */
 	function force_type_private( $post ) {
 	    if ( 'talks' === $post['post_type'] ) {
-		    $post['post_status'] = 'private';
+	    	if ( ! in_array( $post['post_status'] , [ 'trash', 'auto-draft', 'inherit' ] ) ) {
+			    $post['post_status'] = 'private';
+			}
 		}
 	    return $post;
 	}
-
-
 }
