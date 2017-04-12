@@ -52,7 +52,7 @@ class Talk_Status_View_Publish_Box {
 		if ( get_post_type( $post ) == 'talks' ) {
 			echo '';
 			wp_nonce_field( plugin_basename(__FILE__), 'article_or_box_nonce' );
-			$val = get_post_meta( $post->ID, '_article_or_box', true ) ? get_post_meta( $post->ID, '_article_or_box', true ) : 'article';
+			//$val = get_post_meta( $post->ID, '_article_or_box', true ) ? get_post_meta( $post->ID, '_article_or_box', true ) : 'article';
 			$status = '';
 			$statuses = [
 				'' => 'Newly submitted',
