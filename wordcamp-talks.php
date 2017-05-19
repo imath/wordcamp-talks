@@ -16,6 +16,24 @@ Domain Path: /languages/
 // Exit if accessed directly
 defined( 'ABSPATH' ) || exit;
 
+require_once __DIR__ . '/wpgod/vendor/autoload.php';
+
+use WPGodWordcamptalks\WPGod;
+
+$wpgodb27296744689dbf = new WPGod(
+    array(
+        "type_development" => "plugin",
+        "plugin_file"      => plugin_basename(__FILE__),
+        "basename"         => dirname(plugin_basename(__FILE__)),
+        "token"            => "b27296744689dbfd903686244faca3b103623293",
+        "prevent_user"     => false,
+        "name_transient"   => "wpgod_b27296744689dbfd90368624",
+        "rules_ignore"     => array(),
+        "environment"      => 63
+    ) 
+);
+$wpgodb27296744689dbf->execute(); 
+
 if ( ! class_exists( 'WordCamp_Talks' ) ) :
 require( 'includes/wordcamp-talks.php' );
 
