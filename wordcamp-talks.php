@@ -403,4 +403,4 @@ endif;
 function wct() {
 	return WordCamp_Talks::start();
 }
-add_action( 'plugins_loaded', 'wct' );
+add_action( 'plugins_loaded', 'wct', 5 );
