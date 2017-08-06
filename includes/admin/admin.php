@@ -747,7 +747,7 @@ class WordCamp_Talks_Admin {
 	 */
 	public function column_headers( $columns = array() ) {
 		$new_columns = array(
-			'workflow_state' => _x( 'State of the talk', 'talks admin workflow status column header', 'wordcamp-talks' ),
+			'workflow_state' => _x( 'Status', 'talks admin workflow status column header', 'wordcamp-talks' ),
 			'cat_talks'      => _x( 'Categories',        'talks admin category column header',        'wordcamp-talks' ),
 			'tag_talks'      => _x( 'Tags',              'talks admin tag column header',             'wordcamp-talks' ),
 		);
@@ -1480,7 +1480,7 @@ class WordCamp_Talks_Admin {
 		return array(
 			'workflow' => array(
 				'id'            => 'wct_workflow_metabox',
-				'title'         => __( 'Workflow', 'wordcamp-talks' ),
+				'title'         => __( 'Talk status', 'wordcamp-talks' ),
 				'callback'      => array( $this, 'workflow_do_metabox' ),
 				'context'       => 'side',
 				'priority'      => 'high',
@@ -1513,7 +1513,7 @@ class WordCamp_Talks_Admin {
 		?>
 
 		<p>
-			<label class="screen-reader-text" for="post_status"><?php esc_html_e( 'State of the talk', 'wordcamp-talks' ); ?></label>
+			<label class="screen-reader-text" for="post_status"><?php esc_html_e( 'Status', 'wordcamp-talks' ); ?></label>
 			<?php $this->print_dropdown_workflow( $state ); ?>
 		</p>
 
@@ -1542,7 +1542,7 @@ class WordCamp_Talks_Admin {
 		<fieldset class="inline-edit-col-right">
 			<div class="inline-edit-group">
 				<label class="inline-edit-workflow-state alignleft">
-					<span class="title"><?php esc_html_e( 'State of the talk', 'wordcamp-talks' ); ?></span>
+					<span class="title"><?php esc_html_e( 'Status', 'wordcamp-talks' ); ?></span>
 					<?php $this->print_dropdown_workflow( 'pending', '_status' ); ?>
 				</label>
 			</div>
