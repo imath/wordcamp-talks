@@ -285,7 +285,7 @@ final class WordCamp_Talks {
 			register_post_status( $name, array(
 				'label'                     => $status,
 				'private'                   => true,
-				'show_in_admin_all_list'    => false,
+				'show_in_admin_all_list'    => true,
 				'show_in_admin_status_list' => false,
 			) );
 		}
