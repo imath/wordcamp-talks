@@ -97,13 +97,10 @@ class WordCamp_Talks_Comments {
 		}
 
 		// Make sure the comment notifications respect talk authors capability
-		add_filter( 'comment_moderation_recipients', array( $this, 'moderation_recipients' ), 10, 2 );
-		add_filter( 'comment_notification_text',     array( $this, 'comment_notification' ),  10, 2 );
-		add_filter( 'comment_moderation_text',       array( $this, 'comment_notification' ),  10, 2 );
-
-		if ( 'private' === wct_default_talk_status() ) {
-			add_filter( 'comment_notification_recipients', array( $this, 'donot_notify_talk_authors' ), 10, 2 );
-		}
+		add_filter( 'comment_moderation_recipients',   array( $this, 'moderation_recipients' ), 10, 2 );
+		add_filter( 'comment_notification_text',       array( $this, 'comment_notification' ),  10, 2 );
+		add_filter( 'comment_moderation_text',         array( $this, 'comment_notification' ),  10, 2 );
+		add_filter( 'comment_notification_recipients', array( $this, 'donot_notify_talk_authors' ), 10, 2 );
 	}
 
 	/**

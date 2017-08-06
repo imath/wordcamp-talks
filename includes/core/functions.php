@@ -309,6 +309,42 @@ function wct_post_type_register_labels() {
 }
 
 /**
+ * Get the Talk statuses
+ *
+ * @since  1.1.0
+ *
+ * @return array The list of talk statuses.
+ */
+function wct_get_statuses() {
+	/**
+	 * Filter here to add statuses.
+	 *
+	 * @since  1.1.0
+	 *
+	 * @param array $value The list of talk statuses.
+	 */
+	return apply_filters( 'wct_get_statuses', array(
+		'wct_pending'   => __( 'Pending',      'wordcamp-talks' ),
+		'wct_shortlist' => __( 'Short-listed', 'wordcamp-talks' ),
+		'wct_selected'  => __( 'Selected',     'wordcamp-talks' ),
+		'wct_rejected'  => __( 'Rejected',     'wordcamp-talks' ),
+	) );
+}
+
+/**
+ * Check if a given status is supported by the plugin.
+ *
+ * @since  1.1.0
+ *
+ * @param  string $status Name for the status
+ * @return boolean        True if supported. False otherwise.
+ */
+function wct_is_supported_statuses( $status = '' ) {
+	$statuses = wct_get_statuses();
+	return isset( $statuses[ $status ] );
+}
+
+/**
  * Get plugin's post type "category" identifier (talk_categories)
  *
  * @package WordCamp Talks
@@ -658,12 +694,6 @@ function wct_get_feedback_messages( $type = '', $id = false ) {
 			4 => __( 'You have not filled any public profile informations. You can edit your profile to add some.', 'wordcamp-talks' ),
 		),
 	) );
-
-	// Check for a custom pending message
-	$custom_pending_message = wct_moderation_message();
-	if ( ! empty( $custom_pending_message ) ) {
-		$messages['info'][2] = $custom_pending_message;
-	}
 
 	if ( empty( $type ) ) {
 		return $messages;
@@ -1053,7 +1083,7 @@ function wct_ajax_rate() {
 	$new_average_rate = wct_add_rate( $talk, $user_id, $rate );
 
 	// If the user can't see other ratings, simply return the rating he just gave.
-	if ( 'private' === wct_default_talk_status() && ! wct_user_can( 'view_talk_rates' ) ) {
+	if ( ! wct_user_can( 'view_talk_rates' ) ) {
 		$new_average_rate = number_format( $rate, 1 );
 	}
 
@@ -1283,11 +1313,7 @@ function wct_tag_cloud_args( $args = array() ) {
  * @return array           associative array containing the number of tags and the content of the cloud.
  */
 function wct_generate_tag_cloud( $number = 10, $args = array() ) {
-	$r = array( 'number' => $number, 'orderby' => 'count', 'order' => 'DESC' );
-
-	if ( 'private' === wct_default_talk_status() ) {
-		$r = array( 'hide_empty' => false, 'orderby' => 'name', 'order' => 'ASC' );
-	}
+	$r = array( 'hide_empty' => false, 'orderby' => 'name', 'order' => 'ASC' );
 
 	$tags = get_terms( wct_get_tag(), apply_filters( 'wct_generate_tag_cloud_args', $r ) );
 

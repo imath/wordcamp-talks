@@ -25,6 +25,7 @@ add_action( 'template_redirect',        'wct_template_redirect',      8  );
 
 // Actions to register post_type, metas, taxonomies & rewrite stuff
 add_action( 'wct_init', 'wct_register_post_types',                 2 );
+add_action( 'wct_init', 'wct_register_post_statuses',              3 );
 add_action( 'wct_init', 'wct_register_taxonomies',                 4 );
 add_action( 'wct_init', 'wct_add_rewrite_tags',                    6 );
 add_action( 'wct_init', 'wct_add_rewrite_rules',                   8 );
@@ -221,6 +222,15 @@ function wct_template_redirect() {
  */
 function wct_register_post_types() {
 	do_action( 'wct_register_post_types' );
+}
+
+/**
+ * Fire the 'wct_register_post_statuses' action.
+ *
+ * @since 1.1.0
+ */
+function wct_register_post_statuses() {
+	do_action( 'wct_register_post_statuses' );
 }
 
 /**

@@ -86,14 +86,6 @@ function wct_get_settings_fields() {
 				'args'              => array()
 			),
 
-			// Default post type status
-			'_wc_talks_submit_status' => array(
-				'title'             => __( 'New talks status', 'wordcamp-talks' ),
-				'callback'          => 'wct_submit_status_setting_callback',
-				'sanitize_callback' => 'wct_sanitize_status',
-				'args'              => array()
-			),
-
 			// Can we add images to content ?
 			'_wc_talks_editor_image' => array(
 				'title'             => __( 'Images', 'wordcamp-talks' ),
@@ -115,14 +107,6 @@ function wct_get_settings_fields() {
 				'title'             => __( 'Links', 'wordcamp-talks' ),
 				'callback'          => 'wct_editor_link_setting_callback',
 				'sanitize_callback' => 'absint',
-				'args'              => array()
-			),
-
-			// Is there a specific message to show if Pending is default status ?
-			'_wc_talks_moderation_message' => array(
-				'title'             => __( 'Moderation message', 'wordcamp-talks' ),
-				'callback'          => 'wct_moderation_message_setting_callback',
-				'sanitize_callback' => 'sanitize_text_field',
 				'args'              => array()
 			),
 
@@ -586,36 +570,6 @@ function wct_closing_date_setting_callback() {
 }
 
 /**
- * Submit Status callback
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
- *
- * @since 1.0.0
- *
- * @return string HTML output
- */
-function wct_submit_status_setting_callback() {
-	$current_status = wct_default_talk_status();
-	$stati          = array_diff_key( get_post_stati( array( 'show_in_admin_all_list' => true ), 'objects' ), array(
-		'draft'  => false,
-		'future' => false,
-	) );
-	?>
-	<select name="_wc_talks_submit_status" id="_wc_talks_submit_status">
-
-		<?php foreach ( $stati as $status ) : ?>
-
-			<option value="<?php echo esc_attr( $status->name ); ?>" <?php selected( $current_status, $status->name );?>><?php echo esc_html( $status->label );?></option>
-
-		<?php endforeach; ?>
-
-	</select>
-	<p class="description"><?php esc_html_e( 'The default status for all talks. Depending on this setting, the moderation message setting will be available', 'wordcamp-talks' ); ?></p>
-	<?php
-}
-
-/**
  * WP Editor's image button callback
  *
  * @package WordCamp Talks
@@ -666,25 +620,6 @@ function wct_editor_link_setting_callback() {
 
 	<input name="_wc_talks_editor_link" id="_wc_talks_editor_link" type="checkbox" value="1" <?php checked( wct_talk_editor_link() ); ?> />
 	<label for="_wc_talks_editor_link"><?php esc_html_e( 'Allow users to add links to their talks', 'wordcamp-talks' ); ?></label>
-
-	<?php
-}
-
-/**
- * Custom moderation message callback
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
- *
- * @since 1.0.0
- *
- * @return string HTML output
- */
-function wct_moderation_message_setting_callback() {
-	?>
-
-	<label for="_wc_talks_moderation_message"><?php esc_html_e( 'In cases where &#34;Pending&#34; is the status for all talks, you can customize the moderation message', 'wordcamp-talks' ); ?></label>
-	<textarea name="_wc_talks_moderation_message" id="_wc_talks_moderation_message" rows="10" cols="50" class="large-text code" <?php wct_setting_disabled( 'wct_default_talk_status', 'pending', '!=' ); ?>><?php echo esc_textarea( wct_moderation_message() );?></textarea>
 
 	<?php
 }

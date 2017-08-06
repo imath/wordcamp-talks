@@ -329,8 +329,7 @@ function wct_comments_array( $comments = array(), $talk_id = 0 ) {
 }
 
 /**
- * Filter the comments query in case of a private call for speakers
- * (when the default talk status is private).
+ * Filter the comments query for talks need.
  *
  * @since 1.0.0
  *
@@ -338,7 +337,7 @@ function wct_comments_array( $comments = array(), $talk_id = 0 ) {
  * @return array                     The Comments loop query arguments.
  */
 function wct_comments_template_query_args( $comment_query_args = array() ) {
-	if ( ! wct_is_talks() || 'private' !== wct_default_talk_status() ) {
+	if ( ! wct_is_talks() ) {
 		return $comment_query_args;
 	}
 
@@ -375,7 +374,7 @@ function wct_edit_comments_number( $count = 0, $post_id = 0 ) {
 		return $count;
 	}
 
-	if ( 'private' !== wct_default_talk_status() || wct_user_can( 'view_talk_comments' ) ) {
+	if ( wct_user_can( 'view_talk_comments' ) ) {
 		return $count;
 	}
 
@@ -410,7 +409,7 @@ function wct_comment_reply_link( $reply_link = '', $args = array(), $comment = n
 		return $reply_link;
 	}
 
-	if ( 'private' !== wct_default_talk_status() || user_can( $comment->user_id, 'view_talk_comments' ) ) {
+	if ( user_can( $comment->user_id, 'view_talk_comments' ) ) {
 		return $reply_link;
 	}
 

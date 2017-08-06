@@ -3,7 +3,7 @@
 Plugin Name: WordCamp Talks
 Plugin URI: https://github.com/imath/wordcamp-talks/
 Description: A WordCamp Talk Submission System
-Version: 1.0.0-beta2
+Version: 1.1.0-alpha
 Requires at least: 4.6.1
 Tested up to: 4.7
 License: GNU/GPL 2
@@ -76,7 +76,7 @@ final class WordCamp_Talks {
 	 */
 	private function setup_globals() {
 		// Version
-		$this->version = '1.0.0-beta2';
+		$this->version = '1.1.0-alpha';
 
 		// Domain
 		$this->domain = 'wordcamp-talks';
@@ -142,49 +142,49 @@ final class WordCamp_Talks {
 	 * @uses  is_admin() to check for WordPress Administration
 	 */
 	private function includes() {
-		require( $this->includes_dir . 'core/options.php' );
-		require( $this->includes_dir . 'core/functions.php' );
-		require( $this->includes_dir . 'core/rewrites.php' );
-		require( $this->includes_dir . 'core/classes.php' );
-		require( $this->includes_dir . 'core/capabilities.php' );
-		require( $this->includes_dir . 'core/upgrade.php' );
-		require( $this->includes_dir . 'core/template-functions.php' );
-		require( $this->includes_dir . 'core/template-loader.php' );
-		require( $this->includes_dir . 'core/widgets.php' );
+		require $this->includes_dir . 'core/options.php';
+		require $this->includes_dir . 'core/functions.php';
+		require $this->includes_dir . 'core/rewrites.php';
+		require $this->includes_dir . 'core/classes.php';
+		require $this->includes_dir . 'core/capabilities.php';
+		require $this->includes_dir . 'core/upgrade.php';
+		require $this->includes_dir . 'core/template-functions.php';
+		require $this->includes_dir . 'core/template-loader.php';
+		require $this->includes_dir . 'core/widgets.php';
 
-		require( $this->includes_dir . 'comments/functions.php' );
-		require( $this->includes_dir . 'comments/classes.php' );
-		require( $this->includes_dir . 'comments/tags.php' );
-		require( $this->includes_dir . 'comments/widgets.php' );
+		require $this->includes_dir . 'comments/functions.php';
+		require $this->includes_dir . 'comments/classes.php';
+		require $this->includes_dir . 'comments/tags.php';
+		require $this->includes_dir . 'comments/widgets.php';
 
-		require( $this->includes_dir . 'talks/functions.php' );
-		require( $this->includes_dir . 'talks/classes.php' );
-		require( $this->includes_dir . 'talks/tags.php' );
-		require( $this->includes_dir . 'talks/widgets.php' );
+		require $this->includes_dir . 'talks/functions.php';
+		require $this->includes_dir . 'talks/classes.php';
+		require $this->includes_dir . 'talks/tags.php';
+		require $this->includes_dir . 'talks/widgets.php';
 
-		require( $this->includes_dir . 'users/functions.php' );
-		require( $this->includes_dir . 'users/tags.php' );
-		require( $this->includes_dir . 'users/widgets.php' );
+		require $this->includes_dir . 'users/functions.php';
+		require $this->includes_dir . 'users/tags.php';
+		require $this->includes_dir . 'users/widgets.php';
 
-		require( $this->includes_dir . 'core/actions.php' );
-		require( $this->includes_dir . 'core/filters.php' );
+		require $this->includes_dir . 'core/actions.php';
+		require $this->includes_dir . 'core/filters.php';
 
 		if ( is_admin() ) {
-			require( $this->includes_dir . 'admin/admin.php' );
+			require $this->includes_dir . 'admin/admin.php';
 		}
 
 		/**
 		 * Add specific functions for the current site
 		 */
 		if ( file_exists( WP_PLUGIN_DIR . '/wct-functions.php' ) ) {
-			require( WP_PLUGIN_DIR . '/wct-functions.php' );
+			require WP_PLUGIN_DIR . '/wct-functions.php';
 		}
 
 		/**
 		 * On multisite configs, load current blog's specific functions
 		 */
 		if ( is_multisite() && file_exists( WP_PLUGIN_DIR . '/wct-' . get_current_blog_id() . '- functions.php' ) ) {
-			require( WP_PLUGIN_DIR . '/wct-' . get_current_blog_id() . '- functions.php' );
+			require WP_PLUGIN_DIR . '/wct-' . get_current_blog_id() . '- functions.php';
 		}
 	}
 
@@ -200,11 +200,12 @@ final class WordCamp_Talks {
 	 */
 	private function setup_hooks() {
 		// Main hooks
-		add_action( 'wct_loaded',              array( $this, 'load_textdomain'     ), 0 );
-		add_action( 'wct_register_post_types', array( $this, 'register_post_type'  )    );
-		add_action( 'wct_register_taxonomies', array( $this, 'register_taxonomies' )    );
-		add_action( 'wct_setup_current_user',  array( $this, 'setup_current_user'  )    );
-		add_action( 'wct_enqueue_scripts',     array( $this, 'enqueue_scripts'     ), 1 );
+		add_action( 'wct_loaded',                 array( $this, 'load_textdomain'        ), 0 );
+		add_action( 'wct_register_post_types',    array( $this, 'register_post_type'     )    );
+		add_action( 'wct_register_post_statuses', array( $this, 'register_post_statuses' )    );
+		add_action( 'wct_register_taxonomies',    array( $this, 'register_taxonomies'    )    );
+		add_action( 'wct_setup_current_user',     array( $this, 'setup_current_user'     )    );
+		add_action( 'wct_enqueue_scripts',        array( $this, 'enqueue_scripts'        ), 1 );
 	}
 
 	/**
@@ -270,6 +271,24 @@ final class WordCamp_Talks {
 				wct_tag_register_args()
 			)
 		);
+	}
+
+	/**
+	 * Register private custom post statuses.
+	 *
+	 * @since  1.1.0
+	 */
+	public function register_post_statuses() {
+		$statuses = wct_get_statuses();
+
+		foreach ( $statuses as $name => $status ) {
+			register_post_status( $name, array(
+				'label'                     => $status,
+				'private'                   => true,
+				'show_in_admin_all_list'    => false,
+				'show_in_admin_status_list' => false,
+			) );
+		}
 	}
 
 	/**

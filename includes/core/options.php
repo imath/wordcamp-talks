@@ -38,10 +38,8 @@ function wct_get_default_options() {
 		/** Core Settings **********************************************************/
 		'_wc_talks_archive_title'       => 'Talks',
 		'_wc_talks_closing_date'        => '',
-		'_wc_talks_submit_status'       => 'private',
 		'_wc_talks_editor_image'        => 1,
 		'_wc_talks_editor_link'         => 1,
-		'_wc_talks_moderation_message'  => '',
 		'_wc_talks_login_message'       => '',
 		'_wc_talks_hint_list'           => array(),
 		'_wc_talks_private_fields_list' => array(),
@@ -156,28 +154,11 @@ function wct_get_closing_date( $timestamp = false ) {
  * @param  string $default default value
  * @return string default value or customized one
  */
-function wct_default_talk_status( $default = 'private' ) {
-	$default_status = get_option( '_wc_talks_submit_status', $default );
-
-	// Make sure admins will have a publish status whatever the settings choice
-	if ( 'pending' === $default_status && wct_user_can( 'wct_talks_admin' ) ) {
-		$wct            = wct();
-		$current_screen = false;
-
-		if ( function_exists( 'get_current_screen' ) ) {
-			$current_screen = get_current_screen();
-		}
-
-		// In administration screens we need to be able to change the status
-		if ( empty( $wct->admin->is_plugin_settings ) && ( empty( $current_screen->post_type ) || wct_get_post_type() !== $current_screen->post_type ) ) {
-			$default_status = 'publish';
-		}
-	}
-
+function wct_default_talk_status( $default = 'wct_pending' ) {
 	/**
 	 * @param  string $default_status
 	 */
-	return apply_filters( 'wct_default_talk_status', $default_status );
+	return apply_filters( 'wct_default_talk_status', $default );
 }
 
 /**

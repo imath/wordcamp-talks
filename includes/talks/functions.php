@@ -783,7 +783,7 @@ function wct_talks_enqueue_scripts() {
 	if ( wct_is_single_talk() && ! wct_is_edit() && ! wct_is_rating_disabled() ) {
 		$user_id = wct_users_current_user_id();
 
-		if ( 'private' === wct_default_talk_status() && ! wct_user_can( 'view_talk_rates' ) ) {
+		if ( ! wct_user_can( 'view_talk_rates' ) ) {
 			$talk_id = 0;
 
 			if ( ! empty( wct()->query_loop->talk->ID ) ) {
