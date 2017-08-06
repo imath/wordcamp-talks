@@ -192,24 +192,6 @@ function wct_talk_editor_link( $default = 1 ) {
 }
 
 /**
- * Use a custom moderation message ?
- *
- * This option depends on the default publish status one. If pending
- * is set, it will be possible to customize a moderation message.
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @param  string $default default value
- * @return string       the moderation message
- */
-function wct_moderation_message( $default = '' ) {
-	return apply_filters( 'wct_moderation_message', get_option( '_wc_talks_moderation_message', $default ) );
-}
-
-/**
  * Use a custom login message ?
  *
  * @package WordCamp Talks
