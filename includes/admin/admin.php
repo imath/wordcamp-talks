@@ -112,16 +112,16 @@ class WordCamp_Talks_Admin {
 	private function includes() {
 		// By default, comments are disjoined from the other post types.
 		if ( wct_is_comments_disjoined() ) {
-			require( $this->includes_dir . 'comments.php' );
+			require $this->includes_dir . 'comments.php';
 		}
 
 		// By default, talks can be sticked to front post type archive page.
 		if ( wct_is_sticky_enabled() ) {
-			require( $this->includes_dir . 'sticky.php' );
+			require $this->includes_dir . 'sticky.php';
 		}
 
 		// Settings
-		require( $this->includes_dir . 'settings.php' );
+		require $this->includes_dir . 'settings.php';
 	}
 
 	/**
@@ -384,47 +384,15 @@ class WordCamp_Talks_Admin {
 		}
 
 		// Bail if not a post request
-		if ( 'POST' != strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
+		if ( 'POST' != strtoupper( $_SERVER['REQUEST_METHOD'] ) || empty( $_POST['wct_workflow_metabox_metabox'] ) ) {
 			return $id;
 		}
+
+		check_admin_referer( 'wct_workflow_metabox_save', 'wct_workflow_metabox_metabox' );
 
 		// Capability check
 		if ( ! wct_user_can( 'select_talks' ) ) {
 			return $id;
-		}
-
-		// Nonce check
-		if ( ! empty( $_POST['wct_workflow_metabox_metabox'] ) && check_admin_referer( 'wct_workflow_metabox_save', 'wct_workflow_metabox_metabox' ) ) {
-
-			$db_state = wct_talks_get_meta( $id, 'workflow_state' );
-			$states   = wct_get_statuses();
-
-			// State is to update or to delete
-			if ( ! empty( $_POST['wct_admin_workflow_states'] ) ) {
-				$state = $_POST['wct_admin_workflow_states'];
-
-				// Valid states are updated
-				if ( isset( $states[ $state ] ) ) {
-					if ( 'pending' === $state && ! empty( $db_state ) ) {
-						wct_talks_delete_meta( $id, 'workflow_state' );
-					}
-
-					if ( 'pending' !== $state ) {
-						wct_talks_update_meta( $id, 'workflow_state', $state );
-					};
-				}
-			}
-		}
-
-		// inline edit
-		if ( ! empty( $_REQUEST['_inline_workflow_state'] ) ) {
-			check_ajax_referer( 'inlineeditnonce', '_inline_edit' );
-
-			if ( 'pending' == $_REQUEST['_inline_workflow_state'] ) {
-				wct_talks_delete_meta( $id, 'workflow_state' );
-			} else {
-				wct_talks_update_meta( $id, 'workflow_state', $_REQUEST['_inline_workflow_state'] );
-			}
 		}
 
 		/**
@@ -1610,11 +1578,11 @@ class WordCamp_Talks_Admin {
 		}
 
 		$state = '';
-		if ( ! empty( $_REQUEST['workflow_states'] ) ) {
-			$state = sanitize_key( $_REQUEST['workflow_states'] );
+		if ( ! empty( $_REQUEST['post_status'] ) ) {
+			$state = sanitize_key( $_REQUEST['post_status'] );
 		}
 
-		$this->print_dropdown_workflow( $state, 'workflow_states' );
+		$this->print_dropdown_workflow( $state, 'post_status' );
 	}
 
 	/**
