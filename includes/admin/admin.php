@@ -321,6 +321,8 @@ class WordCamp_Talks_Admin {
 	 * @param WP_Post $talk the talk object
 	 */
 	public function add_metaboxes( $talk = null ) {
+		remove_meta_box( 'submitdiv', get_current_screen(), 'side' );
+
 		/**
 		 * @see  $this->ratings_metabox() for an example of use
 		 * @param array $metaboxes list of metaboxes to add
@@ -395,7 +397,7 @@ class WordCamp_Talks_Admin {
 		if ( ! empty( $_POST['wct_workflow_metabox_metabox'] ) && check_admin_referer( 'wct_workflow_metabox_save', 'wct_workflow_metabox_metabox' ) ) {
 
 			$db_state = wct_talks_get_meta( $id, 'workflow_state' );
-			$states   = $this->get_workflow_states();
+			$states   = wct_get_statuses();
 
 			// State is to update or to delete
 			if ( ! empty( $_POST['wct_admin_workflow_states'] ) ) {
@@ -865,7 +867,7 @@ class WordCamp_Talks_Admin {
 
 			case 'workflow_state' :
 				// Try to get the db state
-				$state = wct_talks_get_meta( $talk_id, 'workflow_state' );
+				$state = get_post_status( $talk_id );
 
 				// Fallback on pending
 				if ( empty( $state ) ) {
@@ -873,7 +875,7 @@ class WordCamp_Talks_Admin {
 				}
 
 				if ( empty( $this->workflow_states ) ) {
-					$this->workflow_states = $this->get_workflow_states();
+					$this->workflow_states = wct_get_statuses();
 				}
 
 				if ( ! empty( $this->workflow_states[ $state ] ) ) {
@@ -1460,29 +1462,6 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Get the workflow states
-	 *
-	 * @since  1.0.0
-	 *
-	 * @return array the list of workflow states.
-	 */
-	public function get_workflow_states() {
-		/**
-		 * Use this filter to add/remove your own workflow states.
-		 *
-		 * @since  1.0.0
-		 *
-		 * @return  array the list of workflow states.
-		 */
-		return apply_filters( 'wct_admin_get_workflow_states', array(
-			'pending'   => __( 'Pending',      'wordcamp-talks' ),
-			'shortlist' => __( 'Short-listed', 'wordcamp-talks' ),
-			'selected'  => __( 'Selected',     'wordcamp-talks' ),
-			'rejected'  => __( 'Rejected',     'wordcamp-talks' ),
-		) );
-	}
-
-	/**
 	 * Prints a dropdown to select workflow state
 	 *
 	 * @since  1.0.0
@@ -1491,7 +1470,7 @@ class WordCamp_Talks_Admin {
 	 * @param  string $select_id the name/id of select field
 	 * @return string HTML Output
 	 */
-	public function print_dropdown_workflow( $selected = '', $select_id = 'wct_admin_workflow_states' ) {
+	public function print_dropdown_workflow( $selected = '', $select_id = 'post_status' ) {
 		$workflow_states = $this->workflow_states;
 
 		printf( '<select name="%s" id="%s">', esc_attr( $select_id ), esc_attr( $select_id ) );
@@ -1521,7 +1500,7 @@ class WordCamp_Talks_Admin {
 	 * @return array The workflow metabox parameters.
 	 */
 	public function get_workflow_metabox() {
-		$states = $this->get_workflow_states();
+		$states = wct_get_statuses();
 
 		if ( empty( $states ) ) {
 			return array();
@@ -1556,21 +1535,24 @@ class WordCamp_Talks_Admin {
 			return;
 		}
 
-		$state = 'pending';
-		$db_state = wct_talks_get_meta( $id, 'workflow_state' );
+		$status = get_post_status( $talk );
 
-		if ( ! empty( $db_state ) ) {
-			$state = sanitize_key( $db_state );
+		if ( ! empty( $status ) ) {
+			$state = sanitize_key( $status );
+		} else {
+			$state = 'pending';
 		}
 		?>
 
 		<p>
-			<label class="screen-reader-text" for="wc_talk_workflow_states"><?php esc_html_e( 'State of the talk', 'wordcamp-talks' ); ?></label>
+			<label class="screen-reader-text" for="post_status"><?php esc_html_e( 'State of the talk', 'wordcamp-talks' ); ?></label>
 			<?php $this->print_dropdown_workflow( $state ); ?>
 		</p>
 
 		<?php
 		wp_nonce_field( 'wct_workflow_metabox_save', 'wct_workflow_metabox_metabox' );
+
+		submit_button( __( 'Update', 'wordcamp-talks' ), 'primary large', 'save' );
 	}
 
 	/**
@@ -1593,7 +1575,7 @@ class WordCamp_Talks_Admin {
 			<div class="inline-edit-group">
 				<label class="inline-edit-workflow-state alignleft">
 					<span class="title"><?php esc_html_e( 'State of the talk', 'wordcamp-talks' ); ?></span>
-					<?php $this->print_dropdown_workflow( 'pending', '_inline_workflow_state' ); ?>
+					<?php $this->print_dropdown_workflow( 'pending', '_status' ); ?>
 				</label>
 			</div>
 		</fieldset>
@@ -1624,7 +1606,7 @@ class WordCamp_Talks_Admin {
 		}
 
 		if ( empty( $this->workflow_states ) ) {
-			$this->workflow_states = $this->get_workflow_states();
+			$this->workflow_states = wct_get_statuses();
 		}
 
 		$state = '';
@@ -1697,6 +1679,8 @@ class WordCamp_Talks_Admin {
  			}
  		}
 
+ 		$post_type = sanitize_html_class( $this->post_type );
+
  		// Add some css
 		?>
 
@@ -1704,7 +1688,7 @@ class WordCamp_Talks_Admin {
 		/*<![CDATA[*/
 
 			/* Bubble style for Main Post type menu */
-			#adminmenu .wp-menu-open.menu-icon-<?php echo $this->post_type?> .awaiting-mod {
+			#adminmenu .wp-menu-open.menu-icon-<?php echo $post_type;?> .awaiting-mod {
 				background-color: #2ea2cc;
 				color: #fff;
 			}
@@ -1789,6 +1773,12 @@ class WordCamp_Talks_Admin {
 				#wct_ratings_box ul.admin-talk-rates li div.admin-talk-rates-users a.del-rate div {
 					vertical-align: baseline;
 				}
+
+				body.post-type-<?php echo $post_type;?> .inline-edit-status,
+				body.post-type-<?php echo $post_type;?> .inline-edit-col-left .inline-edit-group {
+					display: none;
+				}
+
 			<?php endif; ?>
 
 		/*]]>*/
