@@ -925,54 +925,16 @@ function wct_talks_get_order_options() {
 	return apply_filters( 'wct_talks_get_order_options', $order_options );
 }
 
-/**
- * Sets the title prefix in case of a private talk
- *
- * @package WordCamp Talks
- * @subpackage talks/functions
- *
- * @since 1.0.0
- *
- * @param  string  $prefix the prefix to apply in case of a private talk
- * @param  WP_Post $talk   the talk object
- * @return string          the title prefix
- */
-function wct_talks_private_title_prefix( $prefix = '', $talk = null ) {
-	// Not an talk ? Bail.
-	if ( empty( $talk ) || wct_get_post_type() != $talk->post_type ) {
-		return $prefix;
+function wct_talks_status_title_prefix( $title = '', $talk = null ) {
+	$status = get_post_status( $talk );
+
+	if ( ! wct_is_supported_statuses( $status ) ) {
+		return $title;
 	}
 
-	/**
-	 * @param  string        the prefix output
-	 * @param  WP_Post $talk the talk object
-	 */
-	return apply_filters( 'wct_talks_private_title_prefix', '<span class="private-talk"></span> %s', $talk );
-}
+	$status_o = get_post_status_object( $status );
 
-/**
- * Sets the title prefix in case of a password protected talk
- *
- * @package WordCamp Talks
- * @subpackage talks/functions
- *
- * @since 1.0.0
- *
- * @param  string  $prefix the prefix to apply in case of a private talk
- * @param  WP_Post $talk   the talk object
- * @return string          the title prefix
- */
-function wct_talks_protected_title_prefix( $prefix = '', $talk = null ) {
-	// Not an talk ? Bail.
-	if ( empty( $talk ) || wct_get_post_type() != $talk->post_type ) {
-		return $prefix;
-	}
-
-	/**
-	 * @param  string        the prefix output
-	 * @param  WP_Post $talk the talk object
-	 */
-	return apply_filters( 'wct_talks_protected_title_prefix', '<span class="protected-talk"></span> %s', $talk );
+	return sprintf( '<span class="talk-status">%1$s</span> %2$s', $status_o->label, $title );
 }
 
 /** Handle Talk actions *******************************************************/

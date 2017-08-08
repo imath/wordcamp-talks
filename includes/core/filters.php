@@ -28,8 +28,7 @@ add_filter( 'heartbeat_nopriv_received', 'wct_talks_heartbeat_check_locked', 10,
 add_filter( 'mce_external_plugins',      'wct_talks_tiny_mce_plugins',       10, 1 );
 
 // Prefix talk's title in case of private/protected
-add_filter( 'private_title_format',   'wct_talks_private_title_prefix',   10, 2 );
-add_filter( 'protected_title_format', 'wct_talks_protected_title_prefix', 10, 2 );
+add_filter( 'the_title', 'wct_talks_status_title_prefix', 10, 2 );
 
 // Order by rates count
 add_filter( 'posts_clauses', 'wct_set_rates_count_orderby', 10, 2 );
