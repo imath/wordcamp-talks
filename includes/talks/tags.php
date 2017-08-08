@@ -38,9 +38,33 @@ function wct_talks_search_form() {
 		$action = apply_filters( 'wct_talks_search_form_action_url', wct_get_root_url() );
 	}
 
-	$search_form_html = '<form action="' . esc_url( $action ) . '" method="get" id="talks-search-form" class="nav-form">' . $hidden;
-	$search_form_html .= '<label><input type="text" name="' . wct_search_rewrite_id() . '" id="talks-search-box" placeholder="'. esc_attr( $placeholder ) .'" value="' . $search_value . '" /></label>';
-	$search_form_html .= '<input type="submit" id="talks-search-submit" value="'. esc_attr__( 'Search', 'wordcamp-talks' ) .'" /></form>';
+	// Init the output.
+ 	$search_form_html = '';
+
+ 	add_filter( 'get_search_query', 'wct_get_search_query' );
+
+ 	$search_form_html = get_search_form( false );
+ 
+ 	remove_filter( 'get_search_query', 'wct_get_search_query' );
+ 
+	if ( ! empty( $action ) ) {
+		preg_match( '/action=["|\']([^"]*)["|\']/i', $search_form_html, $action_attr );
+
+		if ( ! empty( $action_attr[1] ) ) {
+			$a = str_replace( $action_attr[1], esc_url( $action ), $action_attr[0] );
+			$search_form_html = str_replace( $action_attr[0], $a, $search_form_html );
+		}
+	}
+
+	preg_match( '/name=["|\']s["|\']/i', $search_form_html, $name_attr );
+
+	if ( ! empty( $name_attr[0] ) ) {
+		$search_form_html = str_replace( $name_attr[0], 'name="' . wct_search_rewrite_id() . '"', $search_form_html );
+	}
+
+	if ( ! empty( $hidden ) ) {
+		$search_form_html = str_replace( '</form>', "{$hidden}\n</form>", $search_form_html );
+	}
 
 	echo apply_filters( 'wct_talks_search_form', $search_form_html );
 }
@@ -101,15 +125,26 @@ function wct_talks_order_form() {
 		$action = apply_filters( 'wct_talks_order_form_action_url', $action, $category, $tag );
 	}
 
-	$order_form_html = '<form action="' . esc_url( $action ) . '" method="get" id="talks-order-form" class="nav-form">' . $hidden;
-	$order_form_html .= '<label><select name="orderby" id="talks-order-box">';
-
+	$options_output = '';
 	foreach ( $order_options as $query_var => $label ) {
-		$order_form_html .= '<option value="' . esc_attr( $query_var ) . '" ' . selected( $order_value, $query_var, false ) . '>' . esc_html( $label) . '</option>';
+		$options_output .= '<option value="' . esc_attr( $query_var ) . '" ' . selected( $order_value, $query_var, false ) . '>' . esc_html( $label ) . '</option>';
 	}
 
-	$order_form_html .= '</select></label>';
-	$order_form_html .= '<input type="submit" id="talks-order-submit" value="'. esc_attr__( 'Sort', 'wordcamp-talks' ) .'" /></form>';
+	$order_form_html = sprintf( '
+		<form action="%1$s" method="get" id="ideas-order-form" class="nav-form">%2$s
+			<label for="orderby">
+				<span class="screen-reader-text">%3$s</span>
+			</label>
+			<select name="orderby" id="ideas-order-box">
+				%4$s
+			</select>
+
+			<button type="submit" class="submit-sort">
+				<span class="dashicons dashicons-filter"></span>
+				<span class="screen-reader-text">%5$s</span>
+			</button>
+		</form>
+	', esc_url( $action ), $hidden, esc_attr__( 'Select the sort order', 'wordcamp-talks' ), $options_output, esc_attr__( 'Sort', 'wordcamp-talks' ) );
 
 	echo apply_filters( 'wct_talks_order_form', $order_form_html );
 }

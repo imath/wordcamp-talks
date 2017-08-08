@@ -191,7 +191,7 @@ span.wp-talk-stream-group:before {
  	margin: 10px 0;
  	padding: 10px;
 }
-#wordcamp-talks .message p{
+#wordcamp-talks .message p {
  	margin: 0;
  	padding: 0;
 }
@@ -212,11 +212,40 @@ span.wp-talk-stream-group:before {
 #wordcamp-talks .error {
  	border-left: 4px solid #dd3333;
 }
-#wordcamp-talks .notice{
+#wordcamp-talks .notice {
  	border-left: 4px solid #eeeebb;
 }
-#wordcamp-talks .success{
+#wordcamp-talks .success {
  	border-left: 4px solid #88aa22;
+}
+
+span.talk-status {
+	padding: 5px;
+	outline-color: #fff;
+	color: #fff;
+	font-size: 70%;
+	font-weight: bold;
+	background-color: #222;
+}
+
+span.talk-status.wct_pending {
+	background-color: #ffba00;
+}
+
+span.talk-status.wct_selected {
+	background-color: #88aa22;
+}
+
+span.talk-status.wct_rejected {
+	background-color: #dd3333;
+}
+
+span.talk-status.wct_shortlist {
+	background-color: #3388aa;
+}
+
+.talk-nav-single span.talk-status {
+	display: none;
 }
 
 /*--------------------------------------------------------------
@@ -814,11 +843,11 @@ body.talks .wp-embed-share-dialog {
 #wordcamp-talks form#send-invite-form {
 	margin-top: 20px;
 }
-#wordcamp-talks button:not(.ed_button),
+#wordcamp-talks button:not( .ed_button ):not( .search-submit ):not( .submit-sort ),
 #wordcamp-talks a.button,
 a.wpis-title-button,
-#wordcamp-talks input[type=submit],
-#wordcamp-talks input[type=button]:not(.ed_button),
+#wordcamp-talks input[type=submit]:not( .search-submit ),
+#wordcamp-talks input[type=button]:not( .ed_button ),
 #wordcamp-talks input[type=reset],
 body.single-talks #comments .comment-reply-link {
 	background: #fff; /* Old browsers */
@@ -834,13 +863,17 @@ body.single-talks #comments .comment-reply-link {
 	border-radius: 0;
 }
 
-#wordcamp-talks button:hover:not(.ed_button),
+#wordcamp-talks button.submit-sort {
+	padding: 0.5em 1em;
+}
+
+#wordcamp-talks button:hover:not( .ed_button ):not( .search-submit ):not( .submit-sort ),
 #wordcamp-talks a.button:hover,
 #wordcamp-talks a.button:focus,
 a.wpis-title-button:hover,
 a.wpis-title-button:focus,
-#wordcamp-talks input[type=submit]:hover,
-#wordcamp-talks input[type=button]:hover:not(.ed_button),
+#wordcamp-talks input[type=submit]:hover:not( .search-submit ),
+#wordcamp-talks input[type=button]:hover:not( .ed_button ),
 #wordcamp-talks input[type=reset]:hover,
 body.single-talks #comments .comment-reply-link:hover {
 	background: #ededed;
@@ -895,6 +928,15 @@ body.single-talks #comments .comment-reply-link:hover {
 	background-color: #fff;
 	width: 100%;
 	text-align: center;
+}
+
+#wordcamp-talks .screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	height: 1px;
+	overflow: hidden;
+	position: absolute !important;
+	width: 1px;
+	word-wrap: normal !important; /* Many screen reader and browser combinations announce broken words as they would appear visually. */
 }
 
 /*--------------------------------------------------------------

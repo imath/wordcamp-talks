@@ -925,16 +925,29 @@ function wct_talks_get_order_options() {
 	return apply_filters( 'wct_talks_get_order_options', $order_options );
 }
 
+/**
+ * Prefix the Talk title with its status
+ *
+ * @since  1.1.0
+ * 
+ * @param  string  $title The Talk title.
+ * @param  WP_Post $talk  The Talk object
+ * @return string         The Talk title.
+ */
 function wct_talks_status_title_prefix( $title = '', $talk = null ) {
 	$status = get_post_status( $talk );
 
-	if ( ! wct_is_supported_statuses( $status ) ) {
+	if ( ! wct_is_supported_statuses( $status ) || is_admin() ) {
 		return $title;
 	}
 
 	$status_o = get_post_status_object( $status );
 
-	return sprintf( '<span class="talk-status">%1$s</span> %2$s', $status_o->label, $title );
+	return sprintf( '<span class="talk-status %1$s">%2$s</span> %3$s',
+		sanitize_html_class( $status ),
+		$status_o->label,
+		$title
+	);
 }
 
 /** Handle Talk actions *******************************************************/

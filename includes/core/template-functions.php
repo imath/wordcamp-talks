@@ -618,6 +618,18 @@ function wct_get_term_name() {
 	return apply_filters( 'wct_get_term_name', $term->name );
 }
 
+
+/**
+ * Get the search query.
+ *
+ * @since  1.1.0
+ *
+ * @return string The search query
+ */
+ function wct_get_search_query() {
+ 	return get_query_var( wct_search_rewrite_id() );
+ }
+
 /**
  * Are we searching talks ?
  *
