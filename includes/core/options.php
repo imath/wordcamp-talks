@@ -52,25 +52,6 @@ function wct_get_default_options() {
 		'_wc_talks_autolog_enabled'     => 0,
 	);
 
-	// Pretty links customization
-	if ( wct_is_pretty_links() ) {
-		$default_options = array_merge( $default_options, array(
-			'_wc_talks_root_slug'          => _x( 'talks', 'default root slug', 'wordcamp-talks' ),
-			'_wc_talks_talk_slug'          => _x( 'talk', 'default talk slug', 'wordcamp-talks' ),
-			'_wc_talks_category_slug'      => _x( 'category', 'default category slug', 'wordcamp-talks' ),
-			'_wc_talks_tag_slug'           => _x( 'tag', 'default tag slug', 'wordcamp-talks' ),
-			'_wc_talks_user_slug'          => _x( 'user', 'default user slug', 'wordcamp-talks' ),
-			'_wc_talks_user_comments_slug' => _x( 'comments', 'default comments slug', 'wordcamp-talks' ),
-			'_wc_talks_user_rates_slug'    => _x( 'ratings', 'default ratings slug', 'wordcamp-talks' ),
-			'_wc_talks_user_to_rate_slug'  => _x( 'to-rate', 'default to rate slug', 'wordcamp-talks' ),
-			'_wc_talks_signup_slug'        => _x( 'sign-up', 'default sign-up action slug', 'wordcamp-talks' ),
-			'_wc_talks_action_slug'        => _x( 'action', 'default action slug', 'wordcamp-talks' ),
-			'_wc_talks_addnew_slug'        => _x( 'add', 'default add talk action slug', 'wordcamp-talks' ),
-			'_wc_talks_edit_slug'          => _x( 'edit', 'default edit talk action slug', 'wordcamp-talks' ),
-			'_wc_talks_cpage_slug'         => _x( 'cpage', 'default comments pagination slug', 'wordcamp-talks' ),
-		) );
-	}
-
 	// Multisite options
 	if ( is_multisite() ) {
 		$default_options = array_merge( $default_options, array(
@@ -354,17 +335,12 @@ function wct_is_user_to_rate_disabled( $default = 0, $rates_disabled = null ) {
  * @package WordCamp Talks
  * @subpackage core/options
  *
- * @since 1.0.0
- *
- * @param  string $default default value
- * @return string       the root slug
+ * @since  1.0.0
+ * @since  1.1.0 Not filerable & not an option anymore.
+ * @return string the root slug
  */
-function wct_root_slug( $default = '' ) {
-	if ( empty( $default ) ) {
-		$default = _x( 'talks', 'default root slug', 'wordcamp-talks' );
-	}
-
-	return apply_filters( 'wct_root_slug', get_option( '_wc_talks_root_slug', $default ) );
+function wct_root_slug() {
+	return _x( 'talks', 'default root slug', 'wordcamp-talks' );
 }
 
 /**
@@ -374,11 +350,12 @@ function wct_root_slug( $default = '' ) {
  * @subpackage core/options
  *
  * @since 1.0.0
+ * @since  1.1.0 Not filerable anymore.
  *
- * @return string       the talk slug (prefixed by the root one)
+ * @return string the talk slug (prefixed by the root one)
  */
 function wct_talk_slug() {
-	return apply_filters( 'wct_talk_slug', wct_root_slug() . '/' . wct_get_talk_slug() );
+	return wct_root_slug() . '/' . wct_get_talk_slug();
 }
 
 	/**
@@ -387,17 +364,13 @@ function wct_talk_slug() {
 	 * @package WordCamp Talks
 	 * @subpackage core/options
 	 *
-	 * @since 1.0.0
-	 *
-	 * @param  string $default default value
-	 * @return string       the talk slug
+	 * @since  1.0.0
+	 * @since  1.1.0 Not filerable & not an option anymore.
+	 * 
+	 * @return string The talk slug
 	 */
-	function wct_get_talk_slug( $default = '' ) {
-		if ( empty( $default ) ) {
-			$default = _x( 'talk', 'default talk slug', 'wordcamp-talks' );
-		}
-
-		return apply_filters( 'wct_get_talk_slug', get_option( '_wc_talks_talk_slug', $default ) );
+	function wct_get_talk_slug() {
+		return _x( 'talk', 'default talk slug', 'wordcamp-talks' );
 	}
 
 /**
@@ -407,11 +380,12 @@ function wct_talk_slug() {
  * @subpackage core/options
  *
  * @since 1.0.0
+ * @since  1.1.0 Not filerable anymore.
  *
  * @return string the category slug (prefixed by the root one)
  */
 function wct_category_slug() {
-	return apply_filters( 'wct_category_slug', wct_root_slug() . '/' . wct_get_category_slug() );
+	return wct_root_slug() . '/' . wct_get_category_slug();
 }
 
 	/**
@@ -420,17 +394,13 @@ function wct_category_slug() {
 	 * @package WordCamp Talks
 	 * @subpackage core/options
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
+	 * @since  1.1.0 Not filerable & not an option anymore.
 	 *
-	 * @param  string $default default value
-	 * @return string       the category slug
+	 * @return string the category slug
 	 */
-	function wct_get_category_slug( $default = '' ) {
-		if ( empty( $default ) ) {
-			$default = _x( 'category', 'default category slug', 'wordcamp-talks' );
-		}
-
-		return apply_filters( 'wct_get_category_slug', get_option( '_wc_talks_category_slug', $default ) );
+	function wct_get_category_slug() {
+		return _x( 'category', 'default category slug', 'wordcamp-talks' );
 	}
 
 /**
@@ -439,12 +409,13 @@ function wct_category_slug() {
  * @package WordCamp Talks
  * @subpackage core/options
  *
- * @since 1.0.0
+ * @since  1.0.0
+ * @since  1.1.0 Not filerable anymore.
  *
- * @return string       the tag slug (prefixed by the root one)
+ * @return string the tag slug (prefixed by the root one)
  */
 function wct_tag_slug() {
-	return apply_filters( 'wct_tag_slug', wct_root_slug() . '/' . wct_get_tag_slug() );
+	return wct_root_slug() . '/' . wct_get_tag_slug();
 }
 
 	/**
@@ -453,17 +424,13 @@ function wct_tag_slug() {
 	 * @package WordCamp Talks
 	 * @subpackage core/options
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
+	 * @since  1.1.0 Not filerable & not an option anymore.
 	 *
-	 * @param  string $default default value
 	 * @return string          the tag slug
 	 */
-	function wct_get_tag_slug( $default = '' ) {
-		if ( empty( $default ) ) {
-			$default = _x( 'tag', 'default tag slug', 'wordcamp-talks' );
-		}
-
-		return apply_filters( 'wct_get_tag_slug', get_option( '_wc_talks_tag_slug', $default ) );
+	function wct_get_tag_slug() {
+		return _x( 'tag', 'default tag slug', 'wordcamp-talks' );
 	}
 
 /**
@@ -472,12 +439,13 @@ function wct_tag_slug() {
  * @package WordCamp Talks
  * @subpackage core/options
  *
- * @since 1.0.0
+ * @since  1.0.0
+ * @since  1.1.0 Not filerable anymore.
  *
  * @return string the user slug (prefixed by the root one)
  */
 function wct_user_slug() {
-	return apply_filters( 'wct_user_slug', wct_root_slug() . '/' . wct_get_user_slug() );
+	return wct_root_slug() . '/' . wct_get_user_slug();
 }
 
 	/**
@@ -486,17 +454,13 @@ function wct_user_slug() {
 	 * @package WordCamp Talks
 	 * @subpackage core/options
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
+	 * @since  1.1.0 Not filerable & not an option anymore.
 	 *
-	 * @param  string $default default value
-	 * @return string       the user slug
+	 * @return string the user slug
 	 */
-	function wct_get_user_slug( $default = '' ) {
-		if ( empty( $default ) ) {
-			$default = _x( 'user', 'default user slug', 'wordcamp-talks' );
-		}
-
-		return apply_filters( 'wct_get_user_slug', get_option( '_wc_talks_user_slug', $default ) );
+	function wct_get_user_slug() {
+		return _x( 'user', 'default user slug', 'wordcamp-talks' );
 	}
 
 /**
@@ -505,17 +469,13 @@ function wct_user_slug() {
  * @package WordCamp Talks
  * @subpackage core/options
  *
- * @since 1.0.0
+ * @since  1.0.0
+ * @since  1.1.0 Not filerable & not an option anymore.
  *
- * @param  string $default default value
- * @return string       the user's profile rates slug
+ * @return string the user's profile rates slug
  */
-function wct_user_rates_slug( $default = '' ) {
-	if ( empty( $default ) ) {
-		$default = _x( 'ratings', 'default ratings slug', 'wordcamp-talks' );
-	}
-
-	return apply_filters( 'wct_user_rates_slug', get_option( '_wc_talks_user_rates_slug', $default ) );
+function wct_user_rates_slug() {
+	return _x( 'ratings', 'default ratings slug', 'wordcamp-talks' );
 }
 
 /**
@@ -524,17 +484,13 @@ function wct_user_rates_slug( $default = '' ) {
  * @package WordCamp Talks
  * @subpackage core/options
  *
- * @since 1.0.0
+ * @since  1.0.0
+ * @since  1.1.0 Not filerable & not an option anymore.
  *
- * @param  string $default default value
- * @return string       the user's profile to rate slug
+ * @return string the user's profile to rate slug
  */
-function wct_user_to_rate_slug( $default = '' ) {
-	if ( empty( $default ) ) {
-		$default = _x( 'to-rate', 'default user to rate slug', 'wordcamp-talks' );
-	}
-
-	return apply_filters( 'wct_user_to_rate_slug', get_option( '_wc_talks_user_to_rate_slug', $default ) );
+function wct_user_to_rate_slug() {
+	return _x( 'to-rate', 'default user to rate slug', 'wordcamp-talks' );
 }
 
 /**
@@ -543,17 +499,13 @@ function wct_user_to_rate_slug( $default = '' ) {
  * @package WordCamp Talks
  * @subpackage core/options
  *
- * @since 1.0.0
+ * @since  1.0.0
+ * @since  1.1.0 Not filerable anymore.
  *
- * @param  string $default default value
- * @return string          the user's profile talks section slug
+ * @return string the user's profile talks section slug
  */
-function wct_user_talks_slug( $default = '' ) {
-	if ( empty( $default ) ) {
-		$default = wct_root_slug();
-	}
-
-	return apply_filters( 'wct_user_talks_slug', $default );
+function wct_user_talks_slug() {
+	return wct_root_slug();
 }
 
 /**
@@ -562,17 +514,13 @@ function wct_user_talks_slug( $default = '' ) {
  * @package WordCamp Talks
  * @subpackage core/options
  *
- * @since 1.0.0
+ * @since  1.0.0
+ * @since  1.1.0 Not filerable & not an option anymore.
  *
- * @param  string $default default value
- * @return string       the user's profile comments slug
+ * @return string the user's profile comments slug
  */
-function wct_user_comments_slug( $default = '' ) {
-	if ( empty( $default ) ) {
-		$default = _x( 'comments', 'default comments slug', 'wordcamp-talks' );
-	}
-
-	return apply_filters( 'wct_user_comments_slug', get_option( '_wc_talks_user_comments_slug', $default ) );
+function wct_user_comments_slug() {
+	return _x( 'comments', 'default comments slug', 'wordcamp-talks' );
 }
 
 /**
@@ -581,12 +529,13 @@ function wct_user_comments_slug( $default = '' ) {
  * @package WordCamp Talks
  * @subpackage core/options
  *
- * @since 1.0.0
+ * @since  1.0.0
+ * @since  1.1.0 Not filerable anymore.
  *
- * @return string       the action slug (prefixed by the root one)
+ * @return string the action slug (prefixed by the root one)
  */
 function wct_action_slug() {
-	return apply_filters( 'wct_action_slug', wct_root_slug() . '/' . wct_get_action_slug() );
+	return wct_root_slug() . '/' . wct_get_action_slug();
 }
 
 	/**
@@ -595,17 +544,13 @@ function wct_action_slug() {
 	 * @package WordCamp Talks
 	 * @subpackage core/options
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
+	 * @since  1.1.0 Not filerable & not an option anymore.
 	 *
-	 * @param  string $default default value
-	 * @return string       the action slug
+	 * @return string the action slug
 	 */
-	function wct_get_action_slug( $default = '' ) {
-		if ( empty( $default ) ) {
-			$default = _x( 'action', 'default action slug', 'wordcamp-talks' );
-		}
-
-		return apply_filters( 'wct_get_action_slug', get_option( '_wc_talks_action_slug', $default ) );
+	function wct_get_action_slug() {
+		return _x( 'action', 'default action slug', 'wordcamp-talks' );
 	}
 
 /**
@@ -614,17 +559,13 @@ function wct_action_slug() {
  * @package WordCamp Talks
  * @subpackage core/options
  *
- * @since 1.0.0
+ * @since  1.0.0
+ * @since  1.1.0 Not filerable & not an option anymore.
  *
- * @param  string $default default value
- * @return string       the add (action) slug
+ * @return string the add (action) slug
  */
-function wct_addnew_slug( $default = '' ) {
-	if ( empty( $default ) ) {
-		$default = _x( 'add', 'default add talk action slug', 'wordcamp-talks' );
-	}
-
-	return apply_filters( 'wct_addnew_slug', get_option( '_wc_talks_addnew_slug', $default ) );
+function wct_addnew_slug() {
+	return _x( 'add', 'default add talk action slug', 'wordcamp-talks' );
 }
 
 /**
@@ -633,17 +574,13 @@ function wct_addnew_slug( $default = '' ) {
  * @package WordCamp Talks
  * @subpackage core/options
  *
- * @since 1.0.0
+ * @since  1.0.0
+ * @since  1.1.0 Not filerable & not an option anymore.
  *
- * @param  string $default default value
  * @return string       the add (action) slug
  */
 function wct_edit_slug( $default = '' ) {
-	if ( empty( $default ) ) {
-		$default = _x( 'edit', 'default edit talk action slug', 'wordcamp-talks' );
-	}
-
-	return apply_filters( 'wct_edit_slug', get_option( '_wc_talks_edit_slug', $default ) );
+	return _x( 'edit', 'default edit talk action slug', 'wordcamp-talks' );
 }
 
 /**
@@ -653,16 +590,12 @@ function wct_edit_slug( $default = '' ) {
  * @subpackage core/options
  *
  * @since 1.0.0
+ * @since  1.1.0 Not filerable & not an option anymore.
  *
- * @param  string the default signup slug
  * @return string the signup slug (prefixed by the root one)
  */
-function wct_signup_slug( $default = '' ) {
-	if ( empty( $default ) ) {
-		$default = _x( 'sign-up', 'default sign-up action slug', 'wordcamp-talks' );
-	}
-
-	return apply_filters( 'wct_signup_slug', get_option( '_wc_talks_signup_slug', $default ) );
+function wct_signup_slug() {
+	return _x( 'sign-up', 'default sign-up action slug', 'wordcamp-talks' );
 }
 
 /**
@@ -671,17 +604,13 @@ function wct_signup_slug( $default = '' ) {
  * @package WordCamp Talks
  * @subpackage core/options
  *
- * @since 1.0.0
+ * @since  1.0.0
+ * @since  1.1.0 Not filerable & not an option anymore.
  *
- * @param  string $default default value
  * @return string       the comment pagination slug
  */
-function wct_cpage_slug( $default = '' ) {
-	if ( empty( $default ) ) {
-		$default = _x( 'cpage', 'default comments pagination slug', 'wordcamp-talks' );
-	}
-
-	return apply_filters( 'wct_cpage_slug', get_option( '_wc_talks_cpage_slug', $default ) );
+function wct_cpage_slug() {
+	return _x( 'cpage', 'default comments pagination slug', 'wordcamp-talks' );
 }
 
 /**
