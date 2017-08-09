@@ -279,10 +279,6 @@ function wct_comments_query_args() {
 function wct_comments_open( $open = true, $talk_id = 0 ) {
 	if ( ! wct_is_talks() ) {
 		return $open;
-	}
-
-	if ( $open !== wct_is_comments_allowed() ) {
-		$open = false;
 	} else {
 		$open = wct_user_can( 'comment_talks' );
 	}

@@ -126,14 +126,6 @@ function wct_get_settings_fields() {
 				'args'              => array()
 			),
 
-			// Disable comments in talks post type
-			'_wc_talks_allow_comments' => array(
-				'title'             => __( 'Comments', 'wordcamp-talks' ),
-				'callback'          => 'wct_allow_comments_setting_callback',
-				'sanitize_callback' => 'absint',
-				'args'              => array()
-			),
-
 			// Private fields (not shown on front-end)
 			'_wc_talks_private_fields_list' => array(
 				'title'             => __( 'Private user profile fields', 'wordcamp-talks' ),
@@ -542,25 +534,6 @@ function wct_disjoin_comments_setting_callback() {
 
 	<input name="_wc_talks_disjoin_comments" id="_wc_talks_disjoin_comments" type="checkbox" value="1" <?php checked( wct_is_comments_disjoined() ); ?> />
 	<label for="_wc_talks_disjoin_comments"><?php esc_html_e( 'Separate comments made on talks from the other post types.', 'wordcamp-talks' ); ?></label>
-
-	<?php
-}
-
-/**
- * Global "opened" comments callback
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
- *
- * @since 1.0.0
- *
- * @return string HTML output
- */
-function wct_allow_comments_setting_callback() {
-	?>
-
-	<input name="_wc_talks_allow_comments" id="_wc_talks_allow_comments" type="checkbox" value="1" <?php checked( wct_is_comments_allowed() ); ?> />
-	<label for="_wc_talks_allow_comments"><?php esc_html_e( 'Allow users to add comments on talks', 'wordcamp-talks' ); ?></label>
 
 	<?php
 }

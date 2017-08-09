@@ -45,7 +45,6 @@ function wct_get_default_options() {
 		'_wc_talks_public_fields_list'  => array(),
 		'_wc_talks_signup_fields'       => array(),
 		'_wc_talks_disjoin_comments'    => 1,
-		'_wc_talks_allow_comments'      => 1,
 		'_wc_talks_embed_profile'       => 0,
 		'_wc_talks_featured_images'     => 1,
 		'_wc_talks_to_rate_disabled'    => 0,
@@ -262,26 +261,6 @@ function wct_user_autolog_after_signup( $default = 0 ) {
  */
 function wct_is_comments_disjoined( $default = 1 ) {
 	return (bool) apply_filters( 'wct_is_comments_disjoined', (bool) get_option( '_wc_talks_disjoin_comments', $default ) );
-}
-
-/**
- * Are comments about talks globally allowed
- *
- * Thanks to this option, plugin will be able to neutralize comments about
- * talks without having to rely on WordPress discussion settings. If this
- * option is enabled, it's still possible from the edit Administration screen
- * of the talk to neutralize for each specific talk the comments.
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @param  bool $default default value
- * @return bool         True if enabled, false otherwise
- */
-function wct_is_comments_allowed( $default = 1 ) {
-	return (bool) apply_filters( 'wct_is_comments_allowed', (bool) get_option( '_wc_talks_allow_comments', $default ) );
 }
 
 /**
