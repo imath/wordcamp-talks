@@ -110,10 +110,8 @@ class WordCamp_Talks_Admin {
 	 * @since 1.0.0
 	 */
 	private function includes() {
-		// By default, comments are disjoined from the other post types.
-		if ( wct_is_comments_disjoined() ) {
-			require $this->includes_dir . 'comments.php';
-		}
+		// Separate Talks comments moderation from the other post types.
+		require $this->includes_dir . 'comments.php';
 
 		// Settings
 		require $this->includes_dir . 'settings.php';
