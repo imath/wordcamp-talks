@@ -107,12 +107,12 @@ final class WordCamp_Talks {
 		$this->pretty_links = get_option( 'permalink_structure' );
 
 		// template globals
-		$this->is_talks    = false;
+		$this->is_talks         = false;
 		$this->template_file    = false;
 		$this->main_query       = array();
 		$this->query_loop       = false;
 		$this->per_page         = get_option( 'posts_per_page' );
-		$this->is_talks_archive  = false;
+		$this->is_talks_archive = false;
 		$this->is_category      = false;
 		$this->is_tag           = false;
 		$this->current_term     = false;

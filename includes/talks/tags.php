@@ -490,40 +490,6 @@ function wct_talks_get_author_id() {
 }
 
 /**
- * Checks if the Talk being iterated on is sticky
- *
- * @package WordCamp Talks
- * @subpackage talks/tags
- *
- * @since 1.0.0
- *
- * @return bool True if the Talk being iterating on is sticky, false otherwise
- */
-function wct_talks_is_sticky_talk() {
-	$query_loop = wct()->query_loop;
-	$talk = $query_loop->talk;
-
-	if ( ! wct_is_talks_archive() || wct_get_global( 'orderby' ) || wct_is_search() ) {
-		return;
-	}
-
-	if ( empty( $query_loop->page ) || ( ! empty( $query_loop->page ) && 1 < $query_loop->page ) ) {
-		return;
-	}
-
-	// Bail if sticky is disabled
-	if ( ! wct_is_sticky_enabled() ) {
-		return;
-	}
-
-	if ( ! empty( $talk->is_sticky ) ) {
-		return true;
-	} else {
-		return wct_talks_is_sticky( $talk->ID );
-	}
-}
-
-/**
  * Output the row classes of the Talk being iterated on.
  *
  * @package WordCamp Talks
@@ -547,10 +513,6 @@ function wct_talks_the_classes() {
 	 */
 	function wct_talks_get_classes() {
 		$classes = array( 'talk' );
-
-		if ( wct_talks_is_sticky_talk() ) {
-			$classes[] = 'sticky-talk';
-		}
 
 		if ( ! wct_user_can( 'view_other_profiles', wct_talks_get_author_id() ) ) {
 			$classes[] = 'no-avatar';
@@ -625,10 +587,6 @@ function wct_talks_before_talk_title() {
 	 */
 	function wct_talks_get_before_talk_title() {
 		$output = '';
-
-		if ( wct_talks_is_sticky_talk() ) {
-			$output = '<span class="sticky-talk"></span> ';
-		}
 
 		/**
 		 * @param  string  $output the avatar output
@@ -1416,14 +1374,6 @@ function wct_talks_not_loggedin() {
 				esc_url( wp_login_url( wct_get_form_url() ) )
 			);
 		}
-
-		// Check for a custom message..
-		$custom_message = wct_login_message();
-
-		if ( ! empty( $custom_message ) ) {
-			$output = $custom_message;
-		}
-
 	}
 
 	/**

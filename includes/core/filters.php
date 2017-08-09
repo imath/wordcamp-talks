@@ -33,9 +33,6 @@ add_filter( 'the_title', 'wct_talks_status_title_prefix', 10, 2 );
 // Order by rates count
 add_filter( 'posts_clauses', 'wct_set_rates_count_orderby', 10, 2 );
 
-// Sticky Talks
-add_filter( 'the_posts', 'wct_talks_stick_talks', 10, 2 );
-
 // Filter comment author urls
 add_filter( 'comments_array',               'wct_comments_array',               11, 2 );
 add_filter( 'comments_template_query_args', 'wct_comments_template_query_args', 10, 1 );

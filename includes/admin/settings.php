@@ -72,7 +72,7 @@ function wct_get_settings_fields() {
 
 			// Post Type Archive page title
 			'_wc_talks_archive_title' => array(
-				'title'             => __( 'WordCamp Talks archive page', 'wordcamp-talks' ),
+				'title'             => __( 'Archive page title', 'wordcamp-talks' ),
 				'callback'          => 'wct_archive_title_setting_callback',
 				'sanitize_callback' => 'sanitize_text_field',
 				'args'              => array()
@@ -80,7 +80,7 @@ function wct_get_settings_fields() {
 
 			// Closing date for the call for speakers.
 			'_wc_talks_closing_date' => array(
-				'title'             => __( 'Closing date.', 'wordcamp-talks' ),
+				'title'             => __( 'Closing date', 'wordcamp-talks' ),
 				'callback'          => 'wct_closing_date_setting_callback',
 				'sanitize_callback' => 'wct_sanitize_closing_date',
 				'args'              => array()
@@ -110,14 +110,6 @@ function wct_get_settings_fields() {
 				'args'              => array()
 			),
 
-			// Is there a specific message to show to not logged in users ?
-			'_wc_talks_login_message' => array(
-				'title'             => __( 'Not logged in message', 'wordcamp-talks' ),
-				'callback'          => 'wct_login_message_setting_callback',
-				'sanitize_callback' => 'sanitize_text_field',
-				'args'              => array()
-			),
-
 			// Customize the hint list
 			'_wc_talks_hint_list' => array(
 				'title'             => __( 'Rating stars hover captions', 'wordcamp-talks' ),
@@ -131,14 +123,6 @@ function wct_get_settings_fields() {
 				'title'             => __( 'Disable the &quot;To rate&quot; tab for the user\'s profile', 'wordcamp-talks' ),
 				'callback'          => 'wct_to_rate_profile_setting_callback',
 				'sanitize_callback' => 'absint',
-				'args'              => array()
-			),
-
-			// Disable stickies ?
-			'_wc_talks_sticky_talks' => array(
-				'title'             => __( 'Sticky talks', 'wordcamp-talks' ),
-				'callback'          => 'wct_sticky_talks_setting_callback',
-				'sanitize_callback' => 'wct_sticky_sanitize',
 				'args'              => array()
 			),
 
@@ -625,25 +609,6 @@ function wct_editor_link_setting_callback() {
 }
 
 /**
- * Custom login message callback
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
- *
- * @since 1.0.0
- *
- * @return string HTML output
- */
-function wct_login_message_setting_callback() {
-	?>
-
-	<label for="_wc_talks_login_message"><?php esc_html_e( 'You can customize the message shown to not logged in users on the new talk form', 'wordcamp-talks' ); ?></label>
-	<textarea name="_wc_talks_login_message" id="_wc_talks_login_message" rows="10" cols="50" class="large-text code"><?php echo esc_textarea( wct_login_message() );?></textarea>
-
-	<?php
-}
-
-/**
  * List of captions for the rating stars
  *
  * @package WordCamp Talks
@@ -676,25 +641,6 @@ function wct_to_rate_profile_setting_callback() {
 
 	<input name="_wc_talks_to_rate_disabled" id="_wc_talks_to_rate_disabled" type="checkbox" value="1" <?php checked( wct_is_user_to_rate_disabled() ); ?> />
 	<label for="_wc_talks_to_rate_disabled"><?php esc_html_e( '&quot;To rate&quot; user\'s profile tab.', 'wordcamp-talks' ); ?></label>
-
-	<?php
-}
-
-/**
- * Sticky talks callback
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
- *
- * @since 1.0.0
- *
- * @return string HTML output
- */
-function wct_sticky_talks_setting_callback() {
-	?>
-
-	<input name="_wc_talks_sticky_talks" id="_wc_talks_sticky_talks" type="checkbox" value="1" <?php checked( wct_is_sticky_enabled() ); ?> />
-	<label for="_wc_talks_sticky_talks"><?php esc_html_e( 'Allow talks to be made &#34;sticky&#34; (they will stay at the top of WordCamp Talks first page)', 'wordcamp-talks' ); ?></label>
 
 	<?php
 }
@@ -1255,25 +1201,6 @@ function wct_sanitize_user_fields_list( $option = '' ) {
 	 * @param array $fields the sanitized fields
 	 */
 	return apply_filters( 'wct_sanitize_user_fields_list', $fields );
-}
-
-/**
- * Make sure sticky talks are removed if the sticky setting is disabled
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
- *
- * @since 1.0.0
- *
- * @param  int $option the sticky setting
- * @return int         the new sticky setting
- */
-function wct_sticky_sanitize( $option = 0 ) {
-	if ( empty( $option ) ) {
-		delete_option( 'sticky_talks' );
-	}
-
-	return absint( $option );
 }
 
 /**
