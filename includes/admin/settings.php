@@ -832,68 +832,6 @@ function wct_sanitize_embed_profile( $option = 0 ) {
 }
 
 /**
- * Sanitize permalink slugs when saving the settings page.
- *
- * Inspired by bbPress's bbp_sanitize_slug() function
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
- *
- * @since 1.0.0
- *
- * @param  string $slug the slug choosed by the admin
- * @return string the sanitized slug
- */
-function wct_sanitize_slug( $slug = '' ) {
-	// Remove accents
-	$value = remove_accents( $slug );
-
-	// Put every character in lowercase
-	$value = strtolower( $value );
-
-	// Don't allow multiple slashes in a row
-	$value = preg_replace( '#/+#', '/', str_replace( '#', '', $value ) );
-
-	// Strip out unsafe or unusable chars
-	$value = esc_url_raw( $value );
-
-	// esc_url_raw() adds a scheme via esc_url(), so let's remove it
-	$value = str_replace( 'http://', '', $value );
-
-	// Trim off first and last slashes.
-	//
-	// We already prevent double slashing elsewhere, but let's prevent
-	// accidental poisoning of options values where we can.
-	$value = ltrim( $value, '/' );
-	$value = rtrim( $value, '/' );
-
-	/**
-	 * @param string $value the sanitized slug
-	 * @param string $slug  the slug choosed by the admin
-	 */
-	return apply_filters( 'wct_sanitize_slug', $value, $slug );
-}
-
-/**
- * Sanitize the user comments pagination slug.
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
- *
- * @since 1.0.0
- *
- * @param  string $slug the slug choosed by the admin
- * @return string the sanitized slug
- */
-function wct_sanitize_comments_page_slug( $slug = '' ) {
-	if ( $slug == wct_paged_slug() ) {
-		return 'cpage';
-	}
-
-	return wct_sanitize_slug( $slug );
-}
-
-/**
  * Displays the settings page
  *
  * @package WordCamp Talks

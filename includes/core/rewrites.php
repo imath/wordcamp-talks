@@ -166,6 +166,247 @@ function wct_cpage_rewrite_id( $default = 'cpaged' ) {
 }
 
 /**
+ * Customize the root slug of the plugin
+ *
+ * @since  1.0.0
+ * @since  1.1.0 Not filerable & not an option anymore.
+ * 
+ * @return string the root slug
+ */
+function wct_root_slug() {
+	/* Translators: This string is used in urls, make sure to avoid using special chars */
+	return _x( 'talks', 'default root slug', 'wordcamp-talks' );
+}
+
+/**
+ * Build the talk slug (root + talk ones)
+ *
+ * @since 1.0.0
+ * @since  1.1.0 Not filerable anymore.
+ *
+ * @return string the talk slug (prefixed by the root one)
+ */
+function wct_talk_slug() {
+	return wct_root_slug() . '/' . wct_get_talk_slug();
+}
+
+	/**
+	 * Customize the talk (post type) slug of the plugin
+	 *
+	 * @since  1.0.0
+	 * @since  1.1.0 Not filerable & not an option anymore.
+	 * 
+	 * @return string The talk slug
+	 */
+	function wct_get_talk_slug() {
+		/* Translators: This string is used in urls, make sure to avoid using special chars */
+		return _x( 'talk', 'default talk slug', 'wordcamp-talks' );
+	}
+
+/**
+ * Build the category slug (root + category ones)
+ *
+ * @since 1.0.0
+ * @since  1.1.0 Not filerable anymore.
+ *
+ * @return string the category slug (prefixed by the root one)
+ */
+function wct_category_slug() {
+	return wct_root_slug() . '/' . wct_get_category_slug();
+}
+
+	/**
+	 * Customize the category (hierarchical taxonomy) slug of the plugin
+	 *
+	 * @since  1.0.0
+	 * @since  1.1.0 Not filerable & not an option anymore.
+	 *
+	 * @return string the category slug
+	 */
+	function wct_get_category_slug() {
+		/* Translators: This string is used in urls, make sure to avoid using special chars */
+		return _x( 'category', 'default category slug', 'wordcamp-talks' );
+	}
+
+/**
+ * Build the tag slug (root + tag ones)
+ *
+ * @since  1.0.0
+ * @since  1.1.0 Not filerable anymore.
+ *
+ * @return string the tag slug (prefixed by the root one)
+ */
+function wct_tag_slug() {
+	return wct_root_slug() . '/' . wct_get_tag_slug();
+}
+
+	/**
+	 * Customize the tag (non hierarchical taxonomy) slug of the plugin
+	 *
+	 * @since  1.0.0
+	 * @since  1.1.0 Not filerable & not an option anymore.
+	 *
+	 * @return string          the tag slug
+	 */
+	function wct_get_tag_slug() {
+		/* Translators: This string is used in urls, make sure to avoid using special chars */
+		return _x( 'tag', 'default tag slug', 'wordcamp-talks' );
+	}
+
+/**
+ * Build the user's profile slug (root + user ones)
+ *
+ * @since  1.0.0
+ * @since  1.1.0 Not filerable anymore.
+ *
+ * @return string the user slug (prefixed by the root one)
+ */
+function wct_user_slug() {
+	return wct_root_slug() . '/' . wct_get_user_slug();
+}
+
+	/**
+	 * Customize the user's profile slug of the plugin
+	 *
+	 * @since  1.0.0
+	 * @since  1.1.0 Not filerable & not an option anymore.
+	 *
+	 * @return string the user slug
+	 */
+	function wct_get_user_slug() {
+		/* Translators: This string is used in urls, make sure to avoid using special chars */
+		return _x( 'user', 'default user slug', 'wordcamp-talks' );
+	}
+
+/**
+ * Customize the user's profile rates slug of the plugin
+ *
+ * @since  1.0.0
+ * @since  1.1.0 Not filerable & not an option anymore.
+ *
+ * @return string the user's profile rates slug
+ */
+function wct_user_rates_slug() {
+	/* Translators: This string is used in urls, make sure to avoid using special chars */
+	return _x( 'ratings', 'default ratings slug', 'wordcamp-talks' );
+}
+
+/**
+ * Customize the user's profile to rate slug of the plugin
+ *
+ * @since  1.0.0
+ * @since  1.1.0 Not filerable & not an option anymore.
+ *
+ * @return string the user's profile to rate slug
+ */
+function wct_user_to_rate_slug() {
+	/* Translators: This string is used in urls, make sure to avoid using special chars */
+	return _x( 'to-rate', 'default user to rate slug', 'wordcamp-talks' );
+}
+
+/**
+ * Customize the user's profile talks section slug of the plugin
+ *
+ * @since  1.0.0
+ * @since  1.1.0 Not filerable anymore.
+ *
+ * @return string the user's profile talks section slug
+ */
+function wct_user_talks_slug() {
+	return wct_root_slug();
+}
+
+/**
+ * Customize the user's profile comments slug of the plugin
+ *
+ * @since  1.0.0
+ * @since  1.1.0 Not filerable & not an option anymore.
+ *
+ * @return string the user's profile comments slug
+ */
+function wct_user_comments_slug() {
+	/* Translators: This string is used in urls, make sure to avoid using special chars */
+	return _x( 'comments', 'default comments slug', 'wordcamp-talks' );
+}
+
+/**
+ * Build the action slug (root + action ones)
+ *
+ * @since  1.0.0
+ * @since  1.1.0 Not filerable anymore.
+ *
+ * @return string the action slug (prefixed by the root one)
+ */
+function wct_action_slug() {
+	return wct_root_slug() . '/' . wct_get_action_slug();
+}
+
+	/**
+	 * Customize the action slug of the plugin
+	 *
+	 * @since  1.0.0
+	 * @since  1.1.0 Not filerable & not an option anymore.
+	 *
+	 * @return string the action slug
+	 */
+	function wct_get_action_slug() {
+		/* Translators: This string is used in urls, make sure to avoid using special chars */
+		return _x( 'action', 'default action slug', 'wordcamp-talks' );
+	}
+
+/**
+ * Customize the add (action) slug of the plugin
+ *
+ * @since  1.0.0
+ * @since  1.1.0 Not filerable & not an option anymore.
+ *
+ * @return string the add (action) slug
+ */
+function wct_addnew_slug() {
+	/* Translators: This string is used in urls, make sure to avoid using special chars */
+	return _x( 'add', 'default add talk action slug', 'wordcamp-talks' );
+}
+
+/**
+ * Customize the edit (action) slug of the plugin
+ *
+ * @since  1.0.0
+ * @since  1.1.0 Not filerable & not an option anymore.
+ *
+ * @return string       the add (action) slug
+ */
+function wct_edit_slug( $default = '' ) {
+	/* Translators: This string is used in urls, make sure to avoid using special chars */
+	return _x( 'edit', 'default edit talk action slug', 'wordcamp-talks' );
+}
+
+/**
+ * Build the signup slug (root + signup one)
+ *
+ * @since 1.0.0
+ * @since  1.1.0 Not filerable & not an option anymore.
+ *
+ * @return string the signup slug (prefixed by the root one)
+ */
+function wct_signup_slug() {
+	/* Translators: This string is used in urls, make sure to avoid using special chars */
+	return _x( 'sign-up', 'default sign-up action slug', 'wordcamp-talks' );
+}
+
+/**
+ * Customize the comment pagination slug of the plugin in user's profile
+ *
+ * @since  1.0.0
+ * @since  1.1.0 Not filerable & not an option anymore.
+ *
+ * @return string       the comment pagination slug
+ */
+function wct_cpage_slug() {
+	/* Translators: This string is used in urls, make sure to avoid using special chars */
+	return _x( 'cpage', 'default comments pagination slug', 'wordcamp-talks' );
+}
+
+/**
  * Delete a blogs rewrite rules, so that they are automatically rebuilt on
  * the subsequent page load.
  *
