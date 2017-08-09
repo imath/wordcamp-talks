@@ -140,7 +140,7 @@ function wct_talks_order_form() {
 			</select>
 
 			<button type="submit" class="submit-sort">
-				<span class="dashicons dashicons-filter"></span>
+				<span class="dashicons dashicons-editor-ol"></span>
 				<span class="screen-reader-text">%5$s</span>
 			</button>
 		</form>
