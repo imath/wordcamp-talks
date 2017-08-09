@@ -1191,29 +1191,6 @@ function wct_talks_update_talk() {
 	exit();
 }
 
-/** Featured images ***********************************************************/
-
-/**
- * Simulate a tinymce plugin to intercept images once added to the
- * WP Editor
- *
- * @since 1.0.0
- *
- * @param  array $tinymce_plugins Just what the name of the param says!
- * @return array Tiny MCE plugins
- */
-function wct_talks_tiny_mce_plugins( $tinymce_plugins = array() ) {
-	if ( ! wct_featured_images_allowed() || ! current_theme_supports( 'post-thumbnails' ) ) {
-		return $tinymce_plugins;
-	}
-
-	if ( ! wct_is_addnew() && ! wct_is_edit() ) {
-		return $tinymce_plugins;
-	}
-
-	return array_merge( $tinymce_plugins, array( 'wpTalkStreamListImages' => wct_get_js_script( 'featured-images' ) ) );
-}
-
 function wct_do_embed( $content ) {
 	global $wp_embed;
 

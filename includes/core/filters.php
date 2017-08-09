@@ -25,7 +25,6 @@ add_filter( 'get_edit_comment_link',     'wct_edit_comment_link',            10,
 add_filter( 'comments_open',             'wct_comments_open',                10, 2 );
 add_filter( 'heartbeat_received',        'wct_talks_heartbeat_check_locked', 10, 2 );
 add_filter( 'heartbeat_nopriv_received', 'wct_talks_heartbeat_check_locked', 10, 2 );
-add_filter( 'mce_external_plugins',      'wct_talks_tiny_mce_plugins',       10, 1 );
 
 // Prefix talk's title in case of private/protected
 add_filter( 'the_title', 'wct_talks_status_title_prefix', 10, 2 );

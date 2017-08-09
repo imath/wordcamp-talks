@@ -244,13 +244,7 @@ function wct_post_type() {
  * @return array the init arguments for the 'talks' post type
  */
 function wct_post_type_register_args() {
-	$supports = array( 'title', 'editor', 'author', 'comments', 'revisions' );
-
-	if ( wct_featured_images_allowed() ) {
-		$supports[] = 'thumbnail';
-	}
-
-	return apply_filters( 'wct_post_type_register_args', array(
+	return array(
 		'public'              => true,
 		'query_var'           => wct_get_post_type(),
 		'rewrite'             => array(
@@ -262,7 +256,7 @@ function wct_post_type_register_args() {
 		'show_in_nav_menus'   => false,
 		'show_in_admin_bar'   => wct_user_can( 'wct_talks_admin' ),
 		'menu_icon'           => 'dashicons-megaphone',
-		'supports'            => $supports,
+		'supports'            => array( 'title', 'editor', 'author', 'comments', 'revisions' ),
 		'taxonomies'          => array(
 			wct_get_category(),
 			wct_get_tag()
@@ -271,7 +265,7 @@ function wct_post_type_register_args() {
 		'capabilities'        => wct_get_post_type_caps(),
 		'delete_with_user'    => true,
 		'can_export'          => true,
-	) );
+	);
 }
 
 /**
@@ -1350,28 +1344,15 @@ function wct_generate_tag_cloud( $number = 10, $args = array() ) {
  * @return array           the filtered list of buttons to match plugin's needs
  */
 function wct_teeny_button_filter( $buttons = array() ) {
-
 	$remove_buttons = array(
 		'wp_more',
 		'spellchecker',
 		'wp_adv',
 	);
 
-	if ( ! wct_talk_editor_link() ) {
-		$remove_buttons = array_merge( $remove_buttons, array(
-			'link',
-			'unlink',
-		) );
-	}
-
-	// Remove unused buttons
-	$buttons = array_diff( $buttons, $remove_buttons );
-
-	// Eventually add the image button
-	if ( wct_talk_editor_image() ) {
-		$buttons = array_diff( $buttons, array( 'fullscreen' ) );
-		array_push( $buttons, 'image', 'fullscreen' );
-	}
+	// Add the image and fullscreen button
+	$buttons = array_diff( $buttons, $remove_buttons, array( 'fullscreen' ) );
+	array_push( $buttons, 'image', 'fullscreen' );
 
 	return $buttons;
 }

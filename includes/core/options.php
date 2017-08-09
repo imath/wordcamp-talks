@@ -38,14 +38,11 @@ function wct_get_default_options() {
 		/** Core Settings **********************************************************/
 		'_wc_talks_archive_title'       => 'Talks',
 		'_wc_talks_closing_date'        => '',
-		'_wc_talks_editor_image'        => 1,
-		'_wc_talks_editor_link'         => 1,
 		'_wc_talks_hint_list'           => array(),
 		'_wc_talks_private_fields_list' => array(),
 		'_wc_talks_public_fields_list'  => array(),
 		'_wc_talks_signup_fields'       => array(),
 		'_wc_talks_embed_profile'       => 0,
-		'_wc_talks_featured_images'     => 1,
 		'_wc_talks_to_rate_disabled'    => 0,
 		'_wc_talks_autolog_enabled'     => 0,
 	);
@@ -139,36 +136,6 @@ function wct_default_talk_status( $default = 'wct_pending' ) {
 }
 
 /**
- * Should the editor include the add image url button ?
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @param  int $default default value
- * @return bool         True if enabled, false otherwise
- */
-function wct_talk_editor_image( $default = 1 ) {
-	return (bool) apply_filters( 'wct_talk_editor_image(', (bool) get_option( '_wc_talks_editor_image', $default ) );
-}
-
-/**
- * Should the editor include the add/remove link buttons ?
- *
- * @package WordCamp Talks
- * @subpackage core/options
- *
- * @since 1.0.0
- *
- * @param  int $default default value
- * @return bool         True if enabled, false otherwise
- */
-function wct_talk_editor_link( $default = 1 ) {
-	return (bool) apply_filters( 'wct_talk_editor_link', (bool) get_option( '_wc_talks_editor_link', $default ) );
-}
-
-/**
  * Use a custom captions for rating stars ?
  *
  * @package WordCamp Talks
@@ -257,18 +224,6 @@ function wct_user_autolog_after_signup( $default = 0 ) {
  */
 function wct_is_embed_profile( $default = 0 ) {
 	return (int) apply_filters( 'wct_is_embed_profile', get_option( '_wc_talks_embed_profile', $default ) );
-}
-
-/**
- * Featured images for talks ?
- *
- * @since 1.0.0
- *
- * @param  int $default default value
- * @return bool         True if enabled, false otherwise
- */
-function wct_featured_images_allowed( $default = 1 ) {
-	return (bool) apply_filters( 'wct_featured_images_allowed', (bool) get_option( '_wc_talks_featured_images', $default ) );
 }
 
 /**
