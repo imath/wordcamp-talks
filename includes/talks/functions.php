@@ -929,7 +929,7 @@ function wct_talks_get_order_options() {
  * Prefix the Talk title with its status
  *
  * @since  1.1.0
- * 
+ *
  * @param  string  $title The Talk title.
  * @param  WP_Post $talk  The Talk object
  * @return string         The Talk title.
@@ -937,11 +937,36 @@ function wct_talks_get_order_options() {
 function wct_talks_status_title_prefix( $title = '', $talk = null ) {
 	$status = get_post_status( $talk );
 
-	if ( ! wct_is_supported_statuses( $status ) || is_admin() ) {
+	if ( ! wct_is_supported_statuses( $status ) || ! is_single() ) {
 		return $title;
 	}
 
+	return wct_talks_status_get_title_prefix( $status, $title );
+}
+
+/**
+ * Returns the status prefix output.
+ *
+ * @since  1.1.0
+ *
+ * @param  string $status The name of the status
+ * @param  string $title  The Text to be prefixed
+ * @return string         The status prefix or the prefixed text.
+ */
+function wct_talks_status_get_title_prefix( $status = '', $title = '' ) {
+	if ( ! $status ) {
+		return false;
+	}
+
 	$status_o = get_post_status_object( $status );
+
+	if ( ! isset( $status_o->label ) ) {
+		return false;
+	}
+
+	if ( empty( $title ) ) {
+		$title = '';
+	}
 
 	return sprintf( '<span class="talk-status %1$s">%2$s</span> %3$s',
 		sanitize_html_class( $status ),

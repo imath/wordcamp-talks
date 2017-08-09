@@ -587,12 +587,19 @@ function wct_talks_before_talk_title() {
 	 */
 	function wct_talks_get_before_talk_title() {
 		$output = '';
+		$talk   = wct()->query_loop->talk;
+
+		$status = get_post_status( $talk );
+
+		if ( wct_is_supported_statuses( $status ) ) {
+			$output = wct_talks_status_get_title_prefix( $status );
+		}
 
 		/**
 		 * @param  string  $output the avatar output
 		 * @param  int     the talk ID
 		 */
-		return apply_filters( 'wct_talks_get_before_talk_title', $output, wct()->query_loop->talk->ID );
+		return apply_filters( 'wct_talks_get_before_talk_title', $output, $talk->ID );
 	}
 
 /**
