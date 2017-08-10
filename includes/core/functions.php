@@ -281,23 +281,23 @@ function wct_post_type_register_args() {
 function wct_post_type_register_labels() {
 	return apply_filters( 'wct_post_type_register_labels', array(
 		'labels' => array(
-			'name'                  => __( 'Talks',                     'wordcamp-talks' ),
-			'menu_name'             => _x( 'Talks', 'Main Plugin menu', 'wordcamp-talks' ),
-			'all_items'             => __( 'All Talks',                 'wordcamp-talks' ),
-			'singular_name'         => __( 'Talk',                      'wordcamp-talks' ),
-			'add_new'               => __( 'Add New Talk',              'wordcamp-talks' ),
-			'add_new_item'          => __( 'Add New Talk',              'wordcamp-talks' ),
-			'edit_item'             => __( 'Edit Talk',                 'wordcamp-talks' ),
-			'new_item'              => __( 'New Talk',                  'wordcamp-talks' ),
-			'view_item'             => __( 'View Talk',                 'wordcamp-talks' ),
-			'search_items'          => __( 'Search Talks',              'wordcamp-talks' ),
-			'not_found'             => __( 'No Talks Found',            'wordcamp-talks' ),
-			'not_found_in_trash'    => __( 'No Talks Found in Trash',   'wordcamp-talks' ),
-			'insert_into_item'      => __( 'Insert into talk',          'wordcamp-talks' ),
-			'uploaded_to_this_item' => __( 'Uploaded to this talk',     'wordcamp-talks' ),
-			'filter_items_list'     => __( 'Filter Talks list',         'wordcamp-talks' ),
-			'items_list_navigation' => __( 'Talks list navigation',     'wordcamp-talks' ),
-			'items_list'            => __( 'Talks list',                'wordcamp-talks' ),
+			'name'                  => __( 'Talk Proposals',                     'wordcamp-talks' ),
+			'menu_name'             => _x( 'Talk Proposals', 'Main Plugin menu', 'wordcamp-talks' ),
+			'all_items'             => __( 'All Talk Proposals',                 'wordcamp-talks' ),
+			'singular_name'         => __( 'Talk Proposal',                      'wordcamp-talks' ),
+			'add_new'               => __( 'Add New Talk Proposal',              'wordcamp-talks' ),
+			'add_new_item'          => __( 'Add New Talk Proposal',              'wordcamp-talks' ),
+			'edit_item'             => __( 'Edit Talk Proposal',                 'wordcamp-talks' ),
+			'new_item'              => __( 'New Talk Proposal',                  'wordcamp-talks' ),
+			'view_item'             => __( 'View Talk Proposal',                 'wordcamp-talks' ),
+			'search_items'          => __( 'Search Talk Proposals',              'wordcamp-talks' ),
+			'not_found'             => __( 'No Talk Proposals Found',            'wordcamp-talks' ),
+			'not_found_in_trash'    => __( 'No Talk Proposals Found in Trash',   'wordcamp-talks' ),
+			'insert_into_item'      => __( 'Insert into Talk Proposal',          'wordcamp-talks' ),
+			'uploaded_to_this_item' => __( 'Uploaded to this Talk Proposal',     'wordcamp-talks' ),
+			'filter_items_list'     => __( 'Filter Talk Proposals list',         'wordcamp-talks' ),
+			'items_list_navigation' => __( 'Talk Proposals list navigation',     'wordcamp-talks' ),
+			'items_list'            => __( 'Talk Proposals list',                'wordcamp-talks' ),
 		)
 	) );
 }
@@ -392,16 +392,16 @@ function wct_category_register_args() {
 function wct_category_register_labels() {
 	return apply_filters( 'wct_category_register_labels', array(
 		'labels' => array(
-			'name'             => __( 'Talk Categories',   'wordcamp-talks' ),
-			'singular_name'    => __( 'Talk Category',     'wordcamp-talks' ),
-			'edit_item'        => __( 'Edit Category',     'wordcamp-talks' ),
-			'update_item'      => __( 'Update Category',   'wordcamp-talks' ),
-			'add_new_item'     => __( 'Add New Category',  'wordcamp-talks' ),
-			'new_item_name'    => __( 'New Category Name', 'wordcamp-talks' ),
-			'all_items'        => __( 'All Categories',    'wordcamp-talks' ),
-			'search_items'     => __( 'Search Categories', 'wordcamp-talks' ),
-			'parent_item'      => __( 'Parent Category',   'wordcamp-talks' ),
-			'parent_item_colon'=> __( 'Parent Category:',  'wordcamp-talks' ),
+			'name'             => __( 'Talk Proposal Categories',        'wordcamp-talks' ),
+			'singular_name'    => __( 'Talk Proposal Category',          'wordcamp-talks' ),
+			'edit_item'        => __( 'Edit Talk Proposal Category',     'wordcamp-talks' ),
+			'update_item'      => __( 'Update Talk Proposal Category',   'wordcamp-talks' ),
+			'add_new_item'     => __( 'Add New Talk Proposal Category',  'wordcamp-talks' ),
+			'new_item_name'    => __( 'New Talk Proposal Category Name', 'wordcamp-talks' ),
+			'all_items'        => __( 'All Talk Proposal Categories',    'wordcamp-talks' ),
+			'search_items'     => __( 'Search Talk Proposal Categories', 'wordcamp-talks' ),
+			'parent_item'      => __( 'Parent Talk Proposal Category',   'wordcamp-talks' ),
+			'parent_item_colon'=> __( 'Parent Talk Proposal Category:',  'wordcamp-talks' ),
 		)
 	) );
 }
@@ -460,18 +460,18 @@ function wct_tag_register_args() {
 function wct_tag_register_labels() {
 	return apply_filters( 'wct_tag_register_labels', array(
 		'labels' => array(
-			'name'                       => __( 'Talk Tags',                         'wordcamp-talks' ),
-			'singular_name'              => __( 'Talk Tag',                          'wordcamp-talks' ),
-			'edit_item'                  => __( 'Edit Tag',                          'wordcamp-talks' ),
-			'update_item'                => __( 'Update Tag',                        'wordcamp-talks' ),
-			'add_new_item'               => __( 'Add New Tag',                       'wordcamp-talks' ),
-			'new_item_name'              => __( 'New Tag Name',                      'wordcamp-talks' ),
-			'all_items'                  => __( 'All Tags',                          'wordcamp-talks' ),
-			'search_items'               => __( 'Search Tags',                       'wordcamp-talks' ),
-			'popular_items'              => __( 'Popular Tags',                      'wordcamp-talks' ),
-			'separate_items_with_commas' => __( 'Separate tags with commas',         'wordcamp-talks' ),
-			'add_or_remove_items'        => __( 'Add or remove tags',                'wordcamp-talks' ),
-			'choose_from_most_used'      => __( 'Choose from the most popular tags', 'wordcamp-talks' )
+			'name'                       => __( 'Talk Proposal Tags',                              'wordcamp-talks' ),
+			'singular_name'              => __( 'Talk Proposal Tag',                               'wordcamp-talks' ),
+			'edit_item'                  => __( 'Edit Talk Proposal',                              'wordcamp-talks' ),
+			'update_item'                => __( 'Update Talk Proposal',                            'wordcamp-talks' ),
+			'add_new_item'               => __( 'Add New Talk Proposal Tag',                       'wordcamp-talks' ),
+			'new_item_name'              => __( 'New Talk Proposal Tag Name',                      'wordcamp-talks' ),
+			'all_items'                  => __( 'All Talk Proposal Tags',                          'wordcamp-talks' ),
+			'search_items'               => __( 'Search Talk Proposal Tags',                       'wordcamp-talks' ),
+			'popular_items'              => __( 'Popular Talk Proposal Tags',                      'wordcamp-talks' ),
+			'separate_items_with_commas' => __( 'Separate Talk Proposal tags with commas',         'wordcamp-talks' ),
+			'add_or_remove_items'        => __( 'Add or remove Talk Proposal tags',                'wordcamp-talks' ),
+			'choose_from_most_used'      => __( 'Choose from the most popular Talk Proposal tags', 'wordcamp-talks' )
 		)
 	) );
 }
@@ -682,9 +682,9 @@ function wct_get_feedback_messages( $type = '', $id = false ) {
 			10 => __( 'Something went wrong while trying to update your talk.',  'wordcamp-talks' ),
 		),
 		'info'  => array(
-			1 => __( 'This talk is already being edited by another user.',                                          'wordcamp-talks' ),
-			2 => __( 'Your talk is currently awaiting moderation.',                                                 'wordcamp-talks' ),
-			3 => __( 'This user has not filled any public profile informations.',                                   'wordcamp-talks' ),
+			1 => __( 'This Talk Proposal is already being edited by another user.', 'wordcamp-talks' ),
+			2 => __( 'Your Talk Proposals is currently awaiting moderation.',       'wordcamp-talks' ),
+			3 => __( 'This user has not filled any public profile informations.',   'wordcamp-talks' ),
 			4 => __( 'You have not filled any public profile informations. You can edit your profile to add some.', 'wordcamp-talks' ),
 		),
 	) );

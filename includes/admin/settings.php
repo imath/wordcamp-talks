@@ -708,7 +708,7 @@ function wct_settings() {
 	?>
 	<div class="wrap">
 
-		<h2><?php esc_html_e( 'WordCamp Talks Settings', 'wordcamp-talks' ) ?></h2>
+		<h2><?php esc_html_e( 'WordCamp Talk Proposal Settings', 'wordcamp-talks' ) ?></h2>
 
 		<form action="options.php" method="post">
 

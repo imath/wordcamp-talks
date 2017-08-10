@@ -922,7 +922,7 @@ function wct_document_title_parts( $document_title = array() ) {
 		if ( wct_is_user_profile() && count( $title ) === 1 ) {
 			// Seeing comments of the user
 			if ( wct_is_user_profile_comments() ) {
-				$title[] = __( 'Talk Comments', 'wordcamp-talks' );
+				$title[] = __( 'Talk Proposal Comments', 'wordcamp-talks' );
 
 				// Get the pagination page
 				if ( get_query_var( wct_cpage_rewrite_id() ) ) {
@@ -938,15 +938,15 @@ function wct_document_title_parts( $document_title = array() ) {
 
 			// Seeing Ratings for the user
 			} elseif( wct_is_user_profile_rates() ) {
-				$title[] = __( 'Talk Ratings', 'wordcamp-talks' );
+				$title[] = __( 'Talk Proposal Ratings', 'wordcamp-talks' );
 
 			// Seeing To rates for the user
 			} elseif( wct_is_user_profile_to_rate() ) {
-				$title[] = __( 'Talks to rate', 'wordcamp-talks' );
+				$title[] = __( 'Talk Proposals to rate', 'wordcamp-talks' );
 
 			// Seeing Talks of the user
 			} elseif( wct_is_user_profile_talks() ) {
-				$title[] = __( 'Talks', 'wordcamp-talks' );
+				$title[] = __( 'Talk Proposals', 'wordcamp-talks' );
 
 			// Seeing The root profile
 			} else {

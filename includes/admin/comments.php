@@ -170,7 +170,7 @@ class WordCamp_Talks_Admin_Comments {
 		$menus[0] = array(
 			'type'          => 'comments',
 			'parent_slug'   => wct()->admin->parent_slug,
-			'page_title'    => esc_html__( 'Comments', 'wordcamp-talks' ),
+			'page_title'    => esc_html__( 'Talk Proposal Comments', 'wordcamp-talks' ),
 			'menu_title'    => $comments_menu_title,
 			'capability'    => 'edit_posts', // Unfortunately We cannot use 'edit_talks' here see edit-comments.php.
 			'slug'          => add_query_arg( 'post_type', $this->post_type, 'edit-comments.php' ),

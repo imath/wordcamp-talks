@@ -421,20 +421,20 @@ class WordCamp_Talks_Admin {
 		 */
 		$messages[ $this->post_type ] = apply_filters( 'wct_admin_updated_messages', array(
 			 0 => '', // Unused. Messages start at index 1.
-			 1 => sprintf( __( 'Talk updated. <a href="%s">View Talk</a>', 'wordcamp-talks' ), esc_url( wct_talks_get_talk_permalink( $post ) ) ),
+			 1 => sprintf( __( 'Talk Proposal updated. <a href="%s">View Talk Proposal</a>', 'wordcamp-talks' ), esc_url( wct_talks_get_talk_permalink( $post ) ) ),
 			 2 => __( 'Custom field updated.', 'wordcamp-talks' ),
 			 3 => __( 'Custom field deleted.', 'wordcamp-talks' ),
-			 4 => __( 'Talk updated.', 'wordcamp-talks'),
-			 5 => isset( $_GET['revision'] ) ? sprintf( __( 'Talk restored to revision from %s', 'wordcamp-talks' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-			 6 => sprintf( __( 'Talk published. <a href="%s">View Talk</a>', 'wordcamp-talks' ), esc_url( wct_talks_get_talk_permalink( $post ) ) ),
+			 4 => __( 'Talk Proposal updated.', 'wordcamp-talks'),
+			 5 => isset( $_GET['revision'] ) ? sprintf( __( 'Talk Proposal restored to revision from %s', 'wordcamp-talks' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+			 6 => sprintf( __( 'Talk Proposal submitted. <a href="%s">View Talk</a>', 'wordcamp-talks' ), esc_url( wct_talks_get_talk_permalink( $post ) ) ),
 			 7 => __( 'Talk saved.', 'wordcamp-talks' ),
-			 8 => sprintf( __( 'Talk submitted. <a target="_blank" href="%s">Preview Talk</a>', 'wordcamp-talks' ), esc_url( add_query_arg( 'preview', 'true', wct_talks_get_talk_permalink( $post  ) ) ) ),
+			 8 => sprintf( __( 'Talk Proposal submitted. <a target="_blank" href="%s">Preview Talk Proposal</a>', 'wordcamp-talks' ), esc_url( add_query_arg( 'preview', 'true', wct_talks_get_talk_permalink( $post  ) ) ) ),
 			 9 => sprintf(
-			 		__( 'Talk scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview Talk</a>', 'wordcamp-talks' ),
+			 		__( 'Talk Proposal scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview Talk Proposal</a>', 'wordcamp-talks' ),
 					date_i18n( _x( 'M j, Y @ G:i', 'Talk Publish box date format', 'wordcamp-talks' ), strtotime( $post->post_date ) ),
 					esc_url( wct_talks_get_talk_permalink( $post ) )
 				),
-			10 => sprintf( __( 'Talk draft updated. <a target="_blank" href="%s">Preview Talk</a>', 'wordcamp-talks' ), esc_url( add_query_arg( 'preview', 'true', wct_talks_get_talk_permalink( $post ) ) ) ),
+			10 => sprintf( __( 'Talk Proposal draft updated. <a target="_blank" href="%s">Preview Talk Proposal</a>', 'wordcamp-talks' ), esc_url( add_query_arg( 'preview', 'true', wct_talks_get_talk_permalink( $post ) ) ) ),
 		) );
 
 		return $messages;
@@ -459,11 +459,11 @@ class WordCamp_Talks_Admin {
 		}
 
 		$bulk_messages[ $this->post_type ] = apply_filters( 'wct_admin_updated_bulk_messages', array(
-			'updated'   => _n( '%s talk updated.', '%s talks updated.', $bulk_counts['updated'], 'wordcamp-talks' ),
-			'locked'    => _n( '%s talk not updated; somebody is editing it.', '%s talks not updated; somebody is editing them.', $bulk_counts['locked'], 'wordcamp-talks' ),
-			'deleted'   => _n( '%s talk permanently deleted.', '%s talks permanently deleted.', $bulk_counts['deleted'], 'wordcamp-talks' ),
-			'trashed'   => _n( '%s talk moved to the Trash.', '%s talks moved to the Trash.', $bulk_counts['trashed'], 'wordcamp-talks' ),
-			'untrashed' => _n( '%s talk restored from the Trash.', '%s talks restored from the Trash.', $bulk_counts['untrashed'], 'wordcamp-talks' ),
+			'updated'   => _n( '%s Talk Proposal updated.', '%s Talk Proposals updated.', $bulk_counts['updated'], 'wordcamp-talks' ),
+			'locked'    => _n( '%s Talk Proposal not updated; somebody is editing it.', '%s Talk Proposals not updated; somebody is editing them.', $bulk_counts['locked'], 'wordcamp-talks' ),
+			'deleted'   => _n( '%s Talk Proposal permanently deleted.', '%s Talk Proposals permanently deleted.', $bulk_counts['deleted'], 'wordcamp-talks' ),
+			'trashed'   => _n( '%s Talk Proposal moved to the Trash.', '%s Talk Proposals moved to the Trash.', $bulk_counts['trashed'], 'wordcamp-talks' ),
+			'untrashed' => _n( '%s Talk Proposal restored from the Trash.', '%s Talk Proposals restored from the Trash.', $bulk_counts['untrashed'], 'wordcamp-talks' ),
 		) );
 
 		return $bulk_messages;
@@ -537,7 +537,7 @@ class WordCamp_Talks_Admin {
 
 		$csv_link = sprintf( '<a href="%s" id="wordcamp-talks-csv" title="%s"><span class="dashicons dashicons-media-spreadsheet"></span></a>',
 			esc_url( wp_nonce_url( $csv_url, 'wct_is_csv' ) ),
-			esc_attr__( 'Download all talks in a csv spreadsheet', 'wordcamp-talks' )
+			esc_attr__( 'Download all Talk Proposals in a csv spreadsheet', 'wordcamp-talks' )
 		);
 
 		return array_merge( $talk_views, array(
@@ -1258,7 +1258,7 @@ class WordCamp_Talks_Admin {
 							array(
 								esc_html__( 'Edit takes you to the editing screen for that talk. You can also reach that screen by clicking on the talk title.', 'wordcamp-talks' ),
 								esc_html__( 'Trash removes the talk from this list and places it in the trash, from which you can permanently delete it.', 'wordcamp-talks' ),
-								esc_html__( 'View opens the talk in the WordCamp Talks&#39;s part of your site.', 'wordcamp-talks' ),
+								esc_html__( 'View opens the talk in the WordCamp Talk Proposals&#39 part of your site.', 'wordcamp-talks' ),
 							),
 						),
 					),
@@ -1289,7 +1289,7 @@ class WordCamp_Talks_Admin {
 						'id'      => 'talks-overview',
 						'title'   => esc_html__( 'Overview', 'wordcamp-talks' ),
 						'content' => array(
-							esc_html__( 'The title field and the big Talk Editing Area are fixed in place, but you can reposition all the other boxes using drag and drop. You can also minimize or expand them by clicking the title bar of each box. Use the Screen Options tab to hide/show boxes.', 'wordcamp-talks' ),
+							esc_html__( 'The title field and the big Talk Proposal Editing Area are fixed in place, but you can reposition all the other boxes using drag and drop. You can also minimize or expand them by clicking the title bar of each box. Use the Screen Options tab to hide/show boxes.', 'wordcamp-talks' ),
 						),
 					),
 				),
@@ -1300,7 +1300,7 @@ class WordCamp_Talks_Admin {
 						'id'      => 'settings-overview',
 						'title'   => esc_html__( 'Overview', 'wordcamp-talks' ),
 						'content' => array(
-							esc_html__( 'This is the place where you can customize the behavior of WordCamp Talks.', 'wordcamp-talks' ),
+							esc_html__( 'This is the place where you can customize the behavior of WordCamp Talk Proposals.', 'wordcamp-talks' ),
 							esc_html__( 'Please see the additional help tabs for more information on each individual section.', 'wordcamp-talks' ),
 						),
 					),
@@ -1309,7 +1309,7 @@ class WordCamp_Talks_Admin {
 						'title'   => esc_html__( 'Main Settings', 'wordcamp-talks' ),
 						'content' => array(
 							sprintf( esc_html__( 'Just before the first option, you will find the link to the main archive page of the plugin. If you wish, you can use it to define a new custom link %1$smenu item%2$s.', 'wordcamp-talks' ), $nav_menu_page, '</a>' ),
-							sprintf( esc_html__( 'If you do so, do not forget to update the link in case you change your permalink settings. Another possible option is to use the %1$sWordCamp Talks Navigation%2$s widget in one of your dynamic sidebars.', 'wordcamp-talks' ), $widgets_page, '</a>' ),
+							sprintf( esc_html__( 'If you do so, do not forget to update the link in case you change your permalink settings. Another possible option is to use the %1$sWordCamp Talk Proposals Navigation%2$s widget in one of your dynamic sidebars.', 'wordcamp-talks' ), $widgets_page, '</a>' ),
 							esc_html__( 'In the Main Settings you have a number of options:', 'wordcamp-talks' ),
 							array(
 								esc_html__( 'Closing date: define the date when the call for speakers will end.', 'wordcamp-talks' ),
@@ -1326,9 +1326,9 @@ class WordCamp_Talks_Admin {
 						'id'      => 'talks-category-overview',
 						'title'   => esc_html__( 'Overview', 'wordcamp-talks' ),
 						'content' => array(
-							esc_html__( 'Talk Categories can only be created by the site Administrator. To add a new talk category please fill the following fields:', 'wordcamp-talks' ),
+							esc_html__( 'Talk Proposal Categories can only be created by the site Administrator. To add a new talk category please fill the following fields:', 'wordcamp-talks' ),
 							array(
-								esc_html__( 'Name - The name is how it appears on your site (in the category checkboxes of the talk front end submit form, in the talk&#39;s footer part or in the title of WordCamp Talks&#39;s category archive pages).', 'wordcamp-talks' ),
+								esc_html__( 'Name - The name is how it appears on your site (in the category checkboxes of the talk front end submit form, in the talk&#39;s footer part or in the title of WordCamp Talk Proposals&#39 category archive pages).', 'wordcamp-talks' ),
 								esc_html__( 'Slug - The &#34;slug&#34; is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.', 'wordcamp-talks' ),
 								esc_html__( 'Description - If you set a description for your category, it will be displayed over the list of talks in the category archive page.', 'wordcamp-talks' ),
 							),
@@ -1343,9 +1343,9 @@ class WordCamp_Talks_Admin {
 						'id'      => 'talks-tag-overview',
 						'title'   => esc_html__( 'Overview', 'wordcamp-talks' ),
 						'content' => array(
-							esc_html__( 'Talk Tags can be created by any logged in user of the site from the talk front end submit form. From this screen, to add a new talk tag please fill the following fields:', 'wordcamp-talks' ),
+							esc_html__( 'Talk Proposal Tags can be created by any logged in user of the site from the talk front end submit form. From this screen, to add a new talk tag please fill the following fields:', 'wordcamp-talks' ),
 							array(
-								esc_html__( 'Name - The name is how it appears on your site (in the tag cloud, in the tags editor of the talk front end submit form, in the talk&#39;s footer part or in the title of WordCamp Talks&#39;s tag archive pages).', 'wordcamp-talks' ),
+								esc_html__( 'Name - The name is how it appears on your site (in the tag cloud, in the tags editor of the talk front end submit form, in the talk&#39;s footer part or in the title of WordCamp Talk Proposals&#39; tag archive pages).', 'wordcamp-talks' ),
 								esc_html__( 'Slug - The &#34;slug&#34; is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.', 'wordcamp-talks' ),
 								esc_html__( 'Description - If you set a description for your tag, it will be displayed over the list of talks in the tag archive page.', 'wordcamp-talks' ),
 							),
@@ -1452,7 +1452,7 @@ class WordCamp_Talks_Admin {
 		return array(
 			'workflow' => array(
 				'id'            => 'wct_workflow_metabox',
-				'title'         => __( 'Talk status', 'wordcamp-talks' ),
+				'title'         => __( 'Talk Proposal status', 'wordcamp-talks' ),
 				'callback'      => array( $this, 'workflow_do_metabox' ),
 				'context'       => 'side',
 				'priority'      => 'high',

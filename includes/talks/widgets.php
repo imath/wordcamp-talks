@@ -36,8 +36,8 @@ if ( ! class_exists( 'WordCamp_Talk_Widget_Categories' ) ) :
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		$widget_ops = array( 'description' => __( 'A list of Talk categories', 'wordcamp-talks' ) );
-		WP_Widget::__construct( false, $name = __( 'WordCamp Talks categories', 'wordcamp-talks' ), $widget_ops );
+		$widget_ops = array( 'description' => __( 'A list of Talk Proposal categories', 'wordcamp-talks' ) );
+		WP_Widget::__construct( false, $name = __( 'WordCamp Talk Proposal categories', 'wordcamp-talks' ), $widget_ops );
 	}
 
 	/**
