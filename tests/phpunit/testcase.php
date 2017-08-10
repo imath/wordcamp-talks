@@ -2,13 +2,13 @@
 
 class WordCampTalkProposalsTest extends WP_UnitTestCase {
 
-	function setUp() {
+	public function setUp() {
 		parent::setUp();
 
 		$this->set_permalink_structure( '/%postname%/' );
 	}
 
-	function tearDown() {
+	public function tearDown() {
 		parent::tearDown();
 
 		$this->set_permalink_structure( '' );

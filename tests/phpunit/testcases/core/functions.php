@@ -1,6 +1,7 @@
 <?php
 
 class WordCampTalkProposalsTest_Functions extends WordCampTalkProposalsTest {
+
 	public function test_wct_register_post_type() {
 		$registered_post_types = get_post_types();
 
@@ -53,5 +54,16 @@ class WordCampTalkProposalsTest_Functions extends WordCampTalkProposalsTest {
 		$rewrite = $GLOBALS['wp_rewrite'];
 
 		$this->assertTrue( isset( $rewrite->rules[sprintf( '%s/([^/]+)/?$', wct_action_slug() )] ) );
+	}
+
+	public function test_wct_add_permastructs() {
+		$rewrite = $GLOBALS['wp_rewrite'];
+
+		$this->assertTrue( isset( $rewrite->extra_permastructs[ wct_user_rewrite_id() ] ) );
+		$this->assertTrue( isset( $rewrite->extra_permastructs[ wct_action_rewrite_id() ] ) );
+	}
+
+	public function test_wct_load_textdomain() {
+		$this->assertTrue( is_textdomain_loaded( 'wordcamp-talks' ) );
 	}
 }
