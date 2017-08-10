@@ -1312,7 +1312,6 @@ class WordCamp_Talks_Admin {
 							sprintf( esc_html__( 'If you do so, do not forget to update the link in case you change your permalink settings. Another possible option is to use the %1$sWordCamp Talks Navigation%2$s widget in one of your dynamic sidebars.', 'wordcamp-talks' ), $widgets_page, '</a>' ),
 							esc_html__( 'In the Main Settings you have a number of options:', 'wordcamp-talks' ),
 							array(
-								esc_html__( 'WordCamp Talks archive page: you can customize the title of this page. It will appear on every WordCamp Talks&#39;s page, except the single talk one.', 'wordcamp-talks' ),
 								esc_html__( 'Closing date: define the date when the call for speakers will end.', 'wordcamp-talks' ),
 								esc_html__( 'Rating stars hover captions: fill a comma separated list of captions to replace default one. On front end, the number of rating stars will depend on the number of comma separated captions you defined in this setting.', 'wordcamp-talks' ),
 								esc_html__( 'Embed profile: if this setting is active, your users profiles will include a sharing button to let your visitors copy the embed code and share it into their website.', 'wordcamp-talks' ),
