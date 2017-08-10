@@ -78,14 +78,6 @@ function wct_get_settings_fields() {
 				'args'              => array()
 			),
 
-			// Are user's talks to rate profile area enabled ?
-			'_wc_talks_to_rate_disabled' => array(
-				'title'             => __( 'Disable the &quot;To rate&quot; tab for the user\'s profile', 'wordcamp-talks' ),
-				'callback'          => 'wct_to_rate_profile_setting_callback',
-				'sanitize_callback' => 'absint',
-				'args'              => array()
-			),
-
 			// Private fields (not shown on front-end)
 			'_wc_talks_private_fields_list' => array(
 				'title'             => __( 'Private user profile fields', 'wordcamp-talks' ),
@@ -133,8 +125,7 @@ function wct_get_settings_fields() {
 	 */
 	if ( wct_is_rating_disabled() ) {
 		unset(
-			$setting_fields['wc_talks_settings_core']['_wc_talks_hint_list'],
-			$setting_fields['wc_talks_settings_core']['_wc_talks_to_rate_disabled']
+			$setting_fields['wc_talks_settings_core']['_wc_talks_hint_list']
 		);
 	}
 
@@ -381,22 +372,6 @@ function wct_hint_list_setting_callback() {
 
 	<label for="_wc_talks_hint_list"><?php esc_html_e( 'You can customize the hover captions used for stars by using a comma separated list of captions', 'wordcamp-talks' ); ?></label>
 	<input name="_wc_talks_hint_list" id="_wc_talks_hint_list" type="text" class="large-text code" value="<?php echo esc_attr( $csv_hinlist ); ?>" />
-
-	<?php
-}
-
-/**
- * User's Profile "To Rate" tab disabling callback
- *
- * @since 1.0.0
- *
- * @return string HTML output
- */
-function wct_to_rate_profile_setting_callback() {
-	?>
-
-	<input name="_wc_talks_to_rate_disabled" id="_wc_talks_to_rate_disabled" type="checkbox" value="1" <?php checked( wct_is_user_to_rate_disabled() ); ?> />
-	<label for="_wc_talks_to_rate_disabled"><?php esc_html_e( '&quot;To rate&quot; user\'s profile tab.', 'wordcamp-talks' ); ?></label>
 
 	<?php
 }

@@ -42,7 +42,6 @@ function wct_get_default_options() {
 		'_wc_talks_public_fields_list'  => array(),
 		'_wc_talks_signup_fields'       => array(),
 		'_wc_talks_embed_profile'       => 0,
-		'_wc_talks_to_rate_disabled'    => 0,
 		'_wc_talks_autolog_enabled'     => 0,
 	);
 
@@ -223,27 +222,6 @@ function wct_user_autolog_after_signup( $default = 0 ) {
  */
 function wct_is_embed_profile( $default = 0 ) {
 	return (int) apply_filters( 'wct_is_embed_profile', get_option( '_wc_talks_embed_profile', $default ) );
-}
-
-/**
- * Is user's to rate profile tab disabled ?
- *
- * @since 1.0.0
- *
- * @param  int        $default        default value
- * @param  null|bool  $rates_disabled Whether built-in rating system is disabled or not.
- * @return bool                       True if disabled, false otherwise.
- */
-function wct_is_user_to_rate_disabled( $default = 0, $rates_disabled = null ) {
-	if ( is_null( $rates_disabled ) ) {
-		$rates_disabled = wct_is_rating_disabled();
-	}
-
-	if ( $rates_disabled ) {
-		return true;
-	}
-
-	return (bool) apply_filters( 'wct_is_user_to_rate_disabled', (bool) get_option( '_wc_talks_to_rate_disabled', $default ) );
 }
 
 /**

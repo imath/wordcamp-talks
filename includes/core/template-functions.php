@@ -151,7 +151,7 @@ function wct_parse_query( $posts_query = null ) {
 				)
 			) );
 
-		} else if ( ! empty( $user_to_rate ) && ! wct_is_user_to_rate_disabled() ) {
+		} else if ( ! empty( $user_to_rate ) ) {
 			// We are viewing user's ideas to rate
 			wct_set_global( 'is_user_to_rate', true );
 

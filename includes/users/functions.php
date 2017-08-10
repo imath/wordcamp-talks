@@ -697,21 +697,20 @@ function wct_users_get_profile_nav_items( $user_id = 0, $username ='', $nofilter
 	}
 
 	if ( ! wct_is_rating_disabled() && user_can( $user_id, 'rate_talks' ) ) {
-		$nav_items['rates'] = array(
-			'title'   => __( 'Rated', 'wordcamp-talks' ),
-			'url'     => wct_users_get_user_rates_url( $user_id, $username ),
-			'current' => wct_is_user_profile_rates(),
-			'slug'    => wct_user_rates_slug(),
-		);
-
-		if ( ! wct_is_user_to_rate_disabled( 0, false ) ) {
-			$nav_items['to_rate'] = array(
+		$nav_items = array_merge( $nav_items, array( 
+			'rates' => array(
+				'title'   => __( 'Rated', 'wordcamp-talks' ),
+				'url'     => wct_users_get_user_rates_url( $user_id, $username ),
+				'current' => wct_is_user_profile_rates(),
+				'slug'    => wct_user_rates_slug(),
+			),
+			'to_rate' => array(
 				'title'   => __( 'To rate', 'wordcamp-talks' ),
 				'url'     => wct_users_get_user_to_rate_url( $user_id, $username ),
 				'current' => wct_is_user_profile_to_rate(),
 				'slug'    => 'to-rate',
-			);
-		}
+			),
+		) );
 	}
 
 	if ( false === $nofilter ) {
