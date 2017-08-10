@@ -9,3 +9,6 @@ function _bootstrap_wct() {
 tests_add_filter( 'muplugins_loaded', '_bootstrap_wct' );
 
 require getenv( 'WP_DEVELOP_DIR' ) . '/tests/phpunit/includes/bootstrap.php';
+
+// include our testcase
+require( 'testcase.php' );
