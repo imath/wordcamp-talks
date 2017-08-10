@@ -1,6 +1,6 @@
 <?php
 
-class WordCampTalkProposalsTest_Functions extends WordCampTalkProposalsTest {
+class WordCampTalkProposalsTest_Core_Functions extends WordCampTalkProposalsTest {
 
 	public function test_wct_register_post_type() {
 		$registered_post_types = get_post_types();
@@ -65,5 +65,18 @@ class WordCampTalkProposalsTest_Functions extends WordCampTalkProposalsTest {
 
 	public function test_wct_load_textdomain() {
 		$this->assertTrue( is_textdomain_loaded( 'wordcamp-talks' ) );
+	}
+
+	public function test_wct_register_scripts() {
+		$registered = wp_scripts()->registered;
+		wct_set_global( 'is_talks', true );
+
+		do_action( 'wp_enqueue_scripts' );
+
+		$this->assertTrue( isset( wp_scripts()->registered['jquery-raty'] ) );
+		$this->assertTrue( isset( wp_scripts()->registered['tagging'] ) );
+
+		wct_set_global( 'is_talks', false );
+		wp_scripts()->registered = $registered;
 	}
 }
