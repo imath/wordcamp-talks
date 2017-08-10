@@ -62,14 +62,6 @@ function wct_get_settings_fields() {
 
 		'wc_talks_settings_core' => array(
 
-			// Post Type Archive page title
-			'_wc_talks_archive_title' => array(
-				'title'             => __( 'Archive page title', 'wordcamp-talks' ),
-				'callback'          => 'wct_archive_title_setting_callback',
-				'sanitize_callback' => 'sanitize_text_field',
-				'args'              => array()
-			),
-
 			// Closing date for the call for speakers.
 			'_wc_talks_closing_date' => array(
 				'title'             => __( 'Closing date', 'wordcamp-talks' ),
@@ -350,24 +342,6 @@ function wct_settings_core_section_callback() {
 
 	<p><?php _e( 'Customize WordCamp Talks features', 'wordcamp-talks' ); ?></p>
 	<p class="description"><?php printf( esc_html__( 'Url of WordCamp Talks&#39;s main page: %s', 'wordcamp-talks' ), '<code>' . wct_get_root_url() .'</code>' ) ;?></p>
-
-	<?php
-}
-
-/**
- * Archive page title callback
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
- *
- * @since 1.0.0
- *
- * @return string HTML output
- */
-function wct_archive_title_setting_callback() {
-	?>
-
-	<input name="_wc_talks_archive_title" id="_wc_talks_archive_title" type="text" class="regular-text code" value="<?php echo esc_attr( wct_archive_title() ); ?>" />
 
 	<?php
 }

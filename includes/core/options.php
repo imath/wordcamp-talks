@@ -36,7 +36,6 @@ function wct_get_default_options() {
 		'_wc_talks_version' => wct_get_version(),
 
 		/** Core Settings **********************************************************/
-		'_wc_talks_archive_title'       => 'Talks',
 		'_wc_talks_closing_date'        => '',
 		'_wc_talks_hint_list'           => array(),
 		'_wc_talks_private_fields_list' => array(),
@@ -86,13 +85,13 @@ function wct_add_options() {
  * @package WordCamp Talks
  * @subpackage core/options
  *
- * @since 1.0.0
+ * @since  1.0.0
+ * @since  1.1.0 The option has been removed.
  *
- * @param  string $default default value
- * @return string          default value or customized one
+ * @return string Title of the Talks archive page
  */
-function wct_archive_title( $default = 'Talks' ) {
-	return apply_filters( 'wct_archive_title', get_option( '_wc_talks_archive_title', $default ) );
+function wct_archive_title() {
+	return _x( 'Talk Proposals', 'Title of the main archive page.', 'wordcamp-talks' );
 }
 
 /**
