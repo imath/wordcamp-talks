@@ -142,19 +142,14 @@ function wct_get_settings_fields() {
 	if ( wct_is_rating_disabled() ) {
 		unset(
 			$setting_fields['wc_talks_settings_core']['_wc_talks_hint_list'],
-			$setting_fields['wc_talks_settings_core']['_wc_talks_to_rate_disabled'],
-			$setting_fields['wc_talks_settings_rewrite']['_wc_talks_user_rates_slug'],
-			$setting_fields['wc_talks_settings_rewrite']['_wc_talks_user_to_rate_slug']
+			$setting_fields['wc_talks_settings_core']['_wc_talks_to_rate_disabled']
 		);
-	} elseif ( wct_is_user_to_rate_disabled( 0, false ) ) {
-		unset( $setting_fields['wc_talks_settings_rewrite']['_wc_talks_user_to_rate_slug'] );
 	}
 
 	if ( ! wct_is_signup_allowed_for_current_blog() ) {
 		unset(
 			$setting_fields['wc_talks_settings_core']['_wc_talks_signup_fields'],
-			$setting_fields['wc_talks_settings_core']['_wc_talks_autolog_enabled'],
-			$setting_fields['wc_talks_settings_rewrite']['_wc_talks_signup_slug']
+			$setting_fields['wc_talks_settings_core']['_wc_talks_autolog_enabled']
 		);
 	}
 
