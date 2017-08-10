@@ -255,7 +255,7 @@ function wct_post_type_register_args() {
 		'exclude_from_search' => true,
 		'show_in_nav_menus'   => false,
 		'show_in_admin_bar'   => wct_user_can( 'wct_talks_admin' ),
-		'menu_icon'           => 'dashicons-megaphone',
+		'menu_icon'           => 'dashicons-controls-volumeon',
 		'supports'            => array( 'title', 'editor', 'author', 'comments', 'revisions' ),
 		'taxonomies'          => array(
 			wct_get_category(),
@@ -1413,7 +1413,7 @@ function wct_adminbar_menu( $wp_admin_bar = null ){
 		$wp_admin_bar->add_menu( array(
 			'parent' => 'appearance',
 			'id'     => 'wc_talks',
-			'title'  => _x( 'WordCamp Talks', 'Admin bar menu', 'wordcamp-talks' ),
+			'title'  => _x( 'WordCamp Talk Proposals', 'Admin bar menu', 'wordcamp-talks' ),
 			'href'   => $menu_url,
 		) );
 	}

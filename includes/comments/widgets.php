@@ -32,7 +32,7 @@ if ( ! class_exists( 'WordCamp_Talk_Recent_Comments' ) ) :
 	 */
 	public function __construct() {
 		$widget_ops = array( 'classname' => 'widget_talks_recent_comments', 'description' => __( 'Latest comments about talks', 'wordcamp-talks' ) );
-		WP_Widget::__construct( 'talk-recent-comments', $name = __( 'WordCamp Talks latest comments', 'wordcamp-talks' ), $widget_ops );
+		WP_Widget::__construct( 'talk-recent-comments', $name = __( 'WordCamp Talk Proposals latest comments', 'wordcamp-talks' ), $widget_ops );
 
 		$this->alt_option_name = 'widget_talks_recent_comments';
 

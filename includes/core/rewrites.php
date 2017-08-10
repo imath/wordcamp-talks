@@ -175,7 +175,7 @@ function wct_cpage_rewrite_id( $default = 'cpaged' ) {
  */
 function wct_root_slug() {
 	/* Translators: This string is used in urls, make sure to avoid using special chars */
-	return _x( 'talks', 'default root slug', 'wordcamp-talks' );
+	return _x( 'talk-proposals', 'default root slug', 'wordcamp-talks' );
 }
 
 /**
