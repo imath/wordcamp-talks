@@ -1,7 +1,6 @@
 <?php
 
 class WordCampTalkProposalsTest extends WP_UnitTestCase {
-
 	public function setUp() {
 		parent::setUp();
 
@@ -11,11 +10,11 @@ class WordCampTalkProposalsTest extends WP_UnitTestCase {
 	}
 
 	public function tearDown() {
-		parent::tearDown();
-
 		$this->set_permalink_structure( '' );
 
 		remove_filter( 'query_vars', array( $this, 'wct_query_vars' ), 10, 1 );
+
+		parent::tearDown();
 	}
 
 	/**

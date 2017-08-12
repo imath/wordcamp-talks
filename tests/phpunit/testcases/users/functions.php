@@ -15,9 +15,9 @@ class WordCampTalkProposalsTest_Users_Functions extends WordCampTalkProposalsTes
 	}
 
 	public function tearDown() {
-		parent::tearDown();
-
 		wp_set_current_user( $this->current_user_id );
+
+		parent::tearDown();
 	}
 
 	public function test_wct_users_current_user_id() {

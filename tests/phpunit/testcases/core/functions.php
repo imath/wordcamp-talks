@@ -79,4 +79,14 @@ class WordCampTalkProposalsTest_Core_Functions extends WordCampTalkProposalsTest
 		wct_set_global( 'is_talks', false );
 		wp_scripts()->registered = $registered;
 	}
+
+	public function test_wct_set_user_feedback() {
+		$feedback_url = add_query_arg( 'success', 1, wct_get_root_url() );
+
+		$this->go_to( $feedback_url );
+
+		do_action( 'template_redirect' );
+
+		$this->assertTrue( isset( wct_get_global( 'feedback' )['success'] ) );
+	}
 }
