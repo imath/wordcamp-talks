@@ -38,7 +38,7 @@ class WordCamp_Talk_Widget_Top_Contributors extends WP_Widget {
 		parent::__construct( false, $name = __( 'WordCamp Talks Tops', 'wordcamp-talks' ), $widget_ops );
 
 		if ( is_active_widget( false, false, $this->id_base ) && ! is_admin() && ! is_network_admin() ) {
-			add_action( 'wct_enqueue_scripts', 'wct_enqueue_style' );
+			add_action( 'wp_enqueue_scripts', 'wct_enqueue_style' );
 		}
 	}
 

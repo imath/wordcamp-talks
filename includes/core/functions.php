@@ -88,6 +88,38 @@ function wct_get_plugin_url() {
 }
 
 /**
+ * Register JavaScripts into WP_Scripts.
+ *
+ * @since 1.1.0
+ */
+function wct_register_scripts() {
+	if ( ! wct_is_talks() ) {
+		return;
+	}
+
+	// Register jquery Raty
+	wp_register_script(
+		'jquery-raty',
+		wct_get_js_script( 'jquery.raty' ),
+		array( 'jquery' ),
+		'2.7.0.imath',
+		true
+	);
+
+	// Register tagging
+	wp_register_script(
+		'tagging',
+		wct_get_js_script( 'tagging' ),
+		array( 'jquery' ),
+		'1.3.1',
+		true
+	);
+
+	wct_enqueue_style();
+}
+add_action( 'wp_enqueue_scripts', 'wct_register_scripts', 1 );
+
+/**
  * Get plugin's javascript url
  *
  * That's where the plugin's js file are all available

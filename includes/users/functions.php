@@ -657,6 +657,7 @@ function wct_users_enqueue_scripts() {
 	wp_enqueue_script ( 'wc-talks-script', wct_get_js_script( 'script' ), array( 'jquery' ), wct_get_version(), true );
 	wp_localize_script( 'wc-talks-script', 'wct_vars', apply_filters( 'wct_users_current_profile_script', $js_vars ) );
 }
+add_action( 'wp_enqueue_scripts', 'wct_users_enqueue_scripts', 14 );
 
 /**
  * Builds user's profile nav

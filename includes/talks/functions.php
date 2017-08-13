@@ -864,6 +864,7 @@ function wct_talks_enqueue_scripts() {
 	wp_enqueue_script ( 'wc-talks-script', wct_get_js_script( 'script' ), $deps, wct_get_version(), true );
 	wp_localize_script( 'wc-talks-script', 'wct_vars', $js_vars );
 }
+add_action( 'wp_enqueue_scripts', 'wct_talks_enqueue_scripts', 12 );
 
 /**
  * Builds the loop query arguments

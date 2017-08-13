@@ -45,7 +45,6 @@ final class WordCamp_Talks {
 	private function __construct() {
 		$this->setup_globals();
 		$this->includes();
-		$this->setup_hooks();
 	}
 
 	/**
@@ -189,21 +188,6 @@ final class WordCamp_Talks {
 	}
 
 	/**
-	 * Setups some hooks to register post type stuff, scripts, set
-	 * the current user.
-	 *
-	 * @package WordCamp Talks
-	 *
-	 * @since 1.0.0
-	 *
-	 * @uses  add_action() to perform custom actions at key points
-	 */
-	private function setup_hooks() {
-		// Main hooks
-		add_action( 'wct_enqueue_scripts',        array( $this, 'enqueue_scripts'        ), 1 );
-	}
-
-	/**
 	 * Setups a globalized var for a later use
 	 *
 	 * @package WordCamp Talks
@@ -237,28 +221,6 @@ final class WordCamp_Talks {
 		}
 
 		return $this->{$var};
-	}
-
-	/**
-	 * Registers external javascript libraries to be linked later
-	 * using the wp_enqueue_script() function, & adds the plugin's stylesheet
-	 *
-	 * @package WordCamp Talks
-	 *
-	 * @since 1.0.0
-	 */
-	public function enqueue_scripts() {
-		if ( ! wct_is_talks() ) {
-			return;
-		}
-
-		// Register jquery Raty
-		wp_register_script( 'jquery-raty', wct_get_js_script( 'jquery.raty' ), array( 'jquery' ), '2.7.0.imath', true );
-
-		// Register tagging
-		wp_register_script( 'tagging', wct_get_js_script( 'tagging' ), array( 'jquery' ), '1.3.1', true );
-
-		wct_enqueue_style();
 	}
 }
 

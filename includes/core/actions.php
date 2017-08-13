@@ -15,7 +15,6 @@ add_action( 'plugins_loaded',           'wct_loaded',                 11 );
 add_action( 'init',                     'wct_init',                   9  );
 add_action( 'parse_query',              'wct_parse_query',            2  );
 add_action( 'widgets_init',             'wct_widgets_init',           10 );
-add_action( 'wp_enqueue_scripts',       'wct_enqueue_scripts',        10 );
 add_action( 'enqueue_embed_scripts',    'wct_enqueue_embed_scripts',  10 );
 add_action( 'wp_head',                  'wct_head',                   10 );
 add_action( 'wp_footer',                'wct_footer',                 10 );
@@ -33,10 +32,6 @@ add_action( 'wct_loaded', array( 'WordCamp_Talks_Comments', 'start' ) );
 add_action( 'wp_set_comment_status', 'wct_comments_clean_count_cache', 10, 2 );
 add_action( 'delete_comment',        'wct_comments_clean_count_cache', 10, 1 );
 add_action( 'wp_insert_comment',     'wct_comments_clean_count_cache', 10, 2 );
-
-// Actions hooking enqueue_scripts (tags, rates UI)
-add_action( 'wct_enqueue_scripts', 'wct_talks_enqueue_scripts', 10 );
-add_action( 'wct_enqueue_scripts', 'wct_users_enqueue_scripts', 11 );
 
 // Template actions
 add_action( 'wct_talk_header',             'wct_users_the_user_talk_rating', 1 );
@@ -121,20 +116,6 @@ function wct_loaded() {
  */
 function wct_widgets_init() {
 	do_action( 'wct_widgets_init' );
-}
-
-/**
- * Fire the 'wct_enqueue_scripts' action.
- *
- * Used to register and enqueue custom scripts
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_enqueue_scripts() {
-	do_action( 'wct_enqueue_scripts' );
 }
 
 /**
