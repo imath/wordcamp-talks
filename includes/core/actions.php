@@ -50,11 +50,8 @@ add_action( 'wct_added_rate',   'wct_clean_rates_count_cache', 10, 2 );
 add_action( 'wct_deleted_rate', 'wct_clean_rates_count_cache', 10, 2 );
 
 // Admin
-add_action( 'admin_init', 'wct_admin_init', 10 );
 add_action( 'admin_head', 'wct_admin_head', 10 );
-
-add_action( 'wct_admin_init', 'wct_admin_register_settings', 11 );
-add_action( 'wct_admin_init', 'wct_maybe_upgrade',          999 );
+add_action( 'admin_init', 'wct_maybe_upgrade', 999 );
 
 // Widgets
 add_action( 'wct_widgets_init', array( 'WordCamp_Talks_Navig',                  'register_widget' ), 10 );
@@ -244,18 +241,6 @@ function wct_actions() {
 /** Admin *********************************************************************/
 
 /**
- * Fire the 'wct_admin_init' action.
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_admin_init() {
-	do_action( 'wct_admin_init' );
-}
-
-/**
  * Fire the 'wct_admin_head' action.
  *
  * @package WordCamp Talks
@@ -265,16 +250,4 @@ function wct_admin_init() {
  */
 function wct_admin_head() {
 	do_action( 'wct_admin_head' );
-}
-
-/**
- * Fire the 'wct_admin_register_settings' action.
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_admin_register_settings() {
-	do_action( 'wct_admin_register_settings' );
 }

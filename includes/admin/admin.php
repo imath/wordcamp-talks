@@ -147,7 +147,7 @@ class WordCamp_Talks_Admin {
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 
 		// Register the settings
-		add_action( 'wct_admin_register_settings', array( $this, 'register_admin_settings' ) );
+		add_action( 'admin_init', array( $this, 'register_admin_settings' ) );
 
 		add_action( 'load-settings_page_wc_talks', array( $this, 'settings_load' ) );
 
@@ -1752,4 +1752,4 @@ class WordCamp_Talks_Admin {
 
 endif;
 
-add_action( 'wct_loaded', array( 'WordCamp_Talks_Admin', 'start' ), 5 );
+add_action( 'plugins_loaded', array( 'WordCamp_Talks_Admin', 'start' ), 10 );

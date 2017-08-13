@@ -182,8 +182,8 @@ final class WordCamp_Talks {
 		/**
 		 * On multisite configs, load current blog's specific functions
 		 */
-		if ( is_multisite() && file_exists( WP_PLUGIN_DIR . '/wct-' . get_current_blog_id() . '- functions.php' ) ) {
-			require WP_PLUGIN_DIR . '/wct-' . get_current_blog_id() . '- functions.php';
+		if ( is_multisite() && file_exists( WP_PLUGIN_DIR . '/wct-' . get_current_blog_id() . '-functions.php' ) ) {
+			require WP_PLUGIN_DIR . '/wct-' . get_current_blog_id() . '-functions.php';
 		}
 	}
 
