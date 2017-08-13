@@ -476,6 +476,76 @@ function wct_tag_register_labels() {
 	) );
 }
 
+/**
+ * Register WordCamp Talk Proposals objects.
+ *
+ * @since  1.1.0
+ */
+function wct_register_objects() {
+
+	/** Post Types ***********************************************************/
+
+	// Register the Talks post-type
+	register_post_type(
+		wct_get_post_type(),
+		array_merge(
+			wct_post_type_register_labels(),
+			wct_post_type_register_args()
+		)
+	);
+
+	// Register a private utility post type
+	register_post_type(
+		'wct_utility',
+		array(
+			'label'              => 'wct_utility',
+			'public'             => false,
+			'publicly_queryable' => false,
+			'show_ui'            => false,
+			'show_in_menu'       => false,
+			'show_in_nav_menus'  => false,
+			'query_var'          => false,
+			'rewrite'            => false,
+			'has_archive'        => false,
+			'hierarchical'       => true,
+		)
+	);
+
+	/** Post Statuses ********************************************************/
+
+	foreach ( (array) wct_get_statuses() as $name => $status ) {
+		register_post_status( $name, array(
+			'label'                     => $status,
+			'private'                   => true,
+			'show_in_admin_all_list'    => true,
+			'show_in_admin_status_list' => false,
+		) );
+	}
+
+	/** Taxonomies ************************************************************/
+
+	// Register the category taxonomy
+	register_taxonomy(
+		wct_get_category(),
+		wct_get_post_type(),
+		array_merge(
+			wct_category_register_labels(),
+			wct_category_register_args()
+		)
+	);
+
+	// Register the tag taxonomy
+	register_taxonomy(
+		wct_get_tag(),
+		wct_get_post_type(),
+		array_merge(
+			wct_tag_register_labels(),
+			wct_tag_register_args()
+		)
+	);
+}
+add_action( 'init', 'wct_register_objects', 15 );
+
 /** Urls **********************************************************************/
 
 /**
