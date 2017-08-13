@@ -16,6 +16,16 @@ defined( 'ABSPATH' ) || exit;
 /** Set/Get User Datas **********************************************************/
 
 /**
+ * Sets up the current user.
+ *
+ * @since 1.1.0
+ */
+function wct_users_set_current_user() {
+	wct()->current_user = wp_get_current_user();
+}
+add_action( 'set_current_user', 'wct_users_set_current_user', 10 );
+
+/**
  * Gets current user ID
  *
  * @package WordCamp Talks
@@ -697,7 +707,7 @@ function wct_users_get_profile_nav_items( $user_id = 0, $username ='', $nofilter
 	}
 
 	if ( ! wct_is_rating_disabled() && user_can( $user_id, 'rate_talks' ) ) {
-		$nav_items = array_merge( $nav_items, array( 
+		$nav_items = array_merge( $nav_items, array(
 			'rates' => array(
 				'title'   => __( 'Rated', 'wordcamp-talks' ),
 				'url'     => wct_users_get_user_rates_url( $user_id, $username ),

@@ -200,19 +200,7 @@ final class WordCamp_Talks {
 	 */
 	private function setup_hooks() {
 		// Main hooks
-		add_action( 'wct_setup_current_user',     array( $this, 'setup_current_user'     )    );
 		add_action( 'wct_enqueue_scripts',        array( $this, 'enqueue_scripts'        ), 1 );
-	}
-
-	/**
-	 * Setups the loggedin user
-	 *
-	 * @package WordCamp Talks
-	 *
-	 * @since 1.0.0
-	 */
-	public function setup_current_user() {
-		$this->current_user = wp_get_current_user();
 	}
 
 	/**
