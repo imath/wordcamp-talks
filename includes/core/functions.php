@@ -203,6 +203,56 @@ function wct_get_global( $var_key = '' ) {
 	return wct()->get_global( $var_key );
 }
 
+/**
+ * Load Plugin's translations.
+ *
+ * @since 1.1.0
+ */
+function wct_load_textdomain() {
+	$wct = wct();
+
+	// Use regular locale
+	if ( ! function_exists( 'get_user_locale' ) ) {
+		// Look in global /wp-content/languages/plugins/
+		load_plugin_textdomain( $wct->domain );
+
+	// Use user locale instead
+	} else {
+		/**
+		 * Filter here to edit this plugin locale.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $value  The locale.
+		 * @param string $domain The plugin domain.
+		 */
+		$locale = apply_filters( 'wordcamp_talks_locale', get_user_locale(), $wct->domain );
+
+		if ( empty( $locale ) ) {
+			$mofile = $wct->domain . '.mo';
+		} else {
+			$mofile = sprintf( '%1$s-%2$s.mo', $wct->domain, $locale );
+		}
+
+		/**
+		 * Filter here to use another dir than the regular plugin lang dir
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $value  Absolute path to the mo file.
+		 * @param string $mofile The mofile file name.
+		 * @param string $locale The current locale.
+		 */
+		$mofile_dir = apply_filters( 'wordcamp_talks_lang_dir', $wct->lang_dir . $mofile, $mofile, $locale );
+
+		// Try to see if a GlotPress generated language is available first.
+		if ( ! load_textdomain( $wct->domain, WP_LANG_DIR . '/plugins/' . $mofile ) ) {
+			load_textdomain( $wct->domain, $mofile_dir );
+		}
+	}
+}
+add_action( 'plugins_loaded', 'wct_load_textdomain', 7 );
+
 /** Post Type (talks) *********************************************************/
 
 /**

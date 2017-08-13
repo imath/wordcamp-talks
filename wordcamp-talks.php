@@ -200,7 +200,6 @@ final class WordCamp_Talks {
 	 */
 	private function setup_hooks() {
 		// Main hooks
-		add_action( 'wct_loaded',                 array( $this, 'load_textdomain'        ), 0 );
 		add_action( 'wct_setup_current_user',     array( $this, 'setup_current_user'     )    );
 		add_action( 'wct_enqueue_scripts',        array( $this, 'enqueue_scripts'        ), 1 );
 	}
@@ -272,55 +271,6 @@ final class WordCamp_Talks {
 		wp_register_script( 'tagging', wct_get_js_script( 'tagging' ), array( 'jquery' ), '1.3.1', true );
 
 		wct_enqueue_style();
-	}
-
-	/**
-	 * Loads the translation files
-	 *
-	 * @package WordCamp Talks
-	 *
-	 * @since 1.0.0
-	 */
-	public function load_textdomain() {
-		// Use regular locale
-		if ( ! function_exists( 'get_user_locale' ) ) {
-			// Look in global /wp-content/languages/plugins/
-			load_plugin_textdomain( $this->domain );
-
-		// Use user locale instead
-		} else {
-			/**
-			 * Filter here to edit this plugin locale.
-			 *
-			 * @since 1.0.0
-			 *
-			 * @param string $value  The locale.
-			 * @param string $domain The plugin domain.
-			 */
-			$locale = apply_filters( 'wordcamp_talks_locale', get_user_locale(), $this->domain );
-
-			if ( empty( $locale ) ) {
-				$mofile = $this->domain . '.mo';
-			} else {
-				$mofile = sprintf( '%1$s-%2$s.mo', $this->domain, $locale );
-			}
-
-			/**
-			 * Filter here to use another dir than the regular plugin lang dir
-			 *
-			 * @since 1.0.0
-			 *
-			 * @param string $value  Absolute path to the mo file.
-			 * @param string $mofile The mofile file name.
-			 * @param string $locale The current locale.
-			 */
-			$mofile_dir = apply_filters( 'wordcamp_talks_lang_dir', $this->lang_dir . $mofile, $mofile, $locale );
-
-			// Try to see if a GlotPress generated language is available first.
-			if ( ! load_textdomain( $this->domain, WP_LANG_DIR . '/plugins/' . $mofile ) ) {
-				load_textdomain( $this->domain, $mofile_dir );
-			}
-		}
 	}
 }
 
