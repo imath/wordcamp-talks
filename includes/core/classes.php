@@ -23,18 +23,20 @@ if ( ! class_exists( 'WordCamp_Talks_Rewrites' ) ) :
  */
 class WordCamp_Talks_Rewrites {
 
-
 	/**
 	 * Constructor
 	 *
 	 * @package WordCamp Talks
 	 * @subpackage core/classes
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
+	 * @since  1.1.0 the hooks method has been replaced with the register one.
 	 */
 	public function __construct() {
 		$this->setup_globals();
-		$this->hooks();
+
+		// Wait untill init to register
+		add_action( 'init', array( $this, 'register' ), 16 );
 	}
 
 	/**
@@ -88,22 +90,19 @@ class WordCamp_Talks_Rewrites {
 	}
 
 	/**
-	 * Hooks to load the register methods
+	 * Register Tags, Rules and Permastructs;
 	 *
-	 * @package WordCamp Talks
-	 * @subpackage core/classes
-	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
-	private function hooks() {
+	public function register() {
 		// Register rewrite tags.
-		add_action( 'wct_add_rewrite_tags',  array( $this, 'add_rewrite_tags' )  );
+		$this->add_rewrite_tags();
 
 		// Register the rewrite rules
-		add_action( 'wct_add_rewrite_rules', array( $this, 'add_rewrite_rules' ) );
+		$this->add_rewrite_rules();
 
 		// Register the permastructs
-		add_action( 'wct_add_permastructs',  array( $this, 'add_permastructs' )  );
+		$this->add_permastructs();
 	}
 
 	/**
@@ -207,6 +206,7 @@ class WordCamp_Talks_Rewrites {
 }
 
 endif;
+add_action( 'plugins_loaded', array( 'WordCamp_Talks_Rewrites', 'start' ), 11 );
 
 /** Template Loader class *****************************************************/
 
