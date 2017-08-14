@@ -30,8 +30,8 @@ defined( 'ABSPATH' ) || exit;
 function wct_talks_get_status() {
 	$status = array( 'publish' );
 
-	if ( wct_user_can( 'read_private_talks' ) ) {
-		$status[] = 'private';
+	if ( is_user_logged_in() ) {
+		$status = array_merge( $status, array_keys( wct_get_statuses() ) );
 	}
 
 	/**
@@ -119,7 +119,7 @@ function wct_talks_get_talks( $args = array() ) {
 	$r = wp_parse_args( $get_args, $default );
 
 	if ( empty( $talks ) ) {
-		$talks = WordCamp_Talks_Talk::get( $r );
+		$talks = WordCamp_Talks_Talks_Proposal::get( $r );
 
 		// Reset will need to be done at the end of the loop
 		wct_set_global( 'needs_reset', true );
@@ -136,32 +136,32 @@ function wct_talks_get_talks( $args = array() ) {
 }
 
 /**
- * Gets an talk with additional metas and terms
+ * Gets a talk with additional metas and terms
  *
  * @package WordCamp Talks
  * @subpackage talks/functions
  *
  * @since 1.0.0
  *
- * @param  string $id_or_name ID or post_name of the talk to get
- * @return WordCamp_Talks_Talk  the talk object
+ * @param  string                        $id_or_name ID or post_name of the talk to get.
+ * @return WordCamp_Talks_Talks_Proposal             The talk object.
  */
 function wct_talks_get_talk( $id_or_name = '' ) {
 	if ( empty( $id_or_name ) ) {
 		return false;
 	}
 
-	$talk = new WordCamp_Talks_Talk( $id_or_name );
+	$talk = new WordCamp_Talks_Talks_Proposal( $id_or_name );
 
 	/**
-	 * @param  WordCamp_Talks_Talk $talk the talk object
-	 * @param  mixed               $id_or_name  the ID or slug of the talk
+	 * @param  WordCamp_Talks_Talks_Proposal $talk        The talk object.
+	 * @param  mixed                         $id_or_name  The ID or slug of the talk.
 	 */
 	return apply_filters( 'wct_talks_get_talk', $talk, $id_or_name );
 }
 
 /**
- * Gets an talk by its slug without additional metas or terms
+ * Gets a talk by its slug without additional metas or terms
  *
  * @package WordCamp Talks
  * @subpackage talks/functions
@@ -176,7 +176,7 @@ function wct_talks_get_talk_by_name( $name = '' ) {
 		return false;
 	}
 
-	$talk = WordCamp_Talks_Talk::get_talk_by_name( $name );
+	$talk = WordCamp_Talks_Talks_Proposal::get_talk_by_name( $name );
 
 	/**
 	 * @param  WP_Post $talk the talk object
@@ -223,7 +223,7 @@ function wct_talks_register_meta( $meta_key = '', $meta_args = '' ) {
 }
 
 /**
- * Gets an talk meta data
+ * Gets a talk meta data
  *
  * @package WordCamp Talks
  * @subpackage talks/functions
@@ -273,7 +273,7 @@ function wct_talks_get_meta( $talk_id = 0, $meta_key = '', $single = true ) {
 }
 
 /**
- * Updates an talk meta data
+ * Updates a talk meta data
  *
  * @package WordCamp Talks
  * @subpackage talks/functions
@@ -321,7 +321,7 @@ function wct_talks_update_meta( $talk_id = 0, $meta_key = '', $meta_value = '' )
 }
 
 /**
- * Deletes an talk meta data
+ * Deletes a talk meta data
  *
  * @package WordCamp Talks
  * @subpackage talks/functions
@@ -378,7 +378,7 @@ function wct_talks_get_terms( $taxonomy = '', $args = array() ) {
 }
 
 /**
- * Sets the post status of an talk
+ * Sets the post status of a talk
  *
  * @package WordCamp Talks
  * @subpackage talks/functions
@@ -390,14 +390,14 @@ function wct_talks_get_terms( $taxonomy = '', $args = array() ) {
  */
 function wct_talks_insert_status( $talkarr = array() ) {
 	/**
-	 * @param  string  the default post status for an talk
+	 * @param  string  the default post status for a talk
 	 * @param  array   $talkarr  the arguments of the talk to save
 	 */
 	return apply_filters( 'wct_talks_insert_status', wct_default_talk_status(), $talkarr );
 }
 
 /**
- * Checks if another user is editing an talk, if not
+ * Checks if another user is editing a talk, if not
  * locks the talk for the current user.
  *
  * @package WordCamp Talks
@@ -430,7 +430,7 @@ function wct_talks_lock_talk( $talk_id = 0 ) {
 }
 
 /**
- * HeartBeat callback to check if an talk is being edited by an admin
+ * HeartBeat callback to check if a talk is being edited by an admin
  *
  * @package WordCamp Talks
  * @subpackage talks/functions
@@ -453,7 +453,7 @@ function wct_talks_heartbeat_check_locked( $response = array(), $data = array() 
 }
 
 /**
- * Checks if a user can edit an talk
+ * Checks if a user can edit a talk
  *
  * A user can edit the talk if :
  * - he is the author
@@ -551,7 +551,7 @@ function wct_talks_can_edit( $talk = null ) {
 }
 
 /**
- * Saves an talk entry in posts table
+ * Saves a talk entry in posts table
  *
  * @package WordCamp Talks
  * @subpackage talks/functions
@@ -577,10 +577,10 @@ function wct_talks_save_talk( $talkarr = array() ) {
 
 	if ( ! empty( $talkarr['_the_id'] ) ) {
 		/**
-		 * Passing the id attribute to WordCamp_Talks_Talk will get the previous version of the talk
+		 * Passing the id attribute to WordCamp_Talks_Talks_Proposal will get the previous version of the talk
 		 * In this case we don't need to set the author or status
 		 */
-		$talk = new WordCamp_Talks_Talk( absint( $talkarr['_the_id'] ) );
+		$talk = new WordCamp_Talks_Talks_Proposal( absint( $talkarr['_the_id'] ) );
 
 		if ( ! empty( $talk->id ) ) {
 			$update = true;
@@ -601,7 +601,7 @@ function wct_talks_save_talk( $talkarr = array() ) {
 		}
 
 	} else {
-		$talk         = new WordCamp_Talks_Talk();
+		$talk         = new WordCamp_Talks_Talks_Proposal();
 		$talk->author = wct_users_current_user_id();
 		$talk->status = wct_talks_insert_status( $talkarr );
 	}
@@ -738,7 +738,7 @@ function wct_talks_get_talk_permalink( $talk = null ) {
 }
 
 /**
- * Gets the comment link of an talk
+ * Gets the comment link of a talk
  *
  * @package WordCamp Talks
  * @subpackage talks/functions
@@ -746,7 +746,7 @@ function wct_talks_get_talk_permalink( $talk = null ) {
  * @since 1.0.0
  *
  * @param  WP_Post $talk the talk object or its ID
- * @return string          the comment link of an talk
+ * @return string          the comment link of a talk
  */
 function wct_talks_get_talk_comments_link( $talk = null ) {
 	$comments_link = wct_talks_get_talk_permalink( $talk ) . '#comments';
@@ -1042,15 +1042,6 @@ function wct_talks_post_talk() {
 			'info'    => array(),
 		);
 
-		if ( ! empty( $posted['_the_thumbnail'] ) ) {
-			$thumbnail = reset( $posted['_the_thumbnail'] );
-			$sideload = WordCamp_Talks_Talks_Thumbnail::start( $thumbnail, $id );
-
-			if ( is_wp_error( $sideload->result ) ) {
-				$feedback_message['error'][] = 6;
-			}
-		}
-
 		if ( 'pending' == $talk->post_status ) {
 			// Build pending message.
 			$feedback_message['info'][] = 2;
@@ -1066,7 +1057,7 @@ function wct_talks_post_talk() {
 }
 
 /**
- * Handles updating an talk
+ * Handles updating a talk
  *
  * @package WordCamp Talks
  * @subpackage talks/functions
@@ -1140,37 +1131,6 @@ function wct_talks_update_talk() {
 		'success' => array(),
 		'info'    => array(),
 	);
-
-	// Take care of the featured image
-	$thumbnail_id = (int) get_post_thumbnail_id( $talk );
-
-	if ( ! empty( $updated['_the_thumbnail'] ) ) {
-		$thumbnail_src = key( $updated['_the_thumbnail'] );
-		$thumbnail     = reset( $updated['_the_thumbnail'] );
-
-		// Update the Featured image
-		if ( ! is_numeric( $thumbnail ) || $thumbnail_id !== (int) $thumbnail ) {
-			if ( is_numeric( $thumbnail ) ) {
-				// validate the attachment
-				if ( ! get_post( $thumbnail ) ) {
-					$feedback_message['error'][] = 6;
-				// Set the new Featured image
-				} else {
-					set_post_thumbnail( $talk->ID, $thumbnail );
-				}
-			} else {
-				$sideload = WordCamp_Talks_Talks_Thumbnail::start( $thumbnail_src, $talk->ID );
-
-				if ( is_wp_error( $sideload->result ) ) {
-					$feedback_message['error'][] = 6;
-				}
-			}
-		}
-
-	// Delete the featured image
-	} elseif ( ! empty( $thumbnail_id ) ) {
-		delete_post_thumbnail( $talk );
-	}
 
 	// Update the talk
 	$id = wct_talks_save_talk( $updated );

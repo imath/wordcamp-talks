@@ -1,27 +1,22 @@
 <?php
 /**
- * WordCamp Talks Widgets.
- *
- * Core Widgets
+ * WordCamp Talks Core Widgets.
  *
  * @package WordCamp Talks
  * @subpackage core/widgets
  */
-
 
 // Exit if accessed directly
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'WordCamp_Talks_Navig' ) ) :
+if ( ! class_exists( 'WordCamp_Talks_Core_Navig' ) ) :
 /**
  * Navigation Menu widget class
  *
- * @package WordCamp Talks
- * @subpackage core/widgets
- *
  * @since 1.0.0
+ * @since 1.1.0 Name changed from WordCamp_Talks_Navig to WordCamp_Talks_Core_Navig.
  */
- class WordCamp_Talks_Navig extends WP_Widget {
+ class WordCamp_Talks_Core_Navig extends WP_Widget {
 
  	/**
 	 * Constructor
@@ -32,8 +27,8 @@ if ( ! class_exists( 'WordCamp_Talks_Navig' ) ) :
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		$widget_ops = array( 'description' => __( 'Add WordCamp Talks&#39;s nav to your sidebar.', 'wordcamp-talks' ) );
-		parent::__construct( false, $name = __( 'WordCamp Talks Nav', 'wordcamp-talks' ), $widget_ops );
+		$widget_ops = array( 'description' => __( 'Adds the Talk Proposals\' nav to your sidebar.', 'wordcamp-talks' ) );
+		parent::__construct( false, $name = __( 'Talk Proposals nav', 'wordcamp-talks' ), $widget_ops );
 
 		// We need to wait for the talks post type to be registered
 		add_action( 'wct_init', array( $this, 'set_available_nav_items' ) );
@@ -48,7 +43,7 @@ if ( ! class_exists( 'WordCamp_Talks_Navig' ) ) :
 	 * @since 1.0.0
 	 */
 	public static function register_widget() {
-		register_widget( 'WordCamp_Talks_Navig' );
+		register_widget( 'WordCamp_Talks_Core_Navig' );
 	}
 
 	/**
@@ -66,7 +61,7 @@ if ( ! class_exists( 'WordCamp_Talks_Navig' ) ) :
 			),
 			'addnew'       => array(
 				'url'  => wct_get_form_url(),
-				'name' => __( 'New talk', 'wordcamp-talks' )
+				'name' => __( 'New Talk Proposal', 'wordcamp-talks' )
 			)
 		);
 

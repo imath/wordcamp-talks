@@ -168,7 +168,7 @@ msgstr ""
 #: includes/admin/admin.php:1257
 msgid ""
 "Hovering over a row in the talks list will display action links that allow "
-"you to manage an talk. You can perform the following actions:"
+"you to manage a talk. You can perform the following actions:"
 msgstr ""
 
 #: includes/admin/admin.php:1259
@@ -1046,7 +1046,7 @@ msgstr ""
 #: includes/talks/tags.php:1374
 msgid ""
 "Please <a href=\"%s\" title=\"Log in\">log in</a> or <a href=\"%s\" title="
-"\"Sign up\">register</a> to this site to submit an talk."
+"\"Sign up\">register</a> to this site to submit a talk."
 msgstr ""
 
 #: includes/talks/tags.php:1380

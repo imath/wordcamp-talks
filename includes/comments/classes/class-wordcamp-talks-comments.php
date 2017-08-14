@@ -11,30 +11,19 @@
 // Exit if accessed directly
 defined( 'ABSPATH' ) || exit;
 
-/** Disjoin comments **********************************************************/
-
 if ( ! class_exists( 'WordCamp_Talks_Comments' ) ) :
 
 /**
  * Main Comments class
  *
- * Actions and filters organized in a class
- * Its main goal is to disjoin comments about talks
- * from regular comments (other post types)
- *
- * @package WordCamp Talks
- * @subpackage comments/classes
+ * Actions and filters organized in a class. Its main goal is to disjoin comments
+ * about talks from regular comments (other post types).
  *
  * @since 1.0.0
  */
 class WordCamp_Talks_Comments {
-
-
 	/**
 	 * Constructor
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/classes
 	 *
 	 * @since 1.0.0
 	 */
@@ -44,10 +33,7 @@ class WordCamp_Talks_Comments {
 	}
 
 	/**
-	 * Starts the class
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/classes
+	 * Starts the class.
 	 *
 	 * @since 1.0.0
 	 */
@@ -62,10 +48,7 @@ class WordCamp_Talks_Comments {
 	}
 
 	/**
-	 * Setups some globals
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/classes
+	 * Setups some globals.
 	 *
 	 * @since 1.0.0
 	 */
@@ -77,11 +60,7 @@ class WordCamp_Talks_Comments {
 	}
 
 	/**
-	 * Hooks to disjoin comments about talks
-	 * & to filter the email notifications
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/classes
+	 * Hooks to disjoin comments about talks & to filter the email notifications.
 	 *
 	 * @since 1.0.0
 	 */
@@ -102,11 +81,7 @@ class WordCamp_Talks_Comments {
 	}
 
 	/**
-	 * Makes sure the post type is set to talks when in Talks
-	 * administration screens
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/classes
+	 * Makes sure the post type is set to talks when in Talks administration screens.
 	 *
 	 * @since 1.0.0
 	 *
@@ -124,10 +99,7 @@ class WordCamp_Talks_Comments {
 	}
 
 	/**
-	 * Catches the "all comments" count
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/classes
+	 * Catches the "all comments" count.
 	 *
 	 * @since 1.0.0
 	 */
@@ -143,12 +115,10 @@ class WordCamp_Talks_Comments {
 	}
 
 	/**
-	 * Adjust the comment count
-	 * by counting comments about talks
-	 * by removing this count to the global comment count
+	 * Adjust the comment count:
 	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/classes
+	 * - by counting comments about talks,
+	 * - by removing this count to the global comment count.
 	 *
 	 * @since 1.0.0
 	 *
@@ -183,11 +153,8 @@ class WordCamp_Talks_Comments {
 	}
 
 	/**
-	 * Adds a dummy argument to comments widget in order
-	 * to be able to remove a bit later comments about talks
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/classes
+	 * Adds a dummy argument to comments widget in order to be able to remove a bit later
+	 * comments about talks.
 	 *
 	 * @since 1.0.0
 	 */
@@ -203,10 +170,7 @@ class WordCamp_Talks_Comments {
 	}
 
 	/**
-	 * Make sure talks comments are not mixed with posts ones
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/classes
+	 * Make sure talks comments are not mixed with posts ones.
 	 *
 	 * @since 1.0.0
 	 *
@@ -236,10 +200,7 @@ class WordCamp_Talks_Comments {
 	}
 
 	/**
-	 * Removes recipients from the moderation notification if needed
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/classes
+	 * Removes recipients from the moderation notification if needed.
 	 *
 	 * @since 1.0.0
 	 *
@@ -256,12 +217,12 @@ class WordCamp_Talks_Comments {
 		// Get the comment
 		$comment = wct_comments_get_comment( $comment_id );
 
-		// check if it relates to an talk
+		// check if it relates to a talk
 		if ( empty( $comment->comment_post_type ) || wct_get_post_type() != $comment->comment_post_type ) {
 			return $emails;
 		}
 
-		// We have a comment about an talk, catch it for a later use
+		// We have a comment about a talk, catch it for a later use
 		$this->{'comment_post_' . $comment_id} = $comment;
 
 		/**
@@ -280,10 +241,7 @@ class WordCamp_Talks_Comments {
 	}
 
 	/**
-	 * Edit the new comment notification message
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/classes
+	 * Edit the new comment notification message.
 	 *
 	 * @since 1.0.0
 	 *
@@ -301,12 +259,12 @@ class WordCamp_Talks_Comments {
 		if ( ! empty( $this->{'comment_post_' . $comment_id} ) ) {
 			$comment = $this->{'comment_post_' . $comment_id};
 
-		// Get the comment to check if it relates to an talk
+		// Get the comment to check if it relates to a talk
 		} else {
 			$comment = wct_comments_get_comment( $comment_id );
 		}
 
-		// Return if no user_id or the comment does not relate to an talk
+		// Return if no user_id or the comment does not relate to a talk
 		if ( empty( $comment->comment_post_author ) || empty( $comment->comment_post_type ) || wct_get_post_type() != $comment->comment_post_type ) {
 			return $message;
 		}
@@ -348,10 +306,7 @@ class WordCamp_Talks_Comments {
 	}
 
 	/**
-	 * Build pieces to remove comments about talks
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/classes
+	 * Build pieces to remove comments about talks.
 	 *
 	 * @since 1.0.0
 	 *
@@ -373,10 +328,7 @@ class WordCamp_Talks_Comments {
 	}
 
 	/**
-	 * Count user's comments about talks
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/classes
+	 * Count user's comments about talks.
 	 *
 	 * @since 1.0.0
 	 *
@@ -412,10 +364,7 @@ class WordCamp_Talks_Comments {
 	}
 
 	/**
-	 * Count comments about talks
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/classes
+	 * Count comments about talks.
 	 *
 	 * @since 1.0.0
 	 *
@@ -510,137 +459,6 @@ class WordCamp_Talks_Comments {
 		}
 
 		return $emails;
-	}
-}
-
-endif;
-
-/** Comment Loop **************************************************************/
-
-if ( ! class_exists( 'WordCamp_Talks_Loop_Comments' ) ) :
-
-/**
- * Comments loop Class.
- *
- * @package WordCamp Talks
- * @subpackage comment/tags
- *
- * @since 1.0.0
- */
-class WordCamp_Talks_Loop_Comments extends WordCamp_Talks_Loop {
-
-	/**
-	 * Constructor
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comment/tags
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param  array $args the loop args
-	 */
-	public function __construct( $args = array() ) {
-
-		$default = array(
-			'post_status' => 'publish',
-			'status'      => 'approve',
-			'user_id'     => 0,
-			'number'      => wct_talks_per_page(),
-		);
-
-		// All post status if user is viewing his profile
-		if ( wct_is_current_user_profile() || current_user_can( 'read_private_talks' ) ) {
-			$default['post_status'] = '';
-		}
-
-		//Merge default with requested
-		$r = wp_parse_args( $args, $default );
-
-		// Set which pagination page
-		if ( get_query_var( wct_cpage_rewrite_id() ) ) {
-			$paged = get_query_var( wct_cpage_rewrite_id() );
-
-		} else if ( ! empty( $_GET[ wct_cpage_rewrite_id() ] ) ) {
-			$paged = absint( $_GET[ wct_cpage_rewrite_id() ] );
-
-		} else if ( ! empty( $r['page'] ) ) {
-			$paged = absint( $r['page'] );
-
-		// Set default page (first page)
-		} else {
-			$paged = 1;
-		}
-
-		$comments_args = array(
-			'post_type'   => wct_get_post_type(),
-			'post_status' => $r['post_status'],
-			'status'      => $r['status'],
-			'user_id'     => (int) $r['user_id'],
-			'number'      => (int) $r['number'],
-			'offset'      => intval( ( $paged - 1 ) * $r['number'] ),
-			'page'        => (int) $paged,
-		);
-
-		if ( ! empty( $comments_args ) ) {
-			foreach ( $comments_args as $key => $value ) {
-				$this->{$key} = $value;
-			}
-		} else {
-			return false;
-		}
-
-		if ( empty( $this->user_id ) ) {
-			$comment_count = 0;
-		} else {
-			$comment_count = wct_comments_count_comments( $this->user_id );
-		}
-
-		// Get the comments
-		$comments = get_comments( $comments_args );
-
-		if ( ! empty( $comments ) ) {
-			$post_ids = wp_list_pluck( $comments, 'comment_post_ID' );
-
-			// Get all posts in the object cache.
-			$posts = get_posts( array( 'include' => $post_ids, 'post_type' => wct_get_post_type() ) );
-
-			// Reset will need to be done at the end of the loop
-			wct_set_global( 'needs_reset', true );
-
-			// Build a new post array indexed by post ID
-			$p = array();
-			foreach ( $posts as $post ) {
-				$p[ $post->ID ] = $post;
-			}
-
-			// Attach the corresponding post to each comment
-			foreach ( $comments as $key => $comment ) {
-				if ( ! empty( $p[ $comment->comment_post_ID ] ) ) {
-					$comments[ $key ]->talk = $p[ $comment->comment_post_ID ];
-				}
-			}
-		}
-
-		$params = array(
-			'plugin_prefix'    => 'wct',
-			'item_name'        => 'comment',
-			'item_name_plural' => 'comments',
-			'items'            => $comments,
-			'total_item_count' => $comment_count,
-			'page'             => $this->page,
-			'per_page'         => $this->number,
-		);
-
-		$paginate_args = array();
-
-		if ( ! wct_is_pretty_links() ) {
-			$paginate_args['base'] = add_query_arg( wct_cpage_rewrite_id(), '%#%' );
-		} else {
-			$paginate_args['base']   = trailingslashit( wct_users_get_displayed_profile_url( 'comments') ) . '%_%';
-			$paginate_args['format'] = wct_cpage_slug() . '/%#%/';
-		}
-
-		parent::start( $params, apply_filters( 'wct_comments_pagination_args', $paginate_args ) );
 	}
 }
 

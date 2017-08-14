@@ -3,7 +3,7 @@
  * WordCamp Talks Admin.
  *
  * @package WordCamp Talks
- * @subpackage admin/admin
+ * @subpackage admin/classes
  *
  * @since 1.0.0
  */
@@ -110,9 +110,6 @@ class WordCamp_Talks_Admin {
 	 * @since 1.0.0
 	 */
 	private function includes() {
-		// Separate Talks comments moderation from the other post types.
-		require $this->includes_dir . 'comments.php';
-
 		// Settings
 		require $this->includes_dir . 'settings.php';
 	}
@@ -740,9 +737,9 @@ class WordCamp_Talks_Admin {
 	 */
 	public function column_headers( $columns = array() ) {
 		$new_columns = array(
-			'workflow_state' => _x( 'Status', 'talks admin workflow status column header', 'wordcamp-talks' ),
-			'cat_talks'      => _x( 'Categories',        'talks admin category column header',        'wordcamp-talks' ),
-			'tag_talks'      => _x( 'Tags',              'talks admin tag column header',             'wordcamp-talks' ),
+			'workflow_state' => _x( 'Status',     'talks admin workflow status column header', 'wordcamp-talks' ),
+			'cat_talks'      => _x( 'Categories', 'talks admin category column header',        'wordcamp-talks' ),
+			'tag_talks'      => _x( 'Tags',       'talks admin tag column header',             'wordcamp-talks' ),
 		);
 
 		if ( ! wct_is_rating_disabled() ) {
@@ -1254,7 +1251,7 @@ class WordCamp_Talks_Admin {
 						'id'      => 'edit-talks-row-actions',
 						'title'   => esc_html__( 'Actions', 'wordcamp-talks' ),
 						'content' => array(
-							esc_html__( 'Hovering over a row in the talks list will display action links that allow you to manage an talk. You can perform the following actions:', 'wordcamp-talks' ),
+							esc_html__( 'Hovering over a row in the talks list will display action links that allow you to manage a talk. You can perform the following actions:', 'wordcamp-talks' ),
 							array(
 								esc_html__( 'Edit takes you to the editing screen for that talk. You can also reach that screen by clicking on the talk title.', 'wordcamp-talks' ),
 								esc_html__( 'Trash removes the talk from this list and places it in the trash, from which you can permanently delete it.', 'wordcamp-talks' ),
@@ -1751,5 +1748,3 @@ class WordCamp_Talks_Admin {
 }
 
 endif;
-
-add_action( 'plugins_loaded', array( 'WordCamp_Talks_Admin', 'start' ), 10 );

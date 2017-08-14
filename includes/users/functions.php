@@ -752,7 +752,7 @@ function wct_users_get_profile_nav_items( $user_id = 0, $username ='', $nofilter
  * of view, you can remove_action( 'deleted_user', 'wct_users_delete_user_data', 10, 1 )
  * and use a different way of managing this. I advise you to make sure talks are reattributed to
  * an existing user ID. About rates, there's no problem if a non existing user ID is in the rating
- * list of an talk.
+ * list of a talk.
  *
  * @package WordCamp Talks
  * @subpackage users/functions
@@ -869,7 +869,13 @@ function wct_users_talks_count_by_user( $max = 10 ) {
 	$sql = array();
 	$sql['select']  = "SELECT p.post_author, COUNT(p.ID) as count_talks, u.user_nicename";
 	$sql['from']    = "FROM {$wpdb->posts} p LEFT JOIN {$wpdb->users} u ON ( p.post_author = u.ID )";
-	$sql['where']   = get_posts_by_author_sql( wct_get_post_type(), true, null, true );
+
+	if ( current_user_can( 'view_other_profiles' ) ) {
+		$sql['where']   = str_replace( 'post_status = \'private\'', 'post_status IN( "' . join( array_keys( wct_get_statuses() ), '","' ) . '")', get_posts_by_author_sql( wct_get_post_type(), true, null, false ) );
+	} else {
+		$sql['where']   = get_posts_by_author_sql( wct_get_post_type(), true, null, true );
+	}
+
 	$sql['groupby'] = 'GROUP BY p.post_author';
 	$sql['order']   = 'ORDER BY count_talks DESC';
 	$sql['limit']   = $wpdb->prepare( 'LIMIT 0, %d', $max );

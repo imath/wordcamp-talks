@@ -5,11 +5,11 @@
  * Mainly inspired by bbPress way of dealing with rewrites
  * @see bbpress main class.
  *
- * Most of the job is done in the class WordCamp_Talks_Rewrites
+ * Most of the job is done in the class WordCamp_Talks_Core_Rewrites
  * @see  core/classes
  *
  * @package WordCamp Talks
- * @subpackage core/rewrites
+ * @subpackage core
  *
  * @since 1.0.0
  */
@@ -19,9 +19,6 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Checks whether the current site is using default permalink settings or custom one
- *
- * @package WordCamp Talks
- * @subpackage core/rewrites
  *
  * @since 1.0.0
  *
@@ -34,9 +31,6 @@ function wct_is_pretty_links() {
 
 /**
  * Get the slug used for paginated requests
- *
- * @package WordCamp Talks
- * @subpackage core/rewrites
  *
  * @since 1.0.0
  *
@@ -56,9 +50,6 @@ function wct_paged_slug() {
 /**
  * Rewrite id for the user's profile
  *
- * @package WordCamp Talks
- * @subpackage core/rewrites
- *
  * @since 1.0.0
  *
  * @return string The user's profile rewrite id
@@ -69,9 +60,6 @@ function wct_user_rewrite_id( $default = 'is_user' ) {
 
 /**
  * Rewrite id for the user's rates
- *
- * @package WordCamp Talks
- * @subpackage core/rewrites
  *
  * @since 1.0.0
  *
@@ -84,9 +72,6 @@ function wct_user_rates_rewrite_id( $default = 'is_rates' ) {
 /**
  * Rewrite id for the user's to rate
  *
- * @package WordCamp Talks
- * @subpackage core/rewrites
- *
  * @since 1.0.0
  *
  * @return string The user's to rate rewrite id
@@ -97,9 +82,6 @@ function wct_user_to_rate_rewrite_id( $default = 'is_to_rate' ) {
 
 /**
  * Rewrite id for the user's talks
- *
- * @package WordCamp Talks
- * @subpackage core/rewrites
  *
  * @since 1.0.0
  *
@@ -112,9 +94,6 @@ function wct_user_talks_rewrite_id( $default = 'is_user_talks' ) {
 /**
  * Rewrite id for the user's comments
  *
- * @package WordCamp Talks
- * @subpackage core/rewrites
- *
  * @since 1.0.0
  *
  * @return string The user's comments rewrite id
@@ -125,9 +104,6 @@ function wct_user_comments_rewrite_id( $default = 'is_comments' ) {
 
 /**
  * Rewrite id for actions
- *
- * @package WordCamp Talks
- * @subpackage core/rewrites
  *
  * @since 1.0.0
  *
@@ -140,9 +116,6 @@ function wct_action_rewrite_id( $default = 'is_action' ) {
 /**
  * Rewrite id for searching in talks
  *
- * @package WordCamp Talks
- * @subpackage core/rewrites
- *
  * @since 1.0.0
  *
  * @return string Searching in talks rewrite id
@@ -153,9 +126,6 @@ function wct_search_rewrite_id( $default = 'talk_search' ) {
 
 /**
  * Rewrite id for user's comments pagination
- *
- * @package WordCamp Talks
- * @subpackage core/rewrites
  *
  * @since 1.0.0
  *
@@ -170,7 +140,7 @@ function wct_cpage_rewrite_id( $default = 'cpaged' ) {
  *
  * @since  1.0.0
  * @since  1.1.0 Not filerable & not an option anymore.
- * 
+ *
  * @return string the root slug
  */
 function wct_root_slug() {
@@ -195,7 +165,7 @@ function wct_talk_slug() {
 	 *
 	 * @since  1.0.0
 	 * @since  1.1.0 Not filerable & not an option anymore.
-	 * 
+	 *
 	 * @return string The talk slug
 	 */
 	function wct_get_talk_slug() {
@@ -409,9 +379,6 @@ function wct_cpage_slug() {
 /**
  * Delete a blogs rewrite rules, so that they are automatically rebuilt on
  * the subsequent page load.
- *
- * @package WordCamp Talks
- * @subpackage core/rewrites
  *
  * @since 1.0.0
  */

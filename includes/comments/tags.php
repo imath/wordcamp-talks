@@ -41,7 +41,7 @@ function wct_comments_has_comments( $args = array() ) {
 	) );
 
 	// Get the WordCamp Talks
-	$comment_query_loop = new WordCamp_Talks_Loop_Comments( array(
+	$comment_query_loop = new WordCamp_Talks_Comments_Loop( array(
 		'user_id' => (int) $r['user_id'],
 		'status'  => $r['status'],
 		'number'  => (int) $r['number'],
@@ -61,7 +61,7 @@ function wct_comments_has_comments( $args = array() ) {
  * @subpackage comments/tags
  *
  * @since 1.0.0
- * 
+ *
  * @return array List of comments.
  */
 function wct_comments_the_comments() {
@@ -75,7 +75,7 @@ function wct_comments_the_comments() {
  * @subpackage comments/tags
  *
  * @since 1.0.0
- * 
+ *
  * @return object The current comment within the loop.
  */
 function wct_comments_the_comment() {
@@ -104,7 +104,7 @@ function wct_comments_no_comment_found() {
 	 * @subpackage comments/tags
 	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string the message if no comments were found
 	 */
 	function wct_comments_get_no_comment_found() {
@@ -138,7 +138,7 @@ function wct_comments_pagination_count() {
 	 * @subpackage comments/tags
 	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string HTML for the pagination count.
 	 */
 	function wct_comments_get_pagination_count() {
@@ -174,7 +174,7 @@ function wct_comments_pagination_links() {
 	 * @subpackage comments/tags
 	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string HTML for the pagination links.
 	 */
 	function wct_comments_get_pagination_links() {
@@ -203,7 +203,7 @@ function wct_comments_the_comment_id() {
 	 * @subpackage comments/tags
 	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return int ID of the current comment.
 	 */
 	function wct_comments_get_comment_id() {
@@ -232,7 +232,7 @@ function wct_comments_the_comment_author_avatar() {
 	 * @subpackage comments/tags
 	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string the avatar.
 	 */
 	function wct_comments_get_comment_author_avatar() {
@@ -267,7 +267,7 @@ function wct_comments_before_comment_title() {
 	 * @subpackage comments/tags
 	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string the mention to prefix the title with.
 	 */
 	function wct_comments_get_before_comment_title() {
@@ -296,7 +296,7 @@ function wct_comments_the_comment_permalink() {
 	 * @subpackage comments/tags
 	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string the comment's permalink.
 	 */
 	function wct_comments_get_comment_permalink() {
@@ -329,7 +329,7 @@ function wct_comments_the_comment_title_attribute() {
 	 * @subpackage comments/tags
 	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string the title attribute.
 	 */
 	function wct_comments_get_comment_title_attribute() {
@@ -379,7 +379,7 @@ function wct_comments_the_comment_title() {
 	 * @subpackage comments/tags
 	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string the title.
 	 */
 	function wct_comments_get_comment_title() {
@@ -421,7 +421,7 @@ function wct_comments_the_comment_excerpt() {
 	 * @subpackage comments/tags
 	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string the excerpt.
 	 */
 	function wct_comments_get_comment_excerpt() {
@@ -473,7 +473,7 @@ function wct_comments_the_comment_footer() {
 	 * @subpackage comments/tags
 	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @return string the footer.
 	 */
 	function wct_comments_get_comment_footer() {

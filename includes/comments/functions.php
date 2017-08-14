@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Builds the talk comments object
  *
- * Adds usefull datas to check if the comments is about an talk
+ * Adds usefull datas to check if the comments is about a talk
  * - post type
  * - post author
  * - post title
@@ -42,7 +42,7 @@ function wct_comments_get_comment( $comment_id = 0 ) {
 		return false;
 	}
 
-	// Get and append post type if an talk one
+	// Get and append post type if a talk one
 	$post = get_post( $comment->comment_post_ID );
 
 	if ( wct_get_post_type() == $post->post_type ) {
@@ -111,7 +111,7 @@ function wct_comments_clean_count_cache( $comment_id = 0, $status = '' ) {
 
 	$comment = wct_comments_get_comment( $comment_id );
 
-	// Make sure the comment has been made on an talk post type
+	// Make sure the comment has been made on a talk post type
 	if ( empty( $comment->comment_post_type ) || wct_get_post_type() != $comment->comment_post_type ) {
 		return;
 	}
@@ -206,7 +206,7 @@ function wct_comments_get_comment_link( $comment_id = 0 ) {
  * @since 1.0.0
  *
  * @param  string $location the comment edit link
- * @return string           the new comment edit link if about an talk, unchanged otherwise
+ * @return string           the new comment edit link if about a talk, unchanged otherwise
  */
 function wct_edit_comment_link( $location = '' ) {
 	if ( empty( $location ) ) {

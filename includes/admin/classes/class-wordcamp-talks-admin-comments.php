@@ -2,10 +2,8 @@
 /**
  * WordCamp Talks Comments Administration.
  *
- * Comments Administration class
- *
  * @package WordCamp Talks
- * @subpackage admin/comments
+ * @subpackage admin/classes
  *
  * @since 1.0.0
  */
@@ -20,9 +18,6 @@ if ( ! class_exists( 'WordCamp_Talks_Admin_Comments' ) ) :
  * The goal of the class is to adapt the Comments
  * Administration interface so that comments about talks
  * are disjoined and included in the main plugin's menu
- *
- * @package WordCamp Talks
- * @subpackage admin/comments
  *
  * @since 1.0.0
  *
@@ -45,10 +40,7 @@ class WordCamp_Talks_Admin_Comments {
 	public $talk_comment_count;
 
 	/**
-	 * The constuctor
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/comments
+	 * The constuctor.
 	 *
 	 * @since 1.0.0
 	 */
@@ -58,10 +50,7 @@ class WordCamp_Talks_Admin_Comments {
 	}
 
 	/**
-	 * Starts the class
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/comments
+	 * Starts the class.
 	 *
 	 * @since 1.0.0
 	 */
@@ -80,10 +69,7 @@ class WordCamp_Talks_Admin_Comments {
 	}
 
 	/**
-	 * Sets some globals
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/comments
+	 * Sets some globals.
 	 *
 	 * @since 1.0.0
 	 */
@@ -93,10 +79,7 @@ class WordCamp_Talks_Admin_Comments {
 	}
 
 	/**
-	 * Sets up the hooks to extend the plugin's Administration
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/comments
+	 * Sets up the hooks to extend the plugin's Administration.
 	 *
 	 * @since 1.0.0
 	 */
@@ -125,10 +108,7 @@ class WordCamp_Talks_Admin_Comments {
 	}
 
 	/**
-	 * Adds a bubble to menu title to show how many comments are pending
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/comments
+	 * Adds a bubble to menu title to show how many comments are pending.
 	 *
 	 * @since 1.0.0
 	 *
@@ -145,10 +125,7 @@ class WordCamp_Talks_Admin_Comments {
 	}
 
 	/**
-	 * Creates a comments submenu for the plugin's menu
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/comments
+	 * Creates a comments submenu for the plugin's menu.
 	 *
 	 * @since 1.0.0
 	 *
@@ -186,10 +163,7 @@ class WordCamp_Talks_Admin_Comments {
 
 	/**
 	 * Adds a bubble to plugin's menu title and make sure it's the highlighted parent
-	 * when talk comments screens are displayed
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/comments
+	 * when talk comments screens are displayed.
 	 *
 	 * @since 1.0.0
 	 *
@@ -218,10 +192,7 @@ class WordCamp_Talks_Admin_Comments {
 
 	/**
 	 * Make sure the comments plugin's submenu is the highlighted submenu
-	 * if its content is displayed
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/comments
+	 * if its content is displayed.
 	 *
 	 * @since 1.0.0
 	 *
@@ -240,10 +211,7 @@ class WordCamp_Talks_Admin_Comments {
 
 	/**
 	 * Replaces the comment count by the talk comments count in the screen views when
-	 * managing comments about talks
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/comments
+	 * managing comments about talks.
 	 *
 	 * @since 1.0.0
 	 *
@@ -285,10 +253,7 @@ class WordCamp_Talks_Admin_Comments {
 	}
 
 	/**
-	 * Adds a post_type query var to the edit action link
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/comments
+	 * Adds a post_type query var to the edit action link.
 	 *
 	 * @since 1.0.0
 	 *
@@ -329,15 +294,12 @@ class WordCamp_Talks_Admin_Comments {
 
 	/**
 	 * Sets the post type attribute of the screen when the comments
-	 * was made on an talk
+	 * was made on a talk.
 	 *
 	 * When clicking on a moderation link within a moderation email, the post type
 	 * is not set, as a result, the highlighted menu is not the good one. This make
 	 * sure the typenow global and the post type attribute of the screen are set
 	 * to the talks post type if needed.
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/comments
 	 *
 	 * @since 1.0.0
 	 *
@@ -373,13 +335,10 @@ class WordCamp_Talks_Admin_Comments {
 	}
 
 	/**
-	 * Disjoin comment count bubbles
+	 * Disjoin comment count bubbles.
 	 *
 	 * The goal here is to make sure the ajax bubbles count update
-	 * are dissociated between posts and talks
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/comments
+	 * are dissociated between posts and talks.
 	 *
 	 * @since 1.0.0
 	 *
@@ -424,5 +383,3 @@ class WordCamp_Talks_Admin_Comments {
 }
 
 endif;
-
-add_action( 'wct_loaded', array( 'WordCamp_Talks_Admin_Comments', 'start' ), 6 );

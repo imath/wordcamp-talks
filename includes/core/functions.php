@@ -452,7 +452,7 @@ function wct_category_register_args() {
 			'hierarchical'      => false,
 		),
 		'capabilities'          => wct_get_category_caps(),
-		'update_count_callback' => '_update_post_term_count',
+		'update_count_callback' => '_update_generic_term_count',
 		'query_var'             => wct_get_category(),
 		'hierarchical'          => true,
 		'show_in_nav_menus'     => false,
@@ -697,7 +697,7 @@ function wct_get_tag_url( $tag = '' ) {
 /**
  * Gets a global redirect url
  *
- * Used after posting an talk failed
+ * Used after posting a talk failed
  * Defaults to root url
  *
  * @package WordCamp Talks
@@ -827,7 +827,6 @@ function wct_get_feedback_messages( $type = '', $id = false ) {
 			3  => __( 'You are not allowed to publish talks',                    'wordcamp-talks' ),
 			4  => __( 'Title and description are required fields.',              'wordcamp-talks' ),
 			5  => __( 'Something went wrong while trying to save your talk.',    'wordcamp-talks' ),
-			6  => __( 'There was a problem saving the featured image, sorry.',   'wordcamp-talks' ),
 			7  => __( 'Please choose a username having at least 4 characters.',  'wordcamp-talks' ),
 			8  => __( 'Please fill all required fields.',                        'wordcamp-talks' ),
 			9  => __( 'The talk you are trying to edit does not seem to exist.', 'wordcamp-talks' ),
@@ -1331,7 +1330,7 @@ function wct_clean_rates_count_cache( $talk_id, $user_id = 0 ) {
 /** Utilities *****************************************************************/
 
 /**
- * Creates a specific excerpt for the content of an talk
+ * Creates a specific excerpt for the content of a talk
  *
  * @package WordCamp Talks
  * @subpackage core/functions
@@ -1341,7 +1340,7 @@ function wct_clean_rates_count_cache( $talk_id, $user_id = 0 ) {
  * @param  string  $text   the content to truncate
  * @param  integer $length the number of words
  * @param  string  $more   the more string
- * @return string          the excerpt of an talk
+ * @return string          the excerpt of a talk
  */
 function wct_create_excerpt( $text = '', $length = 55, $more = ' [&hellip;]', $nofilter = false ) {
 	if ( empty( $text ) ) {

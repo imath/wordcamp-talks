@@ -633,7 +633,7 @@ function wct_get_term_name() {
  *
  * @since 1.0.0
  *
- * @return bool true if an talk search is performed, otherwise false
+ * @return bool true if a talk search is performed, otherwise false
  */
 function wct_is_search() {
 	$retval = false;

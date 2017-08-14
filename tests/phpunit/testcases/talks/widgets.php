@@ -5,7 +5,10 @@ class WordCampTalkProposalsTest_Talks_Classes extends WordCampTalkProposalsTest 
 		$widgets = $GLOBALS['wp_registered_widgets'];
 		$registered_names = wp_list_pluck( $widgets, 'name' );
 
-		$names = array( 'WordCamp Talk Proposal categories', 'WordCamp Talks Popular Talks' );
+		$names = array(
+			__( 'Talk Proposals categories', 'wordcamp-talks' ),
+			__( 'Talk Proposals Popular', 'wordcamp-talks' ),
+		);
 
 		$this->assertTrue( 2 === count( array_intersect( $registered_names, $names ) ) );
 	}

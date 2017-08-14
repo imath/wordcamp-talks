@@ -1,9 +1,6 @@
 <?php
 /**
- * WordCamp Talks Users Widgets.
- *
- * Collection of Users Widgets, for now
- * only one is available :)
+ * WordCamp Talks Top Contributors Users widget.
  *
  * @package WordCamp Talks
  * @subpackage users/widgets
@@ -14,7 +11,7 @@
 // Exit if accessed directly
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'WordCamp_Talk_Widget_Top_Contributors' ) ) :
+if ( ! class_exists( 'WordCamp_Talks_Users_Top_Contributors' ) ) :
 /**
  * List the top contributors
  *
@@ -22,8 +19,9 @@ if ( ! class_exists( 'WordCamp_Talk_Widget_Top_Contributors' ) ) :
  * @subpackage users/widgets
  *
  * @since 1.0.0
+ * @since 1.1.0 Renamed from WordCamp_Talk_Widget_Top_Contributors to WordCamp_Talks_Users_Top_Contributors
  */
-class WordCamp_Talk_Widget_Top_Contributors extends WP_Widget {
+class WordCamp_Talks_Users_Top_Contributors extends WP_Widget {
 
  	/**
 	 * Constructor
@@ -34,8 +32,8 @@ class WordCamp_Talk_Widget_Top_Contributors extends WP_Widget {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		$widget_ops = array( 'description' => __( 'List the top talk contributors', 'wordcamp-talks' ) );
-		parent::__construct( false, $name = __( 'WordCamp Talks Tops', 'wordcamp-talks' ), $widget_ops );
+		$widget_ops = array( 'description' => __( 'List the top Talk Proposals authors', 'wordcamp-talks' ) );
+		parent::__construct( false, $name = __( 'Talk Proposals Tops', 'wordcamp-talks' ), $widget_ops );
 
 		if ( is_active_widget( false, false, $this->id_base ) && ! is_admin() && ! is_network_admin() ) {
 			add_action( 'wp_enqueue_scripts', 'wct_enqueue_style' );
@@ -51,7 +49,7 @@ class WordCamp_Talk_Widget_Top_Contributors extends WP_Widget {
 	 * @since 1.0.0
 	 */
 	public static function register_widget() {
-		register_widget( 'WordCamp_Talk_Widget_Top_Contributors' );
+		register_widget( 'WordCamp_Talks_Users_Top_Contributors' );
 	}
 
 	/**

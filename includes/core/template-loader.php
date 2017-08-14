@@ -2,7 +2,7 @@
 /**
  * WordCamp Talks template loader.
  *
- * Most of the job is done in the class WordCamp_Talks_Template_Loader
+ * Most of the job is done in the class WordCamp_Talks_Core_Template_Loader
  * @see  core/classes
  *
  * @package   WordCamp Talks
@@ -92,7 +92,7 @@ function wct_buffer_single_talk( $content = '' ) {
  * @param  bool    $require_once should we load it once only ?
  */
 function wct_get_template_part( $slug, $name = null, $load = true, $require_once = true ) {
-	$templates = new WordCamp_Talks_Template_Loader;
+	$templates = new WordCamp_Talks_Core_Template_Loader;
 
 	return $templates->get_template_part( $slug, $name, $load, $require_once );
 }
@@ -128,7 +128,7 @@ function wct_template_part( $slug, $name = null, $require_once = false ) {
  * @return string the url to the stylesheet
  */
 function wct_get_stylesheet( $css = 'style' ) {
-	$style = new WordCamp_Talks_Template_Loader;
+	$style = new WordCamp_Talks_Core_Template_Loader;
 
 	return $style->get_stylesheet( $css );
 }
@@ -398,7 +398,7 @@ function wct_set_template( $template = '' ) {
 			// Add the id to globals
 			wct_set_global( 'single_talk_id', $wp_query->post->ID );
 
-			// Are we editing an talk ?
+			// Are we editing a talk ?
 			if ( wct_is_edit() ) {
 
 				// Check if the talk is currently being edited by someone else

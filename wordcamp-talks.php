@@ -31,14 +31,13 @@ final class WordCamp_Talks {
 
 	/**
 	 * Plugin's main instance
+	 *
 	 * @var object
 	 */
 	protected static $instance;
 
 	/**
 	 * Initialize the plugin
-	 *
-	 * @package WordCamp Talks
 	 *
 	 * @since 1.0.0
 	 */
@@ -49,8 +48,6 @@ final class WordCamp_Talks {
 
 	/**
 	 * Return an instance of this class.
-	 *
-	 * @package WordCamp Talks
 	 *
 	 * @since 1.0.0
 	 *
@@ -68,8 +65,6 @@ final class WordCamp_Talks {
 
 	/**
 	 * Setups plugin's globals
-	 *
-	 * @package WordCamp Talks
 	 *
 	 * @since 1.0.0
 	 */
@@ -134,43 +129,33 @@ final class WordCamp_Talks {
 	/**
 	 * Includes plugin's needed files
 	 *
-	 * @package WordCamp Talks
-	 *
 	 * @since 1.0.0
 	 *
 	 * @uses  is_admin() to check for WordPress Administration
 	 */
 	private function includes() {
+		// Class autoloader.
+		spl_autoload_register( array( $this, 'autoload' ) );
+
 		require $this->includes_dir . 'core/options.php';
 		require $this->includes_dir . 'core/functions.php';
 		require $this->includes_dir . 'core/rewrites.php';
-		require $this->includes_dir . 'core/classes.php';
 		require $this->includes_dir . 'core/capabilities.php';
 		require $this->includes_dir . 'core/upgrade.php';
 		require $this->includes_dir . 'core/template-functions.php';
 		require $this->includes_dir . 'core/template-loader.php';
-		require $this->includes_dir . 'core/widgets.php';
 
 		require $this->includes_dir . 'comments/functions.php';
-		require $this->includes_dir . 'comments/classes.php';
 		require $this->includes_dir . 'comments/tags.php';
-		require $this->includes_dir . 'comments/widgets.php';
 
 		require $this->includes_dir . 'talks/functions.php';
-		require $this->includes_dir . 'talks/classes.php';
 		require $this->includes_dir . 'talks/tags.php';
-		require $this->includes_dir . 'talks/widgets.php';
 
 		require $this->includes_dir . 'users/functions.php';
 		require $this->includes_dir . 'users/tags.php';
-		require $this->includes_dir . 'users/widgets.php';
 
 		require $this->includes_dir . 'core/actions.php';
 		require $this->includes_dir . 'core/filters.php';
-
-		if ( is_admin() ) {
-			require $this->includes_dir . 'admin/admin.php';
-		}
 
 		/**
 		 * Add specific functions for the current site
@@ -185,6 +170,53 @@ final class WordCamp_Talks {
 		if ( is_multisite() && file_exists( WP_PLUGIN_DIR . '/wct-' . get_current_blog_id() . '-functions.php' ) ) {
 			require WP_PLUGIN_DIR . '/wct-' . get_current_blog_id() . '-functions.php';
 		}
+	}
+
+	/**
+	 * Class Autoload function
+	 *
+	 * @since  1.1.0
+	 *
+	 * @param  string $class The class name.
+	 */
+	public function autoload( $class ) {
+		$name = str_replace( '_', '-', strtolower( $class ) );
+
+		if ( false === strpos( $name, $this->domain ) ) {
+			return;
+		}
+
+		$folder    = null;
+		$subfolder = 'classes';
+		$prefix    = 'class';
+		$parts     = explode( '-', $name );
+
+		if ( isset( $parts[2] ) ) {
+			$folder = $parts[2];
+		}
+
+		// Class Name => subfolder
+		$map = array_fill_keys( array(
+			'WordCamp_Talks_Core_Navig',
+			'WordCamp_Talks_Talks_List_Categories',
+			'WordCamp_Talks_Talks_Popular',
+			'WordCamp_Talks_Users_Top_Contributors',
+			'WordCamp_Talks_Comments_Recent',
+		), 'widgets');
+
+		if ( isset( $map[ $class ] ) ) {
+			$subfolder = $map[ $class ];
+			$prefix    = 'widget';
+		}
+
+		$path = sprintf( '%1$s%2$s/%3$s/%4$s-%5$s.php', $this->includes_dir, $folder, $subfolder, $prefix, $name );
+
+		// Sanity check.
+		if ( ! file_exists( $path ) ) {
+			return;
+		}
+
+		require $path;
 	}
 
 	/**

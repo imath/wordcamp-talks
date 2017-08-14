@@ -44,9 +44,9 @@ function wct_talks_search_form() {
  	add_filter( 'get_search_query', 'wct_get_search_query' );
 
  	$search_form_html = get_search_form( false );
- 
+
  	remove_filter( 'get_search_query', 'wct_get_search_query' );
- 
+
 	if ( ! empty( $action ) ) {
 		preg_match( '/action=["|\']([^"]*)["|\']/i', $search_form_html, $action_attr );
 
@@ -253,7 +253,7 @@ function wct_talks_has_talks( $args = array() ) {
 	}
 
 	// Get the talks
-	$query_loop = new WordCamp_Talks_Loop_Talks( $template_args );
+	$query_loop = new WordCamp_Talks_Talks_Loop( $template_args );
 
 	// Setup the global query loop
 	wct()->query_loop = $query_loop;
@@ -711,7 +711,7 @@ function wct_talks_the_title_attribute() {
 	}
 
 /**
- * Displays the number of comments about an talk
+ * Displays the number of comments about a talk
  *
  * @package WordCamp Talks
  * @subpackage talks/tags
@@ -742,7 +742,7 @@ function wct_talks_the_comment_number() {
 	}
 
 /**
- * Displays the comment link of an talk
+ * Displays the comment link of a talk
  *
  * @package WordCamp Talks
  * @subpackage talks/tags
@@ -760,7 +760,7 @@ function wct_talks_the_talk_comment_link( $zero = false, $one = false, $more = f
 }
 
 	/**
-	 * Gets the comment link of an talk
+	 * Gets the comment link of a talk
 	 *
 	 * @package WordCamp Talks
 	 * @subpackage talks/tags
@@ -850,7 +850,7 @@ function wct_talks_the_talk_comment_link( $zero = false, $one = false, $more = f
 	}
 
 /**
- * Displays the average rating of an talk
+ * Displays the average rating of a talk
  *
  * @package WordCamp Talks
  * @subpackage talks/tags
@@ -891,7 +891,7 @@ function wct_talks_the_average_rating() {
 	}
 
 /**
- * Displays the rating link of an talk
+ * Displays the rating link of a talk
  *
  * @package WordCamp Talks
  * @subpackage talks/tags
@@ -916,7 +916,7 @@ function wct_talks_the_rating_link( $zero = false, $more = false, $css_class = '
 }
 
 	/**
-	 * Gets the rating link of an talk
+	 * Gets the rating link of a talk
 	 *
 	 * @package WordCamp Talks
 	 * @subpackage talks/tags
@@ -986,13 +986,13 @@ function wct_talks_the_rating_link( $zero = false, $more = false, $css_class = '
 		 * @param  string  $output the rating link to output
 		 * @param  int     the talk ID
 		 * @param  string  $title the title attribute
-		 * @param  string  $average the average rating of an talk
+		 * @param  string  $average the average rating of a talk
 		 */
 		return apply_filters( 'wct_talks_get_rating_link', $output, $talk->ID, $title, $average );
 	}
 
 /**
- * Displays the excerpt of an talk
+ * Displays the excerpt of a talk
  *
  * @package WordCamp Talks
  * @subpackage talks/tags
@@ -1004,7 +1004,7 @@ function wct_talks_the_excerpt() {
 }
 
 	/**
-	 * Gets the excerpt of an talk
+	 * Gets the excerpt of a talk
 	 *
 	 * @package WordCamp Talks
 	 * @subpackage talks/tags
@@ -1052,7 +1052,7 @@ function wct_talks_the_excerpt() {
 	}
 
 /**
- * Displays the content of an talk
+ * Displays the content of a talk
  *
  * @package WordCamp Talks
  * @subpackage talks/tags
@@ -1064,7 +1064,7 @@ function wct_talks_the_content() {
 }
 
 	/**
-	 * Gets the content of an talk
+	 * Gets the content of a talk
 	 *
 	 * @package WordCamp Talks
 	 * @subpackage talks/tags
@@ -1193,7 +1193,7 @@ function wct_meta_single_display( $display_meta = '', $meta_object = null, $cont
 	}
 
 /**
- * Displays the footer of an talk
+ * Displays the footer of a talk
  *
  * @package WordCamp Talks
  * @subpackage talks/tags
@@ -1205,7 +1205,7 @@ function wct_talks_the_talk_footer() {
 }
 
 	/**
-	 * Gets the footer of an talk
+	 * Gets the footer of a talk
 	 *
 	 * @package WordCamp Talks
 	 * @subpackage talks/tags
@@ -1371,13 +1371,13 @@ function wct_talks_not_loggedin() {
 
 		if ( wct_is_signup_allowed_for_current_blog() ) {
 			$output = sprintf(
-				__( 'Please <a href="%s" title="Log in">log in</a> or <a href="%s" title="Sign up">register</a> to this site to submit an talk.', 'wordcamp-talks' ),
+				__( 'Please <a href="%s" title="Log in">log in</a> or <a href="%s" title="Sign up">register</a> to this site to submit a talk.', 'wordcamp-talks' ),
 				esc_url( wp_login_url( wct_get_form_url() ) ),
 				esc_url( wct_users_get_signup_url() )
 			);
 		} else {
 			$output = sprintf(
-				__( 'Please <a href="%s" title="Log in">log in</a> to this site to submit an talk.', 'wordcamp-talks' ),
+				__( 'Please <a href="%s" title="Log in">log in</a> to this site to submit a talk.', 'wordcamp-talks' ),
 				esc_url( wp_login_url( wct_get_form_url() ) )
 			);
 		}
@@ -1407,7 +1407,7 @@ function wct_talks_the_title_edit() {
 }
 
 	/**
-	 * Gets the value of the title field of an talk
+	 * Gets the value of the title field of a talk
 	 *
 	 * @package WordCamp Talks
 	 * @subpackage talks/tags
@@ -1423,7 +1423,7 @@ function wct_talks_the_title_edit() {
 		if ( ! empty( $_POST['wct']['_the_title'] ) ) {
 			$edit_title = $_POST['wct']['_the_title'];
 
-		// Are we editing an talk ?
+		// Are we editing a talk ?
 		} else if ( ! empty( $wct->query_loop->talk->post_title ) ) {
 			$edit_title = $wct->query_loop->talk->post_title;
 
@@ -1475,7 +1475,7 @@ function wct_talks_the_editor() {
 }
 
 	/**
-	 * Gets the value of the content field of an talk
+	 * Gets the value of the content field of a talk
 	 *
 	 * @package WordCamp Talks
 	 * @subpackage talks/tags
@@ -1491,7 +1491,7 @@ function wct_talks_the_editor() {
 		if ( ! empty( $_POST['wct']['_the_content'] ) ) {
 			$edit_content = $_POST['wct']['_the_content'];
 
-		// Are we editing an talk ?
+		// Are we editing a talk ?
 		} else if ( ! empty( $wct->query_loop->talk->post_content ) ) {
 			$edit_content = do_shortcode( $wct->query_loop->talk->post_content );
 
@@ -1630,7 +1630,7 @@ function wct_talks_the_category_edit() {
 		if ( ! empty( $_POST['wct']['_the_category'] ) ) {
 			$edit_categories = (array) $_POST['wct']['_the_category'];
 
-		// Are we editing an talk ?
+		// Are we editing a talk ?
 		} else if ( ! empty( $wct->query_loop->talk->ID ) ) {
 			$edit_categories = (array) wp_get_object_terms( $wct->query_loop->talk->ID, wct_get_category(), array( 'fields' => 'ids' ) );
 
@@ -1715,7 +1715,7 @@ function wct_talks_loop_hierarchical_categories( $parents = array(), $selected_t
 }
 
 /**
- * Displays the tag editor for an talk
+ * Displays the tag editor for a talk
  *
  * @package WordCamp Talks
  * @subpackage talks/tags

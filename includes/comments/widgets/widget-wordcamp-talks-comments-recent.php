@@ -11,7 +11,7 @@
 // Exit if accessed directly
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'WordCamp_Talk_Recent_Comments' ) ) :
+if ( ! class_exists( 'WordCamp_Talks_Comments_Recent' ) ) :
 /**
  * Recent comment about talks Widget
  *
@@ -19,8 +19,9 @@ if ( ! class_exists( 'WordCamp_Talk_Recent_Comments' ) ) :
  * @subpackage comments/widgets
  *
  * @since 1.0.0
+ * @since 1.1.0 Renamed from WordCamp_Talk_Recent_Comments to WordCamp_Talks_Comments_Recent.
  */
- class WordCamp_Talk_Recent_Comments extends WP_Widget_Recent_Comments {
+ class WordCamp_Talks_Comments_Recent extends WP_Widget_Recent_Comments {
 
  	/**
 	 * Constructor
@@ -31,8 +32,8 @@ if ( ! class_exists( 'WordCamp_Talk_Recent_Comments' ) ) :
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		$widget_ops = array( 'classname' => 'widget_talks_recent_comments', 'description' => __( 'Latest comments about talks', 'wordcamp-talks' ) );
-		WP_Widget::__construct( 'talk-recent-comments', $name = __( 'WordCamp Talk Proposals latest comments', 'wordcamp-talks' ), $widget_ops );
+		$widget_ops = array( 'classname' => 'widget_talks_recent_comments', 'description' => __( 'Latest comments about Talk Proposals', 'wordcamp-talks' ) );
+		WP_Widget::__construct( 'talk-recent-comments', $name = __( 'Talk Proposals latest comments', 'wordcamp-talks' ), $widget_ops );
 
 		$this->alt_option_name = 'widget_talks_recent_comments';
 
@@ -50,7 +51,7 @@ if ( ! class_exists( 'WordCamp_Talk_Recent_Comments' ) ) :
 	 * @since 1.0.0
 	 */
 	public static function register_widget() {
-		register_widget( 'WordCamp_Talk_Recent_Comments' );
+		register_widget( 'WordCamp_Talks_Comments_Recent' );
 	}
 
 	/**
@@ -68,16 +69,19 @@ if ( ! class_exists( 'WordCamp_Talk_Recent_Comments' ) ) :
 		// It's that simple !!
 		$comment_args['post_type'] = wct_get_post_type();
 
+		if ( current_user_can( 'view_talk_comments' ) ) {
+			$comment_args['post_status'] = wct_talks_get_status();
+		}
+
 		// Now return these args
 		return $comment_args;
 	}
 
 	/**
-	 * @package WordCamp Talks
-	 * @subpackage comments/widgets
+	 * Display the widget.
 	 *
 	 * @since 1.0.0
-	 * 
+	 *
 	 * @param  array $args
 	 * @param  array $instance
 	 */

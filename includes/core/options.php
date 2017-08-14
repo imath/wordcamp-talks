@@ -240,7 +240,7 @@ function wct_allow_signups( $default = 0 ) {
 }
 
 /**
- * Should we make sure the user posting an talk on the site has the default role ?
+ * Should we make sure the user posting a talk on the site has the default role ?
  *
  * @package WordCamp Talks
  * @subpackage core/options

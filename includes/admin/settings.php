@@ -508,7 +508,7 @@ function wct_allow_signups_setting_callback() {
 }
 
 /**
- * Default role for users posting an talk on this site callback
+ * Default role for users posting a talk on this site callback
  *
  * @package WordCamp Talks
  * @subpackage admin/settings

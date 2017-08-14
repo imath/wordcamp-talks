@@ -1,6 +1,6 @@
 <?php
 /**
- * WordCamp Talks Widgets.
+ * WordCamp Talks Popular widget.
  *
  * @package WordCamp Talks
  * @subpackage talks/widgets
@@ -11,115 +11,7 @@
 // Exit if accessed directly
 defined( 'ABSPATH' ) || exit;
 
-if ( ! class_exists( 'WordCamp_Talk_Widget_Categories' ) ) :
-/**
- * Talks Categories Widget
- *
- * "Extends".. It's more limit WP_Widget_Categories widget feature
- * disallow the dropdown because the javascript part is not "filterable"
- * disallow the hierarchy.. I still wonder why i've chosen to ? But we'll
- * see if we can use it in a future release.
- *
- * @package WordCamp Talks
- * @subpackage talks/widgets
- *
- * @since 1.0.0
- */
- class WordCamp_Talk_Widget_Categories extends WP_Widget_Categories {
-
- 	/**
-	 * Constructor
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage talks/widgets
-	 *
-	 * @since 1.0.0
-	 */
-	public function __construct() {
-		$widget_ops = array( 'description' => __( 'A list of Talk Proposal categories', 'wordcamp-talks' ) );
-		WP_Widget::__construct( false, $name = __( 'WordCamp Talk Proposal categories', 'wordcamp-talks' ), $widget_ops );
-	}
-
-	/**
-	 * Register the widget
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage talks/widgets
-	 *
-	 * @since 1.0.0
-	 */
-	public static function register_widget() {
-		register_widget( 'WordCamp_Talk_Widget_Categories' );
-	}
-
-	/**
-	 * Forces the talk category taxonomy to be used
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage talks/widgets
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param  array  $category_args the arguments to get the list of categories
-	 * @return array                 same arguments making sure talk taxonomy is set
-	 */
-	public function use_talks_category( $category_args = array() ) {
-		// It's that simple !!
-		$category_args['taxonomy'] = wct_get_category();
-
-		// Now return these args
-		return $category_args;
-	}
-
-	/**
-	 * Displays the content of the widget
-	 *
-	 * Temporarly adds and remove filters and use parent category widget display
-	 *
-	 * @param  array  $args
-	 * @param  array  $instance
-	 */
-	public function widget( $args = array(), $instance = array() ) {
-		// Add filter so that the taxonomy used is cat-talks
-		add_filter( 'widget_categories_args', array( $this, 'use_talks_category' ) );
-
-		// Use WP_Widget_Categories::widget()
-		parent::widget( $args, $instance );
-
-		// Remove filter to reset the taxonomy for other widgets
-		add_filter( 'widget_categories_args', array( $this, 'use_talks_category' ) );
-	}
-
-	/**
-	 * Display the form in Widgets Administration
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage talks/widgets
-	 *
-	 * @since 1.0.0
-	 */
-	public function form( $instance = array() ) {
-		//Defaults
-		$instance = wp_parse_args( (array) $instance, array( 'title' => '') );
-		$title = esc_attr( $instance['title'] );
-		$count = isset($instance['count']) ? (bool) $instance['count'] :false;
-		?>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'wordcamp-talks' ); ?></label>
-			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
-		</p>
-
-		<p>
-			<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id( 'count' ); ?>" name="<?php echo $this->get_field_name( 'count' ); ?>"<?php checked( $count ); ?> />
-			<label for="<?php echo $this->get_field_id( 'count' ); ?>"><?php _e( 'Show talk counts', 'wordcamp-talks' ); ?></label><br />
-		</p>
-		<?php
-	}
-}
-
-endif;
-
-if ( ! class_exists( 'WordCamp_Talk_Widget_Popular' ) ) :
+if ( ! class_exists( 'WordCamp_Talks_Talks_Popular' ) ) :
 /**
  * List the most popular talks
  *
@@ -129,43 +21,32 @@ if ( ! class_exists( 'WordCamp_Talk_Widget_Popular' ) ) :
  * But that's not supported and i doubt, i'll adventure
  * in this way in the future.
  *
- * @package WordCamp Talks
- * @subpackage talks/widgets
- *
  * @since 1.0.0
+ * @since 1.1.0 Renamed from WordCamp_Talk_Widget_Popular to WordCamp_Talks_Talks_Popular
  */
- class WordCamp_Talk_Widget_Popular extends WP_Widget {
+ class WordCamp_Talks_Talks_Popular extends WP_Widget {
 
  	/**
-	 * Constructor
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage talks/widgets
+	 * The constructor.
 	 *
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		$widget_ops = array( 'description' => __( 'List the most popular talks', 'wordcamp-talks' ) );
-		parent::__construct( false, $name = __( 'WordCamp Talks Popular Talks', 'wordcamp-talks' ), $widget_ops );
+		$widget_ops = array( 'description' => __( 'List the most popular Talk Proposals', 'wordcamp-talks' ) );
+		parent::__construct( false, $name = __( 'Talk Proposals Popular', 'wordcamp-talks' ), $widget_ops );
 	}
 
 	/**
-	 * Register the widget
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage talks/widgets
+	 * Register the widget.
 	 *
 	 * @since 1.0.0
 	 */
 	public static function register_widget() {
-		register_widget( 'WordCamp_Talk_Widget_Popular' );
+		register_widget( 'WordCamp_Talks_Talks_Popular' );
 	}
 
 	/**
-	 * Display the widget on front end
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage talks/widgets
+	 * Display the widget on front end.
 	 *
 	 * @since 1.0.0
 	 */
@@ -200,9 +81,9 @@ if ( ! class_exists( 'WordCamp_Talk_Widget_Popular' ) ) :
 
 		// Popular argumments.
 		$talk_args = apply_filters( 'wct_talks_popular_args', array(
-			'per_page'  => $number,
-			'orderby'   => $orderby,
-			'is_widget' => true,
+			'per_page'    => $number,
+			'orderby'     => $orderby,
+			'is_widget'   => true,
 		) );
 
 		if ( 'rates_count' == $orderby ) {
@@ -244,10 +125,7 @@ if ( ! class_exists( 'WordCamp_Talk_Widget_Popular' ) ) :
 	}
 
 	/**
-	 * Update widget preferences
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage talks/widgets
+	 * Update widget preferences.
 	 *
 	 * @since 1.0.0
 	 */
@@ -265,10 +143,7 @@ if ( ! class_exists( 'WordCamp_Talk_Widget_Popular' ) ) :
 	}
 
 	/**
-	 * Display the form in Widgets Administration
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage talks/widgets
+	 * Display the form in Widgets Administration.
 	 *
 	 * @since 1.0.0
 	 */
