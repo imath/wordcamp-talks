@@ -942,6 +942,21 @@ function wct_talks_status_title_prefix( $title = '', $talk = null ) {
 		return $title;
 	}
 
+	/**
+	 * The did_the_content global makes sure the prefix is only added
+	 * to the entry main title.
+	 *
+	 * We're waiting for wp_head to be completed as some plugins are using
+	 * the_content inside the header tag to customize the description meta tag.
+	 */
+	if ( did_action( 'wp_head' ) && doing_filter( 'the_content' ) ) {
+		wct_set_global( 'did_the_content', true );
+	}
+
+	if ( wct_get_global( 'did_the_content' ) ) {
+		return $title;
+	}
+
 	return wct_talks_status_get_title_prefix( $status, $title );
 }
 
