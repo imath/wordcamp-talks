@@ -729,7 +729,7 @@ function wct_is_current_user_profile() {
 		return false;
 	}
 
-	$is_user_profile = ( $current_user->ID == $displayed_user_id );
+	$is_user_profile = ( (int) $current_user->ID === (int) $displayed_user_id );
 
 	/**
 	 * @param  bool $is_user_profile whether the user is viewing his profile or not

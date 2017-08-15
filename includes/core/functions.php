@@ -803,6 +803,7 @@ function wct_get_feedback_messages( $type = '', $id = false ) {
 			5 => __( 'For your convenience, you have been automagically logged in.',                           'wordcamp-talks' ),
 			6 => __( 'Make sure to check you received the email we sent you to reset your password.',          'wordcamp-talks' ),
 			7 => __( 'Otherwise, edit your email and password from your profile before logging off the site.', 'wordcamp-talks' ),
+			8 => __( 'Profile successfully updated.',                                                          'wordcamp-talks' ),
 		),
 		'error' => array(
 			1  => __( 'Something went wrong, please try again',                  'wordcamp-talks' ),
@@ -814,6 +815,7 @@ function wct_get_feedback_messages( $type = '', $id = false ) {
 			8  => __( 'Please fill all required fields.',                        'wordcamp-talks' ),
 			9  => __( 'The talk you are trying to edit does not seem to exist.', 'wordcamp-talks' ),
 			10 => __( 'Something went wrong while trying to update your talk.',  'wordcamp-talks' ),
+			11 => __( 'You are not allowed to edit this user profile.',          'wordcamp-talks' ),
 		),
 		'info'  => array(
 			1 => __( 'This Talk Proposal is already being edited by another user.', 'wordcamp-talks' ),

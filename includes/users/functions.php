@@ -738,7 +738,119 @@ function wct_users_get_profile_nav_items( $user_id = 0, $username ='', $nofilter
 	}
 }
 
+/**
+ * Capability check for the front-end profile editing.
+ *
+ * @since  1.1.0
+ *
+ * @return boolean True if the user can edit the profile. False otherwise.
+ */
+function wct_users_can_edit_profile() {
+	return current_user_can( 'manage_network_users' ) || wct_is_current_user_profile();
+}
+
+/**
+ * Get data to edit for the current user.
+ *
+ * @since  1.1.0
+ *
+ * @param  array  $data_to_edit An array containing the keys of the WP_User property to edit.
+ * @return array                The data to edit keyed by the WP_User's properties.
+ */
+function wct_users_get_displayed_user_data_to_edit( $data_to_edit = array() ) {
+	$user = get_userdata( wct_users_displayed_user_id() );
+
+	if ( $user ) {
+		$user->filter = 'edit';
+	}
+
+	$data = array();
+
+	foreach ( $data_to_edit as $dk ) {
+		$key = $dk;
+
+		if ( 'user_description' === $key ) {
+			// Makes sure WordPress will escape it for us.
+			$key = 'description';
+		}
+
+		$data[$dk] = $user->{$key};
+	}
+
+	return $data;
+}
+
 /** Handle User actions *******************************************************/
+
+/**
+ * Saves Front-end profile edits
+ *
+ * @since  1.1.0
+ */
+function wct_users_edit_profile() {
+	// Bail if not a post request
+	if ( 'POST' != strtoupper( $_SERVER['REQUEST_METHOD'] ) ) {
+		return;
+	}
+
+	// Bail if not a post talk request
+	if ( empty( $_POST['wct_users_edit_profile'] ) ) {
+		return;
+	}
+
+	// Check nonce
+	check_admin_referer( 'wct-edit-profile' );
+
+	$redirect = wct_users_get_displayed_profile_url();
+
+	// Check capacity
+	if ( ! wct_users_can_edit_profile() ) {
+		// Redirect to main archive page and inform the user he cannot edit the profile.
+		wp_safe_redirect( add_query_arg( 'error', 11, $redirect ) );
+		exit();
+	}
+
+	$fields = array_intersect_key( $_POST, wct_users_public_profile_infos( 'save' ) );
+
+	if ( isset( $fields['user_description'] ) ) {
+		$fields['description'] = trim( $fields['user_description'] );
+		unset( $fields['user_description'] );
+	}
+
+	foreach ( $fields as $kf => $vf ) {
+		if ( 'description' === $kf ) {
+			$fields[$kf] = wct_users_sanitize_user_description( $vf );
+		} else {
+			$fields[$kf] = sanitize_text_field( $vf );
+		}
+	}
+
+	$fields['ID'] = (int) wct_users_displayed_user_id();
+	$userdata     = (object) $fields;
+
+	/**
+	 * Filter here to shortcircuit the function.
+	 *
+	 * @since  1.1.0
+	 *
+	 * @param array  $result   An array containing the result type as key and the feedback ID as value.
+	 * @param object $userdata The User data to update.
+	 */
+	$result = apply_filters( 'wct_users_pre_edit_profile', array(), $userdata );
+
+	if ( empty( $result['error'] ) && empty( $result['success'] ) ) {
+		$updated = wp_update_user( $userdata );
+
+		if ( is_wp_error( $updated ) ) {
+			$result = array( 'error' => 1 );
+		} else {
+			$result = array( 'success' => 8 );
+		}
+	}
+
+	wp_safe_redirect( add_query_arg( $result, $redirect ) );
+	exit();
+}
 
 /**
  * Hooks to deleted_user to perform additional actions
@@ -1462,7 +1574,7 @@ function wct_users_sanitize_user_description( $text = '' ) {
 }
 
 /**
- * Sanitize public fields for displaye
+ * Sanitize public fields for display
  *
  * @since  1.0.0
  *

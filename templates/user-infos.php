@@ -9,13 +9,22 @@
  */
 ?>
 
-<div class="user-infos">
+<div<?php wct_users_profile_classes(); ?>>
+
+	<?php if ( wct_users_can_edit_profile() ) : ?>
+
+		<form action="" method="post" class="standard-form">
+
+	<?php endif; ?>
 
 	<?php foreach ( wct_users_public_profile_infos() as $info ) :
 
 		if ( ! wct_users_public_profile_has_info( $info ) ) :
 			wct_users_public_empty_info();
-			continue;
+
+			if ( ! wct_users_can_edit_profile() ) {
+				continue;
+			}
 
 		endif; ?>
 
@@ -28,7 +37,14 @@
 
 	<?php endforeach;
 
-	if ( wct_users_public_empty_profile() ) :
+	if ( wct_users_can_edit_profile() ) : ?>
+
+			<div class="submit">
+				<?php wct_users_public_profile_submit(); ?>
+			</div>
+		</form>
+
+	<?php elseif ( wct_users_public_empty_profile() ) :
 
 		wct_user_feedback();
 

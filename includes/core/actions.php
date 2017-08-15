@@ -14,7 +14,6 @@ defined( 'ABSPATH' ) || exit;
 add_action( 'init',                     'wct_init',                   9  );
 add_action( 'parse_query',              'wct_parse_query',            2  );
 add_action( 'after_setup_theme',        'wct_after_setup_theme',      10 );
-add_action( 'template_redirect',        'wct_template_redirect',      8  );
 
 // Init the Talks Meta class.
 add_action( 'init', array( 'WordCamp_Talks_Talks_Meta', 'start' ), 100 );
@@ -39,11 +38,12 @@ add_action( 'wct_talk_header',             'wct_users_the_user_talk_rating', 1 )
 add_action( 'wct_before_archive_main_nav', 'wct_talks_taxonomy_description'    );
 
 // Actions to handle user actions (eg: submit new talk)
-add_action( 'wct_template_redirect', 'wct_actions',                             4 );
-add_action( 'wct_actions',           'wct_set_user_feedback',                   5 );
-add_action( 'wct_actions',           'wct_talks_post_talk'                        );
-add_action( 'wct_actions',           'wct_talks_update_talk'                      );
-add_action( 'wct_actions',           'wct_users_signup_user',               10, 0 );
+add_action( 'template_redirect', 'wct_actions',               12 );
+add_action( 'wct_actions',       'wct_set_user_feedback',      5 );
+add_action( 'wct_actions',       'wct_talks_post_talk'           );
+add_action( 'wct_actions',       'wct_talks_update_talk'         );
+add_action( 'wct_actions',       'wct_users_signup_user',  10, 0 );
+add_action( 'wct_actions',       'wct_users_edit_profile', 10, 0 );
 
 // Rates actions
 add_action( 'wp_ajax_wct_rate', 'wct_ajax_rate'                      );
@@ -85,18 +85,6 @@ add_action( 'embed_content_meta', 'wct_talks_embed_meta', 9 );
  */
 function wct_init() {
 	do_action( 'wct_init' );
-}
-
-/**
- * Fire the 'wct_template_redirect' action.
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_template_redirect() {
-	do_action( 'wct_template_redirect' );
 }
 
 /**

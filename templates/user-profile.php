@@ -31,8 +31,6 @@
 
 			<h2><?php wct_users_user_profile_display_name(); ?></h2>
 
-			<?php wct_users_buttons(); ?>
-
 		</div>
 
 		<?php do_action( 'wct_user_profile_after_display_name' ); ?>

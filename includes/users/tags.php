@@ -258,27 +258,18 @@ function wct_users_the_signup_submit() {
 }
 
 /**
- * Edit/Share profile buttons.
+ * Outputs css classes for the Front-end profile.
  *
- * Displays the edit profile URL for Admins/self profiles.
- *
- * @since 1.0.0
+ * @since  1.1.0
  */
-function wct_users_buttons() {
-	// Edit button for self profiles.
-	if ( wct_is_current_user_profile() || is_super_admin() ) {
-		$url = wct_users_get_user_profile_edit_url();
+function wct_users_profile_classes() {
+	$classes = array( 'user-infos' );
 
-		if ( $url ) {
-			?>
-			<div class="wct-edit">
-				<a href="<?php echo esc_url( $url ); ?>" class="button" aria-label="<?php esc_attr_e( 'Edit profile', 'wordcamp-talks' ); ?>">
-					<span class="dashicons dashicons-edit"></span>
-				</a>
-			</div>
-			<?php
-		}
+	if ( wct_users_can_edit_profile() ) {
+		$classes[] = 'editable';
 	}
+
+	echo ' class="' . join( ' ', $classes ) . '"';
 }
 
 /**
@@ -286,9 +277,10 @@ function wct_users_buttons() {
  *
  * @since  1.0.0
  *
- * @return array The list of field keys.
+ * @param  string $context The 'save' context is used to check fields consistency.
+ * @return array           The list of field keys or the list of fields label depending on the context.
  */
-function wct_users_public_profile_infos() {
+function wct_users_public_profile_infos( $context = '' ) {
 	/**
 	 * Filter here if you need to edit the public profile infos list.
 	 *
@@ -301,9 +293,19 @@ function wct_users_public_profile_infos() {
 		'user_url'         => __( 'Website', 'wordcamp-talks' ),
 	), wct_users_contactmethods( array(), 'public' ) ) );
 
+	if ( 'save' === $context ) {
+		return $public_labels;
+	}
+
 	wct_set_global( 'public_profile_labels', $public_labels );
 
-	return array_keys( $public_labels );
+	$field_keys = array_keys( $public_labels );
+
+	if ( wct_users_can_edit_profile() ) {
+		wct_users_displayed_user()->data_to_edit = wct_users_get_displayed_user_data_to_edit( $field_keys );
+	}
+
+	return $field_keys;
 }
 
 /**
@@ -362,11 +364,32 @@ function wct_users_public_profile_label( $info = '' ) {
  * @param  string $info The field key.
  */
 function wct_users_public_profile_value( $info = '' ) {
-	if ( empty( $info ) ) {
+	if ( empty( $info ) && ! wct_is_current_user_profile() ) {
 		return;
 	}
 
-	echo apply_filters( 'wct_users_public_value', wct()->displayed_user->{$info}, $info );
+	if ( isset( wct_users_displayed_user()->data_to_edit ) ) {
+		if ( 'user_description' === $info ) {
+			printf( '<textarea name="%1$s">%2$s</textarea>', esc_attr( $info ), wct_users_displayed_user()->data_to_edit[$info] );
+			printf( '<p class="description">%s</p>', esc_html__( 'Your bio will be used to introduce yourself in case one of your talk proposals is selected (Required).', 'wordcamp-talks' ) );
+		} else {
+			printf( '<input type="text" name="%1$s" value="%2$s"/>', esc_attr( $info ), wct_users_displayed_user()->data_to_edit[$info] );
+		}
+	} else {
+		echo apply_filters( 'wct_users_public_value', wct()->displayed_user->{$info}, $info );
+	}
+}
+
+/**
+ * Displays the submit button of the front-end profile edit form.
+ *
+ * @since 1.1.0
+ */
+function wct_users_public_profile_submit() {
+	wp_nonce_field( 'wct-edit-profile' );
+	?>
+	<input type="submit" name="wct_users_edit_profile" value="<?php esc_attr_e( 'Edit profile', 'wordcamp-talks' ); ?>"/>
+	<?php
 }
 
 /**
