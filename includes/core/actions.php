@@ -14,9 +14,6 @@ defined( 'ABSPATH' ) || exit;
 add_action( 'plugins_loaded',           'wct_loaded',                 11 );
 add_action( 'init',                     'wct_init',                   9  );
 add_action( 'parse_query',              'wct_parse_query',            2  );
-add_action( 'enqueue_embed_scripts',    'wct_enqueue_embed_scripts',  10 );
-add_action( 'wp_head',                  'wct_head',                   10 );
-add_action( 'wp_footer',                'wct_footer',                 10 );
 add_action( 'after_setup_theme',        'wct_after_setup_theme',      10 );
 add_action( 'template_redirect',        'wct_template_redirect',      8  );
 
@@ -76,11 +73,8 @@ add_action( 'login_form_rp',         'wct_user_setpassword_redirect', 10    );
 // Admin Menu Bar
 add_action( 'admin_bar_menu', 'wct_adminbar_menu', 999 );
 
-// Embeds
-add_action( 'embed_content_meta',        'wct_talks_embed_meta',         9 );
-add_action( 'wct_enqueue_embed_scripts', 'wct_enqueue_embed_style'         );
-add_action( 'wct_embed_content_meta',    'wct_users_embed_content_meta'    );
-add_action( 'wct_head',                  'wct_oembed_add_discovery_links'  );
+// Talk Embeds Meta
+add_action( 'embed_content_meta', 'wct_talks_embed_meta', 9 );
 
 /**
  * Fire the 'wct_init' action.
@@ -104,47 +98,6 @@ function wct_init() {
  */
 function wct_loaded() {
 	do_action( 'wct_loaded' );
-}
-
-/**
- * Fire the 'wct_enqueue_embed_scripts' action.
- * But do it only if needed
- *
- * Used to register and enqueue custom scripts for embed templates
- *
- * @since 1.0.0
- */
-function wct_enqueue_embed_scripts() {
-	// Bail if not a talk or not an embed profile
-	if ( ( wct_get_post_type() === get_query_var( 'post_type' ) && ! wct_is_rating_disabled() )
-		|| ( wct_get_global( 'is_user_embed' ) && wct_is_embed_profile() )
-	) {
-		do_action( 'wct_enqueue_embed_scripts' );
-	}
-}
-
-/**
- * Fire the 'wct_head' action.
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_head() {
-	do_action( 'wct_head' );
-}
-
-/**
- * Fire the 'wct_footer' action.
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_footer() {
-	do_action( 'wct_footer' );
 }
 
 /**

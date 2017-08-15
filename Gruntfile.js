@@ -40,7 +40,7 @@ module.exports = function( grunt ) {
 			}
 		},
 		clean: {
-			all: [ 'templates/*.min.css', 'js/*.min.js' ]
+			all: ['js/*.min.js']
 		},
 		makepot: {
 			target: {
@@ -72,19 +72,6 @@ module.exports = function( grunt ) {
 				'https://github.com/imath/wordcamp-talks */\n'
 			}
 		},
-		cssmin: {
-			minify: {
-				extDot: 'last',
-				expand: true,
-				ext: '.min.css',
-				src: ['templates/embed-style.css', '!*.min.css'],
-				options: {
-					banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-					'<%= grunt.template.today("UTC:yyyy-mm-dd h:MM:ss TT Z") %> - ' +
-					'https://github.com/imath/wordcamp-talks */'
-				}
-			}
-		},
 		jsvalidate:{
 			src: ['js/*.js'],
 			options:{
@@ -101,7 +88,7 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( 'commit',  ['checktextdomain', 'jstest'] );
 
-	grunt.registerTask( 'release', ['checktextdomain', 'makepot', 'jstest', 'clean', 'cssmin', 'uglify'] );
+	grunt.registerTask( 'release', ['checktextdomain', 'makepot', 'jstest', 'clean', 'uglify'] );
 
 	// Default task.
 	grunt.registerTask( 'default', ['commit'] );

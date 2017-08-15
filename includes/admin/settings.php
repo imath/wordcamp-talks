@@ -109,14 +109,6 @@ function wct_get_settings_fields() {
 				'sanitize_callback' => 'absint',
 				'args'              => array()
 			),
-
-			// Are users profiles embeddable ?
-			'_wc_talks_embed_profile' => array(
-				'title'             => __( 'Embed Profile', 'wordcamp-talks' ),
-				'callback'          => 'wct_embed_profile_setting_callback',
-				'sanitize_callback' => 'wct_sanitize_embed_profile',
-				'args'              => array()
-			),
 		)
 	);
 
@@ -455,22 +447,6 @@ function wct_autolog_signups_fields_setting_callback() {
 }
 
 /**
- * Embed User Profiles callback
- *
- * @since 1.0.0
- *
- * @return string HTML output
- */
-function wct_embed_profile_setting_callback() {
-	?>
-
-	<input name="_wc_talks_embed_profile" id="_wc_talks_embed_profile" type="checkbox" value="1" <?php checked( (bool) wct_is_embed_profile() ); ?> />
-	<label for="_wc_talks_embed_profile"><?php esc_html_e( 'Allow users profiles to be embed', 'wordcamp-talks' ); ?></label>
-
-	<?php
-}
-
-/**
  * Some text to introduce the multisite settings section
  *
  * @package WordCamp Talks
@@ -638,62 +614,6 @@ function wct_sanitize_user_fields_list( $option = '' ) {
 	 * @param array $fields the sanitized fields
 	 */
 	return apply_filters( 'wct_sanitize_user_fields_list', $fields );
-}
-
-/**
- * Sanitize the featured image option.
- *
- * @since 1.0.0
- *
- * @param  int $option the featured image setting
- * @return int         the new featured image setting
- */
-function wct_editor_featured_images_sanitize( $option = 0 ) {
-	// People need to insert image before selecting a featured one.
-	if ( ! wct_talk_editor_image() ) {
-		return 0;
-	}
-
-	return absint( $option );
-}
-
-/**
- * Create the Utility page for embed profile if needed
- *
- * @since 1.0.0
- *
- * @param  int $option the embed profile setting
- * @return int         the new embed profile setting
- */
-function wct_sanitize_embed_profile( $option = 0 ) {
-	$utility_page_id = wct_is_embed_profile();
-
-	if ( $utility_page_id ) {
-		$utility_page = get_post( $utility_page_id );
-	}
-
-	if ( isset( $utility_page->post_type ) && 'wct_utility' !== $utility_page->post_type ) {
-		$utility_page = null;
-	}
-
-	if ( ! empty( $option ) ) {
-		if ( empty( $utility_page->ID ) ) {
-			$option = wp_insert_post( array(
-				'comment_status' => 'closed',
-				'ping_status'    => 'closed',
-				'post_status'    => 'publish',
-				'post_title'     => 'wc_talks_user_page',
-				'post_type'      => 'wct_utility',
-			) );
-		} else {
-			$option = $utility_page->ID;
-		}
-
-	} elseif ( ! empty( $utility_page->ID ) ) {
-		wp_delete_post( $utility_page->ID, true );
-	}
-
-	return absint( $option );
 }
 
 /**

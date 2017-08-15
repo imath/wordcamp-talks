@@ -1311,7 +1311,6 @@ class WordCamp_Talks_Admin {
 							array(
 								esc_html__( 'Closing date: define the date when the call for speakers will end.', 'wordcamp-talks' ),
 								esc_html__( 'Rating stars hover captions: fill a comma separated list of captions to replace default one. On front end, the number of rating stars will depend on the number of comma separated captions you defined in this setting.', 'wordcamp-talks' ),
-								esc_html__( 'Embed profile: if this setting is active, your users profiles will include a sharing button to let your visitors copy the embed code and share it into their website.', 'wordcamp-talks' ),
 							),
 						),
 					),
