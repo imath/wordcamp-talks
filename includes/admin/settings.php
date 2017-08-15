@@ -32,7 +32,7 @@ function wct_get_settings_sections() {
 		),
 	);
 
-	if ( is_multisite() ) {
+	if ( is_multisite() && ! class_exists( 'WordCamp_Post_Types_Plugin' ) ) {
 		$settings_sections['wc_talks_settings_multisite'] = array(
 			'title'    => __( 'Network users settings', 'wordcamp-talks' ),
 			'callback' => 'wct_settings_multisite_section_callback',
@@ -121,14 +121,14 @@ function wct_get_settings_fields() {
 		);
 	}
 
-	if ( ! wct_is_signup_allowed_for_current_blog() ) {
+	if ( ! wct_is_signup_allowed_for_current_blog() || class_exists( 'WordCamp_Post_Types_Plugin' ) ) {
 		unset(
 			$setting_fields['wc_talks_settings_core']['_wc_talks_signup_fields'],
 			$setting_fields['wc_talks_settings_core']['_wc_talks_autolog_enabled']
 		);
 	}
 
-	if ( is_multisite() ) {
+	if ( is_multisite() && ! class_exists( 'WordCamp_Post_Types_Plugin' ) ) {
 		/** Multisite Section *********************************************************/
 		$setting_fields['wc_talks_settings_multisite'] = array();
 
@@ -146,6 +146,13 @@ function wct_get_settings_fields() {
 			'callback'          => 'wct_get_user_default_role_setting_callback',
 			'sanitize_callback' => 'absint',
 			'args'              => array()
+		);
+	}
+
+	if ( class_exists( 'WordCamp_Post_Types_Plugin' ) ) {
+		unset(
+			$setting_fields['wc_talks_settings_core']['_wc_talks_private_fields_list'],
+			$setting_fields['wc_talks_settings_core']['_wc_talks_public_fields_list']
 		);
 	}
 

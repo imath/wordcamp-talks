@@ -11,7 +11,6 @@
 // Exit if accessed directly
 defined( 'ABSPATH' ) || exit;
 
-add_action( 'plugins_loaded',           'wct_loaded',                 11 );
 add_action( 'init',                     'wct_init',                   9  );
 add_action( 'parse_query',              'wct_parse_query',            2  );
 add_action( 'after_setup_theme',        'wct_after_setup_theme',      10 );
@@ -86,18 +85,6 @@ add_action( 'embed_content_meta', 'wct_talks_embed_meta', 9 );
  */
 function wct_init() {
 	do_action( 'wct_init' );
-}
-
-/**
- * Fire the 'wct_loaded' action.
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_loaded() {
-	do_action( 'wct_loaded' );
 }
 
 /**
