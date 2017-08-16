@@ -30,6 +30,9 @@ class WordCamp_Talks_Core_Rewrites {
 
 		// Wait untill init to register
 		add_action( 'init', array( $this, 'register' ), 16 );
+
+		// Refresh slugs
+		add_action( 'update_option_rewrite_rules', array( $this, 'update_slugs' ), 10, 0 );
 	}
 
 	/**
@@ -67,13 +70,13 @@ class WordCamp_Talks_Core_Rewrites {
 
 		/** Rewrite slugs *************************************************************/
 
-		$this->user_slug          = wct_user_slug();
-		$this->user_comments_slug = wct_user_comments_slug();
-		$this->user_rates_slug    = wct_user_rates_slug();
-		$this->user_to_rate_slug  = wct_user_to_rate_slug();
-		$this->user_talks_slug    = wct_user_talks_slug();
-		$this->cpage_slug         = wct_cpage_slug();
-		$this->action_slug        = wct_action_slug();
+		$this->user_slug          = wct_user_slug( true );
+		$this->user_comments_slug = wct_user_comments_slug( true );
+		$this->user_rates_slug    = wct_user_rates_slug( true );
+		$this->user_to_rate_slug  = wct_user_to_rate_slug( true );
+		$this->user_talks_slug    = wct_user_talks_slug( true );
+		$this->cpage_slug         = wct_cpage_slug( true );
+		$this->action_slug        = wct_action_slug( true );
 	}
 
 	/**
@@ -178,6 +181,37 @@ class WordCamp_Talks_Core_Rewrites {
 			'walk_dirs'   => true,
 			'endpoints'   => false,
 		) );
+	}
+
+	/**
+	 * Update slugs once rewrite rules have been flushed.
+	 *
+	 * As slugs are translatable, an option to store them is
+	 * needed in case the user language has been switched to
+	 * prevent 404.
+	 *
+	 * @since 1.1.0
+	 */
+	public function update_slugs() {
+		$slugs = array(
+			'root'          => wct_root_slug( true ),
+			'talk'          => wct_get_talk_slug( true ),
+			'category'      => wct_get_category_slug( true ),
+			'tag'           => wct_get_tag_slug( true ),
+			'user'          => wct_get_user_slug( true ),
+			'rate'          => wct_user_rates_slug( true ),
+			'to_rate'       => wct_user_to_rate_slug( true ),
+			'user_comments' => wct_user_comments_slug( true ),
+			'action'        => wct_get_action_slug( true ),
+			'add'           => wct_addnew_slug( true ),
+			'edit'          => wct_edit_slug( true ),
+			'signup'        => wct_signup_slug( true ),
+			'cpage'         => wct_cpage_slug( true ),
+		);
+
+		if( update_option( '_wc_talks_slugs', $slugs ) ) {
+			wct()->slugs = $slugs;
+		}
 	}
 }
 

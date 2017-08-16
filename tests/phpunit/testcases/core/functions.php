@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @group functions
+ */
 class WordCampTalkProposalsTest_Core_Functions extends WordCampTalkProposalsTest {
 
 	public function test_wct_register_post_type() {

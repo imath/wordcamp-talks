@@ -99,6 +99,7 @@ final class WordCamp_Talks {
 
 		// Pretty links ?
 		$this->pretty_links = get_option( 'permalink_structure' );
+		$this->slugs        = get_option( '_wc_talks_slugs', array() );
 
 		// template globals
 		$this->is_talks         = false;

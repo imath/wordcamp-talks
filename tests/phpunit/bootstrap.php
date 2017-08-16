@@ -20,6 +20,12 @@ function _wct_assets_lang_dir( $mofile_path = '', $mofile = '' ) {
 }
 tests_add_filter( 'wordcamp_talks_lang_dir', '_wct_assets_lang_dir', 10, 2 );
 
+function _wct_assets_available_languages( $languages = array() ) {
+	return array_merge( $languages, array( 'fr_FR' ) );
+
+}
+tests_add_filter( 'get_available_languages', '_wct_assets_available_languages', 10, 1 );
+
 require getenv( 'WP_DEVELOP_DIR' ) . '/tests/phpunit/includes/bootstrap.php';
 
 // include our testcase
