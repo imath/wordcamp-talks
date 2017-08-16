@@ -485,7 +485,7 @@ function wct_talks_can_edit( $talk = null ) {
 
 		// Do not edit talks of the super admin
 		if ( ! is_super_admin( $talk->post_author ) ) {
-			return wct_user_can( 'edit_others_talks' );
+			return current_user_can( 'edit_others_talks' );
 		} else {
 			return $retval;
 		}
@@ -506,7 +506,7 @@ function wct_talks_can_edit( $talk = null ) {
 	$early_can_edit = apply_filters( 'wct_talks_pre_can_edit', false, $talk );
 
 	if ( ! empty( $early_can_edit ) || is_super_admin() ) {
-		return wct_user_can( 'edit_talk', $talk->ID );
+		return current_user_can( 'edit_talk', $talk->ID );
 	}
 
 	// Talk was commented or rated
@@ -538,7 +538,7 @@ function wct_talks_can_edit( $talk = null ) {
 
 	// Compare
 	if ( $cur_time <= $lock_time ) {
-		$retval = wct_user_can( 'edit_talk', $talk->ID );
+		$retval = current_user_can( 'edit_talk', $talk->ID );
 	}
 
 	/**
@@ -783,7 +783,7 @@ function wct_talks_enqueue_scripts() {
 	if ( wct_is_single_talk() && ! wct_is_edit() && ! wct_is_rating_disabled() ) {
 		$user_id = wct_users_current_user_id();
 
-		if ( ! wct_user_can( 'view_talk_rates' ) ) {
+		if ( ! current_user_can( 'view_talk_rates' ) ) {
 			$talk_id = 0;
 
 			if ( ! empty( wct()->query_loop->talk->ID ) ) {
@@ -820,14 +820,14 @@ function wct_talks_enqueue_scripts() {
 			'one_rate'     => $one_rate,
 			'x_rate'       => esc_html__( '% ratings', 'wordcamp-talks' ),
 			'readonly'     => true,
-			'can_rate'     => wct_user_can( 'rate_talks' ),
+			'can_rate'     => current_user_can( 'rate_talks' ),
 			'not_rated'    => esc_html__( 'Not rated yet', 'wordcamp-talks' ),
 			'hints'        => $hintlist,
 			'hints_nb'     => count( $hintlist ),
 			'wpnonce'      => wp_create_nonce( 'wct_rate' ),
 		) );
 
-		if ( wct_user_can( 'rate_talks' ) ) {
+		if ( current_user_can( 'rate_talks' ) ) {
 			$js_vars['readonly'] = ( 0 != $users_nb ) ? in_array( $user_id, $ratings['users'] ) : false;
 		}
 
@@ -912,11 +912,11 @@ function wct_talks_get_order_options() {
 	);
 
 	// Only if not disabled.
-	if ( ! wct_is_rating_disabled() && wct_user_can( 'view_talk_rates' ) ) {
+	if ( ! wct_is_rating_disabled() && current_user_can( 'view_talk_rates' ) ) {
 		$order_options['rates_count'] = __( 'Highest Rating', 'wordcamp-talks' );
 	}
 
-	if ( ! wct_user_can( 'view_talk_comments' ) ) {
+	if ( ! current_user_can( 'view_talk_comments' ) ) {
 		unset( $order_options['comment_count'] );
 	}
 
@@ -1023,7 +1023,7 @@ function wct_talks_post_talk() {
 	$redirect = wct_get_redirect_url();
 
 	// Check capacity
-	if ( ! wct_user_can( 'publish_talks' ) ) {
+	if ( ! current_user_can( 'publish_talks' ) ) {
 		// Redirect to main archive page and inform the user he cannot publish talks.
 		wp_safe_redirect( add_query_arg( 'error', 3, $redirect ) );
 		exit();

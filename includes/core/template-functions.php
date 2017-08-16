@@ -191,7 +191,7 @@ function wct_parse_query( $posts_query = null ) {
 		// Set the displayed user.
 		wct_set_global( 'displayed_user', $user );
 
-		if ( wct_user_can( 'view_other_profiles', $user->ID ) ) {
+		if ( current_user_can( 'view_other_profiles', $user->ID ) ) {
 			// Make sure no 404
 			$posts_query->is_404  = false;
 		} else {
@@ -753,7 +753,7 @@ function wct_reset_post_title( $context = '' ) {
 
 	switch( $context ) {
 		case 'archive' :
-			if ( wct_user_can( 'publish_talks' ) ) {
+			if ( current_user_can( 'publish_talks' ) ) {
 				$post_title =  '<a href="' . esc_url( wct_get_root_url() ) . '">' . $post_title . '</a>';
 				$post_title .= ' <a href="' . esc_url( wct_get_form_url() ) .'" class="button wpis-title-button">' . esc_html__( 'Add new', 'wordcamp-talks' ) . '</a>';
 			}
@@ -1088,7 +1088,7 @@ function wct_edit_post_link( $edit_link = '', $post_id = 0 ) {
 	 * author of the talk and don't have the minimal capability to open the talk in WordPress
 	 * Administration edit screen
 	 */
-	if ( wct_is_talks() && ( 0 === $post_id || ! wct_user_can( 'edit_talks' ) ) ) {
+	if ( wct_is_talks() && ( 0 === $post_id || ! current_user_can( 'edit_talks' ) ) ) {
 		/**
 		 * @param  bool   false to be sure the edit link won't show
 		 * @param  string $edit_link

@@ -9,7 +9,7 @@
  */
 ?>
 
-<?php if ( wct_user_can( 'view_other_profiles', wct_talks_get_author_id() ) ) : ?>
+<?php if ( current_user_can( 'view_other_profiles', wct_talks_get_author_id() ) ) : ?>
 	<div class="talk-avatar">
 		<?php wct_talks_the_author_avatar(); ?>
 	</div>

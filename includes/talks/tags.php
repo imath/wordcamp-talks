@@ -364,7 +364,7 @@ function wct_talks_not_found() {
 		} else if ( wct_is_orderby( 'rates_count' ) ) {
 			$output = __( 'It looks like no talks have been rated yet.', 'wordcamp-talks' );
 
-		} else if ( wct_user_can( 'publish_talks' ) ) {
+		} else if ( current_user_can( 'publish_talks' ) ) {
 			$output = sprintf(
 				__( 'It looks like no talks has been submitted yet, <a href="%s" title="Submit your talk">add yours</a>', 'wordcamp-talks' ),
 				esc_url( wct_get_form_url() )
@@ -514,7 +514,7 @@ function wct_talks_the_classes() {
 	function wct_talks_get_classes() {
 		$classes = array( 'talk' );
 
-		if ( ! wct_user_can( 'view_other_profiles', wct_talks_get_author_id() ) ) {
+		if ( ! current_user_can( 'view_other_profiles', wct_talks_get_author_id() ) ) {
 			$classes[] = 'no-avatar';
 		}
 
@@ -791,7 +791,7 @@ function wct_talks_the_talk_comment_link( $zero = false, $one = false, $more = f
 			$none = sprintf( '<span class="%1$s">%2$s</span>', $css_class, esc_html__( 'Comments Off', 'wordcamp-talks' ) );
 		}
 
-		if ( ! wct_user_can( 'comment_talks', $talk->ID ) ) {
+		if ( ! current_user_can( 'comment_talks', $talk->ID ) ) {
 			return $none;
 		}
 
@@ -801,7 +801,7 @@ function wct_talks_the_talk_comment_link( $zero = false, $one = false, $more = f
 		if ( post_password_required( $talk->ID ) ) {
 			$title = _x( 'Comments are protected.', 'talk protected comments message', 'wordcamp-talks' );
 			$output .= '<span class="talk-comments-protected">' . $title . '</span>';
-		} else if ( ! empty( $talk->post_status ) && 'private' == $talk->post_status && ! wct_user_can( 'read_talk', $talk->ID ) ) {
+		} else if ( ! empty( $talk->post_status ) && 'private' == $talk->post_status && ! current_user_can( 'read_talk', $talk->ID ) ) {
 			$title = _x( 'Comments are private.', 'talk private comments message', 'wordcamp-talks' );
 			$output .= '<span class="talk-comments-private">' . $title . '</span>';
 		} else if ( ! comments_open( $talk->ID ) ) {
@@ -877,7 +877,7 @@ function wct_talks_the_average_rating() {
 			$id = wct()->query_loop->talk->ID;
 		}
 
-		if ( wct_user_can( 'view_talk_rates' ) ) {
+		if ( current_user_can( 'view_talk_rates' ) ) {
 			$rating = get_post_meta( $id, '_wc_talks_average_rate', true );
 		} elseif ( is_user_logged_in() ) {
 			$rating = wct_count_ratings( $id, get_current_user_id() );
@@ -904,7 +904,7 @@ function wct_talks_the_average_rating() {
  */
 function wct_talks_the_rating_link( $zero = false, $more = false, $css_class = '' ) {
 	// Bail if ratings are disabled
-	if ( wct_is_rating_disabled() || ! wct_user_can( 'rate_talks' ) ) {
+	if ( wct_is_rating_disabled() || ! current_user_can( 'rate_talks' ) ) {
 		return false;
 	}
 
@@ -935,7 +935,7 @@ function wct_talks_the_rating_link( $zero = false, $more = false, $css_class = '
 		// Simply dont display votes if password protected or private.
 		if ( post_password_required( $talk->ID ) ) {
 			return $output;
-		} else if ( ! empty( $talk->post_status ) && 'private' == $talk->post_status && ! wct_user_can( 'read_talk', $talk->ID ) ) {
+		} else if ( ! empty( $talk->post_status ) && 'private' == $talk->post_status && ! current_user_can( 'read_talk', $talk->ID ) ) {
 			return $output;
 		}
 
@@ -947,7 +947,7 @@ function wct_talks_the_rating_link( $zero = false, $more = false, $css_class = '
 		}
 
 		// Blind raters can only see their vote
-		if ( is_user_logged_in() && ! wct_user_can( 'view_talk_rates' ) ) {
+		if ( is_user_logged_in() && ! current_user_can( 'view_talk_rates' ) ) {
 			$more = __( 'You rated: %', 'wordcamp-talks' );
 		}
 
@@ -1024,7 +1024,7 @@ function wct_talks_the_excerpt() {
 			$excerpt = __( 'This talk is password protected, you will need it to view its content.', 'wordcamp-talks' );
 
 		// Private
-		} else if ( ! empty( $talk->post_status ) && 'private' == $talk->post_status && ! wct_user_can( 'read_talk', $talk->ID ) ) {
+		} else if ( ! empty( $talk->post_status ) && 'private' == $talk->post_status && ! current_user_can( 'read_talk', $talk->ID ) ) {
 			$excerpt = __( 'This talk is private, you cannot view its content.', 'wordcamp-talks' );
 
 		// Public
@@ -1086,7 +1086,7 @@ function wct_talks_the_content() {
 			$content = __( 'This talk is password protected, you will need it to view its content.', 'wordcamp-talks' );
 
 		// Private
-		} else if ( ! empty( $post->post_status ) && 'private' == $post->post_status && ! wct_user_can( 'read_talk', $post->ID ) ) {
+		} else if ( ! empty( $post->post_status ) && 'private' == $post->post_status && ! current_user_can( 'read_talk', $post->ID ) ) {
 			$content = __( 'This talk is private, you cannot view its content.', 'wordcamp-talks' );
 
 		// Public
@@ -1246,7 +1246,7 @@ function wct_talks_the_talk_footer() {
 		}
 
 		if ( wct_is_single_talk() ) {
-			if ( ! wct_user_can( 'view_other_profiles', $talk->post_author ) ) {
+			if ( ! current_user_can( 'view_other_profiles', $talk->post_author ) ) {
 				$user_link = __( 'hidden name', 'wordcamp-talks' );
 			} else {
 				$user = wct_users_get_user_data( 'id', $talk->post_author );
@@ -1296,7 +1296,7 @@ function wct_talks_the_talk_footer() {
 		$edit_url = '';
 
 		// Super admin will use the Administration screens
-		if ( wct_user_can( 'select_talks' ) ) {
+		if ( current_user_can( 'select_talks' ) ) {
 			$edit_url = get_edit_post_link( $talk->ID );
 
 		// The author will use the front end edit form

@@ -125,7 +125,7 @@ function wct_users_user_profile_display_name() {
  * @param int $user_id the user ID
  */
 function wct_users_the_user_talk_rating( $id = 0, $user_id = 0 ) {
-	if ( ! wct_user_can( 'view_talk_rates' ) ) {
+	if ( ! current_user_can( 'view_talk_rates' ) ) {
 		return;
 	}
 

@@ -14,7 +14,7 @@
 
 	<?php wct_user_feedback(); ?>
 
-	<?php if ( wct_user_can( 'publish_talks' ) ) : ?>
+	<?php if ( current_user_can( 'publish_talks' ) ) : ?>
 
 		<form class="standard-form" id="wordcamp-talks-form" action="" method="post">
 

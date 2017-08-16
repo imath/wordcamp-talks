@@ -335,27 +335,3 @@ function wct_map_meta_caps( $caps = array(), $cap = '', $user_id = 0, $args = ar
 	 */
 	return apply_filters( 'wct_map_meta_caps', $caps, $cap, $user_id, $args );
 }
-
-/**
- * Check wether a user has the capability to perform an action
- *
- * @package WordCamp Talks
- * @subpackage core/capabilities
- *
- * @since 1.0.0
- *
- * @param  string $capability Capability to check
- * @param  array  $args additional args to help
- * @return bool True|False
- */
-function wct_user_can( $capability = '', $args = false ) {
-	$can = false;
-
-	if ( ! empty( $args ) ) {
-		$can = current_user_can( $capability, $args );
-	} else {
-		$can = current_user_can( $capability );
-	}
-
-	return apply_filters( 'wct_user_can', $can, $capability );
-}

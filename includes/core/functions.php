@@ -336,7 +336,7 @@ function wct_post_type_register_args() {
 		'has_archive'         => wct_root_slug(),
 		'exclude_from_search' => true,
 		'show_in_nav_menus'   => false,
-		'show_in_admin_bar'   => wct_user_can( 'wct_talks_admin' ),
+		'show_in_admin_bar'   => current_user_can( 'wct_talks_admin' ),
 		'menu_icon'           => 'dashicons-controls-volumeon',
 		'supports'            => array( 'title', 'editor', 'author', 'comments', 'revisions' ),
 		'taxonomies'          => array(
@@ -1201,7 +1201,7 @@ function wct_add_rate( $talk = 0, $user_id = 0, $rate = 0 ) {
  * @return mixed the average rate or 0
  */
 function wct_ajax_rate() {
-	if ( ! wct_user_can( 'rate_talks' ) ) {
+	if ( ! current_user_can( 'rate_talks' ) ) {
 		exit( '0' );
 	}
 
@@ -1214,7 +1214,7 @@ function wct_ajax_rate() {
 	$new_average_rate = wct_add_rate( $talk, $user_id, $rate );
 
 	// If the user can't see other ratings, simply return the rating he just gave.
-	if ( ! wct_user_can( 'view_talk_rates' ) ) {
+	if ( ! current_user_can( 'view_talk_rates' ) ) {
 		$new_average_rate = number_format( $rate, 1 );
 	}
 
@@ -1545,7 +1545,7 @@ function wct_adminbar_menu( $wp_admin_bar = null ){
 		return;
 	}
 
-	if ( ! empty( $wp_admin_bar ) && wct_user_can( 'edit_talks' ) ) {
+	if ( ! empty( $wp_admin_bar ) && current_user_can( 'edit_talks' ) ) {
 		$menu_url = add_query_arg( 'post_type', wct_get_post_type(), admin_url( 'edit.php' ) );
 		$wp_admin_bar->add_menu( array(
 			'parent' => 'appearance',

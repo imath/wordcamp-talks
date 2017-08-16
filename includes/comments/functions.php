@@ -278,7 +278,7 @@ function wct_comments_open( $open = true, $talk_id = 0 ) {
 	if ( ! wct_is_talks() ) {
 		return $open;
 	} else {
-		$open = wct_user_can( 'comment_talks' );
+		$open = current_user_can( 'comment_talks' );
 	}
 
 	/**
@@ -307,12 +307,12 @@ function wct_comments_array( $comments = array(), $talk_id = 0 ) {
 	}
 
 	// If the user can't comment
-	if ( ! wct_user_can( 'comment_talks' ) ) {
+	if ( ! current_user_can( 'comment_talks' ) ) {
 		return array();
 	}
 
 	foreach (  $comments as $key => $comment ) {
-		if ( empty( $comment->user_id ) || ! wct_user_can( 'view_other_profiles', $comment->user_id ) ) {
+		if ( empty( $comment->user_id ) || ! current_user_can( 'view_other_profiles', $comment->user_id ) ) {
 			continue;
 		}
 
@@ -340,7 +340,7 @@ function wct_comments_template_query_args( $comment_query_args = array() ) {
 		$comment_query_args['type__not_in'] = array( 'comment' );
 
 	// if the user can't view any talk comments, only show him the ones he posted.
-	} elseif ( ! wct_user_can( 'view_talk_comments' ) ) {
+	} elseif ( ! current_user_can( 'view_talk_comments' ) ) {
 		$comment_query_args['user_id'] = get_current_user_id();
 	}
 
@@ -368,7 +368,7 @@ function wct_edit_comments_number( $count = 0, $post_id = 0 ) {
 		return $count;
 	}
 
-	if ( wct_user_can( 'view_talk_comments' ) ) {
+	if ( current_user_can( 'view_talk_comments' ) ) {
 		return $count;
 	}
 
@@ -446,7 +446,7 @@ function wct_comment_reply_link( $reply_link = '', $args = array(), $comment = n
  */
 function wct_comment_feed_limits( $limit = '', $wp_query = null ) {
 	// Force the comments query to return nothing
-	if ( ! empty( $wp_query->query['post_type'] ) && wct_get_post_type() === $wp_query->query['post_type'] && ! wct_user_can( 'comment_talks' ) ) {
+	if ( ! empty( $wp_query->query['post_type'] ) && wct_get_post_type() === $wp_query->query['post_type'] && ! current_user_can( 'comment_talks' ) ) {
 		$limit = 'LIMIT 0';
 	}
 

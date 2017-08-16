@@ -1654,7 +1654,7 @@ function wct_users_raters_approved( $approved = 0, $commentdata = array() ) {
 		return $approved;
 	}
 
-	if ( ! empty( $commentdata['user_id'] ) && wct_user_can( 'comment_talks' ) ) {
+	if ( ! empty( $commentdata['user_id'] ) && current_user_can( 'comment_talks' ) ) {
 		$approved = 1;
 	}
 

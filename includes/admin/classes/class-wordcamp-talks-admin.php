@@ -381,7 +381,7 @@ class WordCamp_Talks_Admin {
 		check_admin_referer( 'wct_workflow_metabox_save', 'wct_workflow_metabox_metabox' );
 
 		// Capability check
-		if ( ! wct_user_can( 'select_talks' ) ) {
+		if ( ! current_user_can( 'select_talks' ) ) {
 			return $id;
 		}
 
@@ -586,7 +586,7 @@ class WordCamp_Talks_Admin {
 		foreach ( (array) $sections as $section_id => $section ) {
 
 			// Only proceed if current user can see this section
-			if ( ! wct_user_can( 'wct_talks_admin' ) )
+			if ( ! current_user_can( 'wct_talks_admin' ) )
 				continue;
 
 			// Only add section and fields if section has fields
@@ -1043,7 +1043,7 @@ class WordCamp_Talks_Admin {
 			return;
 		}
 
-		if ( ! wct_user_can( 'edit_talks' ) ) {
+		if ( ! current_user_can( 'edit_talks' ) ) {
 			return;
 		}
 

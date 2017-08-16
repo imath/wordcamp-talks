@@ -440,7 +440,7 @@ function wct_comments_the_comment_excerpt() {
 			$excerpt = __( 'The talk the comment was posted on is password protected: you will need the password to view its content.', 'wordcamp-talks' );
 
 		// Private
-		} else if ( ! empty( $talk->post_status ) && 'private' == $talk->post_status && ! wct_user_can( 'read_talk', $talk->ID ) ) {
+		} else if ( ! empty( $talk->post_status ) && 'private' == $talk->post_status && ! current_user_can( 'read_talk', $talk->ID ) ) {
 			$excerpt = __( 'The talk the comment was posted on is private: you cannot view its content.', 'wordcamp-talks' );
 
 		// Public
