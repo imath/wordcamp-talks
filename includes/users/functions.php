@@ -1084,7 +1084,7 @@ function wct_users_update_signups_table( $user_id = 0 ) {
  * @param string $password The Password to reset.
  * @param int    $user_id  The User id to reset the password for.
  */
-function wct_resset_password( $password, $user_id ) {
+function wct_reset_password( $password, $user_id ) {
 	global $wpdb;
 
 	$hash = wp_hash_password( $password );
@@ -1194,6 +1194,41 @@ function wct_users_signup_user( $exit = true ) {
 	 */
 	do_action( 'wct_users_before_signup_user', $user_login, $user_email, $edit_user );
 
+	/**
+	 * FIlter here by returning false to bypass the profiles.wordpress.org check.
+	 *
+	 * @since  1.1.0
+	 *
+	 * @param  boolean $value True to check the profile exists. False otherwise.
+	 */
+	if ( true === apply_filters( 'wct_users_has_wp_org_profile', true ) ) {
+		$wporg_profile = new WordCamp_Talks_Users_Profile_Parser;
+		$profile_data  = $wporg_profile->parse( $user_login );
+
+		if ( empty( $profile_data ) || ! empty( $profile_data['errors'] ) ) {
+			$profile_error = 12;
+
+			if ( is_wp_error( $profile_data['errors'] ) ) {
+				$profile_error = $profile_data['errors']->get_error_message();
+			}
+
+			// Add feedback to the user
+			wct_add_message( array(
+				'error' => $profile_error,
+			) );
+
+			return;
+		} else {
+			// Use the profiles.wordpress.org display name and description, if found.
+			$to_edit = array_intersect_key( $profile_data, array(
+				'display_name' => true,
+				'description'  => true,
+			) );
+
+			$edit_user = array_merge( $edit_user, $to_edit );
+		}
+	}
+
 	// Defaults to user name and user email
 	$signup_array = array( 'user_name' => $user_login, 'user_email' => $user_email );
 
@@ -1202,7 +1237,7 @@ function wct_users_signup_user( $exit = true ) {
 		$signup_array = wpmu_validate_user_signup( $user_login, $user_email );
 
 		if ( is_wp_error( $signup_array['errors'] ) && $signup_array['errors']->get_error_code() ) {
-			//Add feedback to the user
+			// Add feedback to the user
 			wct_add_message( array(
 				'error' => $signup_array['errors']->get_error_messages(),
 			) );
@@ -1232,7 +1267,7 @@ function wct_users_signup_user( $exit = true ) {
 	do_action( 'wct_users_after_signup_user', $user_login, $user_email, $edit_user, $user );
 
 	if ( is_wp_error( $user ) ) {
-		//Add feedback to the user
+		// Add feedback to the user
 		wct_add_message( array(
 			'error' => $user->get_error_messages(),
 		) );
@@ -1290,7 +1325,7 @@ function wct_users_signup_user( $exit = true ) {
 				);
 
 				// Reset Password without removing the activation key.
-				wct_resset_password( $signon_data['user_password'], $loggedin_user->ID );
+				wct_reset_password( $signon_data['user_password'], $loggedin_user->ID );
 
 				// Log the user in
 				$signed_in = wp_signon( $signon_data );

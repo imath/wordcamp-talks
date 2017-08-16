@@ -192,6 +192,28 @@ function wct_users_the_signup_fields() {
 	function wct_users_get_signup_fields() {
 		$output = '';
 
+		/**
+		 * Use this filter to add descriptions to your fields or remove these ones.
+		 *
+		 * @since  1.1.0
+		 *
+		 * @param array $value The fields description.
+		 */
+		$fields_description = apply_filters( 'wct_users_get_signup_fields_description', array(
+			'user_login' => sprintf(
+					__( 'A WordPress.org username is required, if you don\'t have one yet, you can %s.', 'wordcamp-talks' ),
+					'<a href="https://login.wordpress.org/register">' . __( 'create one', 'wordcamp-talks' ) . '</a>'
+				),
+			'user_email' => sprintf(
+					__( 'An email linked to your Gravatar profile is required. If you don\'t have one yet, you can %s.', 'wordcamp-talks' ),
+					sprintf( '<a href="%1$s">%2$s</a>',
+						/* Translators: Use the url that corresponds to your country. Eg: France is https://fr.gravatar.com/ */
+						esc_url( __( 'https://en.gravatar.com/', 'wordcamp-talks' ) ),
+						esc_html__( 'create one', 'wordcamp-talks' )
+					)
+				),
+		) );
+
 		foreach ( (array) wct_user_get_fields() as $key => $label ) {
 			// reset
 			$sanitized = array(
@@ -207,7 +229,7 @@ function wct_users_the_signup_fields() {
 			$required = apply_filters( 'wct_users_is_signup_field_required', false, $key );
 			$required_output = false;
 
-			if ( ! empty( $required ) || in_array( $key, array( 'user_login', 'user_email' ) ) ) {
+			if ( ! empty( $required ) || in_array( $key, array( 'user_login', 'user_email' ), true ) ) {
 				$required_output = '<span class="required">*</span>';
 			}
 
@@ -237,6 +259,10 @@ function wct_users_the_signup_fields() {
 			// Default is text field.
 			} else {
 				$output .= '<input type="text" id="_wct_signup_' . esc_attr( $sanitized['key'] ) . '" name="wct_signup[' . esc_attr( $sanitized['key'] ) . ']" value="' . esc_attr( $sanitized['value'] ) . '"/>';
+			}
+
+			if ( isset( $fields_description[$key] ) ) {
+				$output .= sprintf( '<p class="description">%s</p>', wp_kses( $fields_description[$key], array( 'a' => array( 'href' => true ) ) ) );
 			}
 
 			$output .= apply_filters( 'wct_users_after_signup_field', '', $sanitized );
