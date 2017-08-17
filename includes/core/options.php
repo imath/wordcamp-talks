@@ -42,6 +42,7 @@ function wct_get_default_options() {
 		'_wc_talks_public_fields_list'  => array(),
 		'_wc_talks_signup_fields'       => array(),
 		'_wc_talks_autolog_enabled'     => 0,
+		'_wc_talks_editing_timeout'     => '+1 hour',
 	);
 
 	// Multisite options
@@ -209,6 +210,18 @@ function wct_user_signup_fields( $default = array() ) {
  */
 function wct_user_autolog_after_signup( $default = 0 ) {
 	return (bool) apply_filters( 'wct_user_autolog_after_signup', (bool) get_option( '_wc_talks_autolog_enabled', $default ) );
+}
+
+/**
+ * Time the speaker has to edit his/her talk.
+ *
+ * @since  1.1.0
+ *
+ * @param  string $default Default value is set to 1 hour once the talk is submitted.
+ * @return string          Time the speaker has to edit his/her talk.
+ */
+function wct_talk_editing_timeout( $default = '+1 hour' ) {
+	return apply_filters( 'wct_talk_editing_timeout', get_option( '_wc_talks_editing_timeout', $default ) );
 }
 
 /**

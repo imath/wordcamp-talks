@@ -78,6 +78,14 @@ function wct_get_settings_fields() {
 				'args'              => array()
 			),
 
+			// Customize the hint list
+			'_wc_talks_editing_timeout' => array(
+				'title'             => __( 'Talk Proposal\'s editing timeout (For speakers)', 'wordcamp-talks' ),
+				'callback'          => 'wct_talk_editing_timeout_callback',
+				'sanitize_callback' => 'wct_sanitize_editing_timeout',
+				'args'              => array()
+			),
+
 			// Private fields (not shown on front-end)
 			'_wc_talks_private_fields_list' => array(
 				'title'             => __( 'Private user profile fields', 'wordcamp-talks' ),
@@ -454,6 +462,26 @@ function wct_autolog_signups_fields_setting_callback() {
 }
 
 /**
+ * Talk Proposal's editing timeout (speakers) callback
+ *
+ * @since 1.0.0
+ *
+ * @return string HTML output
+ */
+function wct_talk_editing_timeout_callback() {
+	$current = wct_talk_editing_timeout();
+
+	$timeouts = wct_talks_editing_timeout_options();
+	?>
+	<select name="_wc_talks_editing_timeout" id="_wc_talks_editing_timeout">
+		<?php foreach ( $timeouts as $t => $timeout ) : ?>
+			<option value="<?php echo esc_attr( $t ); ?>" <?php selected( $current, $t ); ?>><?php echo esc_html( $timeout ); ?></option>
+		<?php endforeach ; ?>
+	</select>
+	<?php
+}
+
+/**
  * Some text to introduce the multisite settings section
  *
  * @package WordCamp Talks
@@ -621,6 +649,24 @@ function wct_sanitize_user_fields_list( $option = '' ) {
 	 * @param array $fields the sanitized fields
 	 */
 	return apply_filters( 'wct_sanitize_user_fields_list', $fields );
+}
+
+/**
+ * Sanitize the Talk Proposal's editing timeout.
+ *
+ * @since  1.1.0
+ *
+ * @param  string $option The timeout
+ * @return string         The timeout
+ */
+function wct_sanitize_editing_timeout( $option = '' ) {
+	$timeouts = array_keys( wct_talks_editing_timeout_options() );
+
+	if ( ! in_array( $option, $timeouts, true ) ) {
+		$option = '+1 hour';
+	}
+
+	return $option;
 }
 
 /**

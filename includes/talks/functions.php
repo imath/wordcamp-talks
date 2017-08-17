@@ -453,6 +453,21 @@ function wct_talks_heartbeat_check_locked( $response = array(), $data = array() 
 }
 
 /**
+ * Talk's editing timeout options for speakers.
+ *
+ * @since  1.1.0
+ *
+ * @return array Timeout options.
+ */
+function wct_talks_editing_timeout_options() {
+	return array(
+		'+5 minutes' => __( '5 minutes', 'wordcamp-talks' ),
+		'+1 hour'    => __( 'an hour', 'wordcamp-talks' ),
+		'+1 day'     => __( 'a day', 'wordcamp-talks' ),
+	);
+}
+
+/**
  * Checks if a user can edit a talk
  *
  * A user can edit the talk if :
@@ -481,7 +496,7 @@ function wct_talks_can_edit( $talk = null ) {
 	}
 
 	// Map to edit others talks if current user is not the author
-	if ( wct_users_current_user_id() != $talk->post_author ) {
+	if ( (int) wct_users_current_user_id() !== (int) $talk->post_author ) {
 
 		// Do not edit talks of the super admin
 		if ( ! is_super_admin( $talk->post_author ) ) {
@@ -514,6 +529,11 @@ function wct_talks_can_edit( $talk = null ) {
 		return $retval;
 	}
 
+	// Talk status has changed.
+	if ( 'wct_pending' !== get_post_status( $talk ) ) {
+		return $retval;
+	}
+
 	/**
 	 * This part is based on bbPress's bbp_past_edit_lock() function
 	 *
@@ -528,7 +548,7 @@ function wct_talks_can_edit( $talk = null ) {
 	}
 
 	// Period of time
-	$lockable  = apply_filters( 'wct_talks_can_edit_time', '+1 hour' );
+	$lockable  = apply_filters( 'wct_talks_can_edit_time', wct_talk_editing_timeout() );
 
 	// Now
 	$cur_time  = current_time( 'timestamp', true );
