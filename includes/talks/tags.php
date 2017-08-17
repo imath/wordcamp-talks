@@ -322,51 +322,57 @@ function wct_talks_not_found() {
 	 */
 	function wct_talks_get_not_found() {
 		// general feedback
-		$output = esc_html__( 'It looks like no talk has been submitted yet, please sign in or sign up to add yours!', 'wordcamp-talks' );
+		$output = sprintf( __( 'It looks like no Talk Proposals have been submitted yet. %s to add yours!', 'wordcamp-talks' ),
+			'<a href="' . esc_url( wp_login_url( wct_get_form_url() ) ) .'">' . esc_html__( 'Sign in', 'wordcamp-talks' ) . '</a>'
+		);
 
 		if ( wct_is_user_profile() ) {
 			/**
 			 * This part should probably be improved..
 			 */
 			if ( ! wct_is_user_profile_rates() && ! wct_is_user_profile_to_rate() ) {
-				$output = sprintf(
-					__( 'It looks like %s has not submitted any talk yet', 'wordcamp-talks' ),
-					wct_users_get_displayed_user_displayname()
-				);
+				if ( wct_is_current_user_profile() ) {
+					$output = __( 'It looks like you have not submitted any Talk Proposals yet.', 'wordcamp-talks' );
+				} else {
+					$output = sprintf(
+						__( 'It looks like %s has not submitted any Talk Proposals yet', 'wordcamp-talks' ),
+						wct_users_get_displayed_user_displayname()
+					);
+				}
 
 			// We're viewing the talk the user rated
 			} elseif ( ! wct_is_user_profile_to_rate() ) {
 				$output = sprintf(
-					__( 'It looks like %s has not rated any talks yet', 'wordcamp-talks' ),
+					__( 'It looks like %s has not rated any Talk Proposals yet', 'wordcamp-talks' ),
 					wct_users_get_displayed_user_displayname()
 				);
 
 			// We're viewing the talk the user had to rate, and he rated all
 			} else {
 				$output = sprintf(
-					__( 'Alright sparky, no more talks to rate.. Good job!', 'wordcamp-talks' ),
+					__( 'Alright sparky, no more Talk Proposals to rate.. Good job!', 'wordcamp-talks' ),
 					wct_users_get_displayed_user_displayname()
 				);
 			}
 
 		} else if ( wct_is_category() ) {
-			$output = __( 'It looks like no talk has been published in this category yet', 'wordcamp-talks' );
+			$output = __( 'It looks like no Talk Proposals have been published in this category yet', 'wordcamp-talks' );
 
 		} else if ( wct_is_tag() ) {
-			$output = __( 'It looks like no talk has been marked with this tag yet', 'wordcamp-talks' );
+			$output = __( 'It looks like no Talk Proposals have been marked with this tag yet', 'wordcamp-talks' );
 
 		} else if ( wct_is_search() ) {
-			$output = __( 'It looks like no talk matches your search terms.', 'wordcamp-talks' );
+			$output = __( 'It looks like no Talk Proposals match your search terms.', 'wordcamp-talks' );
 
 		} else if ( wct_is_search() ) {
-			$output = __( 'It looks like no talk matches your search terms.', 'wordcamp-talks' );
+			$output = __( 'It looks like no Talk Proposals match your search terms.', 'wordcamp-talks' );
 
 		} else if ( wct_is_orderby( 'rates_count' ) ) {
-			$output = __( 'It looks like no talks have been rated yet.', 'wordcamp-talks' );
+			$output = __( 'It looks like no Talk Proposals have been rated yet.', 'wordcamp-talks' );
 
 		} else if ( current_user_can( 'publish_talks' ) ) {
 			$output = sprintf(
-				__( 'It looks like no talks has been submitted yet, <a href="%s" title="Submit your talk">add yours</a>', 'wordcamp-talks' ),
+				__( 'It looks like no Talk Proposals have been submitted yet, <a href="%s" title="Submit your Talk Proposal">add yours</a>', 'wordcamp-talks' ),
 				esc_url( wct_get_form_url() )
 			);
 		}
@@ -404,7 +410,7 @@ function wct_talks_pagination_count() {
 		$from_num   = number_format_i18n( $start_num );
 		$to_num     = number_format_i18n( ( $start_num + ( $query_loop->per_page - 1 ) > $query_loop->total_talk_count ) ? $query_loop->total_talk_count : $start_num + ( $query_loop->per_page - 1 ) );
 		$total      = number_format_i18n( $query_loop->total_talk_count );
-		$pag        = sprintf( _n( 'Viewing %1$s to %2$s (of %3$s talks)', 'Viewing %1$s to %2$s (of %3$s talks)', $total, 'wordcamp-talks' ), $from_num, $to_num, $total );
+		$pag        = sprintf( _n( 'Viewing %1$s to %2$s (of %3$s Talk Proposals)', 'Viewing %1$s to %2$s (of %3$s Talk Proposals)', $total, 'wordcamp-talks' ), $from_num, $to_num, $total );
 
 		/**
 		 * @param  string $pag the pagination count to output
@@ -1021,11 +1027,11 @@ function wct_talks_the_excerpt() {
 
 		// Password protected
 		if ( post_password_required( $talk ) ) {
-			$excerpt = __( 'This talk is password protected, you will need it to view its content.', 'wordcamp-talks' );
+			$excerpt = __( 'This Talk Proposal is password protected, you will need it to view its content.', 'wordcamp-talks' );
 
 		// Private
 		} else if ( ! empty( $talk->post_status ) && 'private' == $talk->post_status && ! current_user_can( 'read_talk', $talk->ID ) ) {
-			$excerpt = __( 'This talk is private, you cannot view its content.', 'wordcamp-talks' );
+			$excerpt = __( 'This Talk Proposal is private, you cannot view its content.', 'wordcamp-talks' );
 
 		// Public
 		} else {
@@ -1083,11 +1089,11 @@ function wct_talks_the_content() {
 
 		// Password protected
 		if ( post_password_required( $post ) ) {
-			$content = __( 'This talk is password protected, you will need it to view its content.', 'wordcamp-talks' );
+			$content = __( 'This Talk Proposal is password protected, you will need it to view its content.', 'wordcamp-talks' );
 
 		// Private
 		} else if ( ! empty( $post->post_status ) && 'private' == $post->post_status && ! current_user_can( 'read_talk', $post->ID ) ) {
-			$content = __( 'This talk is private, you cannot view its content.', 'wordcamp-talks' );
+			$content = __( 'This Talk Proposal is private, you cannot view its content.', 'wordcamp-talks' );
 
 		// Public
 		} else {
@@ -1225,23 +1231,23 @@ function wct_talks_the_talk_footer() {
 
 		// Translators: 1 is category, 2 is tag and 3 is the date.
 		$retarray = array(
-			'utility_text' => _x( 'This talk was posted on %3$s.', 'default talk footer utility text', 'wordcamp-talks' ),
+			'utility_text' => _x( 'This Talk Proposal was posted on %3$s.', 'default talk footer utility text', 'wordcamp-talks' ),
 		);
 
 		if ( ! empty( $category_list ) ) {
 			// Translators: 1 is category, 2 is tag and 3 is the date.
-			$retarray['utility_text'] = _x( 'This talk was posted in %1$s on %3$s.', 'talk attached to at least one category footer utility text', 'wordcamp-talks' );
+			$retarray['utility_text'] = _x( 'This Talk Proposal was posted in %1$s on %3$s.', 'talk attached to at least one category footer utility text', 'wordcamp-talks' );
 			$placeholders['category'] = $category_list;
 		}
 
 		if ( ! empty( $tag_list ) ) {
 			// Translators: 1 is category, 2 is tag and 3 is the date.
-			$retarray['utility_text'] = _x( 'This talk was tagged %2$s on %3$s.', 'talk attached to at least one tag footer utility text', 'wordcamp-talks' );
+			$retarray['utility_text'] = _x( 'This Talk Proposal was tagged %2$s on %3$s.', 'talk attached to at least one tag footer utility text', 'wordcamp-talks' );
 			$placeholders['tag'] = $tag_list;
 
 			if ( ! empty( $category_list ) ) {
 				// Translators: 1 is category, 2 is tag and 3 is the date.
-				$retarray['utility_text'] =  _x( 'This talk was posted in %1$s and tagged %2$s on %3$s.', 'talk attached to at least one tag and one category footer utility text', 'wordcamp-talks' );
+				$retarray['utility_text'] =  _x( 'This Talk Proposal was posted in %1$s and tagged %2$s on %3$s.', 'talk attached to at least one tag and one category footer utility text', 'wordcamp-talks' );
 			}
 		}
 
@@ -1255,21 +1261,21 @@ function wct_talks_the_talk_footer() {
 			}
 
 			// Translators: 1 is category, 2 is tag, 3 is the date and 4 is author.
-			$retarray['utility_text']  = _x( 'This talk was posted on %3$s by %4$s.', 'default single talk footer utility text', 'wordcamp-talks' );
+			$retarray['utility_text']  = _x( 'This Talk Proposal was posted on %3$s by %4$s.', 'default single talk footer utility text', 'wordcamp-talks' );
 			$placeholders['user_link'] = $user_link;
 
 			if ( ! empty( $category_list ) ) {
 				// Translators: 1 is category, 2 is tag, 3 is the date and 4 is author.
-				$retarray['utility_text'] = _x( 'This talk was posted in %1$s on %3$s by %4$s.', 'single talk attached to at least one category footer utility text', 'wordcamp-talks' );
+				$retarray['utility_text'] = _x( 'This Talk Proposal was posted in %1$s on %3$s by %4$s.', 'single talk attached to at least one category footer utility text', 'wordcamp-talks' );
 			}
 
 			if ( ! empty( $tag_list ) ) {
 				// Translators: 1 is category, 2 is tag, 3 is the date and 4 is author.
-				$retarray['utility_text'] = _x( 'This talk was tagged %2$s on %3$s by %4$s.', 'single talk attached to at least one tag footer utility text', 'wordcamp-talks' );
+				$retarray['utility_text'] = _x( 'This Talk Proposal was tagged %2$s on %3$s by %4$s.', 'single talk attached to at least one tag footer utility text', 'wordcamp-talks' );
 
 				if ( ! empty( $category_list ) ) {
 					// Translators: 1 is category, 2 is tag, 3 is the date and 4 is author.
-					$retarray['utility_text'] =  _x( 'This talk was posted in %1$s and tagged %2$s on %3$s by %4$s.', 'single talk attached to at least one tag and one category footer utility text', 'wordcamp-talks' );
+					$retarray['utility_text'] =  _x( 'This Talk Proposal was posted in %1$s and tagged %2$s on %3$s by %4$s.', 'single talk attached to at least one tag and one category footer utility text', 'wordcamp-talks' );
 				}
 			}
 
@@ -1365,19 +1371,19 @@ function wct_talks_bottom_navigation() {
  * @return string the not logged in message output
  */
 function wct_talks_not_loggedin() {
-	$output = esc_html__( 'You are not allowed to submit talks', 'wordcamp-talks' );
+	$output = esc_html__( 'You are not allowed to submit Talk Proposals', 'wordcamp-talks' );
 
 	if ( ! is_user_logged_in() ) {
 
 		if ( wct_is_signup_allowed_for_current_blog() ) {
 			$output = sprintf(
-				__( 'Please <a href="%s" title="Log in">log in</a> or <a href="%s" title="Sign up">register</a> to this site to submit a talk.', 'wordcamp-talks' ),
+				__( 'Please <a href="%s" title="Log in">log in</a> or <a href="%s" title="Sign up">register</a> to this site to submit a Talk Proposal.', 'wordcamp-talks' ),
 				esc_url( wp_login_url( wct_get_form_url() ) ),
 				esc_url( wct_users_get_signup_url() )
 			);
 		} else {
 			$output = sprintf(
-				__( 'Please <a href="%s" title="Log in">log in</a> to this site to submit a talk.', 'wordcamp-talks' ),
+				__( 'Please <a href="%s" title="Log in">log in</a> to this site to submit a Talk Proposal.', 'wordcamp-talks' ),
 				esc_url( wp_login_url( wct_get_form_url() ) )
 			);
 		}

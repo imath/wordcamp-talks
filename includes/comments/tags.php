@@ -109,7 +109,7 @@ function wct_comments_no_comment_found() {
 	 */
 	function wct_comments_get_no_comment_found() {
 		$output = sprintf(
-			__( 'It looks like %s has not commented on any talks yet', 'wordcamp-talks' ),
+			__( 'It looks like %s has not commented on any Talk Proposals yet', 'wordcamp-talks' ),
 			wct_users_get_displayed_user_displayname()
 		);
 
@@ -437,11 +437,11 @@ function wct_comments_the_comment_excerpt() {
 		$talk = get_post( $talk );
 
 		if ( post_password_required( $talk ) ) {
-			$excerpt = __( 'The talk the comment was posted on is password protected: you will need the password to view its content.', 'wordcamp-talks' );
+			$excerpt = __( 'The Talk Proposal the comment was posted on is password protected: you will need the password to view its content.', 'wordcamp-talks' );
 
 		// Private
 		} else if ( ! empty( $talk->post_status ) && 'private' == $talk->post_status && ! current_user_can( 'read_talk', $talk->ID ) ) {
-			$excerpt = __( 'The talk the comment was posted on is private: you cannot view its content.', 'wordcamp-talks' );
+			$excerpt = __( 'The Talk Proposal the comment was posted on is private: you cannot view its content.', 'wordcamp-talks' );
 
 		// Public
 		} else {

@@ -504,7 +504,7 @@ function wct_get_user_default_role_setting_callback() {
 	?>
 
 	<input name="_wc_talks_user_new_talk_set_role" id="_wc_talks_user_new_talk_set_role" type="checkbox" value="1" <?php checked( wct_get_user_default_role() ); ?> />
-	<label for="_wc_talks_user_new_talk_set_role"><?php esc_html_e( 'Automatically set this site&#39;s default role for users posting a new talk and having no role on this site.', 'wordcamp-talks' ); ?></label>
+	<label for="_wc_talks_user_new_talk_set_role"><?php esc_html_e( 'Automatically set this site&#39;s default role for users submitting a new Talk Proposal and having no role on this site.', 'wordcamp-talks' ); ?></label>
 
 	<?php
 }

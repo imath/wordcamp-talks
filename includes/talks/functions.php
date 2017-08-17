@@ -854,7 +854,7 @@ function wct_talks_enqueue_scripts() {
 			$js_vars = array_merge( $js_vars, array(
 				'talk_id' => wct_get_single_talk_id(),
 				'pulse'   => 'fast',
-				'warning' => esc_html__( 'An admin is currently editing this talk, please try to edit your talk later.', 'wordcamp-talks' ),
+				'warning' => esc_html__( 'An admin is currently editing this Talk Proposal, please try to edit your Talk Proposal later.', 'wordcamp-talks' ),
 			) );
 		}
 

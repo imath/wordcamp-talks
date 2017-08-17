@@ -3,7 +3,7 @@
   "bugs": {
     "url": "https://github.com/imath/wordcamp-talks/issues"
   },
-  "description": "A WordCamp Talk Submission System",
+  "description": "WordCamp Talk Proposals Management Tool",
   "devDependencies": {
     "grunt": "~1.0.1",
     "grunt-checktextdomain": "~1.0.1",

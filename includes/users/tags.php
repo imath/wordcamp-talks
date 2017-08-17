@@ -397,7 +397,7 @@ function wct_users_public_profile_value( $info = '' ) {
 	if ( isset( wct_users_displayed_user()->data_to_edit ) ) {
 		if ( 'user_description' === $info ) {
 			printf( '<textarea name="%1$s">%2$s</textarea>', esc_attr( $info ), wct_users_displayed_user()->data_to_edit[$info] );
-			printf( '<p class="description">%s</p>', esc_html__( 'Your bio will be used to introduce yourself in case one of your talk proposals is selected (Required).', 'wordcamp-talks' ) );
+			printf( '<p class="description">%s</p>', esc_html__( 'Your bio will be used to introduce yourself in case one of your Talk Proposals is selected (Required).', 'wordcamp-talks' ) );
 		} else {
 			printf( '<input type="text" name="%1$s" value="%2$s"/>', esc_attr( $info ), wct_users_displayed_user()->data_to_edit[$info] );
 		}

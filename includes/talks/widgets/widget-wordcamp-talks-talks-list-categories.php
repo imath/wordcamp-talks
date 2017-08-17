@@ -113,7 +113,7 @@ if ( ! class_exists( 'WordCamp_Talks_Talks_List_Categories' ) ) :
 
 		<p>
 			<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id( 'count' ); ?>" name="<?php echo $this->get_field_name( 'count' ); ?>"<?php checked( $count ); ?> />
-			<label for="<?php echo $this->get_field_id( 'count' ); ?>"><?php _e( 'Show talk counts', 'wordcamp-talks' ); ?></label><br />
+			<label for="<?php echo $this->get_field_id( 'count' ); ?>"><?php _e( 'Show Talk Proposals count', 'wordcamp-talks' ); ?></label><br />
 		</p>
 		<?php
 	}

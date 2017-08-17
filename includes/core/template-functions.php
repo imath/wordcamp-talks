@@ -813,9 +813,9 @@ function wct_title( $title_array = array() ) {
 	$new_title = array();
 
 	if ( wct_is_addnew() ) {
-		$new_title[] = esc_attr__( 'New talk', 'wordcamp-talks' );
+		$new_title[] = esc_attr__( 'New Talk Proposal', 'wordcamp-talks' );
 	} elseif ( wct_is_edit() ) {
-		$new_title[] = esc_attr__( 'Edit talk', 'wordcamp-talks' );
+		$new_title[] = esc_attr__( 'Edit Talk Proposal', 'wordcamp-talks' );
 	} elseif ( wct_is_user_profile() ) {
 		$new_title[] = sprintf( esc_html__( '%s&#39;s profile', 'wordcamp-talks' ), wct_users_get_displayed_user_displayname() );
 	} elseif ( wct_is_single_talk() ) {
@@ -834,7 +834,7 @@ function wct_title( $title_array = array() ) {
 	} elseif ( wct_is_signup() ) {
 		$new_title[] = esc_html__( 'Create an account', 'wordcamp-talks' );
 	} else {
-		$new_title[] = esc_html__( 'Talks', 'wordcamp-talks' );
+		$new_title[] = esc_html__( 'Talk Proposals', 'wordcamp-talks' );
 	}
 
 	// Compare new title with original title

@@ -798,31 +798,31 @@ function wct_get_feedback_messages( $type = '', $id = false ) {
 		'success' => array(
 			1 => __( 'Saved successfully',                                                                     'wordcamp-talks' ),
 			2 => __( 'Registration complete. Please check your mailbox.',                                      'wordcamp-talks' ),
-			3 => __( 'The talk was successfully created.',                                                     'wordcamp-talks' ),
-			4 => __( 'The talk was successfully updated.',                                                     'wordcamp-talks' ),
+			3 => __( 'The Talk Proposal was successfully created.',                                            'wordcamp-talks' ),
+			4 => __( 'The Talk Proposal was successfully updated.',                                            'wordcamp-talks' ),
 			5 => __( 'For your convenience, you have been automagically logged in.',                           'wordcamp-talks' ),
 			6 => __( 'Make sure to check you received the email we sent you to reset your password.',          'wordcamp-talks' ),
 			7 => __( 'Otherwise, edit your email and password from your profile before logging off the site.', 'wordcamp-talks' ),
 			8 => __( 'Profile successfully updated.',                                                          'wordcamp-talks' ),
 		),
 		'error' => array(
-			1  => __( 'Something went wrong, please try again',                      'wordcamp-talks' ),
-			2  => __( 'You are not allowed to edit this talk.',                      'wordcamp-talks' ),
-			3  => __( 'You are not allowed to publish talks',                        'wordcamp-talks' ),
-			4  => __( 'Title and description are required fields.',                  'wordcamp-talks' ),
-			5  => __( 'Something went wrong while trying to save your talk.',        'wordcamp-talks' ),
-			7  => __( 'Please choose a username having at least 4 characters.',      'wordcamp-talks' ),
-			8  => __( 'Please fill all required fields.',                            'wordcamp-talks' ),
-			9  => __( 'The talk you are trying to edit does not seem to exist.',     'wordcamp-talks' ),
-			10 => __( 'Something went wrong while trying to update your talk.',      'wordcamp-talks' ),
-			11 => __( 'You are not allowed to edit this user profile.',              'wordcamp-talks' ),
-			12 => __( 'We were not able to validate your profile on WordPress.org.', 'wordcamp-talks' ),
+			1  => __( 'Something went wrong, please try again',                           'wordcamp-talks' ),
+			2  => __( 'You are not allowed to edit this Talk Proposal.',                  'wordcamp-talks' ),
+			3  => __( 'You are not allowed to publish Talk Proposals',                    'wordcamp-talks' ),
+			4  => __( 'Title and description are required fields.',                       'wordcamp-talks' ),
+			5  => __( 'Something went wrong while trying to save your Talk Proposal.',    'wordcamp-talks' ),
+			7  => __( 'Please choose a username having at least 4 characters.',           'wordcamp-talks' ),
+			8  => __( 'Please fill all required fields.',                                 'wordcamp-talks' ),
+			9  => __( 'The Talk Proposal you are trying to edit does not seem to exist.', 'wordcamp-talks' ),
+			10 => __( 'Something went wrong while trying to update your Talk Proposal.',  'wordcamp-talks' ),
+			11 => __( 'You are not allowed to edit this user profile.',                   'wordcamp-talks' ),
+			12 => __( 'We were not able to validate your profile on WordPress.org.',      'wordcamp-talks' ),
 		),
 		'info'  => array(
 			1 => __( 'This Talk Proposal is already being edited by another user.', 'wordcamp-talks' ),
-			2 => __( 'Your Talk Proposals is currently awaiting moderation.',       'wordcamp-talks' ),
+			2 => __( 'Your Talk Proposal is currently awaiting moderation.',        'wordcamp-talks' ),
 			3 => __( 'This user has not filled any public profile informations.',   'wordcamp-talks' ),
-			4 => __( 'You have not filled any public profile informations. You can edit your profile to add some.', 'wordcamp-talks' ),
+			4 => __( 'Your profile is empty. You can edit it at anytime.',          'wordcamp-talks' ),
 		),
 	) );
 
@@ -1405,7 +1405,7 @@ function wct_generate_csv_content( $content = '' ) {
  * @return string     the count text for talks
  */
 function wct_tag_cloud_count_callback( $count = 0 ) {
-	return sprintf( _nx( '%s talk', '%s talks', $count, 'talks tag cloud count text', 'wordcamp-talks' ), number_format_i18n( $count )  );
+	return sprintf( _nx( '%s Talk Proposal', '%s Talk Proposals', $count, 'talks tag cloud count text', 'wordcamp-talks' ), number_format_i18n( $count )  );
 }
 
 /**

@@ -995,8 +995,8 @@ class WordCamp_Talks_Admin {
 			?>
 			<p class="description">
 				<?php echo esc_html( sprintf( _n(
-					'%1$s member rated the talk. Its Average rating is: %2$s',
-					'%1$s members rated the talk. Its Average rating is: %2$s',
+					'%1$s member rated the Talk Proposal. Its Average rating is: %2$s',
+					'%1$s members rated the Talk Proposal. Its Average rating is: %2$s',
 					$users_count,
 					'wordcamp-talks'
 				), number_format_i18n( $users_count ), number_format_i18n( $ratings_stats['average'], 1 ) ) ); ?>
@@ -1238,12 +1238,12 @@ class WordCamp_Talks_Admin {
 						'id'      => 'edit-talks-overview',
 						'title'   => esc_html__( 'Overview', 'wordcamp-talks' ),
 						'content' => array(
-							esc_html__( 'This screen provides access to all the talks users of your site shared. You can customize the display of this screen to suit your workflow.', 'wordcamp-talks' ),
+							esc_html__( 'This screen provides access to all the Talk Proposals users of your site shared. You can customize the display of this screen to suit your workflow.', 'wordcamp-talks' ),
 							esc_html__( 'You can customize the display of this screen&#39;s contents in a number of ways:', 'wordcamp-talks' ),
 							array(
-								esc_html__( 'You can hide/display columns based on your needs and decide how many talks to list per screen using the Screen Options tab.', 'wordcamp-talks' ),
-								esc_html__( 'You can filter the list of talks by post status using the text links in the upper left to show All, Published, Private or Trashed talks. The default view is to show all talks.', 'wordcamp-talks' ),
-								esc_html__( 'You can view talks in a simple title list or with an excerpt. Choose the view you prefer by clicking on the icons at the top of the list on the right.', 'wordcamp-talks' ),
+								esc_html__( 'You can hide/display columns based on your needs and decide how many Talk Proposals to list per screen using the Screen Options tab.', 'wordcamp-talks' ),
+								esc_html__( 'You can filter the Talk Proposals by status using the last dropdown box above the list.', 'wordcamp-talks' ),
+								esc_html__( 'You can view Talk Proposals in a simple title list or with an excerpt. Choose the view you prefer by clicking on the icons at the top of the list on the right.', 'wordcamp-talks' ),
 							),
 						),
 					),
@@ -1251,11 +1251,11 @@ class WordCamp_Talks_Admin {
 						'id'      => 'edit-talks-row-actions',
 						'title'   => esc_html__( 'Actions', 'wordcamp-talks' ),
 						'content' => array(
-							esc_html__( 'Hovering over a row in the talks list will display action links that allow you to manage a talk. You can perform the following actions:', 'wordcamp-talks' ),
+							esc_html__( 'Hovering over a row in the Talk Proposals list will display action links that allow you to manage a Talk Proposal. You can perform the following actions:', 'wordcamp-talks' ),
 							array(
-								esc_html__( 'Edit takes you to the editing screen for that talk. You can also reach that screen by clicking on the talk title.', 'wordcamp-talks' ),
-								esc_html__( 'Trash removes the talk from this list and places it in the trash, from which you can permanently delete it.', 'wordcamp-talks' ),
-								esc_html__( 'View opens the talk in the WordCamp Talk Proposals&#39 part of your site.', 'wordcamp-talks' ),
+								esc_html__( 'Edit takes you to the editing screen for that Talk Proposal. You can also reach that screen by clicking on the Talk Proposal title.', 'wordcamp-talks' ),
+								esc_html__( 'Trash removes the Talk Proposal from this list and places it in the trash, from which you can permanently delete it.', 'wordcamp-talks' ),
+								esc_html__( 'View opens the Talk Proposal in the WordCamp Talk Proposals&#39 part of your site.', 'wordcamp-talks' ),
 							),
 						),
 					),
@@ -1263,19 +1263,19 @@ class WordCamp_Talks_Admin {
 						'id'      => 'edit-talks-bulk-actions',
 						'title'   => esc_html__( 'Bulk Actions', 'wordcamp-talks' ),
 						'content' => array(
-							esc_html__( 'You can also move multiple talks to the trash at once. Select the talks you want to trash using the checkboxes, then select the &#34;Move to Trash&#34; action from the Bulk Actions menu and click Apply.', 'wordcamp-talks' ),
+							esc_html__( 'You can also move multiple Talk Proposals to the trash at once. Select the Talk Proposals you want to trash using the checkboxes, then select the &#34;Move to Trash&#34; action from the Bulk Actions menu and click Apply.', 'wordcamp-talks' ),
 						),
 					),
 					array(
 						'id'      => 'edit-talks-sort-filter',
 						'title'   => esc_html__( 'Sorting & filtering', 'wordcamp-talks' ),
 						'content' => array(
-							esc_html__( 'Clicking on specific column headers will sort the talks list. You can sort the talks alphabetically using the Title column header or by popularity:', 'wordcamp-talks' ),
+							esc_html__( 'Clicking on specific column headers will sort the Talk Proposals list. You can sort the Talk Proposals alphabetically using the Title column header or by popularity:', 'wordcamp-talks' ),
 							array(
 								esc_html__( 'Click on the column header having a dialog buble icon to sort by number of comments.', 'wordcamp-talks' ),
 								esc_html__( 'Click on the column header having a star icon to sort by rating.', 'wordcamp-talks' ),
 							),
-							esc_html__( 'Inside the rows, you can filter the talks by categories or tags clicking on the corresponding terms.', 'wordcamp-talks' ),
+							esc_html__( 'Inside the rows, you can filter the Talk Proposals by categories or tags clicking on the corresponding terms.', 'wordcamp-talks' ),
 						),
 					),
 				),
@@ -1322,11 +1322,11 @@ class WordCamp_Talks_Admin {
 						'id'      => 'talks-category-overview',
 						'title'   => esc_html__( 'Overview', 'wordcamp-talks' ),
 						'content' => array(
-							esc_html__( 'Talk Proposal Categories can only be created by the site Administrator. To add a new talk category please fill the following fields:', 'wordcamp-talks' ),
+							esc_html__( 'Talk Proposal Categories can only be created by the site Administrator. To add a new Talk Proposal category please fill the following fields:', 'wordcamp-talks' ),
 							array(
-								esc_html__( 'Name - The name is how it appears on your site (in the category checkboxes of the talk front end submit form, in the talk&#39;s footer part or in the title of WordCamp Talk Proposals&#39 category archive pages).', 'wordcamp-talks' ),
+								esc_html__( 'Name - The name is how it appears on your site (in the category checkboxes of the Talk Proposal front end submit form, in the Talk Proposal&#39;s footer part or in the title of WordCamp Talk Proposals&#39 category archive pages).', 'wordcamp-talks' ),
 								esc_html__( 'Slug - The &#34;slug&#34; is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.', 'wordcamp-talks' ),
-								esc_html__( 'Description - If you set a description for your category, it will be displayed over the list of talks in the category archive page.', 'wordcamp-talks' ),
+								esc_html__( 'Description - If you set a description for your category, it will be displayed over the list of Talk Proposals in the category archive page.', 'wordcamp-talks' ),
 							),
 							esc_html__( 'You can change the display of this screen using the Screen Options tab to set how many items are displayed per screen and to display/hide columns in the table.', 'wordcamp-talks' ),
 						),
@@ -1339,13 +1339,13 @@ class WordCamp_Talks_Admin {
 						'id'      => 'talks-tag-overview',
 						'title'   => esc_html__( 'Overview', 'wordcamp-talks' ),
 						'content' => array(
-							esc_html__( 'Talk Proposal Tags can be created by any logged in user of the site from the talk front end submit form. From this screen, to add a new talk tag please fill the following fields:', 'wordcamp-talks' ),
+							esc_html__( 'Talk Proposal Tags can be created by any logged in user of the site from the Talk Proposal front end submit form. From this screen, to add a new Talk Proposal tag please fill the following fields:', 'wordcamp-talks' ),
 							array(
-								esc_html__( 'Name - The name is how it appears on your site (in the tag cloud, in the tags editor of the talk front end submit form, in the talk&#39;s footer part or in the title of WordCamp Talk Proposals&#39; tag archive pages).', 'wordcamp-talks' ),
+								esc_html__( 'Name - The name is how it appears on your site (in the tag cloud, in the tags editor of the Talk Proposal front end submit form, in the Talk Proposal&#39;s footer part or in the title of WordCamp Talk Proposals&#39; tag archive pages).', 'wordcamp-talks' ),
 								esc_html__( 'Slug - The &#34;slug&#34; is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.', 'wordcamp-talks' ),
-								esc_html__( 'Description - If you set a description for your tag, it will be displayed over the list of talks in the tag archive page.', 'wordcamp-talks' ),
+								esc_html__( 'Description - If you set a description for your tag, it will be displayed over the list of Talk Proposals in the tag archive page.', 'wordcamp-talks' ),
 							),
-							esc_html__( 'You can change the display of this screen using the Screen Options tab to set how many items are displayed per screen and to display/hide columns in the table.', 'wordcamp-talks' ),
+							esc_html__( 'You can change the display of this screen using the Screen Options tab to set how many Talk Proposals are displayed per screen and to display/hide columns in the table.', 'wordcamp-talks' ),
 						),
 					),
 				),
@@ -1390,7 +1390,7 @@ class WordCamp_Talks_Admin {
 			$talks_overview = array_search( 'talks-overview', $talks_help_tabs );
 
 			if ( isset( $help_tabs['talks']['add_help_tab'][ $talks_overview ]['content'] ) ) {
-				$help_tabs['talks']['add_help_tab'][ $talks_overview ]['content'][] = esc_html__( 'The Ratings metabox allows you to manage the ratings the talk has received.', 'wordcamp-talks' );
+				$help_tabs['talks']['add_help_tab'][ $talks_overview ]['content'][] = esc_html__( 'The Ratings metabox allows you to manage the ratings the Talk Proposal has received.', 'wordcamp-talks' );
 			}
 		}
 

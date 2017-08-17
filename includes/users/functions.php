@@ -686,7 +686,7 @@ function wct_users_get_profile_nav_items( $user_id = 0, $username ='', $nofilter
 			'slug'    => sanitize_title( _x( 'home', 'user profile slug', 'wordcamp-talks' ) ),
 		),
 		'talks' => array(
-			'title'   => __( 'Published', 'wordcamp-talks' ),
+			'title'   => __( 'Submitted', 'wordcamp-talks' ),
 			'url'     => wct_users_get_user_talks_url( $user_id, $username ),
 			'current' => wct_is_user_profile_talks(),
 			'slug'    => sanitize_title( _x( 'talks', 'user talks profile slug', 'wordcamp-talks' ) ),
