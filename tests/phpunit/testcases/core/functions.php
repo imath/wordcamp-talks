@@ -92,4 +92,11 @@ class WordCampTalkProposalsTest_Core_Functions extends WordCampTalkProposalsTest
 
 		$this->assertTrue( isset( wct_get_global( 'feedback' )['success'] ) );
 	}
+
+	/**
+	 * @group wordcamp
+	 */
+	public function test_wct_is_signup_allowed() {
+		$this->assertTrue( wct_is_wordcamp_site() );
+	}
 }

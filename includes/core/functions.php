@@ -1557,6 +1557,17 @@ function wct_adminbar_menu( $wp_admin_bar = null ){
 }
 
 /**
+ * Are we on a WordCamp.org site ?
+ *
+ * @since  1.1.0
+ *
+ * @return boolean True if the current site is a WordCamp.org site. False otherwise.
+ */
+function wct_is_wordcamp_site() {
+	return (bool) wct()->is_wordcamp_site;
+}
+
+/**
  * Checks wether signups are allowed
  *
  * @package WordCamp Talks

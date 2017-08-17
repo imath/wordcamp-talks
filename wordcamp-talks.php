@@ -125,6 +125,9 @@ final class WordCamp_Talks {
 		$this->displayed_user   = new WP_User();
 		$this->current_user     = new WP_User();
 		$this->feedback         = array();
+
+		// Is the plugin activated on a WordCamp.org site ?
+		$this->is_wordcamp_site = class_exists( 'WordCamp_Post_Types_Plugin' );
 	}
 
 	/**
@@ -157,6 +160,10 @@ final class WordCamp_Talks {
 
 		require $this->includes_dir . 'core/actions.php';
 		require $this->includes_dir . 'core/filters.php';
+
+		if ( $this->is_wordcamp_site ) {
+			require $this->includes_dir . 'wordcamp/integrations.php';
+		}
 
 		/**
 		 * Add specific functions for the current site

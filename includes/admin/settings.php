@@ -32,7 +32,7 @@ function wct_get_settings_sections() {
 		),
 	);
 
-	if ( is_multisite() && ! class_exists( 'WordCamp_Post_Types_Plugin' ) ) {
+	if ( is_multisite() && ! wct_is_wordcamp_site() ) {
 		$settings_sections['wc_talks_settings_multisite'] = array(
 			'title'    => __( 'Network users settings', 'wordcamp-talks' ),
 			'callback' => 'wct_settings_multisite_section_callback',
@@ -78,7 +78,7 @@ function wct_get_settings_fields() {
 				'args'              => array()
 			),
 
-			// Customize the hint list
+			// Customize the editing timeout
 			'_wc_talks_editing_timeout' => array(
 				'title'             => __( 'Talk Proposal\'s editing timeout (For speakers)', 'wordcamp-talks' ),
 				'callback'          => 'wct_talk_editing_timeout_callback',
@@ -129,14 +129,14 @@ function wct_get_settings_fields() {
 		);
 	}
 
-	if ( ! wct_is_signup_allowed_for_current_blog() || class_exists( 'WordCamp_Post_Types_Plugin' ) ) {
+	if ( ! wct_is_signup_allowed_for_current_blog() || wct_is_wordcamp_site() ) {
 		unset(
 			$setting_fields['wc_talks_settings_core']['_wc_talks_signup_fields'],
 			$setting_fields['wc_talks_settings_core']['_wc_talks_autolog_enabled']
 		);
 	}
 
-	if ( is_multisite() && ! class_exists( 'WordCamp_Post_Types_Plugin' ) ) {
+	if ( is_multisite() && ! wct_is_wordcamp_site() ) {
 		/** Multisite Section *********************************************************/
 		$setting_fields['wc_talks_settings_multisite'] = array();
 
@@ -157,7 +157,7 @@ function wct_get_settings_fields() {
 		);
 	}
 
-	if ( class_exists( 'WordCamp_Post_Types_Plugin' ) ) {
+	if ( wct_is_wordcamp_site() ) {
 		unset(
 			$setting_fields['wc_talks_settings_core']['_wc_talks_private_fields_list'],
 			$setting_fields['wc_talks_settings_core']['_wc_talks_public_fields_list']

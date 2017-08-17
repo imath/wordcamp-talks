@@ -16,6 +16,7 @@
 			<group>ajax</group>
 			<group>admin</group>
 			<group>ms-required</group>
+			<group>wordcamp</group>
 		</exclude>
 	</groups>
 </phpunit>

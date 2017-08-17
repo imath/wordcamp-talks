@@ -22,7 +22,7 @@ class WordCampTalkProposalsTest extends WP_UnitTestCase {
 	 * the $GLOBALS['wp']->public_query_vars when using parent::go_to()
 	 * more than once.
 	 */
-	function wct_query_vars( $qv = array() ) {
+	public function wct_query_vars( $qv = array() ) {
 		return array_merge( $qv, array(
 			'is_user',
 			'is_comments',

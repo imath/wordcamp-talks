@@ -1070,12 +1070,21 @@ function wct_talks_post_talk() {
 		exit();
 
 	} else {
-		$talk             = get_post( $id );
-		$feedback_message = array(
+		$talk = get_post( $id );
+
+		/**
+		 * Filter here to add custom feedback message IDs.
+		 *
+		 * @since 1.1.0
+		 *
+		 * @param array   $feedback_message The list of feedback message ids.
+		 * @param WP_Post $talk             The inserted Talk Proposal object.
+		 */
+		$feedback_message = apply_filters( 'wct_talks_post_talk_feedback', array(
 			'error'   => array(),
 			'success' => array( 3 ),
 			'info'    => array(),
-		);
+		) );
 
 		if ( 'pending' == $talk->post_status ) {
 			// Build pending message.

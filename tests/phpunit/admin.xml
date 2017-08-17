@@ -14,4 +14,11 @@
 			<directory suffix=".php">testcases/admin/</directory>
 		</testsuite>
 	</testsuites>
+	<groups>
+		<exclude>
+			<group>ajax</group>
+			<group>wordcamp</group>
+			<group>ms-required</group>
+		</exclude>
+	</groups>
 </phpunit>

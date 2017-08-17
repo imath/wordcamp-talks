@@ -26,6 +26,15 @@ function _wct_assets_available_languages( $languages = array() ) {
 }
 tests_add_filter( 'get_available_languages', '_wct_assets_available_languages', 10, 1 );
 
+function _wct_assets_register_wordcamp_post_type() {
+	global $argv;
+
+	if ( isset( $argv[1] ) && '--group' === $argv[1] && isset( $argv[2] ) && 'wordcamp' === $argv[2] ) {
+		require_once dirname( __FILE__ ) . '/assets/class-wordcamp-post-types-plugin.php';
+	}
+}
+tests_add_filter( 'plugins_loaded', '_wct_assets_register_wordcamp_post_type', 1 );
+
 require getenv( 'WP_DEVELOP_DIR' ) . '/tests/phpunit/includes/bootstrap.php';
 
 // include our testcase
