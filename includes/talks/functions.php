@@ -1080,11 +1080,11 @@ function wct_talks_post_talk() {
 		 * @param array   $feedback_message The list of feedback message ids.
 		 * @param WP_Post $talk             The inserted Talk Proposal object.
 		 */
-		$feedback_message = apply_filters( 'wct_talks_post_talk_feedback', array(
+		$feedback_message = array(
 			'error'   => array(),
 			'success' => array( 3 ),
 			'info'    => array(),
-		) );
+		);
 
 		if ( 'pending' == $talk->post_status ) {
 			// Build pending message.
@@ -1093,6 +1093,12 @@ function wct_talks_post_talk() {
 		// redirect to the talk
 		} else {
 			$redirect = wct_talks_get_talk_permalink( $talk );
+		}
+
+		if ( ! wct_users_get_user_description() ) {
+			$feedback_message['info'][] = 5;
+		} elseif ( 1 === wct_users_talks_count_by_user( 1, $talk->post_author ) ) {
+			$feedback_message['info'][] = 6;
 		}
 
 		wp_safe_redirect( wct_add_feedback_args( array_filter( $feedback_message ), $redirect ) );

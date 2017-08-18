@@ -322,7 +322,7 @@ function wct_talks_not_found() {
 	 */
 	function wct_talks_get_not_found() {
 		// general feedback
-		$output = sprintf( __( 'It looks like no Talk Proposals have been submitted yet. %s to add yours!', 'wordcamp-talks' ),
+		$output = sprintf( __( '%s to start submitting Talk Proposals.', 'wordcamp-talks' ),
 			'<a href="' . esc_url( wp_login_url( wct_get_form_url() ) ) .'">' . esc_html__( 'Sign in', 'wordcamp-talks' ) . '</a>'
 		);
 
@@ -372,8 +372,11 @@ function wct_talks_not_found() {
 
 		} else if ( current_user_can( 'publish_talks' ) ) {
 			$output = sprintf(
-				__( 'It looks like no Talk Proposals have been submitted yet, <a href="%s" title="Submit your Talk Proposal">add yours</a>', 'wordcamp-talks' ),
-				esc_url( wct_get_form_url() )
+				__( 'Your Talk Proposals will be listed here, %s', 'wordcamp-talks' ),
+				sprintf( '<a href="%1$s">%2$s</a>',
+					esc_url( wct_get_form_url() ),
+					esc_html__( 'add your first one!', 'wordcamp-talks' )
+				)
 			);
 		}
 

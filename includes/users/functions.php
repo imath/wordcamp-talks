@@ -117,6 +117,47 @@ function wct_users_get_displayed_user_displayname() {
 }
 
 /**
+ * Get a user's description field.
+ *
+ * @since  1.1.0
+ *
+ * @param  integer|WP_User $user The user ID or the user object.
+ * @return string                The user description.
+ */
+function wct_users_get_user_description( $user = 0 ) {
+	$user_description = '';
+	if ( ! $user ) {
+		$user = wp_get_current_user();
+
+		if ( empty( $user->ID ) ) {
+			return $user_description;
+		}
+	}
+
+	if ( is_a( $user, 'WP_User' ) ) {
+		$user_description = $user->description;
+	} else {
+		$user = get_user_by( 'id', (int) $user );
+
+		if ( ! empty( $user->ID ) ) {
+			$user_description = $user->description;
+		}
+	}
+
+	/**
+	 * Filter here to replace the User description by something else.
+	 *
+	 * eg: A speaker's post type content.
+	 *
+	 * @since  1.1.0
+	 *
+	 * @param  string  $description The user description.
+	 * @param  WP_User $user        The user oject.
+	 */
+	return apply_filters( 'wct_users_get_user_description', $user->description, $user );
+}
+
+/**
  * Gets displayed user description
  *
  * @package WordCamp Talks
@@ -127,7 +168,7 @@ function wct_users_get_displayed_user_displayname() {
  * @return string the displayed user description
  */
 function wct_users_get_displayed_user_description() {
-	return apply_filters( 'wct_users_get_displayed_user_description', wct()->displayed_user->description );
+	return apply_filters( 'wct_users_get_displayed_user_description', wct_users_get_user_description( wct()->displayed_user ) );
 }
 
 /**
@@ -962,39 +1003,53 @@ function wct_users_delete_user_data( $user_id = 0 ) {
 }
 
 /**
- * Get talk authors sorted by count
+ * Get talk authors sorted by count.
  *
- * count_many_users_posts() does not match the need
- *
- * @package WordCamp Talks
- * @subpackage users/functions
+ * count_many_users_posts() does not match the need.
  *
  * @since 1.0.0
+ * @since 1.1.0 It's now possible to get a single user's Talk Proposals count.
  *
  * @global  $wpdb
- * @param   int  $max the number of users to limit the query
- * @return  array list of users ordered by talks count.
+ * @param   integer       $max     The number of users to limit the query
+ * @param   integer       $user_id The ID of a single user. Optional.
+ * @return  array|integer          List of users ordered by talks count.
+ *                                 Or the specific requested user's count.
  */
-function wct_users_talks_count_by_user( $max = 10 ) {
+function wct_users_talks_count_by_user( $max = 10, $user_id = null ) {
 	global $wpdb;
 
 	$sql = array();
-	$sql['select']  = "SELECT p.post_author, COUNT(p.ID) as count_talks, u.user_nicename";
-	$sql['from']    = "FROM {$wpdb->posts} p LEFT JOIN {$wpdb->users} u ON ( p.post_author = u.ID )";
 
-	if ( current_user_can( 'view_other_profiles' ) ) {
+	if ( ! $user_id ) {
+		$sql['select']  = "SELECT p.post_author, COUNT(p.ID) as count_talks, u.user_nicename";
+		$sql['from']    = "FROM {$wpdb->posts} p LEFT JOIN {$wpdb->users} u ON ( p.post_author = u.ID )";
+	} else {
+		$sql['select']  = "SELECT COUNT(*) as count_talks";
+		$sql['from']    = "FROM {$wpdb->posts}";
+	}
+
+	if ( current_user_can( 'view_other_profiles' ) || ( $user_id && (int) get_current_user_id() === (int) $user_id ) ) {
 		$sql['where']   = str_replace( 'post_status = \'private\'', 'post_status IN( "' . join( array_keys( wct_get_statuses() ), '","' ) . '")', get_posts_by_author_sql( wct_get_post_type(), true, null, false ) );
 	} else {
 		$sql['where']   = get_posts_by_author_sql( wct_get_post_type(), true, null, true );
 	}
 
-	$sql['groupby'] = 'GROUP BY p.post_author';
-	$sql['order']   = 'ORDER BY count_talks DESC';
-	$sql['limit']   = $wpdb->prepare( 'LIMIT 0, %d', $max );
+	if ( ! $user_id ) {
+		$sql['groupby'] = 'GROUP BY p.post_author';
+		$sql['order']   = 'ORDER BY count_talks DESC';
+		$sql['limit']   = $wpdb->prepare( 'LIMIT 0, %d', $max );
+	} else {
+		$sql['limit'] = 'LIMIT 1';
+	}
 
 	$query = apply_filters( 'wct_users_talks_count_by_user_query', join( ' ', $sql ), $sql, $max );
 
-	return $wpdb->get_results( $query );
+	if ( ! $user_id ) {
+		return $wpdb->get_results( $query );
+	}
+
+	return (int) $wpdb->get_var( $query );
 }
 
 /**

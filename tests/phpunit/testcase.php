@@ -34,4 +34,12 @@ class WordCampTalkProposalsTest extends WP_UnitTestCase {
 			'talk_search',
 		) );
 	}
+
+	protected function do_admin_init() {
+		remove_action( 'admin_init', '_maybe_update_core' );
+		remove_action( 'admin_init', '_maybe_update_plugins' );
+		remove_action( 'admin_init', '_maybe_update_themes' );
+
+		do_action( 'admin_init' );
+	}
 }

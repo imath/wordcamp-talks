@@ -823,6 +823,20 @@ function wct_get_feedback_messages( $type = '', $id = false ) {
 			2 => __( 'Your Talk Proposal is currently awaiting moderation.',        'wordcamp-talks' ),
 			3 => __( 'This user has not filled any public profile informations.',   'wordcamp-talks' ),
 			4 => __( 'Your profile is empty. You can edit it at anytime.',          'wordcamp-talks' ),
+			5 => sprintf(
+				__( 'Please, share a little %s about yourself as we will use it if/once your Talk Proposal is selected.', 'wordcamp-talks' ),
+				sprintf ( '<a href="%1$s">%2$s</a>',
+					esc_url( wct_users_get_logged_in_profile_url() ),
+					__( 'biographical information', 'wordcamp-talks' )
+				)
+			),
+			6 => sprintf(
+				__( 'Please, make sure to review your %s as we will use it if/once your Talk Proposal is selected.', 'wordcamp-talks' ),
+				sprintf ( '<a href="%1$s">%2$s</a>',
+					esc_url( wct_users_get_logged_in_profile_url() ),
+					__( 'biographical information', 'wordcamp-talks' )
+				)
+			),
 		),
 	) );
 

@@ -12,11 +12,7 @@ class WordCampTalkProposalsTest_Admin_Settings extends WordCampTalkProposalsTest
 		wp_set_current_user( 1 );
 		set_current_screen( 'settings_page_wc_talks' );
 
-		remove_action( 'admin_init', '_maybe_update_core' );
-		remove_action( 'admin_init', '_maybe_update_plugins' );
-		remove_action( 'admin_init', '_maybe_update_themes' );
-
-		do_action( 'admin_init' );
+		$this->do_admin_init();
 	}
 
 	public function tearDown() {
