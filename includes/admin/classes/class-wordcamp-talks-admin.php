@@ -48,10 +48,7 @@ class WordCamp_Talks_Admin {
 	public $is_plugin_settings;
 
 	/**
-	 * The Admin constructor
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * The Admin constructor.
 	 *
 	 * @since 1.0.0
 	 */
@@ -62,10 +59,7 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Starts the Admin class
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Starts the Admin class.
 	 *
 	 * @since 1.0.0
 	 */
@@ -84,10 +78,7 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Setups some globals
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Setups some globals.
 	 *
 	 * @since 1.0.0
 	 */
@@ -99,13 +90,13 @@ class WordCamp_Talks_Admin {
 		$this->metaboxes          = array();
 		$this->is_plugin_settings = false;
 		$this->downloading_csv    = false;
+
+		// Globalize states.
+		$this->workflow_states = wct_get_statuses();
 	}
 
 	/**
-	 * Includes the needed admin files
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Includes the needed admin files.
 	 *
 	 * @since 1.0.0
 	 */
@@ -115,10 +106,7 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Setups the action and filters to hook to
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Setups the action and filters to hook to.
 	 *
 	 * @since 1.0.0
 	 */
@@ -148,11 +136,11 @@ class WordCamp_Talks_Admin {
 
 		add_action( 'load-settings_page_wc_talks', array( $this, 'settings_load' ) );
 
-		// Filter the list by workflow state
-		add_action( 'restrict_manage_posts', array( $this, 'filter_by_state' ), 10 );
-
 		// Talks columns (in post row)
 		add_action( "manage_{$this->post_type}_posts_custom_column", array( $this, 'column_data' ), 10, 2 );
+
+		// Add Talks statuses near title.
+		add_filter( 'display_post_states', array( $this, 'talk_states' ), 10, 2 );
 
 		// Maybe neutralize quick edit
 		add_action( 'post_row_actions', array( $this, 'talk_row_actions'), 10, 2 );
@@ -203,10 +191,7 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Builds the different Admin menus and submenus
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Builds the different Admin menus and submenus.
 	 *
 	 * @since 1.0.0
 	 */
@@ -272,9 +257,6 @@ class WordCamp_Talks_Admin {
 	 * Hooks Admin edit screen load to eventually perform
 	 * actions before the WP_List_Table is generated.
 	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
-	 *
 	 * @since 1.0.0
 	 */
 	public function load_edit_talk() {
@@ -301,10 +283,7 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Add metaboxes in Edit and Post New Talk screens
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Add metaboxes in Edit and Post New Talk screens.
 	 *
 	 * @since 1.0.0
 	 *
@@ -356,10 +335,7 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Fire an action to save the metabox entries
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Fire an action to save the metabox entries.
 	 *
 	 * @since 1.0.0
 	 *
@@ -394,16 +370,13 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Create specific updated messages for talks
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Create specific updated messages for talks.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @global $post
-	 * @param  array  $messages list of available updated messages
-	 * @return array  the original updated messages if not on a plugin's screen, custom messages otherwise
+	 * @param  array  $messages list of available updated messages.
+	 * @return array  the original updated messages if not on a plugin's screen, custom messages otherwise.
 	 */
 	public function talks_updated_messages( $messages = array() ) {
 		global $post;
@@ -438,16 +411,13 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Create specific updated bulk messages for talks
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Create specific updated bulk messages for talks.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  array  $bulk_messages list of available updated bulk messages
-	 * @param  array  $bulk_counts   count list by type
-	 * @return array  the original updated bulk messages if not on a plugin's screen, custom messages otherwise
+	 * @param  array  $bulk_messages list of available updated bulk messages.
+	 * @param  array  $bulk_counts   count list by type.
+	 * @return array  the original updated bulk messages if not on a plugin's screen, custom messages otherwise.
 	 */
 	public function talks_updated_bulk_messages( $bulk_messages = array(), $bulk_counts = array() ) {
 		// Bail if not posting/editing a talk
@@ -467,16 +437,13 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Build a specific redirect url to handle specific feedbacks
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Build a specific redirect url to handle specific feedbacks.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  string  $location url to redirect to
-	 * @param  int     $talk_id  the ID of the talk
-	 * @return string            url to redirect to
+	 * @param  string  $location url to redirect to.
+	 * @param  int     $talk_id  the ID of the talk.
+	 * @return string            url to redirect to.
 	 */
 	public function redirect_talk_location( $location = '', $talk_id = 0 ) {
 		// Bail if not posting/editing a talk
@@ -498,25 +465,17 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * The talk edit screen views (Over the top of WP_List_Table)
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * The talk edit screen views (Over the top of WP_List_Table).
 	 *
 	 * @since 1.0.0
+	 * @since 1.1.0 Reorder views so that the Trash one is always last.
 	 *
-	 * @param  array  $views list of views for the edit talks screen
-	 * @return array         talk views
+	 * @param  array  $views list of views for the edit talks screen.
+	 * @return array         talk views.
 	 */
 	public function talk_views( $views = array() ) {
-		/**
-		 * Add new views to edit talks page
-		 *
-		 * @since 1.0.0
-		 *
-		 * @param  array $view list of views
-		 */
-		$talk_views = apply_filters( 'wct_admin_edit_talks_views', $views );
+		$talk_views = array_diff_key( $views, array( 'trash' => false ) );
+		$trash_view = array_intersect_key( $views, array( 'trash' => true ) );
 
 		$csv_args = array(
 			'post_type' => $this->post_type,
@@ -537,16 +496,13 @@ class WordCamp_Talks_Admin {
 			esc_attr__( 'Download all Talk Proposals in a csv spreadsheet', 'wordcamp-talks' )
 		);
 
-		return array_merge( $talk_views, array(
+		return array_merge( $talk_views, $trash_view, array(
 			'csv_talks' => $csv_link
 		) );
 	}
 
 	/**
 	 * Displays notices if needed.
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
 	 *
 	 * @since 1.0.0
 	 *
@@ -568,10 +524,7 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Registers Global settings
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Registers Global settings.
 	 *
 	 * @since 1.0.0
 	 */
@@ -612,10 +565,7 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Make sure the settings save messages are displayed
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Make sure the settings save messages are displayed.
 	 *
 	 * @since 1.0.0
 	 */
@@ -632,10 +582,7 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Include options head file to restore settings feedback
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Include options head file to restore settings feedback.
 	 *
 	 * @since 1.0.0
 	 */
@@ -644,10 +591,7 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Customize the highlighted parent menu for plugin's settings
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Customize the highlighted parent menu for plugin's settings.
 	 *
 	 * @since 1.0.0
 	 *
@@ -664,10 +608,7 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Make sure the highlighted menus are the plugin's ones for its specific taxonomies
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Make sure the highlighted menus are the plugin's ones for its specific taxonomies.
 	 *
 	 * @since 1.0.0
 	 *
@@ -683,15 +624,12 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Restrict Bulk actions to only keep the delete one
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Restrict Bulk actions to only keep the delete one.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  array  $bulk_actions list of available bulk actions
-	 * @return array                the new list
+	 * @param  array  $bulk_actions list of available bulk actions.
+	 * @return array                the new list.
 	 */
 	public function talk_bulk_actions( $bulk_actions = array() ) {
 		if ( in_array( 'edit', array_keys( $bulk_actions ) ) ) {
@@ -701,14 +639,35 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Maybe disable the quick edit row action
+	 * Edit the current row post states to include Talk Proposals statuses.
 	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * @since  1.1.0
+	 *
+	 * @param  array  $states The post row states.
+	 * @param  WP_Post $post  The post row object.
+	 * @return array          The current row post states.
+	 */
+	public function talk_states( $states = array(), $post ) {
+		if ( $this->post_type !== get_post_type( $post ) ) {
+			return $states;
+		}
+
+		$talk_states    = wct_get_statuses();
+		$current_status = get_post_status( $post );
+
+		if ( isset( $talk_states[$current_status] ) ) {
+			$states = array_merge( $states, array( $current_status => $talk_states[$current_status] ) );
+		}
+
+		return $states;
+	}
+
+	/**
+	 * Maybe disable the quick edit row action.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  array  $actions list of available row actions
+	 * @param  array  $actions list of available row actions.
 	 * @return array           the new list
 	 */
 	public function talk_row_actions( $actions = array(), $talk = null ) {
@@ -725,19 +684,15 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Add new columns to the Talks WP List Table
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Add new columns to the Talks WP List Table.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  array  $columns the WP List Table columns
-	 * @return array           the new columns
+	 * @param  array  $columns the WP List Table columns.
+	 * @return array           the new columns.
 	 */
 	public function column_headers( $columns = array() ) {
 		$new_columns = array(
-			'workflow_state' => _x( 'Status',     'talks admin workflow status column header', 'wordcamp-talks' ),
 			'cat_talks'      => _x( 'Categories', 'talks admin category column header',        'wordcamp-talks' ),
 			'tag_talks'      => _x( 'Tags',       'talks admin tag column header',             'wordcamp-talks' ),
 		);
@@ -745,12 +700,6 @@ class WordCamp_Talks_Admin {
 		if ( ! wct_is_rating_disabled() ) {
 			$new_columns['rates'] = '<span class="vers"><span title="' . esc_attr__( 'Average Rating', 'wordcamp-talks' ) .'" class="talk-rating-bubble"></span></span>';
 		}
-
-		/**
-		 *
-		 * @param array $new_columns the specific columns
-		 */
-		$new_columns = apply_filters( 'wct_admin_column_headers', $new_columns );
 
 		$temp_remove_columns = array( 'comments', 'date' );
 		$has_columns = array_intersect( $temp_remove_columns, array_keys( $columns ) );
@@ -789,7 +738,7 @@ class WordCamp_Talks_Admin {
 			}
 
 			/**
-			 * User this filter to only add columns for the downloaded csv file
+			 * Use this filter to only add columns for the downloaded csv file
 			 *
 			 * @param array $columns the columns specific to the csv output
 			 */
@@ -800,16 +749,12 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Fills the custom columns datarows
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Fills the custom columns datarows.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  string $column_name the column name
-	 * @param  int    $talk_id     the ID of the talk (row)
-	 * @return string HTML output
+	 * @param  string $column_name the column name.
+	 * @param  int    $talk_id     the ID of the talk (row).
 	 */
 	public function column_data( $column_name = '', $talk_id = 0 ) {
 		switch( $column_name ) {
@@ -821,27 +766,6 @@ class WordCamp_Talks_Admin {
 				} else {
 					echo '&#8212;';
 				}
-				break;
-
-			case 'workflow_state' :
-				// Try to get the db state
-				$state = get_post_status( $talk_id );
-
-				// Fallback on pending
-				if ( empty( $state ) ) {
-					$state = 'pending';
-				}
-
-				if ( empty( $this->workflow_states ) ) {
-					$this->workflow_states = wct_get_statuses();
-				}
-
-				if ( ! empty( $this->workflow_states[ $state ] ) ) {
-					echo '<span data-workflowstate="' . $state . '">' . esc_html( $this->workflow_states[ $state ] ) . '</span>';
-				} else {
-					echo '&#8212;';
-				}
-
 				break;
 
 			case 'cat_talks' :
@@ -893,15 +817,12 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Add extra info to downloaded csv file
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Add extra info to downloaded csv file.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  string $column_name the column name
-	 * @param  int    $talk_id     the ID of the talk (row)
+	 * @param  string $column_name the column name.
+	 * @param  int    $talk_id     the ID of the talk (row).
 	 * @return string HTML Output
 	 */
 	public function talk_row_extra_data( $column_name = '', $talk_id = '' ) {
@@ -923,10 +844,7 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Gets the sortable columns
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Gets the sortable columns.
 	 *
 	 * @since 1.0.0
 	 *
@@ -945,10 +863,7 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Adds the list of ratings in a new metabox
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Adds the list of ratings in a new metabox.
 	 *
 	 * @since 1.0.0
 	 *
@@ -969,10 +884,7 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Displays the ratings metabox
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Displays the ratings metabox.
 	 *
 	 * @since 1.0.0
 	 *
@@ -1031,10 +943,7 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Checks if a rate is to be deleted
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Checks if a rate is to be deleted.
 	 *
 	 * @since 1.0.0
 	 */
@@ -1072,15 +981,12 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Adds ratings specific updated messages
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Adds ratings specific updated messages.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  array  $messages List of updated messages
-	 * @return array            New list
+	 * @param  array  $messages List of updated messages.
+	 * @return array            New list.
 	 */
 	public function ratings_updated( $messages = array() ) {
 
@@ -1092,14 +998,11 @@ class WordCamp_Talks_Admin {
 
 	/**
 	 * Forces the query to include all talks
-	 * Used to "feed" the downloaded csv spreadsheet
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Used to "feed" the downloaded csv spreadsheet.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  WP_Query $posts_query
+	 * @param  WP_Query $posts_query.
 	 */
 	public function get_talks_by_status( $posts_query = null ) {
 		if ( ! empty( $posts_query->query_vars['posts_per_page'] ) ) {
@@ -1114,25 +1017,19 @@ class WordCamp_Talks_Admin {
 
 	/**
 	 * Temporarly restrict all user caps to 2 talk caps
-	 * This is to avoid get_inline_data() to add extra html in title column
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * This is to avoid get_inline_data() to add extra html in title column.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  array  $all_caps user's caps
-	 * @return array            restricted user's caps
+	 * @param  array  $all_caps user's caps.
+	 * @return array            restricted user's caps.
 	 */
 	public function filter_has_cap( $all_caps = array() ) {
 		return array( 'read_private_talks' => true, 'edit_others_talks' => true );
 	}
 
 	/**
-	 * Buffer talks list and outputs an csv file
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Buffer talks list and outputs an csv file.
 	 *
 	 * @since 1.0.0
 	 *
@@ -1211,10 +1108,7 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Gets the help tabs for a given Administration screen
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Gets the help tabs for a given Administration screen.
 	 *
 	 * @since 1.0.0
 	 *
@@ -1223,7 +1117,7 @@ class WordCamp_Talks_Admin {
 	 */
 	public function get_help_tabs( $screen_id = '' ) {
 		// Help urls
-		$plugin_forum         = '<a href="http://wordpress.org/support/plugin/wordcamp-talks">';
+		$plugin_forum         = '<a href="https://github.com/imath/wordcamp-talks/issues">';
 		$help_tabs            = false;
 		$nav_menu_page        = '<a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '">';
 		$widgets_page         = '<a href="' . esc_url( admin_url( 'widgets.php' ) ) . '">';
@@ -1374,15 +1268,12 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Adds the Ratings help tabs
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Adds the Ratings help tabs.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  array  $help_tabs the list of help tabs
-	 * @return array            the new list of help tabs
+	 * @param  array  $help_tabs the list of help tabs.
+	 * @return array             the new list of help tabs.
 	 */
 	public function rates_help_tabs( $help_tabs = array() ) {
 		if ( ! empty( $help_tabs['talks']['add_help_tab'] ) ) {
@@ -1407,15 +1298,13 @@ class WordCamp_Talks_Admin {
 	 * @return string HTML Output
 	 */
 	public function print_dropdown_workflow( $selected = '', $select_id = 'post_status' ) {
-		$workflow_states = $this->workflow_states;
-
 		printf( '<select name="%s" id="%s">', esc_attr( $select_id ), esc_attr( $select_id ) );
 
 		if ( 'workflow-states' === $select_id ) {
 			printf( '<option value="">%s</option>', esc_attr__( 'Filter by state', 'wordcamp-talks' ) );
 		}
 
-		foreach ( $workflow_states as $key_state => $state ) {
+		foreach ( $this->workflow_states as $key_state => $state ) {
 			$current = selected( $selected, $key_state, false );
 			printf(
 				'<option value="%s" %s>%s</option>',
@@ -1429,22 +1318,13 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Registers the workflow metabox
+	 * Registers the workflow metabox.
 	 *
 	 * @since  1.0.0
 	 *
 	 * @return array The workflow metabox parameters.
 	 */
 	public function get_workflow_metabox() {
-		$states = wct_get_statuses();
-
-		if ( empty( $states ) ) {
-			return array();
-		}
-
-		// Globalize states.
-		$this->workflow_states = $states;
-
 		return array(
 			'workflow' => array(
 				'id'            => 'wct_workflow_metabox',
@@ -1461,34 +1341,59 @@ class WordCamp_Talks_Admin {
 	 *
 	 * @since  1.0.0
 	 *
-	 * @param  WP_Post $selected  the db state
-	 * @return string HTML Output
+	 * @param  WP_Post $selected  the db state.
 	 */
 	public function workflow_do_metabox( $talk = null ) {
-		$id = $talk->ID;
-
-		if ( ! $id ) {
-			return;
-		}
-
+		$id     = $talk->ID;
 		$status = get_post_status( $talk );
 
 		if ( ! empty( $status ) ) {
 			$state = sanitize_key( $status );
 		} else {
-			$state = 'pending';
+			$state = 'wct_pending';
+		}
+
+		/* translators: Publish box date format, see https://secure.php.net/date */
+		$datef = __( 'M j, Y @ H:i', 'wordcamp-talks' );
+
+		if ( 0 !== $id ) {
+			$date          = date_i18n( $datef, strtotime( $talk->post_date ) );
+			$modified_date = date_i18n( $datef, strtotime( $talk->post_modified ) );
+		} else {
+			$date = $modified_date = date_i18n( $datef, strtotime( current_time( 'mysql' ) ) );
 		}
 		?>
 
-		<p>
+		<div class="misc-pub-section curtime misc-pub-curtime">
+			<dl id="talk-timestamps">
+				<dt><?php esc_html_e( 'Created on:', 'wordcamp-talks' ); ?></dt>
+				<dd><?php echo $date; ?></dd>
+				<dt><?php esc_html_e( 'Last Modified:', 'wordcamp-talks' ); ?></dt>
+				<dd><?php echo $modified_date; ?></dd>
+			</dl>
+		</div>
+
+		<p class="talk-major-action">
 			<label class="screen-reader-text" for="post_status"><?php esc_html_e( 'Status', 'wordcamp-talks' ); ?></label>
-			<?php $this->print_dropdown_workflow( $state ); ?>
+
+			<?php
+			$this->print_dropdown_workflow( $state );
+
+			wp_nonce_field( 'wct_workflow_metabox_save', 'wct_workflow_metabox_metabox' );
+			submit_button( __( 'Update', 'wordcamp-talks' ), 'primary large right', 'save', false ); ?>
 		</p>
 
 		<?php
-		wp_nonce_field( 'wct_workflow_metabox_save', 'wct_workflow_metabox_metabox' );
-
-		submit_button( __( 'Update', 'wordcamp-talks' ), 'primary large', 'save' );
+		/**
+		 * Hook here to add custom actions.
+		 *
+		 * Eg: a link to generate a session when on a WordCamp Site.
+		 *
+		 * @since  1.1.0
+		 *
+		 * @param  WP_Post $talk The current talk object.
+		 */
+		do_action( 'wct_admin_workflow_metabox', $talk );
 	}
 
 	/**
@@ -1502,7 +1407,7 @@ class WordCamp_Talks_Admin {
 	 */
 	public function inline_edit_workflow( $column_name = '', $post_type = '' ) {
 		// Only in Edit Talks screen!
-		if ( $this->post_type !== $post_type || 'workflow_state' !== $column_name ) {
+		if ( $this->post_type !== $post_type || 'rates' !== $column_name ) {
 			return;
 		}
 		?>
@@ -1520,48 +1425,9 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Add a dropdown to filter the talks by state
-	 *
-	 * @since  1.0.0
-	 *
-	 * @return string HTML Output
-	 */
-	public function filter_by_state() {
-		if ( ! wct_is_admin() ) {
-			return;
-		}
-
-		$current_screen = get_current_screen();
-
-		if ( empty( $current_screen->id ) ) {
-			return;
-		}
-
-		if ( 'edit-' . wct_get_post_type() !== $current_screen->id ) {
-			return;
-		}
-
-		if ( empty( $this->workflow_states ) ) {
-			$this->workflow_states = wct_get_statuses();
-		}
-
-		$state = '';
-		if ( ! empty( $_REQUEST['post_status'] ) ) {
-			$state = sanitize_key( $_REQUEST['post_status'] );
-		}
-
-		$this->print_dropdown_workflow( $state, 'post_status' );
-	}
-
-	/**
-	 * Remove some submenus and add some custom styles
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Remove some submenus and add some custom styles.
 	 *
 	 * @since 1.0.0
-	 *
-	 * @return string CSS output
 	 */
 	public function admin_head() {
  		// Remove the fake Settings submenu
@@ -1631,6 +1497,45 @@ class WordCamp_Talks_Admin {
 
 			#wordcamp-talks-csv span.dashicons-media-spreadsheet {
 				vertical-align: text-bottom;
+			}
+
+			body.post-type-<?php echo $post_type;?> .wp-list-table tr.status-wct_pending th {
+				border-left-width: 4px;
+				border-left-style: solid;
+				border-left-color: #ffba00;
+			}
+
+			body.post-type-<?php echo $post_type;?> .fixed th.column-rates {
+				width: 10%;
+			}
+
+			body.post-type-<?php echo $post_type;?> .fixed th.column-cat_talks,
+			body.post-type-<?php echo $post_type;?> .fixed th.column-tag_talks {
+				width: 15%;
+			}
+
+			body.post-type-<?php echo $post_type;?> #talk-timestamps dt {
+				font-weight: bold;
+			}
+
+			body.post-type-<?php echo $post_type;?> #talk-timestamps dt:before {
+				font: 400 20px/1 dashicons;
+				speak: none;
+				display: inline-block;
+				margin-left: -1px;
+				padding-right: 3px;
+				vertical-align: top;
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				content: "\f145";
+			}
+
+			body.post-type-<?php echo $post_type;?> #talk-timestamps dd {
+				margin-left: 22px;
+			}
+
+			body.post-type-<?php echo $post_type;?> .talk-major-action select {
+				width: 65%;
 			}
 
 			<?php if ( wct_is_admin() && ! wct_is_rating_disabled() ) : ?>
@@ -1723,10 +1628,7 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
-	 * Modifies the links in plugins table
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage admin/admin
+	 * Modifies the links in plugins table.
 	 *
 	 * @since 1.0.0
 	 *

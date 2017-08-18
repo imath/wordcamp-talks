@@ -408,6 +408,30 @@ function wct_get_statuses() {
 }
 
 /**
+ * Get the Talk status label count.
+ *
+ * @since  1.1.0
+ *
+ * @return string The Talk status label count.
+ */
+function wct_get_status_label_count( $status = '' ) {
+	$label_count = $status;
+
+	$labels      = array(
+		'wct_pending'   => _n_noop( 'Pending <span class="count">(%s)</span>', 'Pending <span class="count">(%s)</span>', 'wordcamp-talks' ),
+		'wct_shortlist' => _n_noop( 'Short-listed <span class="count">(%s)</span>', 'Short-listed <span class="count">(%s)</span>', 'wordcamp-talks' ),
+		'wct_selected'  => _n_noop( 'Selected <span class="count">(%s)</span>', 'Selected <span class="count">(%s)</span>', 'wordcamp-talks' ),
+		'wct_rejected'  => _n_noop( 'Rejected <span class="count">(%s)</span>', 'Rejected <span class="count">(%s)</span>', 'wordcamp-talks' ),
+	);
+
+	if ( isset( $labels[$status] ) ) {
+		$label_count = $labels[$status];
+	}
+
+	return $label_count;
+}
+
+/**
  * Check if a given status is supported by the plugin.
  *
  * @since  1.1.0
@@ -480,7 +504,7 @@ function wct_category_register_labels() {
 			'update_item'      => __( 'Update Talk Proposal Category',   'wordcamp-talks' ),
 			'add_new_item'     => __( 'Add New Talk Proposal Category',  'wordcamp-talks' ),
 			'new_item_name'    => __( 'New Talk Proposal Category Name', 'wordcamp-talks' ),
-			'all_items'        => __( 'All Talk Proposal Categories',    'wordcamp-talks' ),
+			'all_items'        => __( 'All Categories',                  'wordcamp-talks' ),
 			'search_items'     => __( 'Search Talk Proposal Categories', 'wordcamp-talks' ),
 			'parent_item'      => __( 'Parent Talk Proposal Category',   'wordcamp-talks' ),
 			'parent_item_colon'=> __( 'Parent Talk Proposal Category:',  'wordcamp-talks' ),
@@ -583,7 +607,9 @@ function wct_register_objects() {
 			'label'                     => $status,
 			'private'                   => true,
 			'show_in_admin_all_list'    => true,
-			'show_in_admin_status_list' => false,
+			'show_in_admin_status_list' => true,
+			'label_count'               => wct_get_status_label_count( $name ),
+			'_is_wc_talk'               => true,
 		) );
 	}
 
@@ -1399,6 +1425,11 @@ function wct_generate_csv_content( $content = '' ) {
 
 	// Strip all tags
 	$content = wp_strip_all_tags( $content, true );
+
+	// Make sure =, +, -, @ are not the first char of the field.
+	if ( in_array( mb_substr( $content, 0, 1 ), array( '=', '+', '-', '@' ), true ) ) {
+		$content = "'" . $content;
+	}
 
 	return apply_filters( 'wct_generate_csv_content', $content );
 }

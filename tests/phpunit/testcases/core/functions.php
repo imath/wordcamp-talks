@@ -13,8 +13,8 @@ class WordCampTalkProposalsTest_Core_Functions extends WordCampTalkProposalsTest
 
 	public function test_wct_register_post_statuses() {
 		$registered_post_statuses = get_post_stati( array(
-			'private'                   => true,
-			'show_in_admin_status_list' => false,
+			'private'     => true,
+			'_is_wc_talk' => true,
 		) );
 
 		$this->assertEquals( array_values( $registered_post_statuses ), array(
