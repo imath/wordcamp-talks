@@ -843,6 +843,7 @@ function wct_get_feedback_messages( $type = '', $id = false ) {
 			10 => __( 'Something went wrong while trying to update your Talk Proposal.',  'wordcamp-talks' ),
 			11 => __( 'You are not allowed to edit this user profile.',                   'wordcamp-talks' ),
 			12 => __( 'We were not able to validate your profile on WordPress.org.',      'wordcamp-talks' ),
+			14 => __( 'Your biographical information are required',                       'wordcamp-talks' ),
 		),
 		'info'  => array(
 			1 => __( 'This Talk Proposal is already being edited by another user.', 'wordcamp-talks' ),

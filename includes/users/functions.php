@@ -142,6 +142,10 @@ function wct_users_get_displayed_user_information( $context = 'display' ) {
 			'user_url'         => __( 'Website', 'wordcamp-talks' ),
 		), wct_users_contactmethods( array(), 'public' ) );
 
+		if ( wct_is_wordcamp_site() ) {
+			unset( $public_information['user_url'] );
+		}
+
 		wct_set_global( 'public_profile_labels', $public_information );
 	}
 
