@@ -1535,7 +1535,22 @@ function wct_teeny_button_filter( $buttons = array() ) {
 
 	// Add the image and fullscreen button
 	$buttons = array_diff( $buttons, $remove_buttons, array( 'fullscreen' ) );
-	array_push( $buttons, 'image', 'fullscreen' );
+
+	// Only add the image and fullscreen buttons for talk edits.
+	if ( ! wct_get_global( 'public_profile_labels' ) ) {
+		array_push( $buttons, 'image', 'fullscreen' );
+
+	// For user descriptions, be consistent with allowed tags.
+	} else {
+		$buttons = array_diff( $buttons, array(
+			'formatselect',
+			'bullist',
+			'numlist',
+			'alignleft',
+			'alignright',
+			'aligncenter',
+		) );
+	}
 
 	return $buttons;
 }

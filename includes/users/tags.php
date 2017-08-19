@@ -371,7 +371,32 @@ function wct_users_public_profile_value( $info = '' ) {
 
 	if ( isset( wct_users_displayed_user()->data_to_edit ) ) {
 		if ( 'user_description' === $info ) {
-			printf( '<textarea name="%1$s">%2$s</textarea>', esc_attr( $info ), wct_users_displayed_user()->data_to_edit[$info] );
+
+			// Use a WP Editor as the target is the Speaker post type.
+			if ( wct_is_wordcamp_site() ) {
+				add_filter( 'mce_buttons', 'wct_teeny_button_filter', 10, 1 );
+
+				$content = apply_filters( 'wct_talks_get_editor_content', wct_users_displayed_user()->data_to_edit[$info] );
+
+				wp_editor( $content, $info, array(
+					'textarea_name' => $info,
+					'wpautop'       => true,
+					'media_buttons' => false,
+					'editor_class'  => 'wc-talks-tinymce',
+					'textarea_rows' => 8,
+					'teeny'         => false,
+					'dfw'           => false,
+					'tinymce'       => true,
+					'quicktags'     => false
+				) );
+
+				remove_filter( 'mce_buttons', 'wct_teeny_button_filter', 10, 1 );
+
+			// Use a regular textarea as the target is the User's description.
+			} else {
+				printf( '<textarea name="%1$s">%2$s</textarea>', esc_attr( $info ), wct_users_displayed_user()->data_to_edit[$info] );
+			}
+
 			printf( '<p class="description">%s</p>', esc_html__( 'Your bio will be used to introduce yourself in case one of your Talk Proposals is selected (Required).', 'wordcamp-talks' ) );
 		} else {
 			printf( '<input type="text" name="%1$s" value="%2$s"/>', esc_attr( $info ), wct_users_displayed_user()->data_to_edit[$info] );

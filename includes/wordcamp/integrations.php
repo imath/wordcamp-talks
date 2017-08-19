@@ -126,12 +126,10 @@ function wct_wordcamp_set_displayed_speaker( &$user, $fields = array() ) {
 
 		if ( isset( $user->filter ) && 'edit' === $user->filter ) {
 			if ( 'user_description' === $field ) {
-				$value = esc_textarea( $speaker->{$map[$field]} );
+				$data_to_edit[$field] = $speaker->{$map[$field]};
 			} else {
-				$value = sanitize_text_field( $speaker->{$map[$field]} );
+				$data_to_edit[$field] = sanitize_user_field( $field, $speaker->{$map[$field]}, $user->ID, 'edit' );
 			}
-
-			$data_to_edit[$field] = $value;
 		} else {
 			$user->{$field} = $speaker->{$map[$field]};
 		}

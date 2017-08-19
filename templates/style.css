@@ -90,11 +90,6 @@ span.protected-talk:before {
 	vertical-align: middle;
 }
 
-span.wp-talk-stream-group:before {
-	content: "\f307";
-	vertical-align: middle;
-}
-
 /*--------------------------------------------------------------
 2 - Pagination
 --------------------------------------------------------------*/
@@ -565,7 +560,7 @@ a.wpis-title-button {
 /*--------------------------------------------------------------
 8 - Forms
 --------------------------------------------------------------*/
-#wordcamp-talks .standard-form textarea:not(.wp-talk-stream-tinymce),
+#wordcamp-talks .standard-form textarea:not(.wc-talks-tinymce),
 #wordcamp-talks .user-profile-form textarea,
 #wordcamp-talks .standard-form input[type=text],
 #wordcamp-talks .standard-form input[type=text],
@@ -710,21 +705,24 @@ a.wpis-title-button {
 #wordcamp-talks #commentform textarea {
 	width: 90%;
 }
-#wordcamp-talks .standard-form textarea:not(.wp-talk-stream-tinymce) {
+#wordcamp-talks .standard-form textarea:not(.wc-talks-tinymce) {
 	height: 120px;
 	width: 90%;
 }
 
-#wp-wct_the_content-wrap {
+#wp-wct_the_content-wrap,
+#wp-user_description-wrap {
 	width: 90%;
 	border: 1px solid #ccc;
 }
 
-#wct_the_content_ifr {
+#wct_the_content_ifr,
+#user_description_ifr {
 	width:99%!important;
 }
 
-#wordcamp-talks #wp-wct_the_content-editor-container .mce-container button {
+#wordcamp-talks #wp-wct_the_content-editor-container .mce-container button,
+#wordcamp-talks #wp-user_description-editor-container .mce-container button {
 	border-radius: 0;
 	padding: 2px 3px;
 	line-height: normal;
@@ -759,7 +757,7 @@ a.wpis-title-button {
 	outline: none;
 }
 #wordcamp-talks .standard-form input:focus,
-#wordcamp-talks .standard-form textarea:focus:not(.wp-talk-stream-tinymce),
+#wordcamp-talks .standard-form textarea:focus:not(.wc-talks-tinymce),
 #wordcamp-talks .user-profile-form textarea:focus,
 #wordcamp-talks .standard-form select:focus {
 	background: #fafafa;
@@ -868,16 +866,16 @@ body.single-talks #comments .comment-reply-link:hover {
 9 - Widgets
 --------------------------------------------------------------*/
 
-.widget ul.wp-talk-stream-tops li a {
+.widget ul.wordcamp-talks-tops li a {
 	display: block;
 	line-height: 40px;
 	margin:5px 0;
 }
-.widget ul.wp-talk-stream-tops li a {
+.widget ul.wordcamp-talks-tops li a {
 	text-decoration: none;
 }
 
-.widget ul.wp-talk-stream-tops li a img {
+.widget ul.wordcamp-talks-tops li a img {
 	vertical-align: bottom;
 }
 
