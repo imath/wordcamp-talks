@@ -299,39 +299,14 @@ function wct_users_profile_classes() {
 }
 
 /**
- * Set the public profile fields for the user's info template on front-end
+ * Get the public profile fields for the user's info template on front-end
  *
  * @since  1.0.0
  *
- * @param  string $context The 'save' context is used to check fields consistency.
- * @return array           The list of field keys or the list of fields label depending on the context.
+ * @return array The list of field keys to display.
  */
-function wct_users_public_profile_infos( $context = '' ) {
-	/**
-	 * Filter here if you need to edit the public profile infos list.
-	 *
-	 * @since  1.0.0
-	 *
-	 * @param array $value An associative array keyed by field IDs containing field labels.
-	 */
-	$public_labels = (array) apply_filters( 'wct_users_public_profile_infos', array_merge( array(
-		'user_description' => __( 'Biographical Info', 'wordcamp-talks' ),
-		'user_url'         => __( 'Website', 'wordcamp-talks' ),
-	), wct_users_contactmethods( array(), 'public' ) ) );
-
-	if ( 'save' === $context ) {
-		return $public_labels;
-	}
-
-	wct_set_global( 'public_profile_labels', $public_labels );
-
-	$field_keys = array_keys( $public_labels );
-
-	if ( wct_users_can_edit_profile() ) {
-		wct_users_displayed_user()->data_to_edit = wct_users_get_displayed_user_data_to_edit( $field_keys );
-	}
-
-	return $field_keys;
+function wct_users_public_profile_infos() {
+	return wct_users_get_displayed_user_information( 'display' );
 }
 
 /**
@@ -342,7 +317,7 @@ function wct_users_public_profile_infos( $context = '' ) {
  * @param  string $info The field key.
  * @return bool         True if the user has filled the field. False otherwise.
  */
-function wct_users_public_profile_has_info(  $info = '' ) {
+function wct_users_public_profile_has_info( $info = '' ) {
 	if ( empty( $info ) ) {
 		return false;
 	}

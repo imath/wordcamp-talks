@@ -189,7 +189,7 @@ function wct_parse_query( $posts_query = null ) {
 		$posts_query->set( 'ignore_sticky_posts', true );
 
 		// Set the displayed user.
-		wct_set_global( 'displayed_user', $user );
+		wct_users_set_displayed_user( $user );
 
 		if ( current_user_can( 'view_other_profiles', $user->ID ) ) {
 			// Make sure no 404

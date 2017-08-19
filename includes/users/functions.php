@@ -23,13 +23,9 @@ defined( 'ABSPATH' ) || exit;
 function wct_users_set_current_user() {
 	wct()->current_user = wp_get_current_user();
 }
-add_action( 'set_current_user', 'wct_users_set_current_user', 10 );
 
 /**
  * Gets current user ID
- *
- * @package WordCamp Talks
- * @subpackage users/functions
  *
  * @since 1.0.0
  *
@@ -42,9 +38,6 @@ function wct_users_current_user_id() {
 /**
  * Gets current user user nicename
  *
- * @package WordCamp Talks
- * @subpackage users/functions
- *
  * @since 1.0.0
  *
  * @return string the logged in username
@@ -54,94 +47,18 @@ function wct_users_current_user_nicename() {
 }
 
 /**
- * Gets displayed user object if set.
- *
- * @package WordCamp Talks
- * @subpackage users/functions
- *
- * @since 1.0.0
- *
- * @return null|WP_User The displayed user if set. Null otherwise.
- */
-function wct_users_displayed_user() {
-	$displayed_user = null;
-	$wct            = wct();
-
-	if ( ! empty( $wct->displayed_user->ID ) && is_a( $wct->displayed_user, 'WP_User' ) ) {
-		$displayed_user = $wct->displayed_user;
-	}
-
-	return $displayed_user;
-}
-
-/**
- * Gets displayed user ID
- *
- * @package WordCamp Talks
- * @subpackage users/functions
- *
- * @since 1.0.0
- *
- * @return int the displayed user ID
- */
-function wct_users_displayed_user_id() {
-	return (int) apply_filters( 'wct_users_displayed_user_id', wct()->displayed_user->ID );
-}
-
-/**
- * Gets displayed user user nicename
- *
- * @package WordCamp Talks
- * @subpackage users/functions
- *
- * @since 1.0.0
- *
- * @return string the displayed user username
- */
-function wct_users_get_displayed_user_username() {
-	return apply_filters( 'wct_users_get_displayed_user_username', wct()->displayed_user->user_nicename );
-}
-
-/**
- * Gets displayed user display name
- *
- * @package WordCamp Talks
- * @subpackage users/functions
- *
- * @since 1.0.0
- *
- * @return string the displayed user display name
- */
-function wct_users_get_displayed_user_displayname() {
-	return apply_filters( 'wct_users_get_displayed_user_displayname', wct()->displayed_user->display_name );
-}
-
-/**
- * Get a user's description field.
+ * Get the current user's description field.
  *
  * @since  1.1.0
  *
- * @param  integer|WP_User $user The user ID or the user object.
- * @return string                The user description.
+ * @return string The current user description.
  */
-function wct_users_get_user_description( $user = 0 ) {
+function wct_users_get_current_user_description() {
 	$user_description = '';
-	if ( ! $user ) {
-		$user = wp_get_current_user();
+	$user             = wp_get_current_user();
 
-		if ( empty( $user->ID ) ) {
-			return $user_description;
-		}
-	}
-
-	if ( is_a( $user, 'WP_User' ) ) {
+	if ( ! empty( $user->ID ) ) {
 		$user_description = $user->description;
-	} else {
-		$user = get_user_by( 'id', (int) $user );
-
-		if ( ! empty( $user->ID ) ) {
-			$user_description = $user->description;
-		}
 	}
 
 	/**
@@ -151,48 +68,21 @@ function wct_users_get_user_description( $user = 0 ) {
 	 *
 	 * @since  1.1.0
 	 *
-	 * @param  string  $description The user description.
-	 * @param  WP_User $user        The user oject.
+	 * @param  string  $user_description The user description.
+	 * @param  WP_User $user             The user oject.
 	 */
-	return apply_filters( 'wct_users_get_user_description', $user->description, $user );
+	return apply_filters( 'wct_users_get_current_user_description', $user_description, $user );
 }
 
 /**
- * Gets displayed user description
+ * Capability check for the front-end profile editing.
  *
- * @package WordCamp Talks
- * @subpackage users/functions
+ * @since  1.1.0
  *
- * @since 1.0.0
- *
- * @return string the displayed user description
+ * @return boolean True if the user can edit the profile. False otherwise.
  */
-function wct_users_get_displayed_user_description() {
-	return apply_filters( 'wct_users_get_displayed_user_description', wct_users_get_user_description( wct()->displayed_user ) );
-}
-
-/**
- * Gets one specific or all attribute about a user
- *
- * @package WordCamp Talks
- * @subpackage users/functions
- *
- * @since 1.0.0
- *
- * @return mixed WP_User/string/array/int the user object or one of its attribute
- */
-function wct_users_get_user_data( $field = '', $value ='', $attribute = 'all'  ) {
-	$user = get_user_by( $field, $value );
-
-	if ( empty( $user ) ) {
-		return false;
-	}
-
-	if ( 'all' == $attribute ) {
-		return $user;
-	} else {
-		return $user->{$attribute};
-	}
+function wct_users_can_edit_profile() {
+	return current_user_can( 'manage_network_users' ) || wct_is_current_user_profile();
 }
 
 /**
@@ -234,13 +124,164 @@ function wct_users_get_all_contact_methods() {
 	return apply_filters( 'wct_users_get_all_contact_methods', array_merge( $wp_fields, wp_get_user_contact_methods() ) );
 }
 
+/**
+ * Get the information fields to display on the front end profile
+ *
+ * @since  1.1.0
+ *
+ * @param  string $context The context of use: display or save.
+ * @return array            The list of information fields.
+ */
+function wct_users_get_displayed_user_information( $context = 'display' ) {
+	$public_information = wct_get_global( 'public_profile_labels' );
+
+	if ( ! $public_information ) {
+		$public_information = array_merge( array(
+			'display_name'     => __( 'Name', 'wordcamp-talks' ),
+			'user_description' => __( 'Biographical Info', 'wordcamp-talks' ),
+			'user_url'         => __( 'Website', 'wordcamp-talks' ),
+		), wct_users_contactmethods( array(), 'public' ) );
+
+		wct_set_global( 'public_profile_labels', $public_information );
+	}
+
+	if ( 'save' === $context ) {
+		return $public_information;
+	}
+
+	return array_keys( $public_information );
+}
+
+/**
+ * Set up the displayed user for display or edit.
+ *
+ * @since  1.1.0
+ *
+ * @param  WP_User $user The user object (Required).
+ * @return boolean       True if the displayed user was set. False otherwise.
+ */
+function wct_users_set_displayed_user( WP_User $user ) {
+	// The displayed user is set, only one user can be displayed.
+	if ( (int) $user->ID !== wct_get_global( 'is_user' ) ) {
+		return false;
+	}
+
+	$fields = wct_users_get_displayed_user_information();
+
+	if ( wct_users_can_edit_profile() ) {
+		$user->filter = 'edit';
+
+		$data_to_edit = array();
+
+		foreach ( $fields as $dk ) {
+			$key = $dk;
+
+			if ( 'user_description' === $key ) {
+				// Makes sure WordPress will escape it for us.
+				$key = 'description';
+			}
+
+			$data_to_edit[$dk] = $user->{$key};
+		}
+
+		$user->data_to_edit = $data_to_edit;
+	}
+
+	/**
+	 * Hook here to edit the Displayed user's information
+	 *
+	 * @since  1.1.0
+	 *
+	 * @param  array $value {
+	 *   An array containing the user and information fields.
+	 *
+	 *   @type WP_User $user   The displayed user passed by reference.
+	 *   @type array   $fields The editable fields of the front end profile.
+	 * }
+	 */
+	do_action_ref_array( 'wct_users_set_displayed_user', array( &$user, $fields ) );
+
+	wct_set_global( 'displayed_user', $user );
+
+	return true;
+}
+
+/**
+ * Gets displayed user object if set.
+ *
+ * @since 1.0.0
+ *
+ * @return null|WP_User The displayed user if set. Null otherwise.
+ */
+function wct_users_displayed_user() {
+	$displayed_user = null;
+	$wct            = wct();
+
+	if ( ! empty( $wct->displayed_user->ID ) && is_a( $wct->displayed_user, 'WP_User' ) ) {
+		$displayed_user = $wct->displayed_user;
+	}
+
+	return $displayed_user;
+}
+
+/**
+ * Gets displayed user ID.
+ *
+ * @since 1.0.0
+ *
+ * @return int the displayed user ID.
+ */
+function wct_users_displayed_user_id() {
+	return (int) apply_filters( 'wct_users_displayed_user_id', wct()->displayed_user->ID );
+}
+
+/**
+ * Gets displayed user user nicename.
+ *
+ * @since 1.0.0
+ *
+ * @return string the displayed user username.
+ */
+function wct_users_get_displayed_user_username() {
+	return apply_filters( 'wct_users_get_displayed_user_username', wct()->displayed_user->user_nicename );
+}
+
+/**
+ * Gets displayed user display name.
+ *
+ * @since 1.0.0
+ *
+ * @return string the displayed user display name.
+ */
+function wct_users_get_displayed_user_displayname() {
+	return apply_filters( 'wct_users_get_displayed_user_displayname', wct()->displayed_user->display_name );
+}
+
+/**
+ * Gets one specific or all attribute about a user.
+ *
+ * @since 1.0.0
+ *
+ * @return mixed WP_User/string/array/int the user object or one of its attribute.
+ */
+function wct_users_get_user_data( $field = '', $value ='', $attribute = 'all'  ) {
+	$user = get_user_by( $field, $value );
+
+	if ( empty( $user ) ) {
+		return false;
+	}
+
+	if ( 'all' == $attribute ) {
+		return $user;
+	} else {
+		return $user->{$attribute};
+	}
+}
+
 /** User urls *****************************************************************/
 
 /**
- * Gets URL to the edit profile page of a user
- *
- * @package WordCamp Talks
- * @subpackage users/functions
+ * Gets URL to the edit profile page of a user.
  *
  * @since 1.0.0
  *
@@ -269,22 +310,19 @@ function wct_users_get_user_profile_edit_url( $user_id = 0 ) {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $profile_url   Profile Edit Url
-	 * @param int    $user_id       the user ID
+	 * @param string $profile_url Profile Edit Url.
+	 * @param int    $user_id     the user ID.
 	 */
 	return apply_filters( 'wct_users_get_user_profile_edit_url', $profile_url, $user_id );
 }
 
 /**
- * Gets the displayed user's profile url
- *
- * @package WordCamp Talks
- * @subpackage users/functions
+ * Gets the displayed user's profile url.
  *
  * @since 1.0.0
  *
- * @param  string $type profile, rates, comments
- * @return string url of the profile type
+ * @param  string $type profile, rates, comments.
+ * @return string       url of the profile type.
  */
 function wct_users_get_displayed_profile_url( $type = 'profile' ) {
 	$user_id = wct_users_displayed_user_id();
@@ -293,22 +331,23 @@ function wct_users_get_displayed_profile_url( $type = 'profile' ) {
 	$profile_url = call_user_func_array( 'wct_users_get_user_' . $type . '_url', array( $user_id, $username ) );
 
 	/**
-	 * @param  string $profile_url url to the profile part
-	 * @param  string $type the requested part (profile, rates or comments)
+	 * Filter here to edit the displayed user's profile url.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param  string $profile_url Url to the profile part.
+	 * @param  string $type        The requested part (profile, rates or comments).
 	 */
 	return apply_filters( 'wct_users_get_displayed_profile_url', $profile_url, $type );
 }
 
 /**
- * Gets the logged in user's profile url
- *
- * @package WordCamp Talks
- * @subpackage users/functions
+ * Gets the logged in user's profile url.
  *
  * @since 1.0.0
  *
- * @param  string $type profile, rates, comments
- * @return string url of the profile type
+ * @param  string $type profile, rates, comments.
+ * @return string       url of the profile type.
  */
 function wct_users_get_logged_in_profile_url( $type = 'profile' ) {
 	$user_id = wct_users_current_user_id();
@@ -317,26 +356,26 @@ function wct_users_get_logged_in_profile_url( $type = 'profile' ) {
 	$profile_url = call_user_func_array( 'wct_users_get_user_' . $type . '_url', array( $user_id, $username ) );
 
 	/**
-	 * @param  string $profile_url url to the profile part
-	 * @param  string $type the requested part (profile, rates or comments)
+	 * Filter here to edit the loggedin user's profile url.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param  string $profile_url Url to the profile part.
+	 * @param  string $type        The requested part (profile, rates or comments).
 	 */
 	return apply_filters( 'wct_users_get_logged_in_profile_url', $profile_url, $type );
 }
 
 /**
- * Gets URL to the main profile page of a user
- *
- * Inspired by bbPress's bbp_get_user_profile_url() function
- *
- * @package WordCamp Talks
- * @subpackage users/functions
+ * Gets URL to the main profile page of a user.
  *
  * @since 1.0.0
  *
  * @global $wp_rewrite
- * @param  int $user_id User id
- * @param  string $user_nicename Optional. User nicename
- * @return string User profile url
+ * @param  integer $user_id       The User id.
+ * @param  string  $user_nicename Optional. User nicename.
+ * @param  boolean $no_filter     Whether to allow filters.
+ * @return string                 User profile url.
  */
 function wct_users_get_user_profile_url( $user_id = 0, $user_nicename = '', $nofilter = false ) {
 	global $wp_rewrite;
@@ -348,8 +387,12 @@ function wct_users_get_user_profile_url( $user_id = 0, $user_nicename = '', $nof
 
 	if ( false === $nofilter ) {
 		/**
-		 * @param int    $user_id       the user ID
-		 * @param string $user_nicename the username
+		 * Filter here to shortcircuit the function.
+		 *
+		 * @since  1.0.0
+		 *
+		 * @param integer $user_id       The user ID
+		 * @param string  $user_nicename The username
 		 */
 		$early_profile_url = apply_filters( 'wct_users_pre_get_user_profile_url', (int) $user_id, $user_nicename );
 		if ( is_string( $early_profile_url ) ) {
@@ -378,6 +421,8 @@ function wct_users_get_user_profile_url( $user_id = 0, $user_nicename = '', $nof
 		/**
 		 * Filter the user profile url once it has been built
 		 *
+		 * @since  1.0.0
+		 *
 		 * @param string $url           Profile Url
 		 * @param int    $user_id       the user ID
 		 * @param string $user_nicename the username
@@ -389,19 +434,14 @@ function wct_users_get_user_profile_url( $user_id = 0, $user_nicename = '', $nof
 }
 
 /**
- * Gets URL to the talks profile page of a user
- *
- * Inspired by bbPress's bbp_get_user_profile_url() function
- *
- * @package WordCamp Talks
- * @subpackage users/functions
+ * Gets URL to the talks profile page of a user.
  *
  * @since 1.0.0
  *
  * @global $wp_rewrite
- * @param  int    $user_id User id
- * @param  string $user_nicename Optional. User nicename
- * @return string                To talks section of the profile url
+ * @param  integer $user_id       The User id.
+ * @param  string  $user_nicename Optional. User nicename.
+ * @return string                 To talks section of the profile url.
  */
 function wct_users_get_user_talks_url( $user_id = 0, $user_nicename = '' ) {
 	global $wp_rewrite;
@@ -412,8 +452,12 @@ function wct_users_get_user_talks_url( $user_id = 0, $user_nicename = '' ) {
 	}
 
 	/**
-	 * @param int    $user_id       the user ID
-	 * @param string $user_nicename the username
+	 * Filter here to shortcircuit the function.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param integer $user_id       The user ID
+	 * @param string  $user_nicename The username
 	 */
 	$early_profile_url = apply_filters( 'wct_users_pre_get_user_talks_url', (int) $user_id, $user_nicename );
 	if ( is_string( $early_profile_url ) ) {
@@ -438,29 +482,26 @@ function wct_users_get_user_talks_url( $user_id = 0, $user_nicename = '' ) {
 	}
 
 	/**
-	 * Filter the talks section of the profile url once it has built it
+	 * Filter the talks section of the profile url once it has built it.
 	 *
-	 * @param string $url           Talks section of the  profile Url
-	 * @param int    $user_id       the user ID
-	 * @param string $user_nicename the username
+	 * @since  1.0.0
+	 *
+	 * @param string $url           Talks section of the  profile Url.
+	 * @param int    $user_id       the user ID.
+	 * @param string $user_nicename the username.
 	 */
 	return apply_filters( 'wct_users_get_user_talks_url', $url, $user_id, $user_nicename );
 }
 
 /**
- * Gets URL to the rates profile page of a user
- *
- * Inspired by bbPress's bbp_get_user_profile_url() function
- *
- * @package WordCamp Talks
- * @subpackage users/functions
+ * Gets URL to the rates profile page of a user.
  *
  * @since 1.0.0
  *
  * @global $wp_rewrite
- * @param  int $user_id User id
- * @param  string $user_nicename Optional. User nicename
- * @return string Rates profile url
+ * @param  integer $user_id       The User id.
+ * @param  string  $user_nicename Optional. User nicename.
+ * @return string                 Rates profile url.
  */
 function wct_users_get_user_rates_url( $user_id = 0, $user_nicename = '' ) {
 	global $wp_rewrite;
@@ -471,8 +512,12 @@ function wct_users_get_user_rates_url( $user_id = 0, $user_nicename = '' ) {
 	}
 
 	/**
-	 * @param int    $user_id       the user ID
-	 * @param string $user_nicename the username
+	 * Filter here to shortcircuit the function.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param int    $user_id       the user ID.
+	 * @param string $user_nicename the username.
 	 */
 	$early_profile_url = apply_filters( 'wct_users_pre_get_user_rates_url', (int) $user_id, $user_nicename );
 	if ( is_string( $early_profile_url ) ) {
@@ -500,27 +545,24 @@ function wct_users_get_user_rates_url( $user_id = 0, $user_nicename = '' ) {
 	/**
 	 * Filter the rates profile url once it has been built.
 	 *
-	 * @param string $url           Rates profile Url
-	 * @param int    $user_id       the user ID
-	 * @param string $user_nicename the username
+	 * @since  1.0.0
+	 *
+	 * @param string $url           Rates profile Url.
+	 * @param int    $user_id       the user ID.
+	 * @param string $user_nicename the username.
 	 */
 	return apply_filters( 'wct_users_get_user_rates_url', $url, $user_id, $user_nicename );
 }
 
 /**
- * Gets URL to the "to rate" profile page of a user
- *
- * Inspired by bbPress's bbp_get_user_profile_url() function
- *
- * @package WordCamp Talks
- * @subpackage users/functions
+ * Gets URL to the "to rate" profile page of a user.
  *
  * @since 1.0.0
  *
  * @global $wp_rewrite
- * @param  int    $user_id User id
- * @param  string $user_nicename Optional. User nicename
- * @return string                To rate profile url
+ * @param  integer $user_id       The User id.
+ * @param  string  $user_nicename Optional. User nicename.
+ * @return string                 To rate profile url.
  */
 function wct_users_get_user_to_rate_url( $user_id = 0, $user_nicename = '' ) {
 	global $wp_rewrite;
@@ -531,8 +573,12 @@ function wct_users_get_user_to_rate_url( $user_id = 0, $user_nicename = '' ) {
 	}
 
 	/**
-	 * @param int    $user_id       the user ID
-	 * @param string $user_nicename the username
+	 * Filter here to shortcircuit the function.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param integer $user_id       the user ID.
+	 * @param string  $user_nicename the username.
 	 */
 	$early_profile_url = apply_filters( 'wct_users_pre_get_user_to_rate_url', (int) $user_id, $user_nicename );
 	if ( is_string( $early_profile_url ) ) {
@@ -557,29 +603,26 @@ function wct_users_get_user_to_rate_url( $user_id = 0, $user_nicename = '' ) {
 	}
 
 	/**
-	 * Filter the "to rate" profile url once it has built it
+	 * Filter the "to rate" profile url once it has built it.
 	 *
-	 * @param string $url           To rate profile Url
-	 * @param int    $user_id       the user ID
-	 * @param string $user_nicename the username
+	 * @since  1.0.0
+	 *
+	 * @param string  $url           To rate profile Url.
+	 * @param integer $user_id       The user ID.
+	 * @param string  $user_nicename The username.
 	 */
 	return apply_filters( 'wct_users_get_user_to_rate_url', $url, $user_id, $user_nicename );
 }
 
 /**
- * Gets URL to the comments profile page of a user
- *
- * Inspired by bbPress's bbp_get_user_profile_url() function
- *
- * @package WordCamp Talks
- * @subpackage users/functions
+ * Gets URL to the comments profile page of a user.
  *
  * @since 1.0.0
  *
  * @global $wp_rewrite
- * @param  int $user_id User id
- * @param  string $user_nicename Optional. User nicename
- * @return string Comments profile url
+ * @param  integer $user_id       The User id.
+ * @param  string  $user_nicename Optional. User nicename.
+ * @return string                 Comments profile url.
  */
 function wct_users_get_user_comments_url( $user_id = 0, $user_nicename = '' ) {
 	global $wp_rewrite;
@@ -590,8 +633,12 @@ function wct_users_get_user_comments_url( $user_id = 0, $user_nicename = '' ) {
 	}
 
 	/**
-	 * @param int    $user_id       the user ID
-	 * @param string $user_nicename the username
+	 * Filter here to shortcircuit the function.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param integer $user_id       The user ID.
+	 * @param string  $user_nicename The username.
 	 */
 	$early_profile_url = apply_filters( 'wct_users_pre_get_user_comments_url', (int) $user_id, $user_nicename );
 	if ( is_string( $early_profile_url ) ) {
@@ -619,18 +666,17 @@ function wct_users_get_user_comments_url( $user_id = 0, $user_nicename = '' ) {
 	/**
 	 * Filter the comments profile url once it has been built.
 	 *
-	 * @param string $url           Rates profile Url
-	 * @param int    $user_id       the user ID
-	 * @param string $user_nicename the username
+	 * @since  1.0.0
+	 *
+	 * @param string  $url           Rates profile Url.
+	 * @param integer $user_id       The user ID.
+	 * @param string  $user_nicename The username.
 	 */
 	return apply_filters( 'wct_users_get_user_comments_url', $url, $user_id, $user_nicename );
 }
 
 /**
  * Gets the signup url
- *
- * @package WordCamp Talks
- * @subpackage users/functions
  *
  * @since 1.0.0
  *
@@ -641,7 +687,9 @@ function wct_users_get_signup_url() {
 	global $wp_rewrite;
 
 	/**
-	 * Early filter to override form url before being built
+	 * Early filter to override form url before being built.
+	 *
+	 * @since  1.0.0
 	 *
 	 * @param mixed false or url to override
 	 */
@@ -664,7 +712,9 @@ function wct_users_get_signup_url() {
 	}
 
 	/**
-	 * Filter to override form url after being built
+	 * Filter to override form url after being built.
+	 *
+	 * @since  1.0.0
 	 *
 	 * @param string url to override
 	 */
@@ -674,10 +724,7 @@ function wct_users_get_signup_url() {
 /** Template functions ********************************************************/
 
 /**
- * Enqueues Users description editing scripts
- *
- * @package WordCamp Talks
- * @subpackage users/functions
+ * Enqueues Users description editing scripts.
  *
  * @since 1.0.0
  */
@@ -701,17 +748,14 @@ function wct_users_enqueue_scripts() {
 add_action( 'wp_enqueue_scripts', 'wct_users_enqueue_scripts', 14 );
 
 /**
- * Builds user's profile nav
- *
- * @package WordCamp Talks
- * @subpackage users/functions
+ * Builds user's profile nav.
  *
  * @since 1.0.0
  *
- * @param  int $user_id User id
- * @param  string $user_nicename Optional. User nicename
- * @param  bool $nofilter. Whether to fire filters or not.
- * @return array the nav items organized in an associative array
+ * @param  integer $user_id       The User id.
+ * @param  string  $user_nicename Optional. User nicename.
+ * @param  boolean $nofilter.     Whether to fire filters or not.
+ * @return array                  The nav items organized in an associative array.
  */
 function wct_users_get_profile_nav_items( $user_id = 0, $username ='', $nofilter = false ) {
 	// Bail if no id or username are provided.
@@ -767,58 +811,18 @@ function wct_users_get_profile_nav_items( $user_id = 0, $username ='', $nofilter
 
 	if ( false === $nofilter ) {
 		/**
-		 * Filter the available user's profile nav items
+		 * Filter the available user's profile nav items.
 		 *
-		 * @param array  $nav_items     the nav items
-		 * @param int    $user_id       the user ID
-		 * @param string $username the username
+		 * @since  1.0.0
+		 *
+		 * @param array   $nav_items The nav items.
+		 * @param integer $user_id   The user ID.
+		 * @param string  $username  The username.
 		 */
 		return apply_filters( 'wct_users_get_profile_nav_items', $nav_items, $user_id, $username );
 	} else {
 		return $nav_items;
 	}
-}
-
-/**
- * Capability check for the front-end profile editing.
- *
- * @since  1.1.0
- *
- * @return boolean True if the user can edit the profile. False otherwise.
- */
-function wct_users_can_edit_profile() {
-	return current_user_can( 'manage_network_users' ) || wct_is_current_user_profile();
-}
-
-/**
- * Get data to edit for the current user.
- *
- * @since  1.1.0
- *
- * @param  array  $data_to_edit An array containing the keys of the WP_User property to edit.
- * @return array                The data to edit keyed by the WP_User's properties.
- */
-function wct_users_get_displayed_user_data_to_edit( $data_to_edit = array() ) {
-	$user = get_userdata( wct_users_displayed_user_id() );
-
-	if ( $user ) {
-		$user->filter = 'edit';
-	}
-
-	$data = array();
-
-	foreach ( $data_to_edit as $dk ) {
-		$key = $dk;
-
-		if ( 'user_description' === $key ) {
-			// Makes sure WordPress will escape it for us.
-			$key = 'description';
-		}
-
-		$data[$dk] = $user->{$key};
-	}
-
-	return $data;
 }
 
 /** Handle User actions *******************************************************/
@@ -851,7 +855,7 @@ function wct_users_edit_profile() {
 		exit();
 	}
 
-	$fields = array_intersect_key( $_POST, wct_users_public_profile_infos( 'save' ) );
+	$fields = array_intersect_key( $_POST, wct_users_get_displayed_user_information( 'save' ) );
 
 	if ( isset( $fields['user_description'] ) ) {
 		$fields['description'] = trim( $fields['user_description'] );
@@ -906,9 +910,6 @@ function wct_users_edit_profile() {
  * and use a different way of managing this. I advise you to make sure talks are reattributed to
  * an existing user ID. About rates, there's no problem if a non existing user ID is in the rating
  * list of a talk.
- *
- * @package WordCamp Talks
- * @subpackage users/functions
  *
  * @since 1.0.0
  */
@@ -1053,10 +1054,7 @@ function wct_users_talks_count_by_user( $max = 10, $user_id = null ) {
 }
 
 /**
- * Get the default role for a user (used in multisite configs)
- *
- * @package WordCamp Talks
- * @subpackage users/functions
+ * Get the default role for a user (used in multisite configs).
  *
  * @since 1.0.0
  */
@@ -1065,10 +1063,7 @@ function wct_users_get_default_role() {
 }
 
 /**
- * Get the signup key if the user registered
- *
- * @package WordCamp Talks
- * @subpackage users/functions
+ * Get the signup key if the user registered.
  *
  * @since 1.0.0
  *
@@ -1087,10 +1082,7 @@ function wct_users_intercept_activation_key( $user, $user_email = '', $key = '',
 }
 
 /**
- * Update the $wpdb->signups table in case of a multisite config
- *
- * @package WordCamp Talks
- * @subpackage users/functions
+ * Update the $wpdb->signups table in case of a multisite config.
  *
  * @since 1.0.0
  *
@@ -1149,10 +1141,7 @@ function wct_reset_password( $password, $user_id ) {
 }
 
 /**
- * Signup a new user
- *
- * @package WordCamp Talks
- * @subpackage users/functions
+ * Signup a new user.
  *
  * @since 1.0.0
  *
@@ -1402,10 +1391,7 @@ function wct_users_signup_user( $exit = true ) {
 }
 
 /**
- * Get user fields
- *
- * @package WordCamp Talks
- * @subpackage users/functions
+ * Get user fields.
  *
  * @since 1.0.0
  *
@@ -1431,10 +1417,7 @@ function wct_user_get_fields( $type = 'signup' ) {
 
 /**
  * Redirect the loggedin user to its profile as already a member
- * Or redirect WP (non multisite) register form to signup form
- *
- * @package WordCamp Talks
- * @subpackage users/functions
+ * Or redirect WP (non multisite) register form to signup form.
  *
  * @since 1.0.0
  *
@@ -1463,7 +1446,7 @@ function wct_user_signup_redirect( $context = '' ) {
 
 /**
  * Filter the user notification content to make sure the password
- * will be set on the Website he registered to
+ * will be set on the Website he registered to.
  *
  * @since 1.0.0
  *
@@ -1499,7 +1482,7 @@ function wct_multisite_user_notification( $mail_attr = array() ) {
 /**
  * Dynamically add a filter to network_site_url in case the user
  * is setting his password from the site's login form where the
- * plugin is activated
+ * plugin is activated.
  *
  * @since 1.0.0
  */
@@ -1512,7 +1495,7 @@ function wct_user_setpassword_redirect() {
 }
 
 /**
- * Temporarly filter network_site_url to use site_url instead
+ * Temporarly filter network_site_url to use site_url instead.
  *
  * @since 1.0.0
  *
@@ -1520,7 +1503,7 @@ function wct_user_setpassword_redirect() {
  * @param  string $path     Optional. Path relative to the site url.
  * @param  string $scheme   Optional. Scheme to give the site url context.
  * @param  bool   $redirect whether to include a redirect to query arg to the url or not.
- * @return string Site url link.
+ * @return string           Site url link.
  */
 function wct_add_filter_network_site_url( $site_url, $path = '', $scheme = null, $redirect = true ) {
 	if ( ! is_multisite() || ! wct_is_signup_allowed_for_current_blog() ) {
@@ -1584,10 +1567,7 @@ function wct_multisite_filter_login_url( $login_url ) {
 }
 
 /**
- * Set a role on the site of the network if needed
- *
- * @package WordCamp Talks
- * @subpackage users/functions
+ * Set a role on the site of the network if needed.
  *
  * @since 1.0.0
  */

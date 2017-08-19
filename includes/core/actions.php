@@ -11,9 +11,9 @@
 // Exit if accessed directly
 defined( 'ABSPATH' ) || exit;
 
-add_action( 'init',                     'wct_init',                   9  );
-add_action( 'parse_query',              'wct_parse_query',            2  );
-add_action( 'after_setup_theme',        'wct_after_setup_theme',      10 );
+add_action( 'init',             'wct_init',                    9 );
+add_action( 'parse_query',      'wct_parse_query',             2 );
+add_action( 'set_current_user', 'wct_users_set_current_user', 10 );
 
 // Init the Talks Meta class.
 add_action( 'init', array( 'WordCamp_Talks_Talks_Meta', 'start' ), 100 );
@@ -51,7 +51,6 @@ add_action( 'wct_added_rate',   'wct_clean_rates_count_cache', 10, 2 );
 add_action( 'wct_deleted_rate', 'wct_clean_rates_count_cache', 10, 2 );
 
 // Admin
-add_action( 'admin_head', 'wct_admin_head', 10 );
 add_action( 'admin_init', 'wct_maybe_upgrade', 999 );
 
 // Widgets
@@ -88,62 +87,6 @@ function wct_init() {
 }
 
 /**
- * Fire the 'wct_add_rewrite_tags' action.
- *
- * Used in core/rewrites to add user's profile, search & action
- * custom tags
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_add_rewrite_tags() {
-	do_action( 'wct_add_rewrite_tags' );
-}
-
-/**
- * Fire the 'wct_add_rewrite_rules' action.
- *
- * Used in core/rewrites to add user's profile custom rule
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_add_rewrite_rules() {
-	do_action( 'wct_add_rewrite_rules' );
-}
-
-/**
- * Fire the 'wct_add_permastructs' action.
- *
- * Used in core/rewrites to add custom permalink structures
- * such as the user's profile one
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_add_permastructs() {
-	do_action( 'wct_add_permastructs' );
-}
-
-/**
- * Fire the 'wct_after_setup_theme' action.
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_after_setup_theme() {
-	do_action( 'wct_after_setup_theme' );
-}
-
-/**
  * Fire the 'wct_actions' action.
  *
  * Used to handle user actions (profile update, submit talks)
@@ -155,18 +98,4 @@ function wct_after_setup_theme() {
  */
 function wct_actions() {
 	do_action( 'wct_actions' );
-}
-
-/** Admin *********************************************************************/
-
-/**
- * Fire the 'wct_admin_head' action.
- *
- * @package WordCamp Talks
- * @subpackage core/actions
- *
- * @since 1.0.0
- */
-function wct_admin_head() {
-	do_action( 'wct_admin_head' );
 }

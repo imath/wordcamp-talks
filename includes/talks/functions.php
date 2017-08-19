@@ -1095,7 +1095,7 @@ function wct_talks_post_talk() {
 			$redirect = wct_talks_get_talk_permalink( $talk );
 		}
 
-		if ( ! wct_users_get_user_description() ) {
+		if ( ! wct_users_get_current_user_description() ) {
 			$feedback_message['info'][] = 5;
 		} elseif ( 1 === wct_users_talks_count_by_user( 1, $talk->post_author ) ) {
 			$feedback_message['info'][] = 6;

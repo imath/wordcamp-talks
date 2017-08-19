@@ -149,7 +149,7 @@ class WordCamp_Talks_Admin {
 		add_action( 'quick_edit_custom_box', array( $this, 'inline_edit_workflow' ), 10, 2 );
 
 		// Do some global stuff here (custom css rule)
-		add_action( 'wct_admin_head', array( $this, 'admin_head' ), 10 );
+		add_action( 'admin_head', array( $this, 'admin_head' ), 10 );
 
 		/** Filters *******************************************************************/
 
