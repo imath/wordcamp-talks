@@ -1367,36 +1367,69 @@ class WordCamp_Talks_Admin {
 		}
 		?>
 
-		<div class="misc-pub-section curtime misc-pub-curtime">
-			<dl id="talk-timestamps">
-				<dt><?php esc_html_e( 'Created on:', 'wordcamp-talks' ); ?></dt>
-				<dd><?php echo $date; ?></dd>
-				<dt><?php esc_html_e( 'Last Modified:', 'wordcamp-talks' ); ?></dt>
-				<dd><?php echo $modified_date; ?></dd>
-			</dl>
-		</div>
+		<div id="misc-publishing-actions">
+			<div class="misc-pub-section curtime misc-pub-curtime">
+				<dl id="talk-timestamps">
+					<dt><?php esc_html_e( 'Created on:', 'wordcamp-talks' ); ?></dt>
+					<dd><?php echo $date; ?></dd>
+					<dt><?php esc_html_e( 'Last Modified:', 'wordcamp-talks' ); ?></dt>
+					<dd><?php echo $modified_date; ?></dd>
+				</dl>
+			</div>
 
-		<p class="talk-major-action">
-			<label class="screen-reader-text" for="post_status"><?php esc_html_e( 'Status', 'wordcamp-talks' ); ?></label>
+			<p class="talk-major-action">
+				<label class="screen-reader-text" for="post_status"><?php esc_html_e( 'Status', 'wordcamp-talks' ); ?></label>
+
+				<?php
+				$this->print_dropdown_workflow( $state );
+
+				wp_nonce_field( 'wct_workflow_metabox_save', 'wct_workflow_metabox_metabox' );
+				submit_button( __( 'Update', 'wordcamp-talks' ), 'primary large right', 'save', false ); ?>
+			</p>
 
 			<?php
-			$this->print_dropdown_workflow( $state );
+			/**
+			 * Hook here to add custom misc actions.
+			 *
+			 * @since  1.1.0
+			 *
+			 * @param  WP_Post $talk The current talk object.
+			 */
+			do_action( 'wct_admin_workflow_metabox_misc', $talk ); ?>
 
-			wp_nonce_field( 'wct_workflow_metabox_save', 'wct_workflow_metabox_metabox' );
-			submit_button( __( 'Update', 'wordcamp-talks' ), 'primary large right', 'save', false ); ?>
-		</p>
+			<div class="clear"></div>
+		</div>
 
+		<div id="major-publishing-actions">
+			<?php
+			/**
+			 * Hook here to add custom major actions.
+			 *
+			 * Eg: a link to generate a session when on a WordCamp Site.
+			 *
+			 * @since  1.1.0
+			 *
+			 * @param  WP_Post $talk The current talk object.
+			 */
+			do_action( 'wct_admin_workflow_metabox_major', $talk );
+
+			if ( current_user_can( 'delete_talk', $talk->ID ) ) {
+				$delete_text = __( 'Move to Trash', 'wordcamp-talks' );
+
+				if ( ! EMPTY_TRASH_DAYS ) {
+					$delete_text = __( 'Delete Permanently' );
+				}
+
+				printf( '<div id="delete-action" class="warning"><a class="submitdelete deletion" href="%1$s">%2$s</a></div>',
+					esc_url( get_delete_post_link( $talk->ID ) ),
+					esc_html( $delete_text )
+				);
+			}
+			?>
+
+			<div class="clear"></div>
+		</div>
 		<?php
-		/**
-		 * Hook here to add custom actions.
-		 *
-		 * Eg: a link to generate a session when on a WordCamp Site.
-		 *
-		 * @since  1.1.0
-		 *
-		 * @param  WP_Post $talk The current talk object.
-		 */
-		do_action( 'wct_admin_workflow_metabox', $talk );
 	}
 
 	/**
@@ -1594,6 +1627,24 @@ class WordCamp_Talks_Admin {
 			body.post-type-<?php echo $post_type;?> .fixed th.column-cat_talks,
 			body.post-type-<?php echo $post_type;?> .fixed th.column-tag_talks {
 				width: 15%;
+			}
+
+			body.post-type-<?php echo $post_type;?> #poststuff #wct_workflow_metabox .inside {
+				margin: 0;
+				padding: 0;
+			}
+
+			body.post-type-<?php echo $post_type;?> .talk-major-action {
+				padding: 6px 10px 8px;
+			}
+
+			body.post-type-<?php echo $post_type;?> #wct_workflow_metabox .submitdelete {
+				color: #a00;
+			}
+
+			body.post-type-<?php echo $post_type;?> #wct_workflow_metabox .submitdelete:hover {
+				color: #dc3232;
+				border: none;
 			}
 
 			body.post-type-<?php echo $post_type;?> #talk-timestamps dt {
