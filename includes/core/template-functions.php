@@ -963,6 +963,145 @@ function wct_maybe_reset_postdata() {
 }
 
 /**
+ * Get the WP Nav Items for the WordCamp Talk Proposals main areas.
+ *
+ * @since  1.1.0
+ *
+ * @return array A list of WP Nav Items object.
+ */
+function wct_get_nav_items() {
+	$nav_items = array(
+		'wct_archive'    => array(
+			'id'         => 'wct-archive',
+			'title'      => html_entity_decode( wct_archive_title(), ENT_QUOTES, get_bloginfo( 'charset' ) ),
+			'url'        => esc_url_raw( wct_get_root_url() ),
+			'object'     => 'wct-archive',
+		),
+		'wct_new'        => array(
+			'id'         => 'wct-new',
+			'title'      => html_entity_decode( __( 'New Talk Proposal', 'wordcamp-talks' ), ENT_QUOTES, get_bloginfo( 'charset' ) ),
+			'url'        => esc_url_raw( wct_get_form_url() ),
+			'object'     => 'wct-new',
+		),
+		'wct_my_profile' => array(
+			'id'         => 'wct-profile',
+			'title'      => html_entity_decode( __( 'My profile', 'wordcamp-talks' ), ENT_QUOTES, get_bloginfo( 'charset' ) ),
+			'url'        => esc_url_raw( wct_users_get_logged_in_profile_url() ),
+			'object'     => 'wct-profile',
+		),
+	);
+
+	if ( wct_is_signup_allowed() ) {
+		$nav_items['wct_signup'] = array(
+			'id'         => 'wct-signup',
+			'title'      => html_entity_decode( __( 'Sign up', 'wordcamp-talks' ), ENT_QUOTES, get_bloginfo( 'charset' ) ),
+			'url'        => esc_url_raw( wct_users_get_signup_url() ),
+			'object'     => 'wct-signup',
+		);
+	}
+
+	foreach ( $nav_items as $nav_item_key => $nav_item ) {
+		$nav_items[ $nav_item_key ] = array_merge( $nav_item, array(
+			'type'       => 'wct_nav_item',
+			'type_label' => _x( 'Custom Link', 'customizer menu type label', 'wordcamp-talks' ),
+			'object_id'  => -1,
+		) );
+	}
+
+	return $nav_items;
+}
+
+/**
+ * Validate & Populate nav item URLs.
+ *
+ * @since  1.1.0
+ *
+ * @param  array  $menu_items WP Nav Items list.
+ * @return array              WP Nav Items list.
+ */
+function wct_validate_nav_menu_items( $menu_items = array() ) {
+	$nav_items = wp_list_filter( $menu_items, array( 'type' => 'wct_nav_item' ) );
+
+	if ( empty( $nav_items ) ) {
+		return $menu_items;
+	}
+
+	$nav_items_urls = wp_list_pluck( wct_get_nav_items(), 'url', 'id' );
+
+	if ( ! is_admin() && ! is_customize_preview() ) {
+		if ( ! is_user_logged_in() ) {
+			unset( $nav_items_urls['wct-profile'] );
+		} else {
+			unset( $nav_items_urls['wct-signup'] );
+		}
+	}
+
+	foreach ( $menu_items as $km => $om ) {
+		if ( ! isset( $nav_items_urls[ $om->object ] ) ) {
+			if ( 'wct_nav_item' === $om->type ) {
+				unset( $menu_items[ $km ] );
+			}
+
+			continue;
+		}
+
+		$menu_items[ $km ]->url = $nav_items_urls[ $om->object ];
+
+		if ( ( 'wct-archive' === $om->object && wct_is_talks() )
+			|| ( 'wct-profile' === $om->object && wct_is_current_user_profile() )
+			|| ( 'wct-new' === $om->object && wct_is_addnew() )
+			|| ( 'wct-signup' === $om->object && wct_is_signup() )
+		) {
+			$menu_items[ $km ]->classes = array_merge( $om->classes, array( 'current-menu-item', 'current_page_item' ) );
+		}
+	}
+
+	return $menu_items;
+}
+
+/**
+ * Add WordCamp Talk Proposals Nav Items to the Customizer.
+ *
+ * @since  1.1.0
+ *
+ * @param  array  $items  The array of menu items.
+ * @param  string $type   The object type.
+ * @param  string $object The object name.
+ * @param  int    $page   The current page number.
+ * @return array          The array of menu items.
+ */
+function wct_customizer_get_nav_menus_items( $items = array(), $type = '', $object = '', $page = 0 ) {
+	if ( 'wct_nav_item' !== $type ) {
+		return $items;
+	}
+
+	// Get the nav items.
+	$items = array_values( wct_get_nav_items() );
+
+	return array_slice( $items, 10 * $page, 10 );
+}
+
+/**
+ * Add WordCamp Talk Proposals Nav item type to the available Customizer Post types.
+ *
+ * @since  1.1.0
+ *
+ * @param  array $item_types Custom menu item types.
+ * @return array             Custom menu item types WordCamp Talk Proposals item type.
+ */
+function wct_customizer_set_nav_menus_item_types( $item_types = array() ) {
+	$item_types = array_merge( $item_types, array(
+		'wct' => array(
+			'title'  => _x( 'Talk Proposals', 'customizer menu section title', 'wordcamp-talks' ),
+			'type'   => 'wct_nav_item',
+			'object' => 'wct',
+		),
+	) );
+
+	return $item_types;
+}
+
+/**
  * Filters edit post link to avoid its display when needed.
  *
  * @since 1.0.0

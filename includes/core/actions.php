@@ -54,11 +54,10 @@ add_action( 'wct_deleted_rate', 'wct_clean_rates_count_cache', 10, 2 );
 add_action( 'admin_init', 'wct_maybe_upgrade', 999 );
 
 // Widgets
-add_action( 'widgets_init', array( 'WordCamp_Talks_Core_Navig',             'register_widget' ), 11 );
-add_action( 'widgets_init', array( 'WordCamp_Talks_Talks_List_Categories',  'register_widget' ), 12 );
-add_action( 'widgets_init', array( 'WordCamp_Talks_Talks_Popular',          'register_widget' ), 14 );
-add_action( 'widgets_init', array( 'WordCamp_Talks_Users_Top_Contributors', 'register_widget' ), 15 );
-add_action( 'widgets_init', array( 'WordCamp_Talks_Comments_Recent',        'register_widget' ), 16 );
+add_action( 'widgets_init', array( 'WordCamp_Talks_Talks_List_Categories',  'register_widget' ), 11 );
+add_action( 'widgets_init', array( 'WordCamp_Talks_Talks_Popular',          'register_widget' ), 12 );
+add_action( 'widgets_init', array( 'WordCamp_Talks_Users_Top_Contributors', 'register_widget' ), 14 );
+add_action( 'widgets_init', array( 'WordCamp_Talks_Comments_Recent',        'register_widget' ), 15 );
 
 // User deleted
 add_action( 'deleted_user', 'wct_users_delete_user_data', 10, 1 );

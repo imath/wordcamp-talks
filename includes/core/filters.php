@@ -19,11 +19,16 @@ add_filter( 'body_class',                'wct_body_class',                   20,
 add_filter( 'post_class',                'wct_post_class',                   10, 2 );
 add_filter( 'map_meta_cap',              'wct_map_meta_caps',                10, 4 );
 add_filter( 'widget_tag_cloud_args',     'wct_tag_cloud_args',               10, 1 );
+add_filter( 'wp_get_nav_menu_items',     'wct_validate_nav_menu_items',      10, 1 );
 add_filter( 'get_edit_post_link',        'wct_edit_post_link',               10, 2 );
 add_filter( 'get_edit_comment_link',     'wct_edit_comment_link',            10, 1 );
 add_filter( 'comments_open',             'wct_comments_open',                10, 2 );
 add_filter( 'heartbeat_received',        'wct_talks_heartbeat_check_locked', 10, 2 );
 add_filter( 'heartbeat_nopriv_received', 'wct_talks_heartbeat_check_locked', 10, 2 );
+
+// Customizer
+add_filter( 'customize_nav_menu_available_items',      'wct_customizer_get_nav_menus_items',      10, 4 );
+add_filter( 'customize_nav_menu_available_item_types', 'wct_customizer_set_nav_menus_item_types', 10, 1 );
 
 // Prefix talk's title in case of private/protected
 add_filter( 'the_title', 'wct_talks_status_title_prefix', 10, 2 );

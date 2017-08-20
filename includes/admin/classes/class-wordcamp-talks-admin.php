@@ -172,6 +172,9 @@ class WordCamp_Talks_Admin {
 		// Add a link to About & settings page in plugins list
 		add_filter( 'plugin_action_links', array( $this, 'modify_plugin_action_links' ), 10, 2 );
 
+		// Add a specific metabox to manage WordCamp Talk Proposal menus.
+		add_action( 'load-nav-menus.php', array( $this, 'menu_accordion' ), 10, 1 );
+
 		/** Specific case: ratings ****************************************************/
 
 		// Only sort by rates & display people who voted if ratings is not disabled.
@@ -1397,6 +1400,85 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
+	 * Register the menu accordeon.
+	 *
+	 * @since 1.1.0
+	 */
+	public function menu_accordion() {
+		add_meta_box(
+			'wct-nav-menu',
+			_x( 'Talk Proposals', 'menu admin accordion box title', 'wordcamp-talks' ),
+			array( $this, 'do_accordion' ),
+			'nav-menus',
+			'side',
+			'default'
+		);
+	}
+	/**
+	 * Output the Menu Accordion section.
+	 *
+	 * @since 1.1.0
+	 */
+	public function do_accordion() {
+		global $_nav_menu_placeholder, $nav_menu_selected_id;
+
+		$nav_items = wct_get_nav_items();
+
+		if ( ! $nav_items ) {
+			return;
+		}
+		?>
+		<div class="wct-nav-menu" id="wct">
+
+			<div id="tabs-panel-posttype-wct_nav_item" class="tabs-panel tabs-panel-active">
+				<ul id="wct_nav_item-menu-checklist" class="categorychecklist form-no-clear">
+
+					<?php foreach ( $nav_items as $nav_item ) :
+						// Decrease on each loop
+						if ( 0 > $_nav_menu_placeholder ) {
+							$_nav_menu_placeholder = $_nav_menu_placeholder - 1;
+						}  else {
+							$_nav_menu_placeholder = -1;
+						}
+					?>
+
+						<li>
+							<label class="menu-item-title">
+								<input type="checkbox" class="menu-item-checkbox" name="menu-item[<?php echo $_nav_menu_placeholder; ?>][menu-item-object-id]" value="-1"> <?php echo esc_html( $nav_item['title'] ) ; ?>
+							</label>
+
+							<input type="hidden" class="menu-item-object" name="menu-item[<?php echo $_nav_menu_placeholder; ?>][menu-item-object]" value="<?php echo esc_attr( $nav_item['object'] ) ; ?>" />
+							<input type="hidden" class="menu-item-url" name="menu-item[<?php echo $_nav_menu_placeholder; ?>][menu-item-url]" value="<?php echo esc_url( $nav_item['url'] ) ; ?>">
+							<input type="hidden" class="menu-item-title" name="menu-item[<?php echo $_nav_menu_placeholder; ?>][menu-item-title]" value="<?php echo esc_attr( $nav_item['title'] ) ; ?>">
+							<input type="hidden" class="menu-item-type" name="menu-item[<?php echo $_nav_menu_placeholder; ?>][menu-item-type]" value="<?php echo esc_attr( $nav_item['type'] ) ; ?>" />
+						</li>
+
+					<?php endforeach; ?>
+
+				</ul>
+			</div>
+
+			<p class="button-controls wp-clearfix">
+
+				<?php if ( count( $nav_items ) > 1 ) : ?>
+					<span class="list-controls">
+						<a href="<?php echo esc_url( add_query_arg( 'selectall', 1, admin_url( 'nav-menus.php' ) ) ); ?>#wct" class="select-all aria-button-if-js">
+							<?php esc_html_e( 'Select All', 'wordcamp-talks' ); ?>
+						</a>
+					</span>
+				<?php endif ; ?>
+
+				<span class="add-to-menu">
+					<input type="submit"<?php wp_nav_menu_disabled_check( $nav_menu_selected_id ); ?> class="button-secondary submit-add-to-menu right" value="<?php esc_attr_e( 'Add to menu', 'wordcamp-talks' ); ?>" name="add-wct-menu-item" id="submit-wct" />
+					<span class="spinner"></span>
+				</span>
+			</p>
+
+		</div><!-- /#wct -->
+		<?php
+	}
+
+	/**
 	 * Add the inline edit workflow state control.
 	 *
 	 * @since  1.O.0
@@ -1632,9 +1714,9 @@ class WordCamp_Talks_Admin {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  array $links the existing links
-	 * @param  string $file  the file of plugins
-	 * @return array  the existing links + the new ones
+	 * @param  array  $links The existing links
+	 * @param  string $file  The file of plugins
+	 * @return array         The existing links & the new ones.
 	 */
 	public function modify_plugin_action_links( $links, $file ) {
 		if ( wct_get_basename() !== $file ) {

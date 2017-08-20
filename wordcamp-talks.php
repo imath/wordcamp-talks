@@ -205,7 +205,6 @@ final class WordCamp_Talks {
 
 		// Class Name => subfolder
 		$map = array_fill_keys( array(
-			'WordCamp_Talks_Core_Navig',
 			'WordCamp_Talks_Talks_List_Categories',
 			'WordCamp_Talks_Talks_Popular',
 			'WordCamp_Talks_Users_Top_Contributors',

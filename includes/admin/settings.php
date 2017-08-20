@@ -338,8 +338,7 @@ function wct_root_slug_conflict_check( $slug = 'talks' ) {
 function wct_settings_core_section_callback() {
 	?>
 
-	<p><?php _e( 'Customize WordCamp Talks features', 'wordcamp-talks' ); ?></p>
-	<p class="description"><?php printf( esc_html__( 'Url of WordCamp Talks&#39;s main page: %s', 'wordcamp-talks' ), '<code>' . wct_get_root_url() .'</code>' ) ;?></p>
+	<p><?php esc_html_e( 'Customize WordCamp Talk Proposals features.', 'wordcamp-talks' ); ?></p>
 
 	<?php
 }
@@ -681,7 +680,7 @@ function wct_settings() {
 	?>
 	<div class="wrap">
 
-		<h2><?php esc_html_e( 'WordCamp Talk Proposal Settings', 'wordcamp-talks' ) ?></h2>
+		<h2><?php esc_html_e( 'WordCamp Talk Proposals Settings', 'wordcamp-talks' ) ?></h2>
 
 		<form action="options.php" method="post">
 
