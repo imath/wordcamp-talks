@@ -19,7 +19,6 @@ add_filter( 'body_class',                'wct_body_class',                   20,
 add_filter( 'post_class',                'wct_post_class',                   10, 2 );
 add_filter( 'map_meta_cap',              'wct_map_meta_caps',                10, 4 );
 add_filter( 'widget_tag_cloud_args',     'wct_tag_cloud_args',               10, 1 );
-add_filter( 'wp_nav_menu_objects',       'wct_wp_nav',                       10, 2 );
 add_filter( 'get_edit_post_link',        'wct_edit_post_link',               10, 2 );
 add_filter( 'get_edit_comment_link',     'wct_edit_comment_link',            10, 1 );
 add_filter( 'comments_open',             'wct_comments_open',                10, 2 );

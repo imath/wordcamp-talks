@@ -18,9 +18,6 @@ defined( 'ABSPATH' ) || exit;
  * This the key function of the plugin, it is definining the templates
  * to load and is setting the displayed user.
  *
- * @package WordCamp Talks
- * @subpackage core/template-functions
- *
  * @since 1.0.0
  *
  * @param WP_Query $posts_query The WP_Query instance
@@ -277,7 +274,6 @@ function wct_parse_query( $posts_query = null ) {
 		wct_set_global( 'is_tag', $tag );
 	}
 
-
 	/** Searching talks ***********************************************************/
 
 	$search = $posts_query->get( wct_search_rewrite_id() );
@@ -347,9 +343,6 @@ function wct_parse_query( $posts_query = null ) {
 /**
  * Loads the plugin's stylesheet
  *
- * @package WordCamp Talks
- * @subpackage core/template-functions
- *
  * @since 1.0.0
  */
 function wct_enqueue_style() {
@@ -362,12 +355,9 @@ function wct_enqueue_style() {
 /**
  * Is this a plugin's Administration screen?
  *
- * @package WordCamp Talks
- * @subpackage core/template-functions
- *
  * @since 1.0.0
  *
- * @return bool true if displaying a plugin's admin screen, false otherwise
+ * @return boolean True if displaying a plugin's admin screen. False otherwise
  */
 function wct_is_admin() {
 	$retval = false;
@@ -391,96 +381,75 @@ function wct_is_admin() {
 /**
  * Is this Plugin's front end area?
  *
- * @package WordCamp Talks
- * @subpackage core/template-functions
- *
  * @since 1.0.0
  *
- * @return bool true if viewing a plugin's front end page, false otherwise
+ * @return boolean True if viewing a plugin's front end page. False otherwise
  */
 function wct_is_talks() {
 	return (bool) wct_get_global( 'is_talks' );
 }
 
 /**
- * Is this the new talk form ?
- *
- * @package WordCamp Talks
- * @subpackage core/template-functions
+ * Is this the new talk form?
  *
  * @since 1.0.0
  *
- * @return bool true if on the addnew form, false otherwise
+ * @return boolean True if on the addnew form. False otherwise.
  */
 function wct_is_addnew() {
 	return (bool) wct_get_global( 'is_new' );
 }
 
 /**
- * Is this the edit talk form ?
- *
- * @package WordCamp Talks
- * @subpackage core/template-functions
+ * Is this the edit talk form?
  *
  * @since 1.0.0
  *
- * @return bool true if on the edit form, false otherwise
+ * @return boolean True if on the edit form. False otherwise.
  */
 function wct_is_edit() {
 	return (bool) wct_get_global( 'is_edit' );
 }
 
 /**
- * Is this the signup form ?
- *
- * @package WordCamp Talks
- * @subpackage core/template-functions
+ * Is this the signup form?
  *
  * @since 1.0.0
  *
- * @return bool true if on the edit form, false otherwise
+ * @return boolean True if on the edit form. False otherwise.
  */
 function wct_is_signup() {
 	return (bool) wct_get_global( 'is_signup' );
 }
 
 /**
- * Are we viewing a single talk ?
- *
- * @package WordCamp Talks
- * @subpackage core/template-functions
+ * Are we viewing a single talk?
  *
  * @since 1.0.0
  *
- * @return bool true if on a single talk template, false otherwise
+ * @return boolean True if on a single talk template. False otherwise.
  */
 function wct_is_single_talk() {
-	return (bool) apply_filters( 'wct_is_single_talk', is_singular( wct_get_post_type() ) );
+	return (bool) is_singular( wct_get_post_type() );
 }
 
 /**
- * Current ID for the talk being viewed
- *
- * @package WordCamp Talks
- * @subpackage core/template-functions
+ * Current ID for the talk being viewed.
  *
  * @since 1.0.0
  *
- * @return int the current talk ID
+ * @return integer The current talk ID.
  */
 function wct_get_single_talk_id() {
-	return (int) apply_filters( 'wct_get_single_talk_id', wct_get_global( 'single_talk_id' ) );
+	return (int) wct_get_global( 'single_talk_id' );
 }
 
 /**
- * Are we viewing talks archive ?
- *
- * @package WordCamp Talks
- * @subpackage core/template-functions
+ * Are we viewing talks archive?
  *
  * @since 1.0.0
  *
- * @return bool true if on talks archive, false otherwise
+ * @return boolean True if on talks archive. False otherwise.
  */
 function wct_is_talks_archive() {
 	$retval = false;
@@ -489,18 +458,15 @@ function wct_is_talks_archive() {
 		$retval = true;
 	}
 
-	return apply_filters( 'wct_is_talks_archive', $retval );
+	return $retval;
 }
 
 /**
- * Are we viewing talks by category ?
- *
- * @package WordCamp Talks
- * @subpackage core/template-functions
+ * Are we viewing talks by category?
  *
  * @since 1.0.0
  *
- * @return bool true if viewing talks categorized in a sepecific term, false otherwise.
+ * @return boolean True if viewing talks categorized in a sepecific term. False otherwise.
  */
 function wct_is_category() {
 	$retval = false;
@@ -509,17 +475,15 @@ function wct_is_category() {
 		$retval = true;
 	}
 
-	return apply_filters( 'wct_is_category', $retval );
+	return $retval;
 }
 
 /**
  * Are we viewing talks by tag ?
  *
- * @package WordCamp Talks
- * @subpackage core/template-functions
- *
  * @since 1.0.0
- * @return bool true if viewing talks tagged with a sepecific term, false otherwise.
+ *
+ * @return boolean True if viewing talks tagged with a sepecific term. False otherwise.
  */
 function wct_is_tag() {
 	$retval = false;
@@ -528,44 +492,38 @@ function wct_is_tag() {
 		$retval = true;
 	}
 
-	return apply_filters( 'wct_is_tag', $retval );
+	return $retval;
 }
 
 /**
- * Get / Set the current term being viewed
- *
- * @package WordCamp Talks
- * @subpackage core/template-functions
+ * Get / Set the current term being viewed.
  *
  * @since 1.0.0
- * @return object $current_term
+ *
+ * @return object The current term.
  */
 function wct_get_current_term() {
 	$current_term = wct_get_global( 'current_term' );
 
 	if ( empty( $current_term ) ) {
 		$current_term = get_queried_object();
+		wct_set_global( 'current_term', $current_term );
 	}
 
-	wct_set_global( 'current_term', $current_term );
-
-	return apply_filters( 'wct_get_current_term', $current_term );
+	return $current_term;
 }
 
 /**
- * Get the current term name
- *
- * @package WordCamp Talks
- * @subpackage core/template-functions
+ * Get the current term name.
  *
  * @since 1.0.0
  *
- * @return string the term name
+ * @return string The term name.
  */
 function wct_get_term_name() {
 	$term = wct_get_current_term();
 
-	return apply_filters( 'wct_get_term_name', $term->name );
+	return $term->name;
 }
 
 
@@ -581,14 +539,11 @@ function wct_get_term_name() {
  }
 
 /**
- * Are we searching talks ?
- *
- * @package WordCamp Talks
- * @subpackage core/template-functions
+ * Are we searching talks?
  *
  * @since 1.0.0
  *
- * @return bool true if a talk search is performed, otherwise false
+ * @return boolean True if a talk search is performed. False otherwise.
  */
 function wct_is_search() {
 	$retval = false;
@@ -597,19 +552,16 @@ function wct_is_search() {
 		$retval = true;
 	}
 
-	return apply_filters( 'wct_is_search', $retval );
+	return $retval;
 }
 
 /**
- * Has the order changed to the type being checked
- *
- * @package WordCamp Talks
- * @subpackage core/template-functions
+ * Has the order changed to the type being checked?
  *
  * @since 1.0.0
  *
- * @param  string $type the order to check
- * @return bool true if the order has changed from default one, false otherwise
+ * @param  string  $type The order to check
+ * @return boolean       True if the order has changed from default one. False otherwise.
  */
 function wct_is_orderby( $type = '' ) {
 	$retval = false;
@@ -624,129 +576,100 @@ function wct_is_orderby( $type = '' ) {
 		$retval = true;
 	}
 
-	return apply_filters( 'wct_is_orderby', $retval, $type );
+	return $retval;
 }
 
 /**
- * Are viewing a user's profile ?
- *
- * @package WordCamp Talks
- * @subpackage core/template-functions
+ * Are viewing a user's profile?
  *
  * @since 1.0.0
  *
- * @return bool true a user's profile is being viewed, false otherwise
+ * @return boolean True a user's profile is being viewed. False otherwise.
  */
 function wct_is_user_profile() {
-	return (bool) apply_filters( 'wct_is_user_profile', wct_get_global( 'is_user' ) );
+	return (bool) wct_get_global( 'is_user' );
 }
 
 /**
- * Are we viewing comments in user's profile
- *
- * @package WordCamp Talks
- * @subpackage core/template-functions
+ * Are we viewing comments in user's profile?
  *
  * @since 1.0.0
  *
- * @return bool true if viewing user's profile comments, false otherwise
+ * @return boolean True if viewing user's profile comments. False otherwise.
  */
 function wct_is_user_profile_comments() {
-	return (bool) apply_filters( 'wct_is_user_profile_comments', wct_get_global( 'is_user_comments' ) );
+	return (bool) wct_get_global( 'is_user_comments' );
 }
 
 /**
- * Are we viewing rates in user's profile
- *
- * @package WordCamp Talks
- * @subpackage core/template-functions
+ * Are we viewing rates in user's profile?
  *
  * @since 1.0.0
  *
- * @return bool true if viewing user's profile rates, false otherwise
+ * @return boolean True if viewing user's profile rates. False otherwise.
  */
 function wct_is_user_profile_rates() {
-	return (bool) apply_filters( 'wct_is_user_profile_rates', wct_get_global( 'is_user_rates' ) );
+	return (bool) wct_get_global( 'is_user_rates' );
 }
 
 /**
- * Are we viewing the "to rate" area of the user's profile
- *
- * @package WordCamp Talks
- * @subpackage core/template-functions
+ * Are we viewing the "to rate" area of the user's profile?
  *
  * @since 1.0.0
  *
- * @return bool true if viewing user's profile to rate, false otherwise.
+ * @return boolean True if viewing user's profile to rate. False otherwise.
  */
 function wct_is_user_profile_to_rate() {
-	return (bool) apply_filters( 'wct_is_user_profile_to_rate', wct_get_global( 'is_user_to_rate' ) );
+	return (bool) wct_get_global( 'is_user_to_rate' );
 }
 
 /**
- * Are we viewing talks in user's profile
- *
- * @package WordCamp Talks
- * @subpackage core/template-functions
+ * Are we viewing talks in user's profile?
  *
  * @since 1.0.0
  *
- * @return bool true if viewing talks in the user's profile, false otherwise
+ * @return boolean True if viewing talks in the user's profile. False otherwise.
  */
 function wct_is_user_profile_talks() {
-	return (bool) apply_filters( 'wct_is_user_profile_talks', wct_get_global( 'is_user_talks' ) );
+	return (bool) wct_get_global( 'is_user_talks' );
 }
 
 /**
- * Are we viewing the "home" page of the user's profile
- *
- * @package WordCamp Talks
- * @subpackage core/template-functions
+ * Are we viewing the "home" page of the user's profile?
  *
  * @since 1.0.0
  *
- * @return bool true if viewing user's profile home page, false otherwise.
+ * @return boolean True if viewing user's profile home page. False otherwise.
  */
 function wct_is_user_profile_home() {
-	return (bool) apply_filters( 'wct_is_user_profile_home', wct_get_global( 'is_user_home' ) );
+	return (bool) wct_get_global( 'is_user_home' );
 }
 
 /**
- * Is this self profile ?
- *
- * @package WordCamp Talks
- * @subpackage core/template-functions
+ * Is this self profile?
  *
  * @since 1.0.0
  *
- * @return bool true if current user is viewing his profile, false otherwise
+ * @return boolean True if current user is viewing his profile. False otherwise.
  */
 function wct_is_current_user_profile() {
 	$current_user      = wct_get_global( 'current_user' );
 	$displayed_user_id = wct_get_global( 'is_user' );
 
-	if( empty( $current_user->ID ) ) {
+	if ( empty( $current_user->ID ) ) {
 		return false;
 	}
 
-	$is_user_profile = ( (int) $current_user->ID === (int) $displayed_user_id );
-
-	/**
-	 * @param  bool $is_user_profile whether the user is viewing his profile or not
-	 */
-	return (bool) apply_filters( 'wct_is_current_user_profile', $is_user_profile );
+	return (int) $current_user->ID === (int) $displayed_user_id;
 }
 
 /**
- * Reset the page (post) title depending on the context
- *
- * @package WordCamp Talks
- * @subpackage core/template-functions
+ * Reset the page (post) title depending on the context.
  *
  * @since 1.0.0
  *
- * @param string $context the context to build the title for
- * @return string the post title
+ * @param  string $context The WordCamp Talk context to build the title for.
+ * @return string          The post title.
  */
 function wct_reset_post_title( $context = '' ) {
 	$post_title = wct_archive_title();
@@ -786,24 +709,23 @@ function wct_reset_post_title( $context = '' ) {
 	}
 
 	/**
-	 * @param  string $post_title the title for the template
-	 * @param  string $context the context
+	 * Filter here to edit the post title.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param  string $post_title The title for the template
+	 * @param  string $context    The WordCamp Talk Proposals context.
 	 */
 	return apply_filters( 'wct_reset_post_title', $post_title, $context );
 }
 
 /**
- * Filters the <title> content
- *
- * Inspired by bbPress's bbp_title()
- *
- * @package WordCamp Talks
- * @subpackage core/template-functions
+ * Filters the <title> content.
  *
  * @since 1.0.0
  *
- * @param array $title the title parts
- * @return string the page title meta tag
+ * @param  array  $title The title parts.
+ * @return string        The page title meta tag.
  */
 function wct_title( $title_array = array() ) {
 	if ( ! wct_is_talks() ) {
@@ -846,8 +768,14 @@ function wct_title( $title_array = array() ) {
 	$new_title_array = array_merge( $title_array, $new_title );
 
 	/**
-	 * @param  string $new_title the filtered title
-	 * @param  string $sep
+	 * Filter here to edit the <title> tag for a WordCamp Talk Proposals page.
+	 *
+	 * NB: only for themes not using the WordPress generated Document title.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param  string $new_title The filtered title.
+	 * @param  string $sep       The separator
 	 * @param  string $seplocation
 	 * @param  string $title the original title meta tag
 	 */
@@ -855,12 +783,12 @@ function wct_title( $title_array = array() ) {
 }
 
 /**
- * Set the document title for plugin's front end pages
+ * Set the document title for plugin's front end pages.
  *
  * @since  1.0.0
  *
- * @param  array  $document_title The WordPress Document title
- * @return array                  The Document title
+ * @param  array  $document_title The WordPress Document title.
+ * @return array                  The Document title.
  */
 function wct_document_title_parts( $document_title = array() ) {
 	if ( ! wct_is_talks() ) {
@@ -925,12 +853,19 @@ function wct_document_title_parts( $document_title = array() ) {
 		unset( $new_document_title['tagline'] );
 	}
 
+	/**
+	 * Filter here to edit the <title> tag for a WordCamp Talk Proposals page.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param  string $new_document_title The WordCamp Talk Proposal generated document title.
+	 * @param  string $document_title     The original WordPress generated document title.
+	 */
 	return apply_filters( 'wct_document_title_parts', $new_document_title, $document_title );
 }
 
 /**
  * Remove the site description from title.
- * @todo we should make sure $wp_query->is_home is false in a future release
  *
  * @since 1.0.0
  *
@@ -948,24 +883,17 @@ function wct_title_adjust( $title = '', $sep = '&raquo;', $seplocation = '' ) {
 		$site_description = ' ' . $sep . ' ' . $site_description;
 	}
 
-	$new_title = str_replace( $site_description, '', $title );
-
-	return apply_filters( 'wct_title_adjust', $new_title, $title, $sep, $seplocation );
+	return str_replace( $site_description, '', $title );
 }
 
 /**
  * Output a body class if in a plugin's front end area.
  *
- * Inspired by bbPress's bbp_body_class()
- *
- * @package WordCamp Talks
- * @subpackage core/template-functions
- *
  * @since 1.0.0
  *
- * @param  array $wp_classes
- * @param  array $custom_classes
- * @return array the new Body Classes
+ * @param  array $wp_classes     WordPress generated Body Classes.
+ * @param  array $custom_classes Custom classes if added. Defaults to false.
+ * @return array                 The WordCamp Talk Proposals Body Classes.
  */
 function wct_body_class( $wp_classes, $custom_classes = false ) {
 
@@ -989,6 +917,10 @@ function wct_body_class( $wp_classes, $custom_classes = false ) {
 	$classes = array_unique( array_merge( (array) $talks_classes, (array) $wp_classes ) );
 
 	/**
+	 * Filter here to edit the WordCamp Talk Proposals body classes.
+	 *
+	 * @since  1.0.0
+	 *
 	 * @param array $classes returned classes.
 	 * @param array $wc_talks_classes specific classes to the plugin.
 	 * @param array $wp_classes regular WordPress classes.
@@ -1000,8 +932,6 @@ function wct_body_class( $wp_classes, $custom_classes = false ) {
 /**
  * Adds a 'type-page' class as the page template is the the most commonly targetted
  * as the root template.
- *
- * NB: TwentySixteen needs this to display the content on full available width
  *
  * @since  1.0.0
  *
@@ -1016,14 +946,11 @@ function wct_post_class( $wp_classes, $theme_class ) {
 		$classes = $wp_classes;
 	}
 
-	return apply_filters( 'wct_post_class', $classes, $wp_classes, $theme_class );
+	return $classes;
 }
 
 /**
  * Reset postdata if needed
- *
- * @package WordCamp Talks
- * @subpackage core/template-functions
  *
  * @since 1.0.0
  */
@@ -1036,51 +963,12 @@ function wct_maybe_reset_postdata() {
 }
 
 /**
- * Filters nav menus looking for the root page to eventually make it current if not the
- * case although it's a plugin's front end area.
- *
- * @package WordCamp Talks
- * @subpackage core/template-functions
+ * Filters edit post link to avoid its display when needed.
  *
  * @since 1.0.0
  *
- * @param  array  $sorted_menu_items list of menu items of the wp_nav menu
- * @param  array  $args
- * @return array  the menu items with specific classes if needed
- */
-function wct_wp_nav( $sorted_menu_items = array(), $args = array() ) {
-
-	if ( ! wct_is_talks() ) {
-		return $sorted_menu_items;
-	}
-
-	foreach ( $sorted_menu_items as $key => $menu ) {
-
-		if( wct_get_root_url() != $menu->url ){
-			// maybe unset parent page if not the talks root
-			if ( in_array( 'current_page_parent', $menu->classes ) ) {
-				$sorted_menu_items[$key]->classes = array_diff( $menu->classes, array( 'current_page_parent' ) );
-			}
-		} else {
-			if ( ! in_array( 'current-menu-item', $menu->classes ) ) {
-				$sorted_menu_items[$key]->classes = array_merge( $menu->classes, array( 'current-menu-item' ) );
-			}
-		}
-	}
-
-	return apply_filters( 'wct_wp_nav', $sorted_menu_items );
-}
-
-/**
- * Filters edit post link to avoid its display when needed
- *
- * @package WordCamp Talks
- * @subpackage core/template-functions
- *
- * @since 1.0.0
- *
- * @param  string $edit_link the link to edit the post
- * @return mixed false if needed, original edit link otherwise
+ * @param  string $edit_link The link to edit the post.
+ * @return mixed             False if needed, original edit link otherwise.
  */
 function wct_edit_post_link( $edit_link = '', $post_id = 0 ) {
 	/**
