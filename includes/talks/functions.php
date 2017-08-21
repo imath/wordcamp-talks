@@ -20,12 +20,9 @@ defined( 'ABSPATH' ) || exit;
  *
  * By default, 'publish'
  *
- * @package WordCamp Talks
- * @subpackage talks/functions
- *
  * @since 1.0.0
  *
- * @return array          the post status of talks to retrieve
+ * @return array The post status of talks to retrieve
  */
 function wct_talks_get_status() {
 	$status = array( 'publish' );
@@ -35,18 +32,17 @@ function wct_talks_get_status() {
 	}
 
 	/**
-	 * Use this filter to override post status of talks to retieve
+	 * Use this filter to override post status of talks to retieve.
 	 *
-	 * @param  array $status
+	 * @since  1.0.0
+	 *
+	 * @param  array $status The statuses to get in queries.
 	 */
 	return apply_filters( 'wct_talks_get_status', $status );
 }
 
 /**
- * Gets all WordPress built in post status (to be used in filters)
- *
- * @package WordCamp Talks
- * @subpackage talks/functions
+ * Gets all WordPress built in post status.
  *
  * @since 1.0.0
  *
@@ -58,32 +54,29 @@ function wct_talks_get_all_status( $status = array() ) {
 }
 
 /**
- * How much talks to retrieve per page ?
+ * How much talks to retrieve per page?
  *
  * By default, same value than regular posts
- * Uses the WordPress posts per page setting
- *
- * @package WordCamp Talks
- * @subpackage talks/functions
+ * Uses the WordPress posts per page setting.
  *
  * @since 1.0.0
  *
- * @return array           the post status of talks to retrieve
+ * @return integer The number of Talks to display per page.
  */
 function wct_talks_per_page() {
-	return apply_filters( 'wct_talks_per_page', wct_get_global( 'per_page' ) );
+	return wct_get_global( 'per_page' );
 }
 
 /**
- * Get Talks matching the query args
- *
- * @package WordCamp Talks
- * @subpackage talks/functions
+ * Get Talks matching the query args.
  *
  * @since 1.0.0
  *
- * @param  array  $args custom args to merge with default ones
- * @return array        requested talks
+ * @param  array  $args {
+ *   custom args to merge with default ones
+ *   @see wct_talks_has_talks() for a complete description.
+ * }
+ * @return array  List of matching talks.
  */
 function wct_talks_get_talks( $args = array() ) {
 	$get_args = array();
@@ -125,21 +118,11 @@ function wct_talks_get_talks( $args = array() ) {
 		wct_set_global( 'needs_reset', true );
 	}
 
-	$talks = array_merge( $talks, array( 'get_args' => $r ) );
-
-	/**
-	 * @param  array $talks     associative array to find talks, total count and loop args
-	 * @param  array $r         merged args
-	 * @param  array $get_args  args before merge
-	 */
-	return apply_filters( 'wct_talks_get_talks', $talks, $r, $get_args );
+	return array_merge( $talks, array( 'get_args' => $r ) );
 }
 
 /**
- * Gets a talk with additional metas and terms
- *
- * @package WordCamp Talks
- * @subpackage talks/functions
+ * Gets a talk with additional metas and terms.
  *
  * @since 1.0.0
  *
@@ -151,50 +134,32 @@ function wct_talks_get_talk( $id_or_name = '' ) {
 		return false;
 	}
 
-	$talk = new WordCamp_Talks_Talks_Proposal( $id_or_name );
-
-	/**
-	 * @param  WordCamp_Talks_Talks_Proposal $talk        The talk object.
-	 * @param  mixed                         $id_or_name  The ID or slug of the talk.
-	 */
-	return apply_filters( 'wct_talks_get_talk', $talk, $id_or_name );
+	return new WordCamp_Talks_Talks_Proposal( $id_or_name );
 }
 
 /**
- * Gets a talk by its slug without additional metas or terms
- *
- * @package WordCamp Talks
- * @subpackage talks/functions
+ * Gets a talk by its slug without additional metas or terms.
  *
  * @since 1.0.0
  *
- * @param  string $name the post_name of the talk to get
- * @return WP_Post the talk object
+ * @param  string $name the post_name of the talk to get.
+ * @return WP_Post      The talk object
  */
 function wct_talks_get_talk_by_name( $name = '' ) {
 	if ( empty( $name ) ) {
 		return false;
 	}
 
-	$talk = WordCamp_Talks_Talks_Proposal::get_talk_by_name( $name );
-
-	/**
-	 * @param  WP_Post $talk the talk object
-	 * @param  string  $name the post_name of the talk
-	 */
-	return apply_filters( 'wct_talks_get_talk_by_name', $talk, $name );
+	return WordCamp_Talks_Talks_Proposal::get_talk_by_name( $name );
 }
 
 /**
- * Registers a new talks meta
- *
- * @package WordCamp Talks
- * @subpackage talks/functions
+ * Registers a new talks meta.
  *
  * @since 1.0.0
  *
- * @param  string $meta_key  the identifier of the meta key to register
- * @param  string $meta_args the arguments (array of callback functions)
+ * @param  string $meta_key  The identifier of the meta key to register.
+ * @param  string $meta_args The arguments (array of callback functions).
  */
 function wct_talks_register_meta( $meta_key = '', $meta_args = '' ) {
 	if ( empty( $meta_key ) || ! is_array( $meta_args ) ) {
@@ -223,17 +188,14 @@ function wct_talks_register_meta( $meta_key = '', $meta_args = '' ) {
 }
 
 /**
- * Gets a talk meta data
- *
- * @package WordCamp Talks
- * @subpackage talks/functions
+ * Gets a talk meta data.
  *
  * @since 1.0.0
  *
- * @param  int     $talk_id  the ID of the talk
- * @param  string  $meta_key the meta key to get
- * @param  bool    $single   whether to get an array of meta or unique one
- * @return mixed             the meta value
+ * @param  integer $talk_id  The ID of the talk
+ * @param  string  $meta_key The meta key to get
+ * @param  boolean $single   Whether to get an array of meta or unique one
+ * @return mixed             The meta value
  */
 function wct_talks_get_meta( $talk_id = 0, $meta_key = '', $single = true ) {
 	if ( empty( $talk_id ) || empty( $meta_key ) ) {
@@ -253,7 +215,10 @@ function wct_talks_get_meta( $talk_id = 0, $meta_key = '', $single = true ) {
 	if ( has_filter( "wct_meta_{$sanitized_key}_sanitize_display" ) ) {
 		/**
 		 * Use this filter if you need to apply custom sanitization to
-		 * the meta value
+		 * the meta value.
+		 *
+		 * @since  1.0.0
+		 *
 		 * @param  mixed   $meta_value the meta value
 		 * @param  string  $meta_key  the meta_key
 		 */
@@ -269,21 +234,18 @@ function wct_talks_get_meta( $talk_id = 0, $meta_key = '', $single = true ) {
 		}
 	}
 
-	return apply_filters( 'wct_talks_get_meta', $sanitized_value, $meta_key, $talk_id );
+	return $sanitized_value;
 }
 
 /**
- * Updates a talk meta data
- *
- * @package WordCamp Talks
- * @subpackage talks/functions
+ * Updates a talk meta data.
  *
  * @since 1.0.0
  *
- * @param  int     $talk_id    the ID of the talk
- * @param  string  $meta_key   the meta key to update
- * @param  mixed   $meta_value the meta value to update
- * @return bool                the update meta result
+ * @param  integer $talk_id    The ID of the talk
+ * @param  string  $meta_key   The meta key to update
+ * @param  mixed   $meta_value The meta value to update
+ * @return boolean             The update meta result
  */
 function wct_talks_update_meta( $talk_id = 0, $meta_key = '', $meta_value = '' ) {
 	if ( empty( $talk_id ) || empty( $meta_key ) || empty( $meta_value ) ) {
@@ -297,7 +259,10 @@ function wct_talks_update_meta( $talk_id = 0, $meta_key = '', $meta_value = '' )
 	if ( has_filter( "wct_meta_{$sanitized_key}_sanitize_db" ) ) {
 		/**
 		 * Use this filter if you need to apply custom sanitization to
-		 * the meta value
+		 * the meta value.
+		 *
+		 * @since  1.0.0
+		 *
 		 * @param  mixed   $meta_value the meta value
 		 * @param  string  $meta_key  the meta_key
 		 */
@@ -321,16 +286,13 @@ function wct_talks_update_meta( $talk_id = 0, $meta_key = '', $meta_value = '' )
 }
 
 /**
- * Deletes a talk meta data
- *
- * @package WordCamp Talks
- * @subpackage talks/functions
+ * Deletes a talk meta data.
  *
  * @since 1.0.0
  *
- * @param  int     $talk_id    the ID of the talk
- * @param  string  $meta_key   the meta key to update
- * @return bool                the delete meta result
+ * @param  integer $talk_id  the ID of the talk.
+ * @param  string  $meta_key the meta key to update.
+ * @return boolean           the delete meta result.
  */
 function wct_talks_delete_meta( $talk_id = 0, $meta_key = '' ) {
 	if ( empty( $talk_id ) || empty( $meta_key ) ) {
@@ -343,17 +305,14 @@ function wct_talks_delete_meta( $talk_id = 0, $meta_key = '' ) {
 }
 
 /**
- * Gets talk terms given a taxonomy and args
- *
- * @package WordCamp Talks
- * @subpackage talks/functions
+ * Gets talk terms given a taxonomy and args.
  *
  * @since 1.0.0
  *
- * @param  string $taxonomy the taxonomy identifier
- * @param  array  $args     the arguments to get the terms
- * @return array|WP_Error List of Term Objects and their children. Will return WP_Error, if any of $taxonomies
- *                        do not exist.
+ * @param  string $taxonomy The taxonomy identifier.
+ * @param  array  $args     The arguments to get the terms.
+ * @return array|WP_Error   List of Term Objects and their children. Will return WP_Error, if any of $taxonomies
+ *                          do not exist.
  */
 function wct_talks_get_terms( $taxonomy = '', $args = array() ) {
 	if ( empty( $taxonomy ) || ! is_array( $args ) ) {
@@ -367,21 +326,11 @@ function wct_talks_get_terms( $taxonomy = '', $args = array() ) {
 	) );
 
 	// get the terms for the requested taxonomy and args
-	$terms = get_terms( $taxonomy, $term_args );
-
-	/**
-	 * @param  array|WP_Error $terms    the list of terms of the taxonomy
-	 * @param  string         $taxonomy the taxonomy of the terms retrieved
-	 * @param  array          $args     the arguments to get the terms
-	 */
-	return apply_filters( 'wct_talks_get_terms', $terms, $taxonomy, $args );
+	return get_terms( $taxonomy, $term_args );
 }
 
 /**
- * Sets the post status of a talk
- *
- * @package WordCamp Talks
- * @subpackage talks/functions
+ * Sets the post status of a talk.
  *
  * @since 1.0.0
  *
@@ -390,6 +339,10 @@ function wct_talks_get_terms( $taxonomy = '', $args = array() ) {
  */
 function wct_talks_insert_status( $talkarr = array() ) {
 	/**
+	 * Filter here to edit the insert status according to the submitted data.
+	 *
+	 * @since  1.0.0
+	 *
 	 * @param  string  the default post status for a talk
 	 * @param  array   $talkarr  the arguments of the talk to save
 	 */
@@ -400,13 +353,10 @@ function wct_talks_insert_status( $talkarr = array() ) {
  * Checks if another user is editing a talk, if not
  * locks the talk for the current user.
  *
- * @package WordCamp Talks
- * @subpackage talks/functions
- *
  * @since 1.0.0
  *
- * @param  int $talk_id The ID of the talk to edit
- * @return int                the user id editing the talk
+ * @param  integer $talk_id The ID of the talk to edit.
+ * @return integer          The user id editing the talk.
  */
 function wct_talks_lock_talk( $talk_id = 0 ) {
 	$user_id = false;
@@ -430,10 +380,7 @@ function wct_talks_lock_talk( $talk_id = 0 ) {
 }
 
 /**
- * HeartBeat callback to check if a talk is being edited by an admin
- *
- * @package WordCamp Talks
- * @subpackage talks/functions
+ * HeartBeat callback to check if a talk is being edited by an admin.
  *
  * @since 1.0.0
  *
@@ -468,7 +415,7 @@ function wct_talks_editing_timeout_options() {
 }
 
 /**
- * Checks if a user can edit a talk
+ * Checks if a user can edit a talk.
  *
  * A user can edit the talk if :
  * - he is the author
@@ -478,13 +425,10 @@ function wct_talks_editing_timeout_options() {
  *   - nobody else is currently editing the talk
  * - he is a super admin.
  *
- * @package WordCamp Talks
- * @subpackage talks/functions
- *
  * @since 1.0.0
  *
- * @param  WP_Post $talk the talk object
- * @return bool          whether the user can edit the talk (true), or not (false)
+ * @param  WP_Post $talk The talk object.
+ * @return boolean       Whether the user can edit the talk (true), or not (false).
  */
 function wct_talks_can_edit( $talk = null ) {
 	// Default to can't edit !
@@ -515,8 +459,10 @@ function wct_talks_can_edit( $talk = null ) {
 	 * If you want to avoid the comment/rate and time lock, you
 	 * can use this filter.
 	 *
-	 * @param bool whether to directly check user's capacity
-	 * @param WP_Post $talk   the talk object
+	 * @since 1.0.0
+	 *
+	 * @param boolean $value Whether to directly check user's capacity.
+	 * @param WP_Post $talk  The talk object.
 	 */
 	$early_can_edit = apply_filters( 'wct_talks_pre_can_edit', false, $talk );
 
@@ -534,24 +480,16 @@ function wct_talks_can_edit( $talk = null ) {
 		return $retval;
 	}
 
-	/**
-	 * This part is based on bbPress's bbp_past_edit_lock() function
-	 *
-	 * In the case of an Talk Management system, i find the way bbPress
-	 * manage the time a content can be edited by its author very interesting
-	 * and simple (simplicity is allways great!)
-	 */
-
 	// Bail if empty date
 	if ( empty( $talk->post_date_gmt ) ) {
 		return $retval;
 	}
 
 	// Period of time
-	$lockable  = apply_filters( 'wct_talks_can_edit_time', wct_talk_editing_timeout() );
+	$lockable = wct_talk_editing_timeout();
 
 	// Now
-	$cur_time  = current_time( 'timestamp', true );
+	$cur_time = current_time( 'timestamp', true );
 
 	// Add lockable time to post time
 	$lock_time = strtotime( $lockable, strtotime( $talk->post_date_gmt ) );
@@ -561,25 +499,16 @@ function wct_talks_can_edit( $talk = null ) {
 		$retval = current_user_can( 'edit_talk', $talk->ID );
 	}
 
-	/**
-	 * Late filter
-	 *
-	 * @param bool    $retval whether to allow the user's to edit the talk
-	 * @param WP_Post $talk   the talk object
-	 */
-	return apply_filters( 'wct_talks_can_edit', $retval, $talk );
+	return $retval;
 }
 
 /**
- * Saves a talk entry in posts table
- *
- * @package WordCamp Talks
- * @subpackage talks/functions
+ * Saves a talk entry in posts table.
  *
  * @since 1.0.0
  *
- * @param  array  $talkarr the posted arguments
- * @return int    the ID of the created or updated talk
+ * @param  array           $talkarr The posted arguments
+ * @return integer|boolean          The ID of the created or updated talk. False otherwise.
  */
 function wct_talks_save_talk( $talkarr = array() ) {
 	if ( ! is_array( $talkarr ) ) {
@@ -692,8 +621,10 @@ function wct_talks_save_talk( $talkarr = array() ) {
 	/**
 	 * Do stuff before the talk is saved
 	 *
-	 * @param  array $talkarr the posted values
-	 * @param  bool  $update  whether it's an update or not
+	 * @since  1.0.0
+	 *
+	 * @param  array $talkarr the posted values.
+	 * @param  bool  $update  whether it's an update or not.
 	 */
 	do_action( 'wct_talks_before_talk_save', $talkarr, $update );
 
@@ -713,8 +644,10 @@ function wct_talks_save_talk( $talkarr = array() ) {
 		 * Call wct_talks_after_insert_talk for a new talk
 		 * Call wct_talks_after_update_talk for an updated talk
 		 *
-		 * @param  int    $inserted_id the inserted id
-		 * @param  object $talk the talk
+		 * @since  1.0.0
+		 *
+		 * @param  integer $inserted_id The inserted id.
+		 * @param  object  $talk        The talk.
 		 */
 		do_action( "wct_talks_after_{$hook}_talk", $saved_id, $talk );
 	}
@@ -725,15 +658,12 @@ function wct_talks_save_talk( $talkarr = array() ) {
 /** Talk urls *****************************************************************/
 
 /**
- * Gets the permalink to the talk
- *
- * @package WordCamp Talks
- * @subpackage talks/functions
+ * Gets the permalink to the talk.
  *
  * @since 1.0.0
  *
- * @param  WP_Post|int  $talk the talk object or its ID
- * @return string|bool     the permalink to the talk, false if the talk is not set
+ * @param  WP_Post|integer $talk The talk object or its ID.
+ * @return string|boolean        The permalink to the talk, false if the talk is not set.
  */
 function wct_talks_get_talk_permalink( $talk = null ) {
 	// Bail if not set
@@ -750,41 +680,25 @@ function wct_talks_get_talk_permalink( $talk = null ) {
 		return false;
 	}
 
-	/**
-	 * @param  string        permalink to the talk
-	 * @param  WP_Post $talk the talk object
-	 */
-	return apply_filters( 'wct_talks_get_talk_permalink', get_permalink( $talk ), $talk );
+	return get_permalink( $talk );
 }
 
 /**
- * Gets the comment link of a talk
- *
- * @package WordCamp Talks
- * @subpackage talks/functions
+ * Gets the comment link of a talk.
  *
  * @since 1.0.0
  *
- * @param  WP_Post $talk the talk object or its ID
- * @return string          the comment link of a talk
+ * @param  WP_Post $talk The talk object or its ID
+ * @return string        The comment link of a talk
  */
 function wct_talks_get_talk_comments_link( $talk = null ) {
-	$comments_link = wct_talks_get_talk_permalink( $talk ) . '#comments';
-
-	/**
-	 * @param  string  $comments_link comment link
-	 * @param  WP_Post $talk          the talk object
-	 */
-	return apply_filters( 'wct_talks_get_talk_comments_link', $comments_link, $talk );
+	return wct_talks_get_talk_permalink( $talk ) . '#comments';
 }
 
 /** Template functions ********************************************************/
 
 /**
- * Adds needed scripts to rate the talk or add tags to it
- *
- * @package WordCamp Talks
- * @subpackage talks/functions
+ * Adds needed scripts to rate the talk or add tags to it.
  *
  * @since 1.0.0
  */
@@ -877,8 +791,6 @@ function wct_talks_enqueue_scripts() {
 				'warning' => esc_html__( 'An admin is currently editing this Talk Proposal, please try to edit your Talk Proposal later.', 'wordcamp-talks' ),
 			) );
 		}
-
-		$js_vars = apply_filters( 'wct_talks_form_script_vars', $js_vars );
 	}
 
 	wp_enqueue_script ( 'wc-talks-script', wct_get_js_script( 'script' ), $deps, wct_get_version(), true );
@@ -887,30 +799,31 @@ function wct_talks_enqueue_scripts() {
 add_action( 'wp_enqueue_scripts', 'wct_talks_enqueue_scripts', 12 );
 
 /**
- * Builds the loop query arguments
+ * Builds the loop query arguments.
  *
  * By default,it's an empty array as the plugin is first
  * using WordPress main query & retrieved posts. This function
- * allows to override it with custom arguments usfin the filter
- *
- * @package WordCamp Talks
- * @subpackage talks/functions
+ * allows to override it with custom arguments usfin the filter.
  *
  * @since 1.0.0
  *
- * @param  string $type is this a single talk?
- * @return array        the loop args
+ * @param  string $type Is this a single talk?
+ * @return array        The loop args.
  */
 function wct_talks_query_args( $type = '' ) {
 	/**
 	 * Use this filter to overide loop args
-	 * @see wct_talks_has_talks() for the list of available ones
 	 *
-	 * @param  array by default an empty array
+	 * @since  1.0.0
+	 *
+	 * @param  array {
+	 *  An array of arguments. By default an empty array.
+	 *  @see wct_talks_has_talks() for the list of available ones.
+	 * }
 	 */
 	$query_args = apply_filters( 'wct_talks_query_args', array() );
 
-	if ( 'single' == $type ) {
+	if ( 'single' === $type ) {
 		$query_arg = array_intersect_key( $query_args, array( 'talk_name' => false ) );
 	}
 
@@ -918,10 +831,7 @@ function wct_talks_query_args( $type = '' ) {
 }
 
 /**
- * Sets the available orderby possible filters
- *
- * @package WordCamp Talks
- * @subpackage talks/functions
+ * Sets the available orderby possible options.
  *
  * @since 1.0.0
  */
@@ -940,19 +850,16 @@ function wct_talks_get_order_options() {
 		unset( $order_options['comment_count'] );
 	}
 
-	/**
-	 * @param  array $order_options the list of available order options
-	 */
-	return apply_filters( 'wct_talks_get_order_options', $order_options );
+	return $order_options;
 }
 
 /**
- * Prefix the Talk title with its status
+ * Prefix the Talk title with its status.
  *
  * @since  1.1.0
  *
  * @param  string  $title The Talk title.
- * @param  WP_Post $talk  The Talk object
+ * @param  WP_Post $talk  The Talk object.
  * @return string         The Talk title.
  */
 function wct_talks_status_title_prefix( $title = '', $talk = null ) {
@@ -1070,16 +977,7 @@ function wct_talks_post_talk() {
 		exit();
 
 	} else {
-		$talk = get_post( $id );
-
-		/**
-		 * Filter here to add custom feedback message IDs.
-		 *
-		 * @since 1.1.0
-		 *
-		 * @param array   $feedback_message The list of feedback message ids.
-		 * @param WP_Post $talk             The inserted Talk Proposal object.
-		 */
+		$talk             = get_post( $id );
 		$feedback_message = array(
 			'error'   => array(),
 			'success' => array( 3 ),
@@ -1107,10 +1005,7 @@ function wct_talks_post_talk() {
 }
 
 /**
- * Handles updating a talk
- *
- * @package WordCamp Talks
- * @subpackage talks/functions
+ * Handles updating a talk.
  *
  * @since 1.0.0
  */
@@ -1202,7 +1097,14 @@ function wct_talks_update_talk() {
 	exit();
 }
 
-function wct_do_embed( $content ) {
+/**
+ * Apply embeds to WordCamp Talk content.
+ *
+ * @since  1.0.0
+ * @param  string $content The content of the Talk.
+ * @return [type]          The content of the Talk.
+ */
+function wct_do_embed( $content = '' ) {
 	global $wp_embed;
 
 	return $wp_embed->autoembed( $content );

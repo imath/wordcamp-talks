@@ -504,7 +504,7 @@ function wct_tag_register_args() {
 			'hierarchical'      => false,
 		),
 		'capabilities'          => wct_get_tag_caps(),
-		'update_count_callback' => '_update_post_term_count',
+		'update_count_callback' => '_update_generic_term_count',
 		'query_var'             => wct_get_tag(),
 		'hierarchical'          => false,
 		'show_in_nav_menus'     => false,

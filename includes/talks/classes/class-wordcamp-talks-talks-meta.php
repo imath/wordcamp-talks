@@ -33,10 +33,7 @@ class WordCamp_Talks_Talks_Meta {
 	public $metas;
 
 	/**
-	 * The constructor
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage talks/classes
+	 * The constructor.
 	 *
 	 * @since 1.0.0
 	 */
@@ -45,10 +42,7 @@ class WordCamp_Talks_Talks_Meta {
 	}
 
 	/**
-	 * Starts the class
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage talks/classes
+	 * Starts the class.
 	 *
 	 * @since 1.0.0
 	 */
@@ -63,10 +57,7 @@ class WordCamp_Talks_Talks_Meta {
 	}
 
 	/**
-	 * Checks if talk metas are registered and hooks to some key actions/filters
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage talks/classes
+	 * Checks if talk metas are registered and hooks to some key actions/filters.
 	 *
 	 * @since 1.0.0
 	 */
@@ -87,15 +78,12 @@ class WordCamp_Talks_Talks_Meta {
 	}
 
 	/**
-	 * Registers a new metabox for custom fields
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage talks/classes
+	 * Registers a new metabox for custom fields.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  array  $metaboxes the metabox list
-	 * @return array            the new list
+	 * @param  array $metaboxes The metabox list.
+	 * @return array            The new list.
 	 */
 	public function register_metabox( $metaboxes = array() ) {
 		$metas_metabox = array(
@@ -111,15 +99,12 @@ class WordCamp_Talks_Talks_Meta {
 	}
 
 	/**
-	 * Outputs the fields in the Custom Field Talk metabox
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage talks/classes
+	 * Outputs the fields in the Custom Field Talk metabox.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param  WP_Post $talk the talk object
-	 * @return string       HTML output
+	 * @return string        HTML output
 	 */
 	public function do_metabox( $talk = null ) {
 		if ( empty( $talk->ID ) || ! is_array( $this->metas ) ) {
@@ -143,19 +128,16 @@ class WordCamp_Talks_Talks_Meta {
 	}
 
 	/**
-	 * Displays a talk's meta
+	 * Displays a talk's meta.
 	 *
-	 * Used for forms (admin or front) and single outputs
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage talks/classes
+	 * Used for forms (admin or front) and single outputs.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  int     $talk_id     the ID of the talk
-	 * @param  object  $meta_object the meta object to send to callback function
-	 * @param  string  $context     the context (admin/single/form)
-	 * @return string               HTML Output
+	 * @param  integer $talk_id     the ID of the talk.
+	 * @param  object  $meta_object the meta object to send to callback function.
+	 * @param  string  $context     the context (admin/single/form).
+	 * @return string               HTML Output.
 	 */
 	public function display_meta( $talk_id = 0, $meta_object = null, $context = 'form' ) {
 		// bail if no meta key
@@ -199,17 +181,14 @@ class WordCamp_Talks_Talks_Meta {
 	}
 
 	/**
-	 * Saves the custom fields when edited from the admin screens (edit/post new)
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage talks/classes
+	 * Saves the custom fields when edited from the admin screens (edit/post new).
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  int      $id     the talk ID
-	 * @param  WP_Post  $talk   the talk object
-	 * @param  bool     $update whether it's an update or not
-	 * @return int         		the ID of the talk
+	 * @param  integer  $id     The talk ID.
+	 * @param  WP_Post  $talk   The talk object.
+	 * @param  boolean  $update Whether it's an update or not.
+	 * @return integer          The ID of the talk.
 	 */
 	public function save_metabox( $id = 0, $talk = null, $update = false ) {
 		// Bail if no meta to save
@@ -241,13 +220,10 @@ class WordCamp_Talks_Talks_Meta {
 	/**
 	 * Displays metas for form/single display
 	 *
-	 * @package WordCamp Talks
-	 * @subpackage talks/classes
-	 *
 	 * @since 1.0.0
 	 *
-	 * @param  string $context the context (single/form)
-	 * @return string          HTML Output
+	 * @param  string $context The context (single/form).
+	 * @return string          HTML Output.
 	 */
 	public function front_output( $context = '' ) {
 		if ( empty( $this->metas ) ) {
@@ -272,14 +248,11 @@ class WordCamp_Talks_Talks_Meta {
 	}
 
 	/**
-	 * Displays metas for single display
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage talks/classes
+	 * Displays metas for single display.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return string          HTML Output
+	 * @return string HTML Output
 	 */
 	public function single_output() {
 		if ( ! wct_is_single_talk() ) {

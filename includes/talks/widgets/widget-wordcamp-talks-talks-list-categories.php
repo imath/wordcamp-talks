@@ -26,10 +26,7 @@ if ( ! class_exists( 'WordCamp_Talks_Talks_List_Categories' ) ) :
  class WordCamp_Talks_Talks_List_Categories extends WP_Widget_Categories {
 
  	/**
-	 * Constructor
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage talks/widgets
+	 * Constructor.
 	 *
 	 * @since 1.0.0
 	 */
@@ -39,10 +36,7 @@ if ( ! class_exists( 'WordCamp_Talks_Talks_List_Categories' ) ) :
 	}
 
 	/**
-	 * Register the widget
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage talks/widgets
+	 * Register the widget.
 	 *
 	 * @since 1.0.0
 	 */
@@ -51,10 +45,7 @@ if ( ! class_exists( 'WordCamp_Talks_Talks_List_Categories' ) ) :
 	}
 
 	/**
-	 * Forces the talk category taxonomy to be used
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage talks/widgets
+	 * Forces the talk category taxonomy to be used.
 	 *
 	 * @since 1.0.0
 	 *
@@ -93,10 +84,7 @@ if ( ! class_exists( 'WordCamp_Talks_Talks_List_Categories' ) ) :
 	}
 
 	/**
-	 * Display the form in Widgets Administration
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage talks/widgets
+	 * Display the form in Widgets Administration.
 	 *
 	 * @since 1.0.0
 	 */

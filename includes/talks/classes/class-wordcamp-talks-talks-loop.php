@@ -171,6 +171,8 @@ class WordCamp_Talks_Talks_Loop extends WordCamp_Talks_Core_Loop {
 		/**
 		 * Use this filter to override the pagination
 		 *
+		 * @since  1.0.0
+		 *
 		 * @param array $paginate_args the pagination arguments
 		 */
 		parent::start( $params, apply_filters( 'wct_talks_pagination_args', $paginate_args ) );
