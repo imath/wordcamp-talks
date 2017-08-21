@@ -183,4 +183,111 @@ class WordCampTalkProposalsTest_WordCamp_Integrations extends WordCampTalkPropos
 
 		wp_set_current_user( $current_user_id );
 	}
+
+	public function test_wct_wordcamp_init_session_invalid_proposal() {
+		$u = $this->factory->user->create( array(
+			'user_login'   => 'barfoo',
+		) );
+
+		$p = $this->factory->post->create_and_get( array( 'post_status' => 'draft', 'post_author' => $u ) );
+
+		$result = wct_wordcamp_init_session( array(
+			'post_title'   => $p->post_title,
+			'post_content' => $p->post_content,
+			'post_author'  => $u,
+			'meta_input'   => array( '_wct_proposal_id' => $p->ID ),
+		) );
+
+		$this->assertTrue( 'invalid_proposal' === $result->get_error_code() );
+	}
+
+	public function test_wct_wordcamp_init_session_session_exists() {
+		$u = $this->factory->user->create( array(
+			'user_login'   => 'foobar',
+		) );
+
+		$tp = $this->factory->post->create_and_get( array(
+			'post_type'   => wct_get_post_type(),
+			'post_status' => 'wct_selected',
+			'post_author' => $u,
+		) );
+
+		$s = $this->factory->post->create( array(
+			'post_type'    => 'wcb_session',
+			'post_status'  => 'draft',
+			'post_title'   => $tp->post_title,
+			'post_content' => $tp->post_content,
+			'meta_input'   => array(
+				'_wct_proposal_id' => $tp->ID,
+			),
+		) );
+
+		$result = wct_wordcamp_init_session( array(
+			'post_title'   => $tp->post_title,
+			'post_content' => $tp->post_content,
+			'post_author'  => $u,
+			'meta_input'   => array( '_wct_proposal_id' => $tp->ID ),
+		) );
+
+		$this->assertTrue( 'session_exists' === $result->get_error_code() );
+	}
+
+	public function test_wct_wordcamp_init_session_missing_speaker() {
+		$u = $this->factory->user->create( array(
+			'user_login'   => 'tazball',
+		) );
+
+		$tp = $this->factory->post->create_and_get( array(
+			'post_type'   => wct_get_post_type(),
+			'post_status' => 'wct_selected',
+			'post_author' => $u,
+		) );
+
+		$result = wct_wordcamp_init_session( array(
+			'post_title'   => $tp->post_title,
+			'post_content' => $tp->post_content,
+			'post_author'  => $u,
+			'meta_input'   => array( '_wct_proposal_id' => $tp->ID ),
+		) );
+
+		$this->assertTrue( 'missing_speaker' === $result->get_error_code() );
+	}
+
+	public function test_wct_wordcamp_init_session_success() {
+		$u = $this->factory->user->create_and_get( array(
+			'user_login'   => 'balltaz',
+			'display_name' => 'Ball Taz',
+			'description'  => 'I am Ball Taz!',
+		) );
+
+		$s = $this->factory->post->create( array(
+			'post_type'    => 'wcb_speaker',
+			'post_status'  => 'pending',
+			'post_title'   => $u->display_name,
+			'post_content' => $u->description,
+			'meta_input'   => array(
+				'_wcpt_user_id'      => $u->ID,
+				'_wcb_speaker_email' => $u->user_email,
+			),
+		) );
+
+		$tp = $this->factory->post->create_and_get( array(
+			'post_type'   => wct_get_post_type(),
+			'post_status' => 'wct_selected',
+			'post_author' => $u->ID,
+		) );
+
+		$result = wct_wordcamp_init_session( array(
+			'post_title'   => $tp->post_title,
+			'post_content' => $tp->post_content,
+			'post_author'  => $u->ID,
+			'meta_input'   => array( '_wct_proposal_id' => $tp->ID ),
+		) );
+
+		$this->assertTrue( (int) $tp->ID === (int) get_post_meta( $result, '_wct_proposal_id', true ) );
+		$this->assertTrue( (int) $s === (int) get_post_meta( $result, '_wcpt_speaker_id', true ) );
+		$this->assertTrue( $u->display_name . ',' === get_post_meta( $result, '_wcb_session_speakers', true ) );
+
+		$this->assertTrue( 'publish' === get_post_status( $s ) );
+	}
 }
