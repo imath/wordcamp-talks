@@ -19,6 +19,26 @@ defined( 'ABSPATH' ) || exit;
 add_filter( 'wct_allow_signups', '__return_false' );
 
 /**
+ * Disable unneeded default options for WordCamp.org sites.
+ *
+ * @since  1.1.0
+ *
+ * @param  array  $options Default plugin options.
+ * @return array           WordCamp.org site's plugin options.
+ */
+function wct_wordcamp_get_default_options( $options = array() ) {
+	return array_diff_key( $options, array(
+		'_wc_talks_private_fields_list' => false,
+		'_wc_talks_public_fields_list'  => false,
+		'_wc_talks_signup_fields'       => false,
+		'_wc_talks_autolog_enabled'     => false,
+		'_wc_talks_allow_signups'       => false,
+		'_wc_talks_user_default_role'   => false,
+	) );
+}
+add_filter( 'wct_get_default_options', 'wct_wordcamp_get_default_options' );
+
+/**
  * Get a WordPress.org user by his/her user_nicename
  *
  * @since  1.1.0

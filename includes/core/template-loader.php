@@ -15,17 +15,14 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Buffer a template part to build the content of a page
- *
- * @package WordCamp Talks
- * @subpackage core/template-loader
+ * Buffer a template part to build the content of a page.
  *
  * @since 1.0.0
  *
- * @param  string  $slug template slug
- * @param  string  $name template name
- * @param  bool    $echo output or return ?
- * @return string $output html of the buffered template part
+ * @param  string  $slug template slug.
+ * @param  string  $name template name.
+ * @param  boolean $echo Output or return?
+ * @return string        HTML of the buffered template part.
  */
 function wct_buffer_template_part( $slug, $name = null, $echo = true ) {
 	ob_start();
@@ -46,13 +43,10 @@ function wct_buffer_template_part( $slug, $name = null, $echo = true ) {
 /**
  * Add a specific header and footer parts to single talk.
  *
- * @package WordCamp Talks
- * @subpackage core/template-loader
- *
  * @since 1.0.0
  *
- * @param  string $content the content of the talk
- * @return string $new_content the content of the talk
+ * @param  string $content The content of the talk.
+ * @return string          The content of the talk.
  */
 function wct_buffer_single_talk( $content = '' ) {
 	$new_content  = '<div id="wordcamp-talks">';
@@ -79,17 +73,14 @@ function wct_buffer_single_talk( $content = '' ) {
 }
 
 /**
- * Load a template part
- *
- * @package WordCamp Talks
- * @subpackage core/template-loader
+ * Load a template part.
  *
  * @since 1.0.0
  *
- * @param  string  $slug template slug
- * @param  string  $name template name
- * @param  bool    $load should we load ?
- * @param  bool    $require_once should we load it once only ?
+ * @param  string  $slug         Template slug.
+ * @param  string  $name         Template name.
+ * @param  boolean $load         Should we load it?
+ * @param  boolean $require_once Should we load it once only?
  */
 function wct_get_template_part( $slug, $name = null, $load = true, $require_once = true ) {
 	$templates = new WordCamp_Talks_Core_Template_Loader;
@@ -102,14 +93,11 @@ function wct_get_template_part( $slug, $name = null, $load = true, $require_once
  *
  * Shortcut for wct_get_template_part() having require once set to false.
  *
- * @package WordCamp Talks
- * @subpackage core/template-loader
- *
  * @since 1.0.0
  *
- * @param  string $slug template slug
- * @param  string $name template name
- * @param  bool   $require_once default to false (for use in loops)
+ * @param  string  $slug         Template slug.
+ * @param  string  $name         Template name.
+ * @param  boolean $require_once Default to false (to use it in loops).
  */
 function wct_template_part( $slug, $name = null, $require_once = false ) {
 	return wct_get_template_part( $slug, $name, true, $require_once );
@@ -117,15 +105,12 @@ function wct_template_part( $slug, $name = null, $require_once = false ) {
 
 /**
  * Get the stylesheet to apply by first looking in
- * the theme's wordcamp-talks subdirectory
- *
- * @package WordCamp Talks
- * @subpackage core/template-loader
+ * the theme's wordcamp-talks subdirectory.
  *
  * @since 1.0.0
  *
- * @param  string $css the name of the file to load
- * @return string the url to the stylesheet
+ * @param  string $css The name of the file to load.
+ * @return string      The url to the stylesheet.
  */
 function wct_get_stylesheet( $css = 'style' ) {
 	$style = new WordCamp_Talks_Core_Template_Loader;
@@ -134,12 +119,7 @@ function wct_get_stylesheet( $css = 'style' ) {
 }
 
 /**
- * Fill up some WordPress globals with dummy data
- *
- * Based on bbPress bbp_theme_compat_reset_post() function
- *
- * @package WordCamp Talks
- * @subpackage core/template-loader
+ * Fill up some WordPress globals with dummy data.
  *
  * @since 1.0.0
  *
@@ -254,14 +234,11 @@ function wct_reset_post( $args = array() ) {
  * Set the template to use, buffers the needed template parts
  * and resets post vars.
  *
- * @package WordCamp Talks
- * @subpackage core/template-loader
- *
  * @since 1.0.0
  *
  * @global $wp_query
- * @param  string $template name of the template to use
- * @return string $template.
+ * @param  string $template Name of the template to use.
+ * @return string           Path to the template to use.
  */
 function wct_set_template( $template = '' ) {
 	global $wp_query;
@@ -354,9 +331,11 @@ function wct_set_template( $template = '' ) {
 				// Allow plugins to add custom action
 				} else if ( has_filter( 'wct_template_args' ) ) {
 					/**
-					 * Custom action ?
+					 * Custom action?
 					 *
-					 * @param array $template_args the template arguments used to reset the post
+					 * @since  1.0.0
+					 *
+					 * @param array $template_args The template arguments used to reset the post.
 					 */
 					$template_args = apply_filters( 'wct_template_args', $template_args );
 				}
@@ -377,6 +356,10 @@ function wct_set_template( $template = '' ) {
 			) );
 
 			/**
+			 * Used internally to adjust the content to output.
+			 *
+			 * @since  1.0.0
+			 *
 			 * @param  string $context to help choosing the best template to use
 			 */
 			do_action( 'wct_set_core_template', $template_args['context'], $template_args );
@@ -442,18 +425,17 @@ function wct_set_template( $template = '' ) {
 			} else {
 				$template_args = array( 'context' => 'single-talk' );
 				$single_args = array(
-					'is_single'    => true,
+					'is_single' => true,
 				);
 			}
 
-			/**
-			 * @param array $single_args the single arguments used to reset the post
-			 */
-			wct_reset_post( apply_filters( 'wct_single_template_args', $single_args ) );
+			// Reset the single talk.
+			wct_reset_post( $single_args );
 
 			/**
-			 * Internally used to redirect to Buddypress Group's
-			 * single talk template if needed
+			 * Used internally to adjust the content to output in the single talk template.
+			 *
+			 * @since  1.0.0
 			 *
 			 * @param  WP_Post $query_loop->talk the talk to display
 			 */
@@ -461,52 +443,5 @@ function wct_set_template( $template = '' ) {
 		}
 	}
 
-	/**
-	 * No templates matched
-	 */
-	do_action( 'wct_set_template' );
-
 	return $template;
 }
-
-/**
- * Replace the content when in a plugin's front end part
- *
- * @since  1.0.0
- */
-class WordCamp_Talks_Core_Screens {
-	public function __construct( $template_args = null ) {
-		if ( ! empty( $template_args ) ) {
-			$this->template_args = $template_args;
-		}
-
-		add_filter( 'the_content', array( $this, 'replace_the_content' ), 10, 1 );
-	}
-
-	public static function start( $context, $template_args ) {
-		$wct = wct();
-
-		if ( empty( $wct->screens ) ) {
-			$wct->screens = new self( $template_args );
-		}
-
-		return $wct->screens;
-	}
-
-	public function replace_the_content( $content ) {
-		if ( 'single-talk' === $this->template_args['context'] ) {
-			// Do not filter the content inside the document header
-			if ( doing_action( 'wp_head' ) ) {
-				return $content;
-			}
-
-			$content = wct_buffer_single_talk( $content );
-		} else {
-			$content = wct_buffer_template_part( $this->template_args['template_slug'], $this->template_args['template_name'], false );
-		}
-
-		return $content;
-	}
-}
-add_action( 'wct_set_core_template',   array( 'WordCamp_Talks_Core_Screens', 'start' ), 0, 2 );
-add_action( 'wct_set_single_template', array( 'WordCamp_Talks_Core_Screens', 'start' ), 0, 2 );

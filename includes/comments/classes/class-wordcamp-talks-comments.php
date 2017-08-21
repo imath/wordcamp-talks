@@ -65,10 +65,9 @@ class WordCamp_Talks_Comments {
 	 * @since 1.0.0
 	 */
 	private function hooks() {
-
 		// Separate comments made on talks from the other post type comments.
 		add_action( 'pre_get_comments',     array( $this, 'maybe_talk_comments' ),       10, 1 );
-		add_action( 'wct_init',  array( $this, 'cache_comments_count' )             );
+		add_action( 'init',                 array( $this, 'cache_comments_count' ),       9    );
 		add_filter( 'wp_count_comments',    array( $this, 'adjust_comment_count' ),      10, 1 );
 		add_filter( 'widget_comments_args', array( $this, 'comments_widget_dummy_var' ), 10, 1 );
 		add_filter( 'comments_clauses',     array( $this, 'maybe_alter_comments_query'), 10, 2 );

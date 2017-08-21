@@ -12,10 +12,7 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Return Talks post type capabilities
- *
- * @package WordCamp Talks
- * @subpackage core/capabilities
+ * Return Talks post type capabilities.
  *
  * @since 1.0.0
  *
@@ -41,10 +38,7 @@ function wct_get_post_type_caps() {
 }
 
 /**
- * Return Talks tag capabilities
- *
- * @package WordCamp Talks
- * @subpackage core/capabilities
+ * Return Talks tag capabilities.
  *
  * @since 1.0.0
  *
@@ -60,10 +54,7 @@ function wct_get_tag_caps() {
 }
 
 /**
- * Return Talks category capabilities
- *
- * @package WordCamp Talks
- * @subpackage core/capabilities
+ * Return Talks category capabilities.
  *
  * @since 1.0.0
  *
@@ -162,18 +153,15 @@ function wct_register_roles() {
 add_action( 'admin_init', 'wct_register_roles' );
 
 /**
- * Maps Talks capabilities
- *
- * @package WordCamp Talks
- * @subpackage core/capabilities
+ * Maps Talks capabilities.
  *
  * @since 1.0.0
  *
- * @param  array $caps Capabilities for meta capability
- * @param  string $cap Capability name
- * @param  int $user_id User id
- * @param  mixed $args Arguments
- * @return array Actual capabilities for meta capability
+ * @param  array   $caps    Capabilities for meta capability.
+ * @param  string  $cap     Capability name.
+ * @param  integer $user_id User id.
+ * @param  mixed   $args    Arguments.
+ * @return array            Actual capabilities for meta capability.
  */
 function wct_map_meta_caps( $caps = array(), $cap = '', $user_id = 0, $args = array() ) {
 	$user = wp_get_current_user();
@@ -327,11 +315,5 @@ function wct_map_meta_caps( $caps = array(), $cap = '', $user_id = 0, $args = ar
 		}
 	}
 
-	/**
-	 * @param  array $caps Capabilities for meta capability
-	 * @param  string $cap Capability name
-	 * @param  int $user_id User id
-	 * @param  mixed $args Arguments
-	 */
-	return apply_filters( 'wct_map_meta_caps', $caps, $cap, $user_id, $args );
+	return $caps;
 }

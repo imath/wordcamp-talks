@@ -1,9 +1,11 @@
 <?php
 /**
- * WordCamp Talks Core Classes.
+ * WordCamp Talks Template Loader Class.
  *
  * @package WordCamp Talks
  * @subpackage core/classes
+ *
+ * @since 1.0.0
  */
 
 // Exit if accessed directly

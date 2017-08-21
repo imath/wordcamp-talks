@@ -1,9 +1,11 @@
 <?php
 /**
- * WordCamp Talks Classes.
+ * WordCamp Talks Rewrites Class.
  *
  * @package WordCamp Talks
  * @subpackage core/classes
+ *
+ * @since 1.0.0
  */
 
 // Exit if accessed directly

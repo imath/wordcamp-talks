@@ -12,6 +12,11 @@ class WordCampTalkProposalsTest_WordCamp_Integrations extends WordCampTalkPropos
 		$this->assertEquals( $expected, array_values( $post_types_registered ) );
 	}
 
+	public function test_wct_wordcamp_get_default_options() {
+		$default_options = wct_get_default_options();
+		$this->assertTrue( ! isset( $default_options['_wc_talks_signup_fields'] ) );
+	}
+
 	/**
 	 * @group ms-required
 	 */

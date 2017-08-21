@@ -14,10 +14,7 @@ defined( 'ABSPATH' ) || exit;
 /** Globals *******************************************************************/
 
 /**
- * Get the plugin's current version
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Get the plugin's current version.
  *
  * @since 1.0.0
  *
@@ -28,14 +25,11 @@ function wct_get_version() {
 }
 
 /**
- * Get the DB verion of the plugin
+ * Get the DB verion of the plugin.
  *
  * Used to check wether to run the upgrade
  * routine of the plugin.
  * @see  core/upgrade > wct_is_upgrade()
- *
- * @package WordCamp Talks
- * @subpackage core/functions
  *
  * @since 1.0.0
  *
@@ -46,10 +40,7 @@ function wct_db_version() {
 }
 
 /**
- * Get plugin's basename
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Get plugin's basename.
  *
  * @since 1.0.0
  *
@@ -60,10 +51,7 @@ function wct_get_basename() {
 }
 
 /**
- * Get plugin's main path
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Get plugin's main path.
  *
  * @since 1.0.0
  *
@@ -74,10 +62,7 @@ function wct_get_plugin_dir() {
 }
 
 /**
- * Get plugin's main url
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Get plugin's main url.
  *
  * @since 1.0.0
  *
@@ -122,10 +107,7 @@ add_action( 'wp_enqueue_scripts', 'wct_register_scripts', 1 );
 /**
  * Get plugin's javascript url
  *
- * That's where the plugin's js file are all available
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * That's where the plugin's js file are all available.
  *
  * @since 1.0.0
  *
@@ -136,10 +118,7 @@ function wct_get_js_url() {
 }
 
 /**
- * Get a specific javascript file url (minified or not)
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Get a specific javascript file url (minified or not).
  *
  * @since 1.0.0
  *
@@ -157,31 +136,25 @@ function wct_get_js_script( $script = '' ) {
 }
 
 /**
- * Get plugin's path to includes directory
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Get plugin's path to includes directory.
  *
  * @since 1.0.0
  *
  * @return string includes directory path
  */
 function wct_get_includes_dir() {
-	return apply_filters( 'wct_get_includes_dir', wct()->includes_dir );
+	return wct()->includes_dir;
 }
 
 /**
- * Get plugin's url to includes directory
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Get plugin's url to includes directory.
  *
  * @since 1.0.0
  *
  * @return string includes directory url
  */
 function wct_get_includes_url() {
-	return apply_filters( 'wct_get_includes_url', wct()->includes_url );
+	return wct()->includes_url;
 }
 
 /**
@@ -193,23 +166,17 @@ function wct_get_includes_url() {
  * from your theme's 'wordcamp-talks' directory. Templates in there
  * will override plugin's default ones.
  *
- * @package WordCamp Talks
- * @subpackage core/functions
- *
  * @since 1.0.0
  *
  * @return string path to templates directory
  */
 function wct_get_templates_dir() {
-	return apply_filters( 'wct_get_templates_dir', wct()->templates_dir );
+	return wct()->templates_dir;
 }
 
 /**
  * Set a global var to be used by the plugin at different times
  * during WordPress loading process.
- *
- * @package WordCamp Talks
- * @subpackage core/functions
  *
  * @since 1.0.0
  *
@@ -221,10 +188,7 @@ function wct_set_global( $var_key = '', $var_value ='' ) {
 }
 
 /**
- * Get a global var set thanks to wct_set_global()
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Get a global var set thanks to wct_set_global().
  *
  * @since 1.0.0
  *
@@ -283,15 +247,23 @@ function wct_load_textdomain() {
 		}
 	}
 }
-add_action( 'plugins_loaded', 'wct_load_textdomain', 7 );
+
+/**
+ * Main archive page title.
+ *
+ * @since  1.0.0
+ * @since  1.1.0 The option has been removed.
+ *
+ * @return string Title of the Talks archive page
+ */
+function wct_archive_title() {
+	return _x( 'Talk Proposals', 'Title of the main archive page.', 'wordcamp-talks' );
+}
 
 /** Post Type (talks) *********************************************************/
 
 /**
- * Outputs the post type identifier (talks) for the plugin
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Outputs the post type identifier (talks) for the plugin.
  *
  * @since 1.0.0
  *
@@ -302,10 +274,7 @@ function wct_post_type() {
 }
 
 	/**
-	 * Gets the post type identifier (talks)
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage core/functions
+	 * Gets the post type identifier (talks).
 	 *
 	 * @since 1.0.0
 	 *
@@ -316,10 +285,7 @@ function wct_post_type() {
 	}
 
 /**
- * Gets plugin's main post type init arguments
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Gets plugin's main post type init arguments.
  *
  * @since 1.0.0
  *
@@ -351,10 +317,7 @@ function wct_post_type_register_args() {
 }
 
 /**
- * Gets the labels for the plugin's post type
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Gets the labels for the plugin's post type.
  *
  * @since 1.0.0
  *
@@ -445,10 +408,19 @@ function wct_is_supported_statuses( $status = '' ) {
 }
 
 /**
- * Get plugin's post type "category" identifier (talk_categories)
+ * Default publishing status.
  *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * @since 1.0.0
+ * @since 1.1.0 Default status is now Plugin's custom pending status.
+ *
+ * @return string the default status.
+ */
+function wct_default_talk_status() {
+	return 'wct_pending';
+}
+
+/**
+ * Get plugin's post type "category" identifier (talk_categories).
  *
  * @since 1.0.0
  *
@@ -459,10 +431,7 @@ function wct_get_category() {
 }
 
 /**
- * Gets the "category" taxonomy init arguments
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Gets the "category" taxonomy init arguments.
  *
  * @since 1.0.0
  *
@@ -486,10 +455,7 @@ function wct_category_register_args() {
 }
 
 /**
- * Get the "category" taxonomy labels
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Get the "category" taxonomy labels.
  *
  * @since 1.0.0
  *
@@ -513,10 +479,7 @@ function wct_category_register_labels() {
 }
 
 /**
- * Get plugin's post type "tag" identifier (talk_tags)
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Get plugin's post type "tag" identifier (talk_tags).
  *
  * @since 1.0.0
  *
@@ -527,10 +490,7 @@ function wct_get_tag() {
 }
 
 /**
- * Gets the "tag" taxonomy init arguments
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Gets the "tag" taxonomy init arguments.
  *
  * @since 1.0.0
  *
@@ -554,10 +514,7 @@ function wct_tag_register_args() {
 }
 
 /**
- * Get the "tag" taxonomy labels
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Get the "tag" taxonomy labels.
  *
  * @since 1.0.0
  *
@@ -635,29 +592,29 @@ function wct_register_objects() {
 		)
 	);
 }
-add_action( 'init', 'wct_register_objects', 15 );
 
 /** Urls **********************************************************************/
 
 /**
- * Gets plugin's post type main url
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Gets plugin's post type main url.
  *
  * @since 1.0.0
  *
  * @return string root url for the post type
  */
 function wct_get_root_url() {
+	/**
+	 * Filter here to edit the root url.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param  string $value The root url.
+	 */
 	return apply_filters( 'wct_get_root_url', get_post_type_archive_link( wct_get_post_type() ) );
 }
 
 /**
- * Gets a specific "category" term url
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Gets a specific "category" term url.
  *
  * @since 1.0.0
  *
@@ -672,6 +629,10 @@ function wct_get_category_url( $category = null ) {
 	$term_link = get_term_link( $category, wct_get_category() );
 
 	/**
+	 * Filter here to edit the category url.
+	 *
+	 * @since  1.0.0
+	 *
 	 * @param  string $term_link Url to reach the talks categorized with the term
 	 * @param  object $category  The term for this taxonomy
 	 */
@@ -679,10 +640,7 @@ function wct_get_category_url( $category = null ) {
 }
 
 /**
- * Gets a specific "tag" term url
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Gets a specific "tag" term url.
  *
  * @since 1.0.0
  *
@@ -697,6 +655,10 @@ function wct_get_tag_url( $tag = '' ) {
 	$term_link = get_term_link( $tag, wct_get_tag() );
 
 	/**
+	 * Filter here to edit the tag url.
+	 *
+	 * @since  1.0.0
+	 *
 	 * @param  string $term_link Url to reach the talks tagged with the term
 	 * @param  object $tag       The term for this taxonomy
 	 */
@@ -709,14 +671,18 @@ function wct_get_tag_url( $tag = '' ) {
  * Used after posting a talk failed
  * Defaults to root url
  *
- * @package WordCamp Talks
- * @subpackage core/functions
- *
  * @since 1.0.0
  *
  * @return string the url to redirect the user to
  */
 function wct_get_redirect_url() {
+	/**
+	 * Filter here to edit the redirect url.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @param  string $value The root url.
+	 */
 	return apply_filters( 'wct_get_redirect_url', wct_get_root_url() );
 }
 
@@ -725,10 +691,7 @@ function wct_get_redirect_url() {
  *
  * So far only adding new talks is supported, but
  * there will surely be an edit action to allow users
- * to edit their talks. Reason of the $type param
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * to edit their talks. Reason of the $type param.
  *
  * @since 1.0.0
  *
@@ -746,6 +709,8 @@ function wct_get_form_url( $type = '', $talk_name = '' ) {
 
 	/**
 	 * Early filter to override form url before being built
+	 *
+	 * @since  1.0.0
 	 *
 	 * @param mixed false or url to override
 	 * @param string $type (only add new for now)
@@ -773,7 +738,9 @@ function wct_get_form_url( $type = '', $talk_name = '' ) {
 	}
 
 	/**
-	 * Filter to override form url after being built
+	 * Filter to override form url after being built.
+	 *
+	 * @since  1.0.0
 	 *
 	 * @param string url to override
 	 * @param string $type add new or edit
@@ -917,9 +884,6 @@ function wct_add_feedback_args( $args = array(), $url = '' ) {
 /**
  * Add a new feedback message to inform the user.
  *
- * package WordCamp Talks
- * @subpackage core/functions
- *
  * @since 1.0.0
  *
  * @param  array $feedback_data A list of feedback message or message ids keyed by their type.
@@ -936,12 +900,7 @@ function wct_add_message( $feedback_data = array() ) {
 }
 
 /**
- * Sets a new message to inform user
- *
- * Inspired by ClusterPress's cp_feedbacks() function.
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Sets a new message to inform user.
  *
  * @since 1.0.0
  */
@@ -968,9 +927,6 @@ function wct_set_user_feedback() {
 
 /**
  * Displays the feedback message to the user.
- *
- * @package WordCamp Talks
- * @subpackage core/functions
  *
  * @since 1.0.0
  *
@@ -1014,23 +970,17 @@ function wct_user_feedback() {
  * the case, as i think like comments, this is a core functionality
  * when managing talks. To deactivate the ratings, use the filter.
  *
- * @package WordCamp Talks
- * @subpackage core/functions
- *
  * @since 1.0.0
  *
- * @param  int  $default   by default enabled
- * @return bool            True if disabled, false if enabled
+ * @param  integer $default By default enabled.
+ * @return boolean          True if disabled, false if enabled.
  */
 function wct_is_rating_disabled( $default = 0 ) {
 	return (bool) apply_filters( 'wct_is_rating_disabled', $default );
 }
 
 /**
- * Gets a fallback hintlist for ratings
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Gets a fallback hintlist for ratings.
  *
  * @since 1.0.0
  *
@@ -1053,10 +1003,7 @@ function wct_get_hint_list() {
 }
 
 /**
- * Count rating stats for a specific talk or gets the rating of a specific user for a given talk
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Count rating stats for a specific talk or gets the rating of a specific user for a given talk.
  *
  * @since 1.0.0
  *
@@ -1107,12 +1054,7 @@ function wct_count_ratings( $id = 0, $user_id = 0, $details = false ) {
 
 	// Return the user rating
 	if ( ! empty( $user_id ) ) {
-		/**
-		 * @param  int $user_rating the rate given by the user to the talk
-		 * @param  int $id the ID of the talk
-		 * @param  int $user_id the user id who rated the talk
-		 */
-		return apply_filters( 'wct_get_user_ratings', $user_rating, $id, $user_id );
+		return $user_rating;
 	}
 
 	if ( ! empty( $retarray['users'] ) ) {
@@ -1121,28 +1063,20 @@ function wct_count_ratings( $id = 0, $user_id = 0, $details = false ) {
 		$retarray['average'] = 0;
 	}
 
-	/**
-	 * @param  array $retarray the talk rating stats
-	 * @param  int $id the ID of the talk
-	 * @param  array $rates all talks rates organized in an array
-	 */
-	return apply_filters( 'wct_count_ratings', $retarray, $id, $rates );
+	return $retarray;
 }
 
 /**
- * Delete a specific rate for a given talk
+ * Delete a specific rate for a given talk.
  *
  * This action is only available from the talk edit Administration screen
- * @see  WordCamp_Talks_Admin->maybe_delete_rate() in admin/admin
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * @see  WordCamp_Talks_Admin->maybe_delete_rate() in admin/admin.
  *
  * @since 1.0.0
  *
- * @param  int $talk    the ID of the talk
- * @param  int $user_id the ID of the user
- * @return mixed        string the new average rating or false if no more rates
+ * @param  integer $talk    The ID of the talk.
+ * @param  integer $user_id The ID of the user.
+ * @return mixed            The new average rating or false if no more rates.
  */
 function wct_delete_rate( $talk = 0, $user_id = 0 ) {
 	if ( empty( $talk ) || empty( $user_id ) ) {
@@ -1171,6 +1105,11 @@ function wct_delete_rate( $talk = 0, $user_id = 0 ) {
 		update_post_meta( $talk, '_wc_talks_average_rate', $ratings['average'] );
 
 		/**
+		 * Hook here to perform custom actions.
+		 * Used internally to clean rates count cache.
+		 *
+		 * @since  1.0.0
+		 *
 		 * @param  int $talk the ID of the talk
 		 * @param  int $user_id the ID of the user
 		 * @param  string       the formatted average.
@@ -1184,17 +1123,14 @@ function wct_delete_rate( $talk = 0, $user_id = 0 ) {
 }
 
 /**
- * Saves a new rate for the talk
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Saves a new rate for the talk.
  *
  * @since 1.0.0
  *
- * @param  int $talk    the ID of the talk
- * @param  int $user_id the ID of the user
- * @param  int $rate    the rate of the user
- * @return mixed       string the new average rating or false if no more rates
+ * @param  integer $talk    The ID of the talk.
+ * @param  integer $user_id The ID of the user.
+ * @param  integer $rate    The rate of the user.
+ * @return mixed            The new average rating or false if no more rates.
  */
 function wct_add_rate( $talk = 0, $user_id = 0, $rate = 0 ) {
 	if ( empty( $talk ) || empty( $user_id ) || empty( $rate ) ) {
@@ -1218,6 +1154,11 @@ function wct_add_rate( $talk = 0, $user_id = 0, $rate = 0 ) {
 		update_post_meta( $talk, '_wc_talks_average_rate', $ratings['average'] );
 
 		/**
+		 * Hook here to perform custom actions.
+		 * Used internally to clean rates count cache.
+		 *
+		 * @since  1.0.0
+		 *
 		 * @param  int $talk the ID of the talk
 		 * @param  int $user_id the ID of the user
 		 * @param  int $rate the user's rating
@@ -1232,10 +1173,7 @@ function wct_add_rate( $talk = 0, $user_id = 0, $rate = 0 ) {
 }
 
 /**
- * Intercepts the user ajax action to rate the talk
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Intercepts the user ajax action to rate the talk.
  *
  * @since 1.0.0
  *
@@ -1247,8 +1185,15 @@ function wct_ajax_rate() {
 	}
 
 	$user_id = wct_users_current_user_id();
-	$talk = ! empty( $_POST['talk'] ) ? absint( $_POST['talk'] ) : 0;
-	$rate = ! empty( $_POST['rate'] ) ? absint( $_POST['rate'] ) : 0;
+	$talk = $rate = 0;
+
+	if ( ! empty( $_POST['talk'] ) ) {
+		$talk = absint( $_POST['talk'] );
+	}
+
+	if ( ! empty( $_POST['rate'] ) ) {
+		$rate = absint( $_POST['rate'] );
+	}
 
 	check_ajax_referer( 'wct_rate', 'wpnonce' );
 
@@ -1267,20 +1212,17 @@ function wct_ajax_rate() {
 }
 
 /**
- * Order the talks by rates when requested
+ * Order the talks by rates when requested.
  *
  * This function is hooking to WordPress 'posts_clauses' filter. As the
  * rating query is first built by using a specific WP_Meta_Query, we need
  * to also make sure the ORDER BY clause of the sql query is customized.
  *
- * @package WordCamp Talks
- * @subpackage core/functions
- *
  * @since 1.0.0
  *
- * @param  array    $clauses  the talk query sql parts
- * @param  WP_Query $wp_query the WordPress query object
- * @return array              new order clauses if needed
+ * @param  array    $clauses  The talk query sql parts.
+ * @param  WP_Query $wp_query The WordPress query object.
+ * @return array              New order clauses if needed.
  */
 function wct_set_rates_count_orderby( $clauses = array(), $wp_query = null ) {
 
@@ -1338,10 +1280,10 @@ function wct_count_user_rates( $user_id = 0 ) {
 /**
  * Clean the user's rates count cache
  *
- * @since 2.3.0
+ * @since 1.0.0
  *
- * @param int $talk_id the talk ID
- * @param int $user_id the user ID
+ * @param integer $talk_id the talk ID.
+ * @param integer $user_id the user ID.
  */
 function wct_clean_rates_count_cache( $talk_id, $user_id = 0 ) {
 	// Bail if no user id
@@ -1357,10 +1299,7 @@ function wct_clean_rates_count_cache( $talk_id, $user_id = 0 ) {
 /** Utilities *****************************************************************/
 
 /**
- * Creates a specific excerpt for the content of a talk
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Creates a specific excerpt for the content of a talk.
  *
  * @since 1.0.0
  *
@@ -1404,10 +1343,7 @@ function wct_create_excerpt( $text = '', $length = 55, $more = ' [&hellip;]', $n
 }
 
 /**
- * Prepare the content to be output in a csv file
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Prepare & sanitize the content to be output in a csv file.
  *
  * @since 1.0.0
  *
@@ -1432,7 +1368,7 @@ function wct_generate_csv_content( $content = '' ) {
 		$content = "'" . $content;
 	}
 
-	return apply_filters( 'wct_generate_csv_content', $content );
+	return $content;
 }
 
 /**
@@ -1442,13 +1378,10 @@ function wct_generate_csv_content( $content = '' ) {
  * make sure "talk/s" will be used instead. Unfortunately
  * it's only possible in front end tag clouds.
  *
- * @package WordCamp Talks
- * @subpackage core/functions
- *
  * @since 1.0.0
  *
- * @param  int $count Number of talks associated with the tag
- * @return string     the count text for talks
+ * @param  integer $count Number of talks associated with the tag.
+ * @return string         The count text for talks.
  */
 function wct_tag_cloud_count_callback( $count = 0 ) {
 	return sprintf( _nx( '%s Talk Proposal', '%s Talk Proposals', $count, 'talks tag cloud count text', 'wordcamp-talks' ), number_format_i18n( $count )  );
@@ -1458,13 +1391,10 @@ function wct_tag_cloud_count_callback( $count = 0 ) {
  * Filters the tag cloud args by referencing a specific count text callback
  * if the plugin's "tag" taxonomy is requested.
  *
- * @package WordCamp Talks
- * @subpackage core/functions
- *
  * @since 1.0.0
  *
- * @param  array  $args the tag cloud arguments
- * @return array        the arguments with the new count text callback if needed
+ * @param  array  $args The tag cloud arguments.
+ * @return array        The arguments with the new count text callback if needed.
  */
 function wct_tag_cloud_args( $args = array() ) {
 	if( ! empty( $args['taxonomy'] ) && wct_get_tag() == $args['taxonomy'] ) {
@@ -1475,19 +1405,16 @@ function wct_tag_cloud_args( $args = array() ) {
 }
 
 /**
- * Generates a talk tags cloud
+ * Generates a talk tags cloud.
  *
  * Used when writing a new talk to allow the author to choose
  * one or more popular talk tags.
  *
- * @package WordCamp Talks
- * @subpackage core/functions
- *
  * @since 1.0.0
  *
- * @param  integer $number number of tag to display
- * @param  array   $args   the tag cloud args
- * @return array           associative array containing the number of tags and the content of the cloud.
+ * @param  integer $number Number of tag to display
+ * @param  array   $args   The tag cloud args
+ * @return array           Associative array containing the number of tags and the content of the cloud.
  */
 function wct_generate_tag_cloud( $number = 10, $args = array() ) {
 	$r = array( 'hide_empty' => false, 'orderby' => 'name', 'order' => 'ASC' );
@@ -1507,24 +1434,19 @@ function wct_generate_tag_cloud( $number = 10, $args = array() ) {
 		wct_tag_cloud_args( array( 'taxonomy' => wct_get_tag() ) )
 	);
 
-	$retarray = array(
+	return array(
 		'number'   => count( $tags ),
 		'tagcloud' => wp_generate_tag_cloud( $tags, $args )
 	);
-
-	return apply_filters( 'wct_generate_tag_cloud', $retarray );
 }
 
 /**
  * Filters WP Editor Buttons depending on plugin's settings.
  *
- * @package WordCamp Talks
- * @subpackage core/functions
- *
  * @since 1.0.0
  *
- * @param  array  $buttons the list of buttons for the editor
- * @return array           the filtered list of buttons to match plugin's needs
+ * @param  array  $buttons The list of buttons for the editor.
+ * @return array           The filtered list of buttons to match plugin's needs.
  */
 function wct_teeny_button_filter( $buttons = array() ) {
 	$remove_buttons = array(
@@ -1564,8 +1486,8 @@ function wct_teeny_button_filter( $buttons = array() ) {
  *
  * @since  1.0.0
  *
- * @param  string $text the editor content.
- * @return string the sanitized text or the text without any changes
+ * @param  string $text The editor content.
+ * @return string       The sanitized text or the text without any changes.
  */
 function wct_format_to_edit( $text = '' ) {
 	if ( function_exists( 'format_for_editor' ) ) {
@@ -1578,10 +1500,7 @@ function wct_format_to_edit( $text = '' ) {
 /**
  * Adds wct to global cache groups
  *
- * Mainly used to cach comments about talks count
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Mainly used to cach comments about talks count.
  *
  * @since 1.0.0
  */
@@ -1590,10 +1509,7 @@ function wct_cache_global_group() {
 }
 
 /**
- * Adds a shortcut to plugin's Admin screens using the appearence menus
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Adds a shortcut to plugin's Admin screens using the appearence menus.
  *
  * @since 1.0.0
  *
@@ -1629,10 +1545,7 @@ function wct_is_wordcamp_site() {
 }
 
 /**
- * Checks wether signups are allowed
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Checks wether signups are allowed.
  *
  * @since 1.0.0
  *
@@ -1660,10 +1573,7 @@ function wct_is_signup_allowed() {
 }
 
 /**
- * Checks wether signups are allowed for current blog
- *
- * @package WordCamp Talks
- * @subpackage core/functions
+ * Checks wether signups are allowed for current blog.
  *
  * @since 1.0.0
  *
@@ -1677,4 +1587,29 @@ function wct_is_signup_allowed_for_current_blog() {
 	}
 
 	return apply_filters( 'wct_is_signup_allowed_for_current_blog', wct_allow_signups() );
+}
+
+/** Actions handler **********************************************************/
+
+/**
+ * Runs front-end actions.
+ *
+ * @since  1.0.0
+ * @since  1.1.0 It's no more a hook wrapper.
+ */
+function wct_actions() {
+	// Sets user feedbacks if needed
+	wct_set_user_feedback();
+
+	// Posts a new talk if requested.
+	wct_talks_post_talk();
+
+	// Updates an existing talk if requested.
+	wct_talks_update_talk();
+
+	// Registers a new user if needed.
+	wct_users_signup_user();
+
+	// Saves a user profile if requested.
+	wct_users_edit_profile();
 }
