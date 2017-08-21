@@ -519,7 +519,7 @@ function wct_talks_before_talk_title() {
 		 *
 		 * @since  1.1.0
 		 *
-		 * @param  string  $output the avatar output.
+		 * @param  string  $output the prefix output.
 		 * @param  int     the talk ID.
 		 */
 		return apply_filters( 'wct_talks_get_before_talk_title', $output, $talk->ID );

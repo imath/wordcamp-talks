@@ -16,20 +16,18 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Initialize the user's comments loop.
  *
- * @package WordCamp Talks
- * @subpackage comments/tags
- *
  * @since 1.0.0
  *
  * @param array $args {
  *     Arguments for customizing comments retrieved in the loop.
- *     Arguments must be passed as an associative array
- *     @type int 'user_id' to restrict the loop to one user (defaults to displayed user)
- *     @type string 'status' to limit the query to comments having a certain status (defaults to approve)
- *     @type int 'number' Number of results per page.
- *     @type int 'page' the page of results to display.
+ *     Arguments must be passed as an associative array.
+ *
+ *     @type integer $user_id To restrict the loop to one user (defaults to displayed user)
+ *     @type string  $status  To limit the query to comments having a certain status (defaults to approve).
+ *     @type integer $number  Number of results per page.
+ *     @type integer $page    The page of results to display.
  * }
- * @return bool         true if comments were found, false otherwise
+ * @return bool True if comments were found, false otherwise.
  */
 function wct_comments_has_comments( $args = array() ) {
 
@@ -51,14 +49,11 @@ function wct_comments_has_comments( $args = array() ) {
 	// Setup the global query loop
 	wct()->comment_query_loop = $comment_query_loop;
 
-	return apply_filters( 'wct_comments_has_comments', $comment_query_loop->has_items(), $comment_query_loop );
+	return $comment_query_loop->has_items();
 }
 
 /**
  * Get the comments returned by the template loop.
- *
- * @package WordCamp Talks
- * @subpackage comments/tags
  *
  * @since 1.0.0
  *
@@ -71,9 +66,6 @@ function wct_comments_the_comments() {
 /**
  * Get the current comment object in the loop.
  *
- * @package WordCamp Talks
- * @subpackage comments/tags
- *
  * @since 1.0.0
  *
  * @return object The current comment within the loop.
@@ -83,13 +75,9 @@ function wct_comments_the_comment() {
 }
 
 /** Loop Output ***************************************************************/
-// Mainly inspired by The BuddyPress notifications loop
 
 /**
- * Displays a message if no comments were found
- *
- * @package WordCamp Talks
- * @subpackage comments/tags
+ * Displays a message if no comments were found.
  *
  * @since 1.0.0
  */
@@ -98,32 +86,21 @@ function wct_comments_no_comment_found() {
 }
 
 	/**
-	 * Gets a message if no comments were found
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/tags
+	 * Gets a message if no comments were found.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @return string the message if no comments were found
 	 */
 	function wct_comments_get_no_comment_found() {
-		$output = sprintf(
+		return sprintf(
 			__( 'It looks like %s has not commented on any Talk Proposals yet', 'wordcamp-talks' ),
 			wct_users_get_displayed_user_displayname()
 		);
-
-		/**
-		 * @param  string $output the message if no comments were found
-		 */
-		return apply_filters( 'wct_comments_get_no_comment_found', $output );
 	}
 
 /**
  * Output the pagination count for the current comments loop.
- *
- * @package WordCamp Talks
- * @subpackage comments/tags
  *
  * @since 1.0.0
  */
@@ -133,9 +110,6 @@ function wct_comments_pagination_count() {
 
 	/**
 	 * Return the pagination count for the current comments loop.
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/tags
 	 *
 	 * @since 1.0.0
 	 *
@@ -147,48 +121,21 @@ function wct_comments_pagination_count() {
 		$from_num   = number_format_i18n( $start_num );
 		$to_num     = number_format_i18n( ( $start_num + ( $query_loop->per_page - 1 ) > $query_loop->total_comment_count ) ? $query_loop->total_comment_count : $start_num + ( $query_loop->number - 1 ) );
 		$total      = number_format_i18n( $query_loop->total_comment_count );
-		$pag        = sprintf( _n( 'Viewing %1$s to %2$s (of %3$s comments)', 'Viewing %1$s to %2$s (of %3$s comments)', $total, 'wordcamp-talks' ), $from_num, $to_num, $total );
 
-		/**
-		 * @param  string $pag the pagination count to output
-		 */
-		return apply_filters( 'wct_comments_get_pagination_count', $pag );
+		return sprintf( _n( 'Viewing %1$s to %2$s (of %3$s comment)', 'Viewing %1$s to %2$s (of %3$s comments)', $total, 'wordcamp-talks' ), $from_num, $to_num, $total );
 	}
 
 /**
  * Output the pagination links for the current comments loop.
  *
- * @package WordCamp Talks
- * @subpackage comments/tags
- *
  * @since 1.0.0
  */
 function wct_comments_pagination_links() {
-	echo wct_comments_get_pagination_links();
+	echo wct()->comment_query_loop->pag_links;
 }
-
-	/**
-	 * Return the pagination links for the current comments loop.
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/tags
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return string HTML for the pagination links.
-	 */
-	function wct_comments_get_pagination_links() {
-		/**
-		 * @param  string the pagination links to output
-		 */
-		return apply_filters( 'wct_comments_get_pagination_links', wct()->comment_query_loop->pag_links );
-	}
 
 /**
  * Output the ID of the comment currently being iterated on.
- *
- * @package WordCamp Talks
- * @subpackage comments/tags
  *
  * @since 1.0.0
  */
@@ -199,25 +146,16 @@ function wct_comments_the_comment_id() {
 	/**
 	 * Return the ID of the comment currently being iterated on.
 	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/tags
-	 *
 	 * @since 1.0.0
 	 *
-	 * @return int ID of the current comment.
+	 * @return integer ID of the current comment.
 	 */
 	function wct_comments_get_comment_id() {
-		/**
-		 * @param  int the comment ID to output
-		 */
-		return apply_filters( 'wct_comments_get_comment_id', wct()->comment_query_loop->comment->comment_ID );
+		return wct()->comment_query_loop->comment->comment_ID;
 	}
 
 /**
  * Output the avatar of the author of the comment currently being iterated on.
- *
- * @package WordCamp Talks
- * @subpackage comments/tags
  *
  * @since 1.0.0
  */
@@ -228,9 +166,6 @@ function wct_comments_the_comment_author_avatar() {
 	/**
 	 * Return the avatar of the author of the comment currently being iterated on.
 	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/tags
-	 *
 	 * @since 1.0.0
 	 *
 	 * @return string the avatar.
@@ -238,21 +173,16 @@ function wct_comments_the_comment_author_avatar() {
 	function wct_comments_get_comment_author_avatar() {
 		$author = wct()->comment_query_loop->comment->user_id;
 		$avatar = get_avatar( $author );
-		$avatar_link = '<a href="' . esc_url( wct_users_get_user_profile_url( $author ) ) . '" title="' . esc_attr__( 'User&#39;s profile', 'wordcamp-talks' ) . '">' . $avatar . '</a>';
 
-		/**
-		 * @param  string  $avatar_link the avatar output
-		 * @param  int     $author the author ID
-		 * @param  string  $avatar the avatar
-		 */
-		return apply_filters( 'wct_comments_get_comment_author_avatar', $avatar_link, $author, $avatar );
+		return sprintf( '<a href="%1$s" title="%2$s">%3$s</a>',
+			esc_url( wct_users_get_user_profile_url( $author ) ),
+			esc_attr__( 'View user\'s profile', 'wordcamp-talks' ),
+			$avatar
+		);
 	}
 
 /**
  * Output the mention to add before the title of the comment currently being iterated on.
- *
- * @package WordCamp Talks
- * @subpackage comments/tags
  *
  * @since 1.0.0
  */
@@ -263,25 +193,23 @@ function wct_comments_before_comment_title() {
 	/**
 	 * Return the mention to add before the title of the comment currently being iterated on.
 	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/tags
-	 *
 	 * @since 1.0.0
 	 *
 	 * @return string the mention to prefix the title with.
 	 */
 	function wct_comments_get_before_comment_title() {
 		/**
-		 * @param  string  the mention output
+		 * Filter here to edit the current comment prefix.
+		 *
+		 * @since  1.0.0
+		 *
+		 * @param  string $value  The prefix.
 		 */
 		return apply_filters( 'wct_comments_get_before_comment_title', esc_html__( 'In reply to:', 'wordcamp-talks' ) );
 	}
 
 /**
  * Output the permalink of the comment currently being iterated on.
- *
- * @package WordCamp Talks
- * @subpackage comments/tags
  *
  * @since 1.0.0
  */
@@ -292,9 +220,6 @@ function wct_comments_the_comment_permalink() {
 	/**
 	 * Return the permalink of the comment currently being iterated on.
 	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/tags
-	 *
 	 * @since 1.0.0
 	 *
 	 * @return string the comment's permalink.
@@ -303,18 +228,11 @@ function wct_comments_the_comment_permalink() {
 		$comment = wct()->comment_query_loop->comment;
 		$comment_link = wct_comments_get_comment_link( $comment );
 
-		/**
-		 * @param  string  $comment_link the comment link
-		 * @param  object  $comment the comment object
-		 */
-		return apply_filters( 'wct_comments_get_comment_permalink', esc_url( $comment_link ), $comment );
+		return esc_url( $comment_link );
 	}
 
 /**
  * Output the title attribute of the comment currently being iterated on.
- *
- * @package WordCamp Talks
- * @subpackage comments/tags
  *
  * @since 1.0.0
  */
@@ -324,9 +242,6 @@ function wct_comments_the_comment_title_attribute() {
 
 	/**
 	 * Return the title attribute of the comment currently being iterated on.
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/tags
 	 *
 	 * @since 1.0.0
 	 *
@@ -353,18 +268,19 @@ function wct_comments_the_comment_title_attribute() {
 		$title .= $talk->post_title;
 
 		/**
-		 * @param  string   $title the title attribute
-		 * @param  WP_Post  $talk the talk object
-		 * @param  object   $comment the comment object
+		 * Filter here to edit the title attribute of the link.
+		 *
+		 * @since  1.0.0
+		 *
+		 * @param  string   $title   The title attribute.
+		 * @param  WP_Post  $talk    The talk object.
+		 * @param  object   $comment The comment object.
 		 */
 		return apply_filters( 'wct_comments_get_comment_title_attribute', esc_attr( $title ), $talk, $comment );
 	}
 
 /**
  * Output the title of the comment currently being iterated on.
- *
- * @package WordCamp Talks
- * @subpackage comments/tags
  *
  * @since 1.0.0
  */
@@ -374,9 +290,6 @@ function wct_comments_the_comment_title() {
 
 	/**
 	 * Return the title of the comment currently being iterated on.
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/tags
 	 *
 	 * @since 1.0.0
 	 *
@@ -395,18 +308,11 @@ function wct_comments_the_comment_title() {
 			$title = esc_html( get_the_title( $comment->comment_post_ID ) );
 		}
 
-		/**
-		 * @param  string   the title of the talk, the comment is linked to
-		 * @param  object   $comment the comment object
-		 */
-		return apply_filters( 'wct_comments_get_comment_title', $title, $comment );
+		return $title;
 	}
 
 /**
  * Output the excerpt of the comment currently being iterated on.
- *
- * @package WordCamp Talks
- * @subpackage comments/tags
  *
  * @since 1.0.0
  */
@@ -416,9 +322,6 @@ function wct_comments_the_comment_excerpt() {
 
 	/**
 	 * Return the excerpt of the comment currently being iterated on.
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/tags
 	 *
 	 * @since 1.0.0
 	 *
@@ -449,16 +352,17 @@ function wct_comments_the_comment_excerpt() {
 		}
 
 		/**
-		 * @param  string   $excerpt the comment excerpt
+		 * Filter here to sanitize the comment excerpt.
+		 *
+		 * @since  1.0.0
+		 *
+		 * @param  string $excerpt the comment excerpt.
 		 */
 		return apply_filters( 'wct_comments_get_comment_excerpt', $excerpt );
 	}
 
 /**
  * Output the footer of the comment currently being iterated on.
- *
- * @package WordCamp Talks
- * @subpackage comments/tags
  *
  * @since 1.0.0
  */
@@ -469,19 +373,10 @@ function wct_comments_the_comment_footer() {
 	/**
 	 * Return the footer of the comment currently being iterated on.
 	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/tags
-	 *
 	 * @since 1.0.0
 	 *
-	 * @return string the footer.
+	 * @return string the comment footer.
 	 */
 	function wct_comments_get_comment_footer() {
-		$posted_on = sprintf( esc_html__( 'This comment was posted on %s', 'wordcamp-talks' ), get_comment_date( '', wct()->comment_query_loop->comment->comment_ID ) );
-
-		/**
-		 * @param  string   $posted_on the comment footer
-		 * @param  object   the comment object
-		 */
-		return apply_filters( 'wct_comments_get_comment_footer', $posted_on, wct()->comment_query_loop->comment );
+		return sprintf( esc_html__( 'This comment was posted on %s', 'wordcamp-talks' ), get_comment_date( '', wct()->comment_query_loop->comment->comment_ID ) );
 	}
