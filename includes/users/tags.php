@@ -12,10 +12,7 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Outputs user's profile nav
- *
- * @package WordCamp Talks
- * @subpackage users/tags
+ * Outputs user's profile nav.
  *
  * @since 1.0.0
  */
@@ -24,10 +21,7 @@ function wct_users_the_user_nav() {
 }
 
 	/**
-	 * Gets user's profile nav
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage users/tags
+	 * Gets user's profile nav.
 	 *
 	 * @since 1.0.0
 	 */
@@ -62,20 +56,19 @@ function wct_users_the_user_nav() {
 		$user_nav .= '</ul>';
 
 		/**
-		 * Filter the user nav output
+		 * Filter the user nav output.
 		 *
-		 * @param string $user_nav      User nav output
-		 * @param int    $user_id       the user ID
-		 * @param string $user_nicename the username
+		 * @since  1.0.0
+		 *
+		 * @param string $user_nav      User nav output.
+		 * @param int    $user_id       the user ID.
+		 * @param string $user_nicename the username.
 		 */
 		return apply_filters( 'wct_users_get_user_nav', $user_nav, $user_id, $username );
 	}
 
 /**
  * Outputs user's profile avatar
- *
- * @package WordCamp Talks
- * @subpackage users/tags
  *
  * @since 1.0.0
  */
@@ -84,15 +77,12 @@ function wct_users_the_user_profile_avatar() {
 }
 
 	/**
-	 * Gets user's profile avatar
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage users/tags
+	 * Gets user's profile avatar.
 	 *
 	 * @since 1.0.0
 	 */
 	function wct_users_get_user_profile_avatar() {
-		return apply_filters( 'wct_users_get_user_profile_avatar', get_avatar( wct_users_displayed_user_id(), '150' ) );
+		return get_avatar( wct_users_displayed_user_id(), '150' );
 	}
 
 /**
@@ -110,19 +100,16 @@ function wct_users_user_profile_display_name() {
 	 * @since 1.0.0
 	 */
 	function wct_users_get_user_profile_display_name() {
-		return esc_html( apply_filters( 'wct_users_get_user_profile_display_name', wct_users_get_displayed_user_displayname() ) );
+		return esc_html( wct_users_get_displayed_user_displayname() );
 	}
 
 /**
- * Append displayed user's rating in talks header when viewing his rates profile
- *
- * @package WordCamp Talks
- * @subpackage users/tags
+ * Append displayed user's rating in talks header when viewing his rates profile.
  *
  * @since 1.0.0
  *
- * @param int $id      the talk ID
- * @param int $user_id the user ID
+ * @param integer $id      The talk ID
+ * @param integer $user_id The user ID
  */
 function wct_users_the_user_talk_rating( $id = 0, $user_id = 0 ) {
 	if ( ! current_user_can( 'view_talk_rates' ) ) {
@@ -135,13 +122,10 @@ function wct_users_the_user_talk_rating( $id = 0, $user_id = 0 ) {
 	/**
 	 * Gets displayed user's rating for a given talk
 	 *
-	 * @package WordCamp Talks
-	 * @subpackage users/tags
-	 *
 	 * @since 1.0.0
 	 *
-	 * @param int $id      the talk ID
-	 * @param int $user_id the user ID
+	 * @param integer $id      the talk ID
+	 * @param integer $user_id the user ID
 	 */
 	function wct_users_get_user_talk_rating( $id = 0, $user_id = 0 ) {
 		if ( ! wct_is_user_profile_rates() ) {
@@ -175,20 +159,25 @@ function wct_users_the_user_talk_rating( $id = 0, $user_id = 0 ) {
 		$output = '<a class="user-rating-link" href="' . esc_url( wct_users_get_user_profile_url( $user_id, $username ) ) . '" title="' . esc_attr( $username ) . '">';
 		$output .= get_avatar( $user_id, 20 ) . sprintf( _n( 'rated 1 star', 'rated %s stars', $user_rating, 'wordcamp-talks' ), $user_rating ) . '</a>';
 
-		/**
-		 * Filter the user talk rating output
-		 *
-		 * @param string $output        the rating
-		 * @param int    $id            the talk ID
-		 * @param int    $user_id       the user ID
-		 */
-		return apply_filters( 'wct_users_get_user_talk_rating', $output, $id, $user_id );
+		return $output;
 	}
 
+/**
+ * Displays the signup fields.
+ *
+ * @since  1.0.0
+ */
 function wct_users_the_signup_fields() {
 	echo wct_users_get_signup_fields();
 }
 
+	/**
+	 * Gets the signup fields output.
+	 *
+	 * @since  1.0.0
+	 *
+	 * @return string HTML Output.
+	 */
 	function wct_users_get_signup_fields() {
 		$output = '';
 
@@ -201,17 +190,17 @@ function wct_users_the_signup_fields() {
 		 */
 		$fields_description = apply_filters( 'wct_users_get_signup_fields_description', array(
 			'user_login' => sprintf(
-					__( 'A WordPress.org username is required, if you don\'t have one yet, you can %s.', 'wordcamp-talks' ),
-					'<a href="https://login.wordpress.org/register">' . __( 'create one', 'wordcamp-talks' ) . '</a>'
-				),
+				__( 'A WordPress.org username is required, if you don\'t have one yet, you can %s.', 'wordcamp-talks' ),
+				'<a href="https://login.wordpress.org/register">' . __( 'create one', 'wordcamp-talks' ) . '</a>'
+			),
 			'user_email' => sprintf(
-					__( 'An email linked to your Gravatar profile is required. If you don\'t have one yet, you can %s.', 'wordcamp-talks' ),
-					sprintf( '<a href="%1$s">%2$s</a>',
-						/* Translators: Use the url that corresponds to your country. Eg: France is https://fr.gravatar.com/ */
-						esc_url( __( 'https://en.gravatar.com/', 'wordcamp-talks' ) ),
-						esc_html__( 'create one', 'wordcamp-talks' )
-					)
-				),
+				__( 'An email linked to your Gravatar profile is required. If you don\'t have one yet, you can %s.', 'wordcamp-talks' ),
+				sprintf( '<a href="%1$s">%2$s</a>',
+					/* Translators: Use the url that corresponds to your country. Eg: France is https://fr.gravatar.com/ */
+					esc_url( __( 'https://en.gravatar.com/', 'wordcamp-talks' ) ),
+					esc_html__( 'create one', 'wordcamp-talks' )
+				)
+			),
 		) );
 
 		foreach ( (array) wct_user_get_fields() as $key => $label ) {
@@ -264,19 +253,20 @@ function wct_users_the_signup_fields() {
 			if ( isset( $fields_description[$key] ) ) {
 				$output .= sprintf( '<p class="description">%s</p>', wp_kses( $fields_description[$key], array( 'a' => array( 'href' => true ) ) ) );
 			}
-
-			$output .= apply_filters( 'wct_users_after_signup_field', '', $sanitized );
 		}
 
-		return apply_filters( 'wct_users_get_signup_fields', $output );
+		return $output;
 	}
 
+/**
+ * Displays the signup actions.
+ *
+ * @since  1.0.0
+ */
 function wct_users_the_signup_submit() {
 	$wct = wct();
 
-	wp_nonce_field( 'wct_signup' );
-
-	do_action( 'wct_users_the_signup_submit' ); ?>
+	wp_nonce_field( 'wct_signup' ); ?>
 
 	<input type="reset" value="<?php esc_attr_e( 'Reset', 'wordcamp-talks' ) ;?>"/>
 	<input type="submit" value="<?php esc_attr_e( 'Sign-up', 'wordcamp-talks' ) ;?>" name="wct_signup[signup]"/>
@@ -376,6 +366,13 @@ function wct_users_public_profile_value( $info = '' ) {
 			if ( wct_is_wordcamp_site() ) {
 				add_filter( 'mce_buttons', 'wct_teeny_button_filter', 10, 1 );
 
+				/**
+				 * Apply sanitization to the description.
+				 *
+				 * @since  1.1.0
+				 *
+				 * @param string $value The description to edit.
+				 */
 				$content = apply_filters( 'wct_talks_get_editor_content', wct_users_displayed_user()->data_to_edit[$info] );
 
 				wp_editor( $content, $info, array(
@@ -402,6 +399,13 @@ function wct_users_public_profile_value( $info = '' ) {
 			printf( '<input type="text" name="%1$s" value="%2$s"/>', esc_attr( $info ), wct_users_displayed_user()->data_to_edit[$info] );
 		}
 	} else {
+		/**
+		 * Used to sanitize the output.
+		 *
+		 * @since  1.0.0
+		 *
+		 * @param  string $info The info to output.
+		 */
 		echo apply_filters( 'wct_users_public_value', wct()->displayed_user->{$info}, $info );
 	}
 }

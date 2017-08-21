@@ -15,9 +15,6 @@ if ( ! class_exists( 'WordCamp_Talks_Users_Top_Contributors' ) ) :
 /**
  * List the top contributors
  *
- * @package WordCamp Talks
- * @subpackage users/widgets
- *
  * @since 1.0.0
  * @since 1.1.0 Renamed from WordCamp_Talk_Widget_Top_Contributors to WordCamp_Talks_Users_Top_Contributors
  */
@@ -25,9 +22,6 @@ class WordCamp_Talks_Users_Top_Contributors extends WP_Widget {
 
  	/**
 	 * Constructor
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage users/widgets
 	 *
 	 * @since 1.0.0
 	 */
@@ -43,9 +37,6 @@ class WordCamp_Talks_Users_Top_Contributors extends WP_Widget {
 	/**
 	 * Register the widget
 	 *
-	 * @package WordCamp Talks
-	 * @subpackage users/widgets
-	 *
 	 * @since 1.0.0
 	 */
 	public static function register_widget() {
@@ -54,9 +45,6 @@ class WordCamp_Talks_Users_Top_Contributors extends WP_Widget {
 
 	/**
 	 * Display the widget on front end
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage users/widgets
 	 *
 	 * @since 1.0.0
 	 */
@@ -125,9 +113,6 @@ class WordCamp_Talks_Users_Top_Contributors extends WP_Widget {
 	/**
 	 * Update widget preferences
 	 *
-	 * @package WordCamp Talks
-	 * @subpackage users/widgets
-	 *
 	 * @since 1.0.0
 	 */
 	public function update( $new_instance, $old_instance ) {
@@ -150,9 +135,6 @@ class WordCamp_Talks_Users_Top_Contributors extends WP_Widget {
 
 	/**
 	 * Display the form in Widgets Administration
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage users/widgets
 	 *
 	 * @since 1.0.0
 	 */
