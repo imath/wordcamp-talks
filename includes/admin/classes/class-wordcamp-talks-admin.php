@@ -1432,7 +1432,7 @@ class WordCamp_Talks_Admin {
 				$delete_text = __( 'Move to Trash', 'wordcamp-talks' );
 
 				if ( ! EMPTY_TRASH_DAYS ) {
-					$delete_text = __( 'Delete Permanently' );
+					$delete_text = __( 'Delete Permanently', 'wordcamp-talks' );
 				}
 
 				printf( '<div id="delete-action"><a class="submitdelete deletion" href="%1$s">%2$s</a></div>',
