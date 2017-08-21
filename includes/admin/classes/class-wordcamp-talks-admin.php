@@ -508,22 +508,37 @@ class WordCamp_Talks_Admin {
 	 * Displays notices if needed.
 	 *
 	 * @since 1.0.0
+	 * @since 1.1.0 Adds a way to output error message on Talk Admin Edit Screen.
 	 *
 	 * @return string HTML output
 	 */
 	public function admin_notices() {
 		$notices = wct_get_global( 'feedback' );
 
-		if ( empty( $notices['admin_notices'] ) ) {
-			return;
+		if ( ! empty( $notices['admin_notices'] ) ) {
+			?>
+			<div class="update-nag">
+				<?php foreach ( $notices['admin_notices'] as $notice ) : ?>
+					<p><?php echo $notice; ?></p>
+				<?php endforeach ;?>
+			</div>
+			<?php
+
+		// There's no error message output on the Admin UI to edit a post.
+		} elseif ( wct_is_admin() && isset( $_REQUEST['error'] ) ) {
+			$message  = wct_get_feedback_messages( 'error' );
+			$feedback = '';
+			if ( isset( $message[$_REQUEST['error']] ) ) {
+				$feedback = $message[$_REQUEST['error']];
+			}
+
+			if ( $feedback ) {
+				printf(
+					'<div id="message" class="error notice notice-error is-dismissible"><p>%s</p></div>',
+					wct_sanitize_feedback( $feedback )
+				);
+			}
 		}
-		?>
-		<div class="update-nag">
-			<?php foreach ( $notices['admin_notices'] as $notice ) : ?>
-				<p><?php echo $notice; ?></p>
-			<?php endforeach ;?>
-		</div>
-		<?php
 	}
 
 	/**
@@ -1384,7 +1399,7 @@ class WordCamp_Talks_Admin {
 				$this->print_dropdown_workflow( $state );
 
 				wp_nonce_field( 'wct_workflow_metabox_save', 'wct_workflow_metabox_metabox' );
-				submit_button( __( 'Update', 'wordcamp-talks' ), 'primary large right', 'save', false ); ?>
+				submit_button( __( 'Update', 'wordcamp-talks' ), 'secondary large right', 'save', false ); ?>
 			</p>
 
 			<?php
@@ -1420,7 +1435,7 @@ class WordCamp_Talks_Admin {
 					$delete_text = __( 'Delete Permanently' );
 				}
 
-				printf( '<div id="delete-action" class="warning"><a class="submitdelete deletion" href="%1$s">%2$s</a></div>',
+				printf( '<div id="delete-action"><a class="submitdelete deletion" href="%1$s">%2$s</a></div>',
 					esc_url( get_delete_post_link( $talk->ID ) ),
 					esc_html( $delete_text )
 				);
@@ -1669,6 +1684,13 @@ class WordCamp_Talks_Admin {
 
 			body.post-type-<?php echo $post_type;?> .talk-major-action select {
 				width: 65%;
+			}
+
+			body.post-type-<?php echo $post_type;?> #wct-session-action a {
+				display: inline-block;
+				margin-bottom: 1.5em;
+				width: 100%;
+				text-align: center;
 			}
 
 			<?php if ( wct_is_admin() && ! wct_is_rating_disabled() ) : ?>

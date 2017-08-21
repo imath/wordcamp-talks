@@ -322,5 +322,95 @@ function wct_wordcamp_init_session( $args = array() ) {
 		'_wcb_session_speakers' => rtrim( $speaker->post_title, ',' ) . ',',
 	) );
 
+	// Set the Session's post type.
+	$r['post_type'] = 'wcb_session';
+
 	return wp_insert_post( $r );
 }
+
+/**
+ * Adds WordCamp Session actions to the Talk Proposal Status Metabox.
+ *
+ * @since  1.1.0
+ *
+ * @param WP_Post $talk The talk object being edited.
+ */
+function wct_wordcamp_talk_proposal_actions( $talk = null ) {
+	if ( empty( $talk->post_author ) || 'wct_selected' !== get_post_status( $talk ) ) {
+		return false;
+	}
+
+	$user_nicename = wct_users_get_user_data( 'id', $talk->post_author, 'user_nicename' );
+
+	if ( ! $user_nicename || ! wct_wordcamp_get_speaker( $user_nicename ) ) {
+		?>
+		<p class="attention">
+			<?php esc_html_e( 'The speaker for this selected talk proposal is not available yet', 'wordcamp-talks' ); ?>
+		</p>
+		<?php
+		return;
+	}
+
+	$session = wct_wordcamp_get_session( $talk->ID ); ?>
+
+	<div id="wct-session-action">
+
+		<?php if ( ! $session ) :
+			$link = wp_nonce_url( add_query_arg( 'draft-session', $talk->ID ), 'init_session' );
+		?>
+
+			<a href="<?php echo esc_url( $link ); ?>" class="button large button-primary wct-draft-session"><?php esc_html_e( 'Draft a Session', 'wordcamp-talks' ); ?></a>
+
+		<?php else :
+			$link = get_edit_post_link( $session );
+		?>
+
+			<a href="<?php echo esc_url( $link ); ?>" class="button large secondary-button wct-edit-session"><?php esc_html_e( 'Edit the Session', 'wordcamp-talks' ); ?></a>
+
+		<?php endif ; ?>
+
+	</div>
+	<?php
+}
+add_action( 'wct_admin_workflow_metabox_major', 'wct_wordcamp_talk_proposal_actions', 10, 1 );
+
+/**
+ * Generates a session in draft mode, once the
+ * 'Draft a session' button was clicked.
+ *
+ * @since  1.1.0
+ */
+function wct_wordcamp_maybe_draft_session() {
+	if ( empty( $_REQUEST['draft-session'] ) || ! wct_is_admin() ) {
+		return;
+	}
+
+	check_admin_referer( 'init_session' );
+
+	$redirect = remove_query_arg( array( 'draft-session', '_wpnonce' ), wp_get_referer() );
+
+	$talk = get_post( $_REQUEST['draft-session'] );
+
+	if ( ! empty( $talk->ID ) ) {
+		$draft_session = wct_wordcamp_init_session( array(
+			'post_title'   => $talk->post_title,
+			'post_content' => $talk->post_content,
+			'post_author'  => $talk->post_author,
+			'meta_input'   => array( '_wct_proposal_id' => $talk->ID ),
+		) );
+
+		if ( ! is_wp_error( $draft_session ) ) {
+			wp_safe_redirect( add_query_arg( array(
+				'post'    => $draft_session,
+				'action'  => 'edit',
+				'message' => 1,
+			), admin_url( 'post.php' ) ) );
+
+			exit();
+		}
+	}
+
+	wp_safe_redirect( wct_add_feedback_args( array( 'error' => 1 ), $redirect ) );
+	exit();
+}
+add_action( 'load-post.php', 'wct_wordcamp_maybe_draft_session', 20 );
