@@ -14,20 +14,17 @@ defined( 'ABSPATH' ) || exit;
 /** Set/Get comment(s) ********************************************************/
 
 /**
- * Builds the talk comments object
+ * Builds the talk comments object.
  *
  * Adds usefull datas to check if the comments is about a talk
  * - post type
  * - post author
  * - post title
  *
- * @package WordCamp Talks
- * @subpackage comments/functions
- *
  * @since 1.0.0
  *
- * @param  int  $comment_id the comment ID
- * @return array the list of comments matching arguments
+ * @param  integer  $comment_id The comment ID.
+ * @return array                The list of comments matching arguments.
  */
 function wct_comments_get_comment( $comment_id = 0 ) {
 	// Bail if comment id is not set
@@ -51,23 +48,16 @@ function wct_comments_get_comment( $comment_id = 0 ) {
 		$comment->comment_post_title  = $post->post_title;
 	}
 
-	/**
-	 * @param  object  $comment the comment object
-	 * @param  WP_Post $post    the post the comment is linked to
-	 */
-	return apply_filters( 'wct_comments_get_comment', $comment, $post );
+	return $comment;
 }
 
 /**
- * Gets comments matching arguments
- *
- * @package WordCamp Talks
- * @subpackage comments/functions
+ * Gets comments matching arguments.
  *
  * @since 1.0.0
  *
- * @param  array  $args the arguments of the comments query
- * @return array        the list of comments matching arguments
+ * @param  array  $args The arguments of the comments query.
+ * @return array        The list of comments matching arguments.
  */
 function wct_comments_get_comments( $args = array() ) {
 	$comments_args = wp_parse_args( $args, array(
@@ -84,15 +74,12 @@ function wct_comments_get_comments( $args = array() ) {
 }
 
 /**
- * Clean the talk's comment count cache
- *
- * @package WordCamp Talks
- * @subpackage comments/functions
+ * Clean the talk's comment count cache.
  *
  * @since 1.0.0
  *
- * @param  int     $comment_id the comment ID
- * @param  string  $status     its status
+ * @param  int     $comment_id The comment ID.
+ * @param  string  $status     Its status.
  */
 function wct_comments_clean_count_cache( $comment_id = 0, $status = '' ) {
 	if ( 'wp_insert_comment' === current_action() && is_a( $status, 'WP_Comment' ) ) {
@@ -128,13 +115,10 @@ function wct_comments_clean_count_cache( $comment_id = 0, $status = '' ) {
 /**
  * Retrieve total comments about talks for blog or user.
  *
- * @package WordCamp Talks
- * @subpackage comments/functions
- *
  * @since 1.0.0
  *
- * @param int $user_id Optional. User ID.
- * @return object Comment stats.
+ * @param  integer $user_id Optional. User ID.
+ * @return object           Comment stats.
  */
 function wct_comments_count_comments( $user_id = 0 ) {
 
@@ -163,10 +147,7 @@ function wct_comments_count_comments( $user_id = 0 ) {
 /** Comments urls *************************************************************/
 
 /**
- * Builds the talk's comment permalink
- *
- * @package WordCamp Talks
- * @subpackage comments/functions
+ * Builds the talk's comment permalink.
  *
  * @since 1.0.0
  *
@@ -189,24 +170,17 @@ function wct_comments_get_comment_link( $comment_id = 0 ) {
 		$comment_link = get_comment_link( $comment );
 	}
 
-	/**
-	 * @param  string $comment_link the comment permalink
-	 * @param  int    $comment_id   the comment ID
-	 */
-	return apply_filters( 'wct_comments_get_comment_link', $comment_link, $comment_id );
+	return $comment_link;
 }
 
 /**
  * Make sure the comment edit link about talks post type will
  * open the plugin's Comments Submenu once cliked on.
  *
- * @package WordCamp Talks
- * @subpackage comments/functions
- *
  * @since 1.0.0
  *
- * @param  string $location the comment edit link
- * @return string           the new comment edit link if about a talk, unchanged otherwise
+ * @param  string $location The comment edit link.
+ * @return string           The new comment edit link if about a talk, unchanged otherwise.
  */
 function wct_edit_comment_link( $location = '' ) {
 	if ( empty( $location ) ) {
@@ -229,28 +203,17 @@ function wct_edit_comment_link( $location = '' ) {
 		return $location;
 	}
 
-	$new_location = add_query_arg( 'post_type', wct_get_post_type(), $location );
-
-	/**
-	 * @param  string $new_location the new comment edit link
-	 * @param  string $location     the original comment edit link
-	 * @param  object $comment      the talk's comment object
-	 */
-	return apply_filters( 'wct_edit_comment_link', $new_location, $location, $comment );
+	return add_query_arg( 'post_type', wct_get_post_type(), $location );
 }
 
 /** Template functions ********************************************************/
 
 /**
- * Builds the loop query arguments for user comments
- *
- * @package WordCamp Talks
- * @subpackage comments/functions
+ * Builds the loop query arguments for user comments.
  *
  * @since 1.0.0
  *
- * @param  string $type is this a single talk ?
- * @return array        the loop args
+ * @return array The loop args
  */
 function wct_comments_query_args() {
 	/**
@@ -263,16 +226,13 @@ function wct_comments_query_args() {
 }
 
 /**
- * Should we display the comments form ?
- *
- * @package WordCamp Talks
- * @subpackage comments/functions
+ * Should we display the comment form?
  *
  * @since 1.0.0
  *
- * @param  bool $open   true if comments are opened, false otherwise
- * @param  int $talk_id the ID of the talk
- * @return bool          true if comments are opened, false otherwise
+ * @param  bool $open   True if comments are opened, false otherwise.
+ * @param  int $talk_id The ID of the talk
+ * @return bool         True if comments are opened, false otherwise.
  */
 function wct_comments_open( $open = true, $talk_id = 0 ) {
 	if ( ! wct_is_talks() ) {
@@ -281,24 +241,17 @@ function wct_comments_open( $open = true, $talk_id = 0 ) {
 		$open = current_user_can( 'comment_talks' );
 	}
 
-	/**
-	 * @param  bool $open true if comments are opened, false otherwise
-	 * @param  int $talk_id the ID of the talk
-	 */
-	return apply_filters( 'wct_comments_open', $open, $talk_id );
+	return $open;
 }
 
 /**
- * Replace or Add the user's profile link to the comment authors
- *
- * @package WordCamp Talks
- * @subpackage comments/functions
+ * Replace or Add the user's profile link to the comment authors.
  *
  * @since 1.0.0
  *
- * @param  array   $comments the list of comments in an array
- * @param  int     $talk_id  the ID of the talk
- * @return array             the list of comments, author links replaced by the plugin's profile if needed
+ * @param  array   $comments The list of comments in an array.
+ * @param  integer $talk_id  The ID of the talk.
+ * @return array             The list of comments, author links replaced by the plugin's profile if needed.
  */
 function wct_comments_array( $comments = array(), $talk_id = 0 ) {
 	// Only filter comments arry if on a single talk
@@ -418,31 +371,17 @@ function wct_comment_reply_link( $reply_link = '', $args = array(), $comment = n
 		);
 	}
 
-	/**
-	 * Filter here if you want to edit the comment reply link for blind raters.
-	 *
-	 * @since  1.0.0
-	 *
-	 * @param  string     $blind_rater_reply_link HTML output for the reply link of the blind rater.
-	 * @param  string     $reply_link             Original HTML output for the reply link.
-	 * @param  array      $args                   An array of arguments overriding the defaults.
-	 * @param  WP_Comment $comment                The object of the comment being replied.
-	 * @param  WP_Post    $post                   The WP_Post object.
-	 */
-	return apply_filters( 'wct_comment_reply_link', $blind_rater_reply_link, $reply_link, $args, $comment, $post );
+	return $blind_rater_reply_link;
 }
 
 /**
  * Make sure user can see comment feeds.
  *
- * @package WordCamp Talks
- * @subpackage comments/functions
- *
  * @since 1.0.0
  *
- * @param  string   $limit    the limit args of the WP_Query comment subquery.
+ * @param  string   $limit    The limit args of the WP_Query comment subquery.
  * @param  WP_Query $wp_query WordPress main query.
- * @return string             the limit args of the WP_Query comment subquery.
+ * @return string             The limit args of the WP_Query comment subquery.
  */
 function wct_comment_feed_limits( $limit = '', $wp_query = null ) {
 	// Force the comments query to return nothing
