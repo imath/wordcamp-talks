@@ -1,6 +1,6 @@
 <?php
 /**
- * WordCamp Talks Comments classes.
+ * WordCamp Talks Comments class.
  *
  * @package WordCamp Talks
  * @subpackage comments/classes

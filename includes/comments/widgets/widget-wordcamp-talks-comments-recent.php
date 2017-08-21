@@ -1,6 +1,6 @@
 <?php
 /**
- * WordCamp Talks Comments Widgets.
+ * WordCamp Talks Comments Widget.
  *
  * @package WordCamp Talks
  * @subpackage comments/widgets
@@ -15,19 +15,13 @@ if ( ! class_exists( 'WordCamp_Talks_Comments_Recent' ) ) :
 /**
  * Recent comment about talks Widget
  *
- * @package WordCamp Talks
- * @subpackage comments/widgets
- *
  * @since 1.0.0
  * @since 1.1.0 Renamed from WordCamp_Talk_Recent_Comments to WordCamp_Talks_Comments_Recent.
  */
  class WordCamp_Talks_Comments_Recent extends WP_Widget_Recent_Comments {
 
  	/**
-	 * Constructor
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/widgets
+	 * Constructor.
 	 *
 	 * @since 1.0.0
 	 */
@@ -43,10 +37,7 @@ if ( ! class_exists( 'WordCamp_Talks_Comments_Recent' ) ) :
 	}
 
 	/**
-	 * Register the widget
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/widgets
+	 * Register the widget.
 	 *
 	 * @since 1.0.0
 	 */
@@ -55,15 +46,12 @@ if ( ! class_exists( 'WordCamp_Talks_Comments_Recent' ) ) :
 	}
 
 	/**
-	 * Override comments query args to only onclude comments about talks
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/widgets
+	 * Override comments query args to only onclude comments about talks.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  array  $comment_args
-	 * @return array  the comments query args to display comments about talks
+	 * @param  array  $comment_args The comments query args.
+	 * @return array                The comments query args to display comments about talks.
 	 */
 	public function override_comment_args( $comment_args = array() ) {
 		// It's that simple !!
@@ -101,10 +89,7 @@ if ( ! class_exists( 'WordCamp_Talks_Comments_Recent' ) ) :
 	}
 
 	/**
-	 * Update the preferences for the widget
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comments/widgets
+	 * Update the preferences for the widget.
 	 *
 	 * @since 1.0.0
 	 */

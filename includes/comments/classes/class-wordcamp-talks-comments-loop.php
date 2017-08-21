@@ -1,6 +1,6 @@
 <?php
 /**
- * WordCamp Talks Comments classes.
+ * WordCamp Talks Comments Loop class.
  *
  * @package WordCamp Talks
  * @subpackage comments/classes
@@ -18,19 +18,13 @@ if ( ! class_exists( 'WordCamp_Talks_Comments_Loop' ) ) :
 /**
  * Comments loop Class.
  *
- * @package WordCamp Talks
- * @subpackage comment/tags
- *
  * @since 1.0.0
  * @since 1.1.0 Renamed from WordCamp_Talks_Loop_Comments to WordCamp_Talks_Comments_Loop.
  */
 class WordCamp_Talks_Comments_Loop extends WordCamp_Talks_Core_Loop {
 
 	/**
-	 * Constructor
-	 *
-	 * @package WordCamp Talks
-	 * @subpackage comment/tags
+	 * Constructor.
 	 *
 	 * @since 1.0.0
 	 *
