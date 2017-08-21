@@ -79,7 +79,36 @@ module.exports = function( grunt ) {
 				esprimaOptions:{},
 				verbose: false
 			}
-		}
+		},
+		phpunit: {
+			'default': {
+				cmd: 'phpunit',
+				args: ['-c', 'phpunit.xml.dist']
+			},
+			'wordcamp': {
+				cmd: 'phpunit',
+				args: ['--group', 'wordcamp']
+			},
+			'admin': {
+				cmd: 'phpunit',
+				args: ['-c', 'tests/phpunit/admin.xml']
+			},
+			'multisite': {
+				cmd: 'phpunit',
+				args: ['-c', 'tests/phpunit/multisite.xml']
+			}
+		},
+	} );
+
+	/**
+	 * Register tasks.
+	 */
+	grunt.registerMultiTask( 'phpunit', 'Runs PHPUnit tests.', function() {
+		grunt.util.spawn( {
+			args: this.data.args,
+			cmd:  this.data.cmd,
+			opts: { stdio: 'inherit' }
+		}, this.async() );
 	} );
 
 	grunt.registerTask( 'jstest', ['jsvalidate', 'jshint'] );

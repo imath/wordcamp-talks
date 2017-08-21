@@ -14,10 +14,7 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * The settings sections
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
+ * The settings sections.
  *
  * @since 1.0.0
  *
@@ -40,17 +37,11 @@ function wct_get_settings_sections() {
 		);
 	}
 
-	/**
-	 * @param array $settings_sections the setting sections
-	 */
-	return (array) apply_filters( 'wct_get_settings_sections', $settings_sections );
+	return $settings_sections;
 }
 
 /**
- * The different fields for setting sections
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
+ * The different fields for setting sections.
  *
  * @since 1.0.0
  *
@@ -164,18 +155,12 @@ function wct_get_settings_fields() {
 		);
 	}
 
-	/**
-	 * @param array $setting_fields the setting fields
-	 */
-	return (array) apply_filters( 'wct_get_settings_fields', $setting_fields );
+	return $setting_fields;
 }
 
 
 /**
- * Gives the setting fields for section
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
+ * Gives the setting fields for section.
  *
  * @since 1.0.0
  *
@@ -185,70 +170,22 @@ function wct_get_settings_fields() {
 function wct_get_settings_fields_for_section( $section_id = '' ) {
 
 	// Bail if section is empty
-	if ( empty( $section_id ) )
+	if ( empty( $section_id ) ) {
 		return false;
+	}
 
 	$fields = wct_get_settings_fields();
-	$retval = isset( $fields[ $section_id ] ) ? $fields[ $section_id ] : false;
+	$retval = false;
 
-	/**
-	 * @param array $retval      the setting fields
-	 * @param string $section_id the section id
-	 */
-	return (array) apply_filters( 'wct_get_settings_fields_for_section', $retval, $section_id );
+	if ( isset( $fields[ $section_id ] ) ) {
+		$retval = $fields[ $section_id ];
+	}
+
+	return $retval;
 }
 
 /**
- * Disable a settings field if its value rely on another setting field value
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
- *
- * @since 1.0.0
- *
- * @param  string $function function to get the option value
- * @param  string $option   the option value
- * @return string HTML output
- */
-function wct_setting_disabled( $function = '', $option = '', $operator = '=' ) {
-	if ( empty( $function ) || empty( $option ) || ! function_exists( $function ) ) {
-		return;
-	}
-
-	$compare = call_user_func( $function );
-
-	if ( '!=' === $operator ) {
-		disabled( $compare !== $option );
-		return;
-	}
-
-	disabled( $compare === $option );
-}
-
-/**
- * Disable a settings field if another option is set
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
- *
- * @since 1.0.0
- *
- * @param  string $option_key the option key
- * @return string HTML output
- */
-function wct_setting_disabled_option( $option = '' ) {
-	if( ! get_option( $option, false ) ) {
-		return;
-	}
-
-	disabled( true );
-}
-
-/**
- * Checks for rewrite conflicts, displays a warning if any
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
+ * Checks for rewrite conflicts, displays a warning if any.
  *
  * @since 1.0.0
  *
@@ -326,14 +263,9 @@ function wct_root_slug_conflict_check( $slug = 'talks' ) {
 /** Core settings callbacks ***************************************************/
 
 /**
- * Some text to introduce the core settings section
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
+ * Some text to introduce the core settings section.
  *
  * @since 1.0.0
- *
- * @return string HTML output
  */
 function wct_settings_core_section_callback() {
 	?>
@@ -344,14 +276,9 @@ function wct_settings_core_section_callback() {
 }
 
 /**
- * Callback function for Talks submission closing date
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
+ * Callback function for Talks submission closing date.
  *
  * @since 1.0.0
- *
- * @return string HTML output
  */
 function wct_closing_date_setting_callback() {
 	$closing = wct_get_closing_date();
@@ -362,14 +289,9 @@ function wct_closing_date_setting_callback() {
 }
 
 /**
- * List of captions for the rating stars
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
+ * List of captions for the rating stars.
  *
  * @since 1.0.0
- *
- * @return string HTML output
  */
 function wct_hint_list_setting_callback() {
 	$hintlist = wct_get_hint_list();
@@ -383,15 +305,11 @@ function wct_hint_list_setting_callback() {
 }
 
 /**
- * List of labels for the user's profile fields
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
+ * List of labels for the user's profile fields.
  *
  * @since 1.0.0
  *
  * @param  array  $args  Whether to get private or public fields.
- * @return string        HTML output.
  */
 function wct_fields_list_setting_callback( $args = array() ) {
 	if ( empty( $args['type'] ) ) {
@@ -418,12 +336,7 @@ function wct_fields_list_setting_callback( $args = array() ) {
 /**
  * List of field keys to include in the signup form.
  *
- * @package WordCamp Talks
- * @subpackage admin/settings
- *
  * @since 1.0.0
- *
- * @return string HTML output.
  */
 function wct_signup_fields_setting_callback() {
 	$fields = wct_users_get_all_contact_methods();
@@ -445,11 +358,9 @@ function wct_signup_fields_setting_callback() {
 }
 
 /**
- * Signups autolog callback
+ * Signups autolog callback.
  *
  * @since 1.0.0
- *
- * @return string HTML output
  */
 function wct_autolog_signups_fields_setting_callback() {
 	?>
@@ -464,8 +375,6 @@ function wct_autolog_signups_fields_setting_callback() {
  * Talk Proposal's editing timeout (speakers) callback
  *
  * @since 1.0.0
- *
- * @return string HTML output
  */
 function wct_talk_editing_timeout_callback() {
 	$current = wct_talk_editing_timeout();
@@ -481,14 +390,9 @@ function wct_talk_editing_timeout_callback() {
 }
 
 /**
- * Some text to introduce the multisite settings section
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
+ * Some text to introduce the multisite settings section.
  *
  * @since 1.0.0
- *
- * @return string HTML output
  */
 function wct_settings_multisite_section_callback() {
 	?>
@@ -501,12 +405,7 @@ function wct_settings_multisite_section_callback() {
 /**
  * Does the blog is allowing us to manage signups?
  *
- * @package WordCamp Talks
- * @subpackage admin/settings
- *
  * @since 1.0.0
- *
- * @return string HTML output
  */
 function wct_allow_signups_setting_callback() {
 	?>
@@ -518,14 +417,9 @@ function wct_allow_signups_setting_callback() {
 }
 
 /**
- * Default role for users posting a talk on this site callback
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
+ * Default role for users posting a talk on this site callback.
  *
  * @since 1.0.0
- *
- * @return string HTML output
  */
 function wct_get_user_default_role_setting_callback() {
 	?>
@@ -539,10 +433,7 @@ function wct_get_user_default_role_setting_callback() {
 /** Custom sanitization *******************************************************/
 
 /**
- * 'Sanitize' the date
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
+ * 'Sanitize' the closing date.
  *
  * @since 1.0.0
  *
@@ -566,28 +457,7 @@ function wct_sanitize_closing_date( $option = '' ) {
 }
 
 /**
- * Sanitize the status setting
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
- *
- * @since 1.0.0
- *
- * @param  string $option the value choosed by the admin
- * @return string         the sanitized value
- */
-function wct_sanitize_status( $option = '' ) {
-	/**
-	 * @param string $option the sanitized option
-	 */
-	return apply_filters( 'wct_sanitize_status', sanitize_key( $option ) );
-}
-
-/**
- * Sanitize list
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
+ * Sanitize list.
  *
  * @since 1.0.0
  *
@@ -605,19 +475,11 @@ function wct_sanitize_list( $option = '' ) {
 		return false;
 	}
 
-	$items = array_map( 'sanitize_text_field', $items );
-
-	/**
-	 * @param array $items the sanitized items
-	 */
-	return apply_filters( 'wct_sanitize_list', $items );
+	return array_map( 'sanitize_text_field', $items );
 }
 
 /**
- * Sanitize the user profile fields
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
+ * Sanitize the user profile fields.
  *
  * @since 1.0.0
  *
@@ -642,12 +504,7 @@ function wct_sanitize_user_fields_list( $option = '' ) {
 		$keys[] = 'wct_' . sanitize_key( $label );
 	}
 
-	$fields = array_combine( $keys, $labels );
-
-	/**
-	 * @param array $fields the sanitized fields
-	 */
-	return apply_filters( 'wct_sanitize_user_fields_list', $fields );
+	return array_combine( $keys, $labels );
 }
 
 /**
@@ -669,10 +526,7 @@ function wct_sanitize_editing_timeout( $option = '' ) {
 }
 
 /**
- * Displays the settings page
- *
- * @package WordCamp Talks
- * @subpackage admin/settings
+ * Displays the settings page.
  *
  * @since 1.0.0
  */
