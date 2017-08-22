@@ -77,20 +77,20 @@ final class WordCamp_Talks {
 
 		// Base name
 		$this->file       = __FILE__;
-		$this->basename   = apply_filters( 'wct_plugin_basename', plugin_basename( $this->file ) );
+		$this->basename   = plugin_basename( $this->file );
 
 		// Path and URL
-		$this->plugin_dir = apply_filters( 'wct_plugin_dir_path', plugin_dir_path( $this->file                     ) );
-		$this->plugin_url = apply_filters( 'wct_plugin_dir_url',  plugin_dir_url ( $this->file                     ) );
-		$this->js_url     = apply_filters( 'wct_js_url',          trailingslashit( $this->plugin_url . 'js'        ) );
-		$this->lang_dir   = apply_filters( 'wct_lang_dir',        trailingslashit( $this->plugin_dir . 'languages' ) );
+		$this->plugin_dir = plugin_dir_path( $this->file );
+		$this->plugin_url = plugin_dir_url( $this->file );
+		$this->js_url     = trailingslashit( $this->plugin_url . 'js' );
+		$this->lang_dir   = trailingslashit( $this->plugin_dir . 'languages' );
 
 		// Includes
-		$this->includes_dir = apply_filters( 'wct_includes_dir_path', trailingslashit( $this->plugin_dir . 'includes'  ) );
-		$this->includes_url = apply_filters( 'wct_includes_dir_url',  trailingslashit( $this->plugin_url . 'includes'  ) );
+		$this->includes_dir = trailingslashit( $this->plugin_dir . 'includes' );
+		$this->includes_url = trailingslashit( $this->plugin_url . 'includes' );
 
-		// Default templates location (can be overridden from theme or child theme)
-		$this->templates_dir = apply_filters( 'wct_templates_dir_path', trailingslashit( $this->plugin_dir . 'templates'  ) );
+		// Default templates location
+		$this->templates_dir = trailingslashit( $this->plugin_dir . 'templates' );
 
 		// Post types / taxonomies default ids
 		$this->post_type = 'talks';

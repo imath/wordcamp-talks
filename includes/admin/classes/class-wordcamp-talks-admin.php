@@ -1629,14 +1629,95 @@ class WordCamp_Talks_Admin {
 				vertical-align: text-bottom;
 			}
 
-			body.post-type-<?php echo $post_type;?> .wp-list-table tr.status-wct_pending th {
+			body.post-type-<?php echo $post_type;?> .wp-list-table tr.status-wct_pending th,
+			body.post-type-<?php echo $post_type;?> .wp-list-table tr.status-wct_selected th,
+			body.post-type-<?php echo $post_type;?> .wp-list-table tr.status-wct_shortlist th,
+			body.post-type-<?php echo $post_type;?> .wp-list-table tr.status-wct_rejected th {
 				border-left-width: 4px;
 				border-left-style: solid;
 				border-left-color: #ffba00;
 			}
+			body.post-type-<?php echo $post_type;?> .wp-list-table tr.status-wct_selected th {
+				border-left-color: #88aa22;
+			}
+
+			body.post-type-<?php echo $post_type;?> .wp-list-table tr.status-wct_shortlist th {
+				border-left-color: #3388aa;
+			}
+
+			body.post-type-<?php echo $post_type;?> .wp-list-table tr.status-wct_rejected th {
+				border-left-color: #dd3333;
+			}
 
 			body.post-type-<?php echo $post_type;?> .fixed th.column-rates {
 				width: 10%;
+			}
+
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_pending a,
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_pending a:hover,
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_pending a.current,
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_selected a,
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_selected a:hover,
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_selected a.current,
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_shortlist a,
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_shortlist a:hover,
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_shortlist a.current,
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_rejected a,
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_rejected a:hover,
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_rejected a.current {
+				border-bottom-color: #ffba00;
+				border-bottom-width: 1px;
+				border-bottom-style: solid;
+			}
+
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_selected a {
+				border-bottom-color: #88aa22;
+			}
+
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_shortlist a {
+				border-bottom-color: #3388aa;
+			}
+
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_rejected a {
+				border-bottom-color: #dd3333;
+			}
+
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_pending a:hover,
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_pending a.current {
+				background-color: #ffba00;
+				color: #FFF;
+			}
+
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_selected a:hover,
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_selected a.current {
+				background-color: #88aa22;
+				color: #FFF;
+				border-bottom-color: #88aa22;
+			}
+
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_shortlist a:hover,
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_shortlist a.current {
+				background-color: #3388aa;
+				color: #FFF;
+				border-bottom-color: #3388aa;
+			}
+
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_rejected a:hover,
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_rejected a.current {
+				background-color: #dd3333;
+				color: #FFF;
+				border-bottom-color: #dd3333;
+			}
+
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_pending a:hover .count,
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_pending a.current .count,
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_selected a:hover .count,
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_selected a.current .count,
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_shortlist a:hover .count,
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_shortlist a.current .count,
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_rejected a:hover .count,
+			body.post-type-<?php echo $post_type;?> .subsubsub li.wct_rejected a.current .count {
+				color: #FFF;
 			}
 
 			body.post-type-<?php echo $post_type;?> .fixed th.column-cat_talks,
