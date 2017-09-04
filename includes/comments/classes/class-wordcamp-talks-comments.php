@@ -68,7 +68,7 @@ class WordCamp_Talks_Comments {
 		// Separate comments made on talks from the other post type comments.
 		add_action( 'pre_get_comments',     array( $this, 'maybe_talk_comments' ),       10, 1 );
 		add_action( 'init',                 array( $this, 'cache_comments_count' ),       9    );
-		add_filter( 'wp_count_comments',    array( $this, 'adjust_comment_count' ),      10, 1 );
+		add_filter( 'wp_count_comments',    array( $this, 'adjust_comment_count' ),      10, 2 );
 		add_filter( 'widget_comments_args', array( $this, 'comments_widget_dummy_var' ), 10, 1 );
 		add_filter( 'comments_clauses',     array( $this, 'maybe_alter_comments_query'), 10, 2 );
 
@@ -124,7 +124,11 @@ class WordCamp_Talks_Comments {
 	 * @param   array $stats empty array to override in the method
 	 * @return  array adjusted comment count stats
 	 */
-	public function adjust_comment_count( $stats = array() ) {
+	public function adjust_comment_count( $stats = array(), $post_id = 0 ) {
+		if ( 0 !== (int) $post_id ) {
+			return $stats;
+		}
+
 		if ( did_action( 'wct_cache_comments_count' ) ) {
 			$this->talk_comment_count = wct_comments_count_comments();
 
