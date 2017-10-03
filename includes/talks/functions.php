@@ -441,14 +441,12 @@ function wct_talks_can_edit( $talk = null ) {
 
 	// Map to edit others talks if current user is not the author
 	if ( (int) wct_users_current_user_id() !== (int) $talk->post_author ) {
-
 		// Do not edit talks of the super admin
 		if ( ! is_super_admin( $talk->post_author ) ) {
 			return current_user_can( 'edit_others_talks' );
 		} else {
 			return $retval;
 		}
-
 	}
 
 	/** Now we're dealing with author's capacitiy to edit the talk ****************/
@@ -1109,3 +1107,31 @@ function wct_do_embed( $content = '' ) {
 
 	return $wp_embed->autoembed( $content );
 }
+
+/**
+ * Sends a Notification to the Review team in Slack when a talk is submitted.
+ *
+ * @since 1.1.0
+ *
+ * @param  integer                        $saved_id The saved ID for the Talk.
+ * @param  WordCamp_Talks_Talks_Proposal  $talk     The Talk object.
+ */
+function wct_send_slack_notification( $saved_id = 0, $talk = null ) {
+	if ( ! $saved_id || empty( $talk->author ) || empty( $talk->title ) || empty( $talk->description ) ) {
+		return;
+	}
+
+	$slack_webhook = wct_talk_slack_webhook_url();
+	$talk->id = (int) $saved_id;
+
+	if ( ! $slack_webhook ) {
+		return;
+	}
+
+	$payload = new WordCamp_Talks_Talks_Slack_Notify( $talk );
+
+	wp_remote_post( $slack_webhook, array(
+		'body' => $payload->get_json(),
+	) );
+}
+add_action( 'wct_talks_after_insert_talk', 'wct_send_slack_notification', 10, 2 );

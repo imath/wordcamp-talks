@@ -37,6 +37,7 @@ function wct_get_default_options() {
 		'_wc_talks_signup_fields'       => array(),
 		'_wc_talks_autolog_enabled'     => 0,
 		'_wc_talks_editing_timeout'     => '+1 hour',
+		'_wc_talks_slack_webhook_url'   => '',
 	);
 
 	// Multisite options
@@ -165,6 +166,18 @@ function wct_user_autolog_after_signup( $default = 0 ) {
  */
 function wct_talk_editing_timeout( $default = '+1 hour' ) {
 	return get_option( '_wc_talks_editing_timeout', $default );
+}
+
+/**
+ * Slack webhook to notify of new talks.
+ *
+ * @since  1.1.0
+ *
+ * @param  string $default Defaults to no webhook URL.
+ * @return string          The slack webhook URL.
+ */
+function wct_talk_slack_webhook_url( $default = '' ) {
+	return get_option( '_wc_talks_slack_webhook_url', $default );
 }
 
 /**

@@ -77,6 +77,14 @@ function wct_get_settings_fields() {
 				'args'              => array()
 			),
 
+			// Slack notifications
+			'_wc_talks_slack_webhook_url' => array(
+				'title'             => __( 'Slack notifications', 'wordcamp-talks' ),
+				'callback'          => 'wct_talk_slack_webhook_callback',
+				'sanitize_callback' => 'esc_url_raw',
+				'args'              => array()
+			),
+
 			// Private fields (not shown on front-end)
 			'_wc_talks_private_fields_list' => array(
 				'title'             => __( 'Private user profile fields', 'wordcamp-talks' ),
@@ -386,6 +394,21 @@ function wct_talk_editing_timeout_callback() {
 			<option value="<?php echo esc_attr( $t ); ?>" <?php selected( $current, $t ); ?>><?php echo esc_html( $timeout ); ?></option>
 		<?php endforeach ; ?>
 	</select>
+	<?php
+}
+
+/**
+ * Notify the Slack team about new talks?
+ *
+ * @since 1.1.0
+ */
+function wct_talk_slack_webhook_callback() {
+	$slack_url = wct_talk_slack_webhook_url();
+	?>
+
+	<label for="_wc_talks_slack_webhook_url"><?php esc_html_e( 'Add the URL of your webhook to notify your Slack team.', 'wordcamp-talks' ); ?></label>
+	<input name="_wc_talks_slack_webhook_url" id="_wc_talks_slack_webhook_url" type="text" class="large-text code" value="<?php echo esc_attr( $slack_url ); ?>" />
+
 	<?php
 }
 
