@@ -4,16 +4,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WordCamp Talk Proposals 1.1.0-beta1\n"
 "Report-Msgid-Bugs-To: https://github.com/imath/wordcamp-talks/issues\n"
-"POT-Creation-Date: 2017-10-02 18:27:32+00:00\n"
+"POT-Creation-Date: 2017-10-03 19:33:12+00:00\n"
+"PO-Revision-Date: 2017-10-03 22:06+0100\n"
+"Last-Translator: imath <mathchristo@yahoo.fr>\n"
+"Language-Team: FRENCH <imath@cluster.press>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-10-03 01:33+0100\n"
-"Last-Translator: imath <mathchristo@yahoo.fr>\n"
-"Language-Team: FRENCH <imath@cluster.press>\n"
 "X-Generator: Poedit 1.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Language: fr\n"
 
 #: includes/admin/classes/class-wordcamp-talks-admin-comments.php:137
 msgid "Comments"
@@ -22,21 +22,19 @@ msgstr "﻿Commentaires"
 #: includes/admin/classes/class-wordcamp-talks-admin-comments.php:150
 #: includes/core/template-functions.php:808
 msgid "Talk Proposal Comments"
-msgstr "Commentaires sur la proposition d'intervention"
+msgstr "Commentaires sur la proposition"
 
 #: includes/admin/classes/class-wordcamp-talks-admin.php:213
 #: includes/admin/classes/class-wordcamp-talks-admin.php:214
 #: includes/admin/classes/class-wordcamp-talks-admin.php:228
 #: includes/admin/classes/class-wordcamp-talks-admin.php:229
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1882
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1880
 msgid "Settings"
 msgstr "﻿Réglages"
 
 #: includes/admin/classes/class-wordcamp-talks-admin.php:397
 msgid "Talk Proposal updated. <a href=\"%s\">View Talk Proposal</a>"
-msgstr ""
-"Proposition d'intervention mise à jour. <a href=\"%s\">Afficher la "
-"proposition</a>"
+msgstr "Proposition mise à jour. <a href=\"%s\">Afficher la proposition</a>"
 
 #: includes/admin/classes/class-wordcamp-talks-admin.php:398
 msgid "Custom field updated."
@@ -48,90 +46,87 @@ msgstr "﻿Champ Personnalisé effacé."
 
 #: includes/admin/classes/class-wordcamp-talks-admin.php:400
 msgid "Talk Proposal updated."
-msgstr "Proposition d'intervention mise à jour."
+msgstr "Proposition mise à jour."
 
 #: includes/admin/classes/class-wordcamp-talks-admin.php:401
 msgid "Talk Proposal restored to revision from %s"
-msgstr "Proposition d'intervention restaurée à la révision %s"
+msgstr "Proposition restaurée à la révision %s"
 
 #: includes/admin/classes/class-wordcamp-talks-admin.php:402
 msgid "Talk Proposal submitted. <a href=\"%s\">View Talk</a>"
-msgstr ""
-"Proposition d'intervention déposée. <a href=\"%s\">Afficher la proposition</"
-"a>"
+msgstr "Proposition déposée. <a href=\"%s\">Afficher la proposition</a>"
 
 #: includes/admin/classes/class-wordcamp-talks-admin.php:403
 msgid "Talk saved."
-msgstr "Proposition d'intervention enregistrée."
+msgstr "Proposition enregistrée."
 
 #: includes/admin/classes/class-wordcamp-talks-admin.php:404
 msgid ""
 "Talk Proposal submitted. <a target=\"_blank\" href=\"%s\">Preview Talk "
 "Proposal</a>"
 msgstr ""
-"Proposition d'intervention déposée. <a target=\"_blank\" href=\"%s"
-"\">Prévisualiser la proposition</a>"
+"Proposition déposée. <a target=\"_blank\" href=\"%s\">Prévisualiser la "
+"proposition</a>"
 
 #: includes/admin/classes/class-wordcamp-talks-admin.php:406
 msgid ""
 "Talk Proposal scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" "
 "href=\"%2$s\">Preview Talk Proposal</a>"
 msgstr ""
-"Proposition d'intervention planifiée pour : <strong>%1$s</strong>. <a target="
-"\"_blank\" href=\"%2$s\">Prévisualiser la proposition</a>"
+"Proposition planifiée pour : <strong>%1$s</strong>. <a target=\"_blank\" "
+"href=\"%2$s\">Prévisualiser la proposition</a>"
 
 #: includes/admin/classes/class-wordcamp-talks-admin.php:410
 msgid ""
 "Talk Proposal draft updated. <a target=\"_blank\" href=\"%s\">Preview Talk "
 "Proposal</a>"
 msgstr ""
-"Brouillon de proposition d'intervention mis à jour. <a target=\"_blank\" "
-"href=\"%s\">Prévisualiser la proposition</a>"
+"Brouillon de proposition mis à jour. <a target=\"_blank\" href=\"%s"
+"\">Prévisualiser la proposition</a>"
 
 #: includes/admin/classes/class-wordcamp-talks-admin.php:432
 msgid "%s Talk Proposal updated."
 msgid_plural "%s Talk Proposals updated."
-msgstr[0] "%s Proposition d'intervention mise à jour."
-msgstr[1] "%s Propositions d'intervention mises à jour."
+msgstr[0] "%s Proposition mise à jour."
+msgstr[1] "%s Propositions mises à jour."
 
 #: includes/admin/classes/class-wordcamp-talks-admin.php:433
 msgid "%s Talk Proposal not updated; somebody is editing it."
 msgid_plural "%s Talk Proposals not updated; somebody is editing them."
 msgstr[0] ""
-"%s Proposition d'intervention non actualisée ; quelqu'un est déjà en train "
-"de la modifier."
+"%s Proposition non actualisée ; quelqu'un est déjà en train de la modifier."
 msgstr[1] ""
-"%s Propositions d'intervention non actualisées ; quelqu'un est déjà en train "
-"de les modifier."
+"%s Propositions non actualisées ; quelqu'un est déjà en train de les "
+"modifier."
 
 #: includes/admin/classes/class-wordcamp-talks-admin.php:434
 msgid "%s Talk Proposal permanently deleted."
 msgid_plural "%s Talk Proposals permanently deleted."
-msgstr[0] "%s Proposition d'intervention supprimée de manière permanente."
-msgstr[1] "%s Propositions d'intervention supprimées de manière permanente."
+msgstr[0] "%s Proposition supprimée de manière permanente."
+msgstr[1] "%s Propositions supprimées de manière permanente."
 
 #: includes/admin/classes/class-wordcamp-talks-admin.php:435
 msgid "%s Talk Proposal moved to the Trash."
 msgid_plural "%s Talk Proposals moved to the Trash."
-msgstr[0] "%s Proposition d'intervention mise à la corbeille."
-msgstr[1] "%s Propositions d'intervention mises à la corbeille."
+msgstr[0] "%s Proposition mise à la corbeille."
+msgstr[1] "%s Propositions mises à la corbeille."
 
 #: includes/admin/classes/class-wordcamp-talks-admin.php:436
 msgid "%s Talk Proposal restored from the Trash."
 msgid_plural "%s Talk Proposals restored from the Trash."
-msgstr[0] "%s Proposition d'intervention restaurée depuis la corbeille."
-msgstr[1] "%s Propositions d'intervention restaurées depuis la corbeille."
+msgstr[0] "%s Proposition restaurée depuis la corbeille."
+msgstr[1] "%s Propositions restaurées depuis la corbeille."
 
 #: includes/admin/classes/class-wordcamp-talks-admin.php:499
 msgid "Download all Talk Proposals in a csv spreadsheet"
-msgstr "Télécharger toutes les propositions d'intervention dans un fichier csv"
+msgstr "Télécharger toutes les propositions dans un fichier csv"
 
 #: includes/admin/classes/class-wordcamp-talks-admin.php:719
 msgid "Average Rating"
 msgstr "Evaluation moyenne"
 
 #: includes/admin/classes/class-wordcamp-talks-admin.php:921
-#: includes/talks/functions.php:758 includes/talks/tags.php:824
+#: includes/talks/functions.php:756 includes/talks/tags.php:824
 msgid "Not rated yet"
 msgstr "Pas encore évaluée"
 
@@ -140,11 +135,10 @@ msgid "%1$s member rated the Talk Proposal. Its Average rating is: %2$s"
 msgid_plural ""
 "%1$s members rated the Talk Proposal. Its Average rating is: %2$s"
 msgstr[0] ""
-"%1$s utilisateur a évalué la proposition d'intervention. Son évaluation "
-"moyenne est : %2$s"
+"%1$s utilisateur a évalué la proposition. Son évaluation moyenne est : %2$s"
 msgstr[1] ""
-"%1$s utilisateurs ont évalué la proposition d'intervention. Son évaluation "
-"moyenne est : %2$s"
+"%1$s utilisateurs ont évalué la proposition. Son évaluation moyenne est : "
+"%2$s"
 
 #: includes/admin/classes/class-wordcamp-talks-admin.php:950
 msgid "Delete this rating"
@@ -158,24 +152,24 @@ msgstr "Evaluation supprimée avec succès."
 msgid "Something went wrong while trying to delete the rating."
 msgstr "Un problème est survenu pendant la suppression de l'évaluation."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1151
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1199
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1210
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1235
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1252
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1149
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1197
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1208
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1233
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1250
 msgid "Overview"
 msgstr "Vue d'ensemble"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1153
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1151
 msgid ""
 "This screen provides access to all the Talk Proposals users of your site "
 "shared. You can customize the display of this screen to suit your workflow."
 msgstr ""
-"Cet écran vous permet de lister toutes les propositions d'intervention que "
-"les utilisateurs ont partagé dans votre site. Vous pouvez personnaliser son "
-"affichage pour la adapter à vos préférences."
+"Cet écran vous permet de lister toutes les propositions que les utilisateurs "
+"ont partagé dans votre site. Vous pouvez personnaliser son affichage pour "
+"l'adapter à vos préférences."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1154
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1152
 msgid ""
 "You can customize the display of this screen&#39;s contents in a number of "
 "ways:"
@@ -183,146 +177,144 @@ msgstr ""
 "Vous pouvez personnaliser l'affichage du contenu de cet écran de nombreuses "
 "manières :"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1156
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1154
 msgid ""
 "You can hide/display columns based on your needs and decide how many Talk "
 "Proposals to list per screen using the Screen Options tab."
 msgstr ""
 "Vous pouvez masquer / afficher les colonnes selon vos préférences et décider "
-"du nombre de propositions d'intervention à lister par écran à l'aide de "
-"l'onglet &#34;Options de la écran&#34;."
+"du nombre de propositions à lister par écran à l'aide de l'onglet &#34;"
+"Options de la écran&#34;."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1157
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1155
 msgid ""
 "You can filter the Talk Proposals by status using the last dropdown box "
 "above the list."
 msgstr ""
-"Vous pouvez filtrer les propositions d'intervention selon leur statut en "
-"utilisant la liste déroulante correspondante au dessus de la liste."
+"Vous pouvez filtrer les propositions selon leur statut en utilisant la liste "
+"déroulante correspondante au dessus de la liste."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1158
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1156
 msgid ""
 "You can view Talk Proposals in a simple title list or with an excerpt. "
 "Choose the view you prefer by clicking on the icons at the top of the list "
 "on the right."
 msgstr ""
-"Vous pouvez lister les propositions d'intervention de manière minimaliste ou "
-"enrichie d'un extrait de leur contenu. Choisissez le mode d'affichage de "
-"votre préférence en cliquant sur les icônes en haut à droite de la liste."
+"Vous pouvez lister les propositions de manière minimaliste ou enrichie d'un "
+"extrait de leur contenu. Choisissez le mode d'affichage de votre préférence "
+"en cliquant sur les icônes en haut à droite de la liste."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1164
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1162
 msgid "Actions"
 msgstr "Actions"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1166
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1164
 msgid ""
 "Hovering over a row in the Talk Proposals list will display action links "
 "that allow you to manage a Talk Proposal. You can perform the following "
 "actions:"
 msgstr ""
-"Survoler une rangée de la liste des propositions d'intervention affichera "
-"les liens d'action qui vous permettent de gérer une proposition "
-"d'intervention. Vous pouvez réaliser les actions suivantes :"
+"Survoler une rangée de la liste des propositions affichera les liens "
+"d'action qui vous permettent de gérer une proposition. Vous pouvez réaliser "
+"les actions suivantes :"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1168
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1166
 msgid ""
 "Edit takes you to the editing screen for that Talk Proposal. You can also "
 "reach that screen by clicking on the Talk Proposal title."
 msgstr ""
-"Modifier affichera l'écran d'édition d'une proposition d'intervention. Vous "
-"pouvez également atteindre cet écran en cliquant sur son titre."
+"Modifier affichera l'écran d'édition d'une proposition. Vous pouvez "
+"également atteindre cet écran en cliquant sur son titre."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1169
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1167
 msgid ""
 "Trash removes the Talk Proposal from this list and places it in the trash, "
 "from which you can permanently delete it."
 msgstr ""
-"Corbeille retire la proposition d'intervention de cette liste pour la placer "
-"dans la corbeille. Depuis la corbeille, vous pourrez la supprimer "
-"définitivement."
+"Corbeille retire la proposition de cette liste pour la placer dans la "
+"corbeille. Depuis la corbeille, vous pourrez la supprimer définitivement."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1170
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1168
 msgid ""
 "View opens the Talk Proposal in the WordCamp Talk Proposals&#39 part of your "
 "site."
 msgstr ""
-"Afficher ouvre la proposition d'intervention dans la zone frontale des "
-"propositions d'intervention de votre site."
+"Afficher ouvre la proposition dans la zone frontale des propositions de "
+"votre site."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1176
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1174
 msgid "Bulk Actions"
 msgstr "Actions de masse"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1178
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1176
 msgid ""
 "You can also move multiple Talk Proposals to the trash at once. Select the "
 "Talk Proposals you want to trash using the checkboxes, then select the &#34;"
 "Move to Trash&#34; action from the Bulk Actions menu and click Apply."
 msgstr ""
-"Vous pouvez également déplacer plusieurs propositions d'intervention dans la "
-"corbeille  simultanément. Sélectionnez les propositions d'intervention à "
-"mettre à la corbeille grâce aux cases à cocher, puis activez l'action &#34;"
-"Déplacer dans la corbeille&#34; depuis le menu des actions de masse avant de "
-"cliquer sur le bouton Appliquer"
+"Vous pouvez également déplacer plusieurs propositions dans la corbeille  "
+"simultanément. Sélectionnez les propositions à mettre à la corbeille grâce "
+"aux cases à cocher, puis activez l'action &#34;Déplacer dans la "
+"corbeille&#34; depuis le menu des actions de masse avant de cliquer sur le "
+"bouton Appliquer"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1183
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1181
 msgid "Sorting & filtering"
 msgstr "Classer & filter"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1185
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1183
 msgid ""
 "Clicking on specific column headers will sort the Talk Proposals list. You "
 "can sort the Talk Proposals alphabetically using the Title column header or "
 "by popularity:"
 msgstr ""
-"En cliquant une des entêtes de colonne classera la liste des propositions "
-"d'intervention. Ce classement peut se faire de manière alphabétique en "
-"utilisant l'entête du champ Titre ou selon leur popularité :"
+"En cliquant une des en-têtes de colonne vous réordonner la liste des "
+"propositions. Ce classement peut se faire de manière alphabétique en "
+"utilisant l'en-tête du champ Titre ou selon leur popularité :"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1187
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1185
 msgid ""
 "Click on the column header having a dialog buble icon to sort by number of "
 "comments."
 msgstr ""
-"Cliquer sur l'entête des commentaires pour un classement fonction du nombre "
+"Cliquer sur l'en-tête des commentaires pour un classement fonction du nombre "
 "de commentaires."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1188
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1186
 msgid "Click on the column header having a star icon to sort by rating."
 msgstr ""
-"Cliquer sur l'entête de colonne contenant une étoile pour classer les "
-"propositions d'intervention selon leur évaluation moyenne."
+"Cliquer sur l'en-tête de colonne contenant une étoile pour classer les "
+"propositions selon leur évaluation moyenne."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1190
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1188
 msgid ""
 "Inside the rows, you can filter the Talk Proposals by categories or tags "
 "clicking on the corresponding terms."
 msgstr ""
 "Dans chacun des rangs de la liste, vous pouvez filtrer les propositions "
-"d'intervention selon leurs catégories ou mots-clés en cliquant sur les liens "
-"correspondants."
+"selon leurs catégories ou mots-clés en cliquant sur les liens correspondants."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1201
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1199
 msgid ""
 "The title field and the big Talk Proposal Editing Area are fixed in place, "
 "but you can reposition all the other boxes using drag and drop. You can also "
 "minimize or expand them by clicking the title bar of each box. Use the "
 "Screen Options tab to hide/show boxes."
 msgstr ""
-"Le champ du titre et la zone d'édition de la proposition d'intervention sont "
-"inamovibles, mais vous pouvez déplacer tous les autres blocs par simple "
-"glisser/déposer. Vous pouvez également les fermer/ouvrir en cliquant sur la "
-"barre de titre de chaque bloc. Utilisez l’onglet &#34;Options de "
-"l’écran&#34; pour masquer / afficher les différents blocs disponibles."
+"Le champ du titre et la zone d'édition de la proposition sont inamovibles, "
+"mais vous pouvez déplacer tous les autres blocs par simple glisser/déposer. "
+"Vous pouvez également les fermer/ouvrir en cliquant sur la barre de titre de "
+"chaque bloc. Utilisez l’onglet &#34;Options de l’écran&#34; pour masquer / "
+"afficher les différents blocs disponibles."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1212
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1210
 msgid ""
 "This is the place where you can customize the behavior of WordCamp Talk "
 "Proposals."
 msgstr ""
 "C'est ici que vous pouvez personnaliser le comportement de l'extension."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1213
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1211
 msgid ""
 "Please see the additional help tabs for more information on each individual "
 "section."
@@ -330,45 +322,23 @@ msgstr ""
 "Merci de consulter les onglets d'aides suivants pour plus d'information au "
 "sujet des différentes sections des réglages."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1218
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1216
 #: includes/admin/settings.php:26
 msgid "Main Settings"
 msgstr "Réglages principaux"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1220
-msgid ""
-"Just before the first option, you will find the link to the main archive "
-"page of the plugin. If you wish, you can use it to define a new custom link "
-"%1$smenu item%2$s."
-msgstr ""
-"Juste avant la première option, vous trouverez le lien vers la page "
-"d'archive principale de l'extension. Si vous le souhaitez, vous pouvez vous "
-"en servir pour créer un nouvel emplacement de type &#34;Lien&#34; dans un "
-"des  %1$smenus%2$s mis à votre disposition par votre thème."
-
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1221
-msgid ""
-"If you do so, do not forget to update the link in case you change your "
-"permalink settings. Another possible option is to use the %1$sWordCamp Talk "
-"Proposals Navigation%2$s widget in one of your dynamic sidebars."
-msgstr ""
-"Si tel est votre choix, n'oubliez pas de mettre à jour ce lien dans "
-"l'éventualité où vous éditiez la structure de vos permaliens. Une autre "
-"option est d'utiliser le widget de navigation des propositions "
-"d'intervention dans une de vos barres latérales."
-
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1222
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1218
 msgid "In the Main Settings you have a number of options:"
 msgstr ""
 "La section des réglages principaux vous propose de nombreuses options :"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1224
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1220
 msgid "Closing date: define the date when the call for speakers will end."
 msgstr ""
 "Date de clôture : définissez la date à partir de laquelle déposer une "
-"proposition d'intervention n'est plus possible."
+"proposition n'est plus possible."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1225
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1221
 msgid ""
 "Rating stars hover captions: fill a comma separated list of captions to "
 "replace default one. On front end, the number of rating stars will depend on "
@@ -379,16 +349,35 @@ msgstr ""
 "nombre de niveaux d'évaluation disponibles dépendra du nombre de valeurs que "
 "vous aurez définies."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1237
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1222
+msgid ""
+"Speaker editing timeout: select the amount of time a speaker has to edit "
+"their talk proposals."
+msgstr ""
+"Temps d'édition pour l'orateur : définissez l'intervalle de temps au delà "
+"duquel un orateur ne peut plus modifier sa proposition."
+
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1223
+msgid ""
+"Slack notifications: if your WordCamp organizing team is using Slack, you "
+"can use it to send notifications to the channel of your choice. In the "
+"setting field, you will only need to paster the incoming webhook URL."
+msgstr ""
+"Notifications Slack : si votre équipe d'organisation utilise Slack, vous "
+"pouvez profiter de notifications dans le canal de votre choix. Depuis le "
+"champ de ce réglage, vous devez simplement coller t'URL de votre incoming-"
+"webhook."
+
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1235
 msgid ""
 "Talk Proposal Categories can only be created by the site Administrator. To "
 "add a new Talk Proposal category please fill the following fields:"
 msgstr ""
-"Les catégories de proposition d'intervention ne peuvent être créées que par "
-"l'Administrateur du site. Pour ajouter une nouvelle catégorie de proposition "
-"d'intervention, merci de définir les champs suivants :"
+"Les catégories de proposition ne peuvent être créées que par "
+"l'Administrateur du site. Pour ajouter une nouvelle catégorie de "
+"proposition, merci de définir les champs suivants :"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1239
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1237
 msgid ""
 "Name - The name is how it appears on your site (in the category checkboxes "
 "of the Talk Proposal front end submit form, in the Talk Proposal&#39;s "
@@ -396,12 +385,12 @@ msgid ""
 "pages)."
 msgstr ""
 "Nom - Le nom est ce qui apparaît dans votre site (dans les cases à cocher de "
-"catégorie de proposition d'intervention du formulaire de dépôt, sous le "
-"contenu d'une proposition d'intervention particulière ou encore dans le "
-"titre d'une page de catégorie de proposition d'intervention)."
+"catégorie de proposition du formulaire de dépôt, sous le contenu d'une "
+"proposition particulière ou encore dans le titre d'une page de catégorie de "
+"proposition)."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1240
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1257
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1238
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1255
 msgid ""
 "Slug - The &#34;slug&#34; is the URL-friendly version of the name. It is "
 "usually all lowercase and contains only letters, numbers, and hyphens."
@@ -410,16 +399,16 @@ msgstr ""
 "généralement que des lettres minuscules non accentuées, des chiffres et des "
 "traits d'union."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1241
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1239
 msgid ""
 "Description - If you set a description for your category, it will be "
 "displayed over the list of Talk Proposals in the category archive page."
 msgstr ""
 "Description - Si vous définissez une description pour votre catégorie, elle "
-"sera affichée au dessus de la liste des propositions d'intervention dans la "
-"page d'archive de la catégorie correspondante."
+"sera affichée au dessus de la liste des propositions dans la page d'archive "
+"de la catégorie correspondante."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1243
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1241
 msgid ""
 "You can change the display of this screen using the Screen Options tab to "
 "set how many items are displayed per screen and to display/hide columns in "
@@ -427,21 +416,21 @@ msgid ""
 msgstr ""
 "Vous pouvez adapter l'affichage de cet écran selon vos préférences en "
 "utilisant l'onglet &#34;Options de l&#39;écran&#34;. Vous pourrez définir le "
-"nombre de propositions d'intervention listées par page et masquer ou "
-"afficher certaines colonnes du tableau. "
+"nombre de propositions listées par page et masquer ou afficher certaines "
+"colonnes du tableau."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1254
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1252
 msgid ""
 "Talk Proposal Tags can be created by any logged in user of the site from the "
 "Talk Proposal front end submit form. From this screen, to add a new Talk "
 "Proposal tag please fill the following fields:"
 msgstr ""
-"Les étiquettes de proposition d'intervention peuvent être créées par tout "
-"utilisateur connecté depuis le formulaire de dépôt de proposition "
-"d'intervention. Depuis cet écran, pour ajouter de nouvelles étiquettes de "
-"proposition d'intervention, merci de remplir des champs suivants :"
+"Les étiquettes de proposition peuvent être créées par tout utilisateur "
+"connecté depuis le formulaire de dépôt de proposition. Depuis cet écran, "
+"pour ajouter de nouvelles étiquettes de proposition, merci de remplir des "
+"champs suivants :"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1256
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1254
 msgid ""
 "Name - The name is how it appears on your site (in the tag cloud, in the "
 "tags editor of the Talk Proposal front end submit form, in the Talk "
@@ -449,20 +438,20 @@ msgid ""
 "tag archive pages)."
 msgstr ""
 "Nom - Le nom est ce qui apparaît sur votre site (dans le nuage d'étiquettes, "
-"dans l'éditeur d'étiquettes de formulaire de dépôt de proposition "
-"d'intervention, sous une propositions d'intervention particulière ou encore "
-"dans le titre de la page d'une étiquette de proposition d'intervention)."
+"dans l'éditeur d'étiquettes de formulaire de dépôt de proposition, sous une "
+"propositions d'intervention particulière ou encore dans le titre de la page "
+"d'une étiquette de proposition)."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1258
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1256
 msgid ""
 "Description - If you set a description for your tag, it will be displayed "
 "over the list of Talk Proposals in the tag archive page."
 msgstr ""
 "Description - Si vous définissez une description pour votre étiquette, elle "
-"sera affichée au dessus de la liste des propositions d'intervention dans la "
-"page d'archive de l'étiquette correspondante."
+"sera affichée au dessus de la liste des propositions dans la page d'archive "
+"de l'étiquette correspondante."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1260
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1258
 msgid ""
 "You can change the display of this screen using the Screen Options tab to "
 "set how many Talk Proposals are displayed per screen and to display/hide "
@@ -470,65 +459,65 @@ msgid ""
 msgstr ""
 "Vous pouvez adapter l'affichage de cet écran selon vos préférences en "
 "utilisant l'onglet &#34;Options de l&#39;écran&#34;. Vous pourrez définir le "
-"nombre de propositions d'intervention listées par page et masquer ou "
-"afficher certaines colonnes du tableau. "
+"nombre de propositions listées par page et masquer ou afficher certaines "
+"colonnes du tableau."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1276
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1274
 msgid "For more information:"
 msgstr "Pour plus d'informations :"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1302
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1300
 msgid ""
 "The Ratings metabox allows you to manage the ratings the Talk Proposal has "
 "received."
 msgstr ""
 "La metabox des évaluations vous permet de manager les évaluations que la "
-"proposition d'intervention a reçues."
+"proposition a reçues."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1322
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1320
 msgid "Filter by state"
 msgstr "Filtrer par statut"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1349
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1347
 msgid "Talk Proposal status"
-msgstr "Statut de proposition d'intervention"
+msgstr "Statut de proposition"
 
 #. translators: Publish box date format, see https:secure.php.net/date
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1375
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1373
 msgid "M j, Y @ H:i"
-msgstr "j F Y \\à G \\h i \\m\\i\\n "
+msgstr "j F Y \\à G \\h i \\m\\i\\n"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1388
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1386
 msgid "Created on:"
 msgstr "Créée le :"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1390
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1388
 msgid "Last Modified:"
 msgstr "Modifiée pour la dernière fois :"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1396
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1548
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1394
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1546
 msgid "Status"
 msgstr "Statut"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1402
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1400
 #: includes/talks/tags.php:1656
 msgid "Update"
 msgstr "Mettre à jour"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1432
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1430
 msgid "Move to Trash"
 msgstr "Déplacer dans la corbeille"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1435
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1433
 msgid "Delete Permanently"
 msgstr "Supprimer définitivement"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1514
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1512
 msgid "Select All"
 msgstr "Tout sélectionner"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1520
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1518
 msgid "Add to menu"
 msgstr "Ajouter au menu"
 
@@ -538,55 +527,57 @@ msgstr "Réglages pour les utilisateurs du réseau"
 
 #: includes/admin/settings.php:58
 msgid "Closing date"
-msgstr "Date de clôture des propositions d'intervention."
+msgstr "Date de clôture des propositions."
 
 #: includes/admin/settings.php:66
 msgid "Rating stars hover captions"
 msgstr "Info-bulles des évaluations"
 
 #: includes/admin/settings.php:74
-msgid "Talk Proposal's editing timeout (For speakers)"
-msgstr ""
-"Temps limite d'édition suite au dépôt d'une proposition d'intervention (Pour "
-"les orateurs)"
+msgid "Speaker editing timeout"
+msgstr "Temps limite d'édition"
 
 #: includes/admin/settings.php:82
+msgid "Slack notifications"
+msgstr "Notifications Slack"
+
+#: includes/admin/settings.php:90
 msgid "Private user profile fields"
 msgstr "Champs de profil privés"
 
-#: includes/admin/settings.php:90
+#: includes/admin/settings.php:98
 msgid "Public user profile fields"
 msgstr "Champs de profil publics"
 
-#: includes/admin/settings.php:98
+#: includes/admin/settings.php:106
 msgid "Fields to add to the signup form."
 msgstr "Champs à ajouter au formulaire d'inscription."
 
-#: includes/admin/settings.php:106
+#: includes/admin/settings.php:114
 msgid "Signups Autolog"
 msgstr "Auto-connexion des inscrits"
 
-#: includes/admin/settings.php:136
+#: includes/admin/settings.php:144
 msgid "Sign-ups"
 msgstr "Inscriptions"
 
-#: includes/admin/settings.php:144
+#: includes/admin/settings.php:152
 msgid "Default role for network users"
 msgstr "Rôle par défaut pour les utilisateurs du réseau"
 
-#: includes/admin/settings.php:257
+#: includes/admin/settings.php:265
 msgid "Possible conflict with: %s"
-msgstr "Conflit possible avec : %s "
+msgstr "Conflit possible avec : %s"
 
-#: includes/admin/settings.php:273
+#: includes/admin/settings.php:281
 msgid "Customize WordCamp Talk Proposals features."
-msgstr "Personnalisation des fonctionnalités de l'extension"
+msgstr "Personnalisation des fonctionnalités de l'extension."
 
-#: includes/admin/settings.php:287
+#: includes/admin/settings.php:295
 msgid "Date when the call for speakers will end."
 msgstr "Date de fin de l'appel à orateurs."
 
-#: includes/admin/settings.php:301
+#: includes/admin/settings.php:309
 msgid ""
 "You can customize the hover captions used for stars by using a comma "
 "separated list of captions"
@@ -594,7 +585,7 @@ msgstr ""
 "Vous pouvez personnaliser les info-bulles utilisées pour les appréciations "
 "en séparant chacune d'entre elles d'une virgule"
 
-#: includes/admin/settings.php:330
+#: includes/admin/settings.php:338
 msgid ""
 "Adding a comma separated list of fields label will generate new %s contact "
 "informations for the user."
@@ -602,37 +593,45 @@ msgstr ""
 "En ajoutant une liste de labels de champ séparés par une virgule, cela "
 "générera autant de nouvelles informations de contact pour l'utilisateur."
 
-#: includes/admin/settings.php:369
+#: includes/admin/settings.php:377
 msgid "Automagically log in just signed up users."
 msgstr "Connecte magiquement les tous nouveaux inscrits."
 
-#: includes/admin/settings.php:400
+#: includes/admin/settings.php:409
+msgid ""
+"Paste the URL of your webhook in this field to notify your Slack team when a "
+"new Talk Proposal is submitted."
+msgstr ""
+"Coller l'URL de votre webhook dans ce champ afin de notifier votre équipe "
+"sur Slack lorsqu'une nouvelle intervention est proposée."
+
+#: includes/admin/settings.php:423
 msgid "Define your preferences about network users"
 msgstr "Définissez vos préférences pour les utilisateurs du réseau"
 
-#: includes/admin/settings.php:414
+#: includes/admin/settings.php:437
 msgid "Allow WordCamp Talks to manage signups for your site"
 msgstr "Autoriser l'extension à gérer les inscriptions de votre site"
 
-#: includes/admin/settings.php:428
+#: includes/admin/settings.php:451
 msgid ""
 "Automatically set this site&#39;s default role for users submitting a new "
 "Talk Proposal and having no role on this site."
 msgstr ""
 "Utiliser le rôle par défaut de ce site comme rôle par défaut des "
-"utilisateurs déposant leur première proposition d'intervention sur ce site."
+"utilisateurs déposant leur première proposition sur ce site."
 
-#: includes/admin/settings.php:537
+#: includes/admin/settings.php:560
 msgid "WordCamp Talk Proposals Settings"
-msgstr "Réglages pour les propositions d'intervention au WordCamp"
+msgstr "Réglages pour les propositions des orateurs du WordCamp"
 
-#: includes/admin/settings.php:546
+#: includes/admin/settings.php:569
 msgid "Save Changes"
 msgstr "Enregistrer les modifications"
 
 #: includes/comments/classes/class-wordcamp-talks-comments.php:298
 msgid "New comment on your Talk Proposal \"%s\""
-msgstr "Nouveau commentaire sur votre proposition d'intervention \"%s\""
+msgstr "Nouveau commentaire sur votre proposition \"%s\""
 
 #: includes/comments/classes/class-wordcamp-talks-comments.php:299
 msgid "Comment: "
@@ -650,8 +649,7 @@ msgstr ""
 
 #: includes/comments/tags.php:97
 msgid "It looks like %s has not commented on any Talk Proposals yet"
-msgstr ""
-"Il semble que %s n'ait pas encore commenté de proposition d'intervention."
+msgstr "Il semble que %s n'ait pas encore commenté de proposition."
 
 #: includes/comments/tags.php:125
 msgid "Viewing %1$s to %2$s (of %3$s comment)"
@@ -672,17 +670,16 @@ msgid ""
 "The Talk Proposal the comment was posted on is password protected: you will "
 "need the password to view its content."
 msgstr ""
-"La proposition d'intervention sur laquelle a été posté le commentaire est "
-"protégée par un mot de passe. Vous avez besoin de ce mot de passe pour voir "
-"son contenu."
+"La proposition sur laquelle a été posté le commentaire est protégée par un "
+"mot de passe. Vous avez besoin de ce mot de passe pour voir son contenu."
 
 #: includes/comments/tags.php:347
 msgid ""
 "The Talk Proposal the comment was posted on is private: you cannot view its "
 "content."
 msgstr ""
-"La proposition d'intervention sur laquelle a été posté le commentaire est "
-"privée. Vous ne pouvez pas voir son contenu."
+"La proposition sur laquelle a été posté le commentaire est privée. Vous ne "
+"pouvez pas voir son contenu."
 
 #: includes/comments/tags.php:381
 msgid "This comment was posted on %s"
@@ -690,11 +687,11 @@ msgstr "Ce commentaire a été posté le %s"
 
 #: includes/comments/widgets/widget-wordcamp-talks-comments-recent.php:29
 msgid "Latest comments about Talk Proposals"
-msgstr "Commentaires récents à propos des propositions d'intervention"
+msgstr "Commentaires récents à propos des propositions"
 
 #: includes/comments/widgets/widget-wordcamp-talks-comments-recent.php:30
 msgid "Talk Proposals latest comments"
-msgstr "Derniers commentaires de proposition d'intervention"
+msgstr "Derniers commentaires de proposition"
 
 #: includes/core/capabilities.php:128
 msgid "Rater"
@@ -711,65 +708,65 @@ msgstr "Juré"
 #: includes/core/functions.php:329 includes/core/template-functions.php:759
 #: includes/core/template-functions.php:832
 msgid "Talk Proposals"
-msgstr "Propositions d'intervention"
+msgstr "Propositions"
 
 #: includes/core/functions.php:331
 msgid "All Talk Proposals"
-msgstr "Toutes les propositions d'intervention"
+msgstr "Toutes les propositions"
 
 #: includes/core/functions.php:332
 msgid "Talk Proposal"
-msgstr "Proposition d'intervention"
+msgstr "Proposition"
 
 #: includes/core/functions.php:333 includes/core/functions.php:334
 msgid "Add New Talk Proposal"
-msgstr "Ajouter une nouvelle proposition d'intervention"
+msgstr "Ajouter une nouvelle proposition"
 
 #: includes/core/functions.php:335 includes/core/functions.php:528
 #: includes/core/template-functions.php:740
 msgid "Edit Talk Proposal"
-msgstr "Modifier la proposition d'intervention"
+msgstr "Modifier la proposition"
 
 #: includes/core/functions.php:336 includes/core/template-functions.php:738
 #: includes/core/template-functions.php:982
 msgid "New Talk Proposal"
-msgstr "Nouvelle proposition d'intervention"
+msgstr "Nouvelle proposition"
 
 #: includes/core/functions.php:337
 msgid "View Talk Proposal"
-msgstr "Afficher la proposition d'intervention"
+msgstr "Afficher la proposition"
 
 #: includes/core/functions.php:338
 msgid "Search Talk Proposals"
-msgstr "Rechercher une proposition d'intervention"
+msgstr "Rechercher une proposition"
 
 #: includes/core/functions.php:339
 msgid "No Talk Proposals Found"
-msgstr "Aucune proposition d'intervention trouvée"
+msgstr "Aucune proposition trouvée"
 
 #: includes/core/functions.php:340
 msgid "No Talk Proposals Found in Trash"
-msgstr "Aucune proposition d'intervention trouvée dans la corbeille"
+msgstr "Aucune proposition trouvée dans la corbeille"
 
 #: includes/core/functions.php:341
 msgid "Insert into Talk Proposal"
-msgstr "Insérer dans la proposition d'intervention"
+msgstr "Insérer dans la proposition"
 
 #: includes/core/functions.php:342
 msgid "Uploaded to this Talk Proposal"
-msgstr "Attaché à cette proposition d'intervention"
+msgstr "Attaché à cette proposition"
 
 #: includes/core/functions.php:343
 msgid "Filter Talk Proposals list"
-msgstr "Filtrer la liste des propositions d'intervention"
+msgstr "Filtrer la liste des propositions"
 
 #: includes/core/functions.php:344
 msgid "Talk Proposals list navigation"
-msgstr "Navigation de la liste des propositions d'intervention"
+msgstr "Navigation de la liste des propositions"
 
 #: includes/core/functions.php:345
 msgid "Talk Proposals list"
-msgstr "Liste des propositions d'intervention"
+msgstr "Liste des propositions"
 
 #: includes/core/functions.php:366
 msgid "Pending"
@@ -813,27 +810,27 @@ msgstr[1] "Rejetées <span class=\"count\">(%s)</span>"
 
 #: includes/core/functions.php:467
 msgid "Talk Proposal Categories"
-msgstr "Catégories de proposition d'intervention"
+msgstr "Catégories"
 
 #: includes/core/functions.php:468
 msgid "Talk Proposal Category"
-msgstr "Catégorie de proposition d'intervention"
+msgstr "Catégorie"
 
 #: includes/core/functions.php:469
 msgid "Edit Talk Proposal Category"
-msgstr "Modifier la catégorie de proposition d'intervention"
+msgstr "Modifier la catégorie"
 
 #: includes/core/functions.php:470
 msgid "Update Talk Proposal Category"
-msgstr "Mettre à jour la catégorie de proposition d'intervention"
+msgstr "Mettre à jour la catégorie"
 
 #: includes/core/functions.php:471
 msgid "Add New Talk Proposal Category"
-msgstr "Ajouter une nouvelle catégorie de proposition d'intervention"
+msgstr "Ajouter une nouvelle catégorie"
 
 #: includes/core/functions.php:472
 msgid "New Talk Proposal Category Name"
-msgstr "Nom de la nouvelle catégorie de proposition d'intervention"
+msgstr "Nom de la nouvelle catégorie"
 
 #: includes/core/functions.php:473
 msgid "All Categories"
@@ -841,59 +838,59 @@ msgstr "Toutes les catégories"
 
 #: includes/core/functions.php:474
 msgid "Search Talk Proposal Categories"
-msgstr "Rechercher une catégorie de proposition d'intervention"
+msgstr "Rechercher une catégorie"
 
 #: includes/core/functions.php:475
 msgid "Parent Talk Proposal Category"
-msgstr "Catégorie de proposition d'intervention parente"
+msgstr "Catégorie parente"
 
 #: includes/core/functions.php:476
 msgid "Parent Talk Proposal Category:"
-msgstr "Catégorie de proposition d'intervention parente :"
+msgstr "Catégorie parente :"
 
 #: includes/core/functions.php:526
 msgid "Talk Proposal Tags"
-msgstr "Etiquettes de proposition d'intervention"
+msgstr "Etiquettes"
 
 #: includes/core/functions.php:527
 msgid "Talk Proposal Tag"
-msgstr "Etiquette de proposition d'intervention"
+msgstr "Etiquette"
 
 #: includes/core/functions.php:529
 msgid "Update Talk Proposal"
-msgstr "Mettre à jour l'étiquette de proposition d'intervention"
+msgstr "Mettre à jour l'étiquette"
 
 #: includes/core/functions.php:530
 msgid "Add New Talk Proposal Tag"
-msgstr "Ajouter une nouvelle étiquette de proposition d'intervention"
+msgstr "Ajouter une nouvelle étiquette"
 
 #: includes/core/functions.php:531
 msgid "New Talk Proposal Tag Name"
-msgstr "Nouveau nom d'étiquette de proposition d'intervention"
+msgstr "Nouveau nom d'étiquette"
 
 #: includes/core/functions.php:532
 msgid "All Talk Proposal Tags"
-msgstr "Toutes les étiquettes de proposition d'intervention"
+msgstr "Toutes les étiquettes"
 
 #: includes/core/functions.php:533
 msgid "Search Talk Proposal Tags"
-msgstr "Rechercher des étiquettes de proposition d'intervention"
+msgstr "Rechercher des étiquettes"
 
 #: includes/core/functions.php:534
 msgid "Popular Talk Proposal Tags"
-msgstr "Etiquettes de proposition d'intervention populaires"
+msgstr "Etiquettes populaires"
 
 #: includes/core/functions.php:535
 msgid "Separate Talk Proposal tags with commas"
-msgstr "Séparer les étiquettes de proposition d'intervention par des virgules"
+msgstr "Séparer les étiquettes par des virgules"
 
 #: includes/core/functions.php:536
 msgid "Add or remove Talk Proposal tags"
-msgstr "Ajouter ou retirer des étiquettes de proposition d'intervention"
+msgstr "Ajouter ou retirer des étiquettes"
 
 #: includes/core/functions.php:537
 msgid "Choose from the most popular Talk Proposal tags"
-msgstr "Choisir parmi les étiquettes de proposition d'intervention suggérées"
+msgstr "Choisir parmi les étiquettes suggérées"
 
 #: includes/core/functions.php:792
 msgid "Saved successfully"
@@ -905,11 +902,11 @@ msgstr "Inscription terminée. Merci de vérifier votre boîte de réception."
 
 #: includes/core/functions.php:794
 msgid "The Talk Proposal was successfully created."
-msgstr "Proposition d'intervention enregistrée avec succès."
+msgstr "Proposition enregistrée avec succès."
 
 #: includes/core/functions.php:795
 msgid "The Talk Proposal was successfully updated."
-msgstr "La proposition d'intervention a été mise à jour avec succès."
+msgstr "La proposition a été mise à jour avec succès."
 
 #: includes/core/functions.php:796
 msgid "For your convenience, you have been automagically logged in."
@@ -940,15 +937,11 @@ msgstr "Une erreur s'est produite. Merci de renouveler plus tard."
 
 #: includes/core/functions.php:803
 msgid "You are not allowed to edit this Talk Proposal."
-msgstr ""
-"Vous n'avez pas les droits suffisants pour modifier cette proposition "
-"d'intervention."
+msgstr "Vous n'avez pas les droits suffisants pour modifier cette proposition."
 
 #: includes/core/functions.php:804
 msgid "You are not allowed to publish Talk Proposals"
-msgstr ""
-"Vous n'avez pas les droits suffisants pour publier des propositions "
-"d'intervention."
+msgstr "Vous n'avez pas les droits suffisants pour publier des propositions."
 
 #: includes/core/functions.php:805
 msgid "Title and description are required fields."
@@ -956,9 +949,7 @@ msgstr "Le titre et la description sont obligatoires."
 
 #: includes/core/functions.php:806
 msgid "Something went wrong while trying to save your Talk Proposal."
-msgstr ""
-"Une erreur est survenue lors de la sauvegarde de votre proposition "
-"d'intervention."
+msgstr "Une erreur est survenue lors de la sauvegarde de votre proposition."
 
 #: includes/core/functions.php:807
 msgid "Please choose a username having at least 4 characters."
@@ -971,15 +962,11 @@ msgstr "Veuillez remplir tous les champs obligatoires."
 
 #: includes/core/functions.php:809
 msgid "The Talk Proposal you are trying to edit does not seem to exist."
-msgstr ""
-"La proposition d'intervention que vous essayez de modifier ne semble pas "
-"exister."
+msgstr "La proposition que vous essayez de modifier ne semble pas exister."
 
 #: includes/core/functions.php:810
 msgid "Something went wrong while trying to update your Talk Proposal."
-msgstr ""
-"Une erreur est survenue lors de la sauvegarde de votre proposition "
-"d'intervention."
+msgstr "Une erreur est survenue lors de la sauvegarde de votre proposition."
 
 #: includes/core/functions.php:811
 msgid "You are not allowed to edit this user profile."
@@ -996,12 +983,11 @@ msgstr "Vos informations de bio sont obligatoires"
 #: includes/core/functions.php:816
 msgid "This Talk Proposal is already being edited by another user."
 msgstr ""
-"Cette proposition d'intervention est déjà en cours d'édition par un autre "
-"utilisateur."
+"Cette proposition est déjà en cours d'édition par un autre utilisateur."
 
 #: includes/core/functions.php:817
 msgid "Your Talk Proposal is currently awaiting moderation."
-msgstr "Votre proposition d'intervention est en cours de modération."
+msgstr "Votre proposition est en cours de modération."
 
 #: includes/core/functions.php:818
 msgid "This user has not filled any public profile informations."
@@ -1017,8 +1003,8 @@ msgid ""
 "Proposal is selected."
 msgstr ""
 "Merci de partager des informations biographiques à votre sujet dans la "
-"mesure où elles seront utilisées si/lorsque votre proposition d'intervention "
-"sera retenue."
+"mesure où elles seront utilisées si/lorsque votre proposition est/sera "
+"retenue."
 
 #: includes/core/functions.php:824 includes/core/functions.php:831
 msgid "biographical information"
@@ -1030,7 +1016,7 @@ msgid ""
 "Proposal is selected."
 msgstr ""
 "Merci de vous assurer de valider vos %s dans la mesure où elles seront "
-"utilisées si/lorsque votre proposition d'intervention sera retenue."
+"utilisées si/lorsque votre proposition est/sera retenue."
 
 #: includes/core/functions.php:994
 msgid "bad"
@@ -1062,11 +1048,11 @@ msgstr "Profil utilisateur"
 
 #: includes/core/template-functions.php:697
 msgid "New Talk"
-msgstr "Nouvelle proposition d'intervention"
+msgstr "Nouvelle proposition"
 
 #: includes/core/template-functions.php:702 includes/talks/tags.php:1151
 msgid "Edit Talk"
-msgstr "Modifier la proposition d'intervention"
+msgstr "Modifier la proposition"
 
 #: includes/core/template-functions.php:707
 #: includes/core/template-functions.php:757
@@ -1083,11 +1069,11 @@ msgstr "Page %s"
 
 #: includes/core/template-functions.php:824
 msgid "Talk Proposal Ratings"
-msgstr "Evaluations de la proposition d'intervention"
+msgstr "Evaluations de la proposition"
 
 #: includes/core/template-functions.php:828
 msgid "Talk Proposals to rate"
-msgstr "Propositions d'intervention à évaluer"
+msgstr "Propositions à évaluer"
 
 #: includes/core/template-functions.php:836 includes/users/functions.php:772
 msgid "Profile"
@@ -1109,6 +1095,18 @@ msgstr "Champs personnalisés"
 msgid "No custom fields available"
 msgstr "Aucun champ personnalisé n'est disponible."
 
+#: includes/talks/classes/class-wordcamp-talks-talks-slack-notify.php:35
+msgid "[%1$s] New talk proposal submitted: %2$s"
+msgstr "[%1$s] Nouvelle intervention proposée : %2$s"
+
+#: includes/talks/classes/class-wordcamp-talks-talks-slack-notify.php:39
+msgid "Review it!"
+msgstr "L'évaluer!"
+
+#: includes/talks/classes/class-wordcamp-talks-talks-slack-notify.php:51
+msgid "Speaker: %s"
+msgstr "Orateur : %s"
+
 #: includes/talks/functions.php:411
 msgid "5 minutes"
 msgstr "5 minutes"
@@ -1121,65 +1119,65 @@ msgstr "une heure"
 msgid "a day"
 msgstr "un jour"
 
-#: includes/talks/functions.php:735
+#: includes/talks/functions.php:733
 msgid "Thanks for your rating:"
 msgstr "Merci pour votre évaluation :"
 
-#: includes/talks/functions.php:740
+#: includes/talks/functions.php:738
 msgid "One rating"
 msgstr "Une évaluation"
 
-#: includes/talks/functions.php:741
+#: includes/talks/functions.php:739
 msgid "Thanks! The average rating is now:"
 msgstr "Merci, l'évaluation moyenne est désormais :"
 
-#: includes/talks/functions.php:749
+#: includes/talks/functions.php:747
 msgid "Saving your rating; please wait"
 msgstr "Enregistrement de votre évaluation, merci de patienter."
 
-#: includes/talks/functions.php:751
+#: includes/talks/functions.php:749
 msgid "Oops! Something went wrong"
 msgstr "Oops une erreur est survenue"
 
-#: includes/talks/functions.php:755
+#: includes/talks/functions.php:753
 msgid "% ratings"
 msgstr "% évaluations"
 
-#: includes/talks/functions.php:780
+#: includes/talks/functions.php:778
 msgid "Duplicate tag:"
 msgstr "Etiquette en doublon :"
 
-#: includes/talks/functions.php:781
+#: includes/talks/functions.php:779
 msgid "Forbidden character:"
 msgstr "Caractère interdit :"
 
-#: includes/talks/functions.php:782
+#: includes/talks/functions.php:780
 msgid "Forbidden word:"
 msgstr "Mot interdit :"
 
-#: includes/talks/functions.php:791
+#: includes/talks/functions.php:789
 msgid ""
 "An admin is currently editing this Talk Proposal, please try to edit your "
 "Talk Proposal later."
 msgstr ""
-"Un administrateur modifie actuellement cette proposition d'intervention, "
-"merci de revenir plus tard pour modifier votre proposition d'intervention."
+"Un administrateur modifie actuellement cette proposition, merci de revenir "
+"plus tard pour modifier votre proposition."
 
-#: includes/talks/functions.php:840
+#: includes/talks/functions.php:838
 msgid "Latest"
 msgstr "Récentes"
 
-#: includes/talks/functions.php:841
+#: includes/talks/functions.php:839
 msgid "Most commented"
 msgstr "Les plus commentées"
 
-#: includes/talks/functions.php:846
+#: includes/talks/functions.php:844
 msgid "Highest Rating"
 msgstr "Mieux évaluées"
 
 #: includes/talks/tags.php:22
 msgid "Search Talks"
-msgstr "Rechercher une proposition d'intervention"
+msgstr "Rechercher une proposition"
 
 #: includes/talks/tags.php:131
 msgid "Select the sort order"
@@ -1191,7 +1189,7 @@ msgstr "Trier"
 
 #: includes/talks/tags.php:295
 msgid "%s to start submitting Talk Proposals."
-msgstr "%s pour commencer à déposer des propositions d'intervention"
+msgstr "%s pour commencer à déposer des propositions"
 
 #: includes/talks/tags.php:296
 msgid "Sign in"
@@ -1199,55 +1197,46 @@ msgstr "S'inscrire"
 
 #: includes/talks/tags.php:305
 msgid "It looks like you have not submitted any Talk Proposals yet."
-msgstr ""
-"Il semble que vous n'ayez pas déposé de proposition d'intervention jusqu'à "
-"présent."
+msgstr "Il semble que vous n'ayez pas déposé de proposition jusqu'à présent."
 
 #: includes/talks/tags.php:308
 msgid "It looks like %s has not submitted any Talk Proposals yet"
 msgstr ""
-"On dirait que %s n'a toujours pas déposé de proposition d'intervention pour "
-"le moment."
+"On dirait que %s n'a toujours pas déposé de proposition pour le moment."
 
 #: includes/talks/tags.php:316
 msgid "It looks like %s has not rated any Talk Proposals yet"
-msgstr ""
-"On dirait que %s n'a toujours pas évalué de proposition d'intervention pour "
-"le moment"
+msgstr "On dirait que %s n'a toujours pas évalué de proposition pour le moment"
 
 #: includes/talks/tags.php:323
 msgid "Alright sparky, no more Talk Proposals to rate.. Good job!"
 msgstr ""
-"Très bien jeune padawan, tu as évalué toutes les propositions "
-"d'intervention.. Beau boulot!"
+"Très bien jeune padawan, tu as évalué toutes les propositions. Beau boulot!"
 
 #: includes/talks/tags.php:329
 msgid ""
 "It looks like no Talk Proposals have been published in this category yet"
 msgstr ""
-"Il semble qu'aucune proposition d'intervention n'ait été publiée dans cette "
-"catégorie jusqu'à présent."
+"Il semble qu'aucune proposition n'ait été publiée dans cette catégorie "
+"jusqu'à présent."
 
 #: includes/talks/tags.php:332
 msgid "It looks like no Talk Proposals have been marked with this tag yet"
 msgstr ""
-"Il semble qu'aucune proposition d'intervention n'ait été marquée avec cette "
-"étiquette jusqu'à présent."
+"Il semble qu'aucune proposition n'ait été marquée avec cette étiquette "
+"jusqu'à présent."
 
 #: includes/talks/tags.php:335 includes/talks/tags.php:338
 msgid "It looks like no Talk Proposals match your search terms."
-msgstr ""
-"On dirait qu'aucune proposition d'intervention ne satisfasse votre recherche."
+msgstr "On dirait qu'aucune proposition ne satisfasse votre recherche."
 
 #: includes/talks/tags.php:341
 msgid "It looks like no Talk Proposals have been rated yet."
-msgstr ""
-"On dirait qu'aucune proposition d'intervention n'ait été évaluée pour le "
-"moment."
+msgstr "On dirait qu'aucune proposition n'ait été évaluée pour le moment."
 
 #: includes/talks/tags.php:345
 msgid "Your Talk Proposals will be listed here, %s"
-msgstr "Vos propositions d'intervention seront listées ici, %s"
+msgstr "Vos propositions seront listées ici, %s"
 
 #: includes/talks/tags.php:348
 msgid "add your first one!"
@@ -1256,8 +1245,8 @@ msgstr "ajoutez en une !"
 #: includes/talks/tags.php:385
 msgid "Viewing %1$s to %2$s (of %3$s Talk Proposals)"
 msgid_plural "Viewing %1$s to %2$s (of %3$s Talk Proposals)"
-msgstr[0] "Affichage de %1$s à %2$s (sur %3$s proposition d'intervention)"
-msgstr[1] "Affichage de %1$s à %2$s (sur %3$s propositions d'intervention)"
+msgstr[0] "Affichage de %1$s à %2$s (sur %3$s proposition)"
+msgstr[1] "Affichage de %1$s à %2$s (sur %3$s propositions)"
 
 #: includes/talks/tags.php:679
 msgid "No Comments"
@@ -1296,14 +1285,12 @@ msgid ""
 "This Talk Proposal is password protected, you will need it to view its "
 "content."
 msgstr ""
-"Cette proposition d'intervention est protégée par un mot de passe, vous en "
-"avez besoin pour voir son contenu."
+"Cette proposition est protégée par un mot de passe, vous en avez besoin pour "
+"voir son contenu."
 
 #: includes/talks/tags.php:897 includes/talks/tags.php:957
 msgid "This Talk Proposal is private, you cannot view its content."
-msgstr ""
-"Cette proposition d'intervention est privée, vous ne pouvez pas voir son "
-"contenu."
+msgstr "Cette proposition est privée, vous ne pouvez pas voir son contenu."
 
 #: includes/talks/tags.php:1092
 msgid "hidden name"
@@ -1311,13 +1298,11 @@ msgstr "nom masqué"
 
 #: includes/talks/tags.php:1188
 msgid "All Talks"
-msgstr "Toutes les propositions d'intervention"
+msgstr "Toutes les propositions"
 
 #: includes/talks/tags.php:1204
 msgid "You are not allowed to submit Talk Proposals"
-msgstr ""
-"Vous n'avez pas les droits suffisants pour publier des propositions "
-"d'intervention."
+msgstr "Vous n'avez pas les droits suffisants pour publier des propositions."
 
 #: includes/talks/tags.php:1210
 msgid ""
@@ -1326,7 +1311,7 @@ msgid ""
 msgstr ""
 "Merci de vous <a href=\"%s\" title=\"Connexion\">connecter</a> ou de vous <a "
 "href=\"%s\" title=\"Inscription\">inscrire</a> avant de partager votre "
-"proposition d'intervention."
+"proposition."
 
 #: includes/talks/tags.php:1216
 msgid ""
@@ -1334,7 +1319,7 @@ msgid ""
 "Talk Proposal."
 msgstr ""
 "Merci de vous <a href=\"%s\" title=\"connectez-vous\">connecter</a> avant de "
-"déposer votre proposition d'intervention."
+"déposer votre proposition."
 
 #: includes/talks/tags.php:1234
 msgid "Title"
@@ -1382,12 +1367,12 @@ msgstr "%1$sEvaluation moyenne : %2$s%3$s"
 
 #: includes/talks/widgets/widget-wordcamp-talks-talks-list-categories.php:34
 msgid "A list of Talk Proposals categories"
-msgstr "Une liste des catégories de proposition d'intervention"
+msgstr "Une liste des catégories de proposition"
 
 #: includes/talks/widgets/widget-wordcamp-talks-talks-list-categories.php:35
 #: tests/phpunit/testcases/talks/widgets.php:9
 msgid "Talk Proposals categories"
-msgstr "Catégories de proposition d'intervention"
+msgstr "Catégories de proposition"
 
 #: includes/talks/widgets/widget-wordcamp-talks-talks-list-categories.php:98
 #: includes/talks/widgets/widget-wordcamp-talks-talks-popular.php:180
@@ -1397,16 +1382,16 @@ msgstr "Titre:"
 
 #: includes/talks/widgets/widget-wordcamp-talks-talks-list-categories.php:104
 msgid "Show Talk Proposals count"
-msgstr "Afficher le nombre de propositions d'intervention"
+msgstr "Afficher le nombre de propositions"
 
 #: includes/talks/widgets/widget-wordcamp-talks-talks-popular.php:35
 msgid "List the most popular Talk Proposals"
-msgstr "Une liste des propositions d'intervention les plus populaires"
+msgstr "Une liste des propositions les plus populaires"
 
 #: includes/talks/widgets/widget-wordcamp-talks-talks-popular.php:36
 #: tests/phpunit/testcases/talks/widgets.php:10
 msgid "Talk Proposals Popular"
-msgstr "Propositions d'intervention populaires"
+msgstr "Propositions populaires"
 
 #: includes/talks/widgets/widget-wordcamp-talks-talks-popular.php:185
 msgid "Type:"
@@ -1414,7 +1399,7 @@ msgstr "Type:"
 
 #: includes/talks/widgets/widget-wordcamp-talks-talks-popular.php:198
 msgid "Number of talks to show:"
-msgstr "Nombre de propositions d'intervention à afficher :"
+msgstr "Nombre de propositions à afficher :"
 
 #: includes/users/classes/class-wordcamp-talks-users-profile-parser.php:36
 msgid "The user name was not provided."
@@ -1505,7 +1490,7 @@ msgid ""
 "Proposals is selected (Required)."
 msgstr ""
 "Votre bio sera utilisée pour vous présenter dans le cas où votre proposition "
-"d'intervention serait retenue (Obligatoire)"
+"serait retenue (Obligatoire)"
 
 #: includes/users/tags.php:421
 msgid "Edit profile"
@@ -1513,11 +1498,11 @@ msgstr "Modifier le profil"
 
 #: includes/users/widgets/widget-wordcamp-talks-users-top-contributors.php:29
 msgid "List the top Talk Proposals authors"
-msgstr "Liste des auteurs populaires de proposition d'intervention"
+msgstr "Liste des auteurs de proposition populaires"
 
 #: includes/users/widgets/widget-wordcamp-talks-users-top-contributors.php:30
 msgid "Talk Proposals Tops"
-msgstr "Auteurs de proposition d'intervention populaires"
+msgstr "Auteurs de proposition populaires"
 
 #: includes/users/widgets/widget-wordcamp-talks-users-top-contributors.php:163
 msgid "Number of users to show:"
@@ -1526,17 +1511,16 @@ msgstr "Nombre d'utilisateurs à afficher :"
 #: includes/wordcamp/integrations.php:284
 msgid "The title, content, author or Talk Proposal ID were not provided."
 msgstr ""
-"Le titre, le contenu, l'auteur ou l'identifiant de la proposition "
-"d'intervention sont manquants."
+"Le titre, le contenu, l'auteur ou l'identifiant de la proposition sont "
+"manquants."
 
 #: includes/wordcamp/integrations.php:291
 msgid "The Talk Proposal is not selected or unknown."
-msgstr "La proposition d'intervention n'est pas retenue ou est inconnue."
+msgstr "La proposition n'est pas retenue ou est inconnue."
 
 #: includes/wordcamp/integrations.php:295
 msgid "There can be only one session for a given Talk Proposal"
-msgstr ""
-"Il ne peut y avoir qu'un session pour une proposition d'intervention donnée"
+msgstr "Il ne peut y avoir qu'une session pour une proposition donnée"
 
 #: includes/wordcamp/integrations.php:302
 msgid "User unknown."
@@ -1548,9 +1532,7 @@ msgstr "Orateur inconnu."
 
 #: includes/wordcamp/integrations.php:348
 msgid "The speaker for this selected talk proposal is not available yet"
-msgstr ""
-"L'orateur pour cette proposition d'intervention retenue n'est pas encore "
-"disponible"
+msgstr "L'orateur pour cette proposition retenue n'est pas encore disponible"
 
 #: includes/wordcamp/integrations.php:362
 msgid "Draft a Session"
@@ -1574,11 +1556,11 @@ msgstr "%  Réponses"
 
 #: templates/talk-header.php:13
 msgid "Rate the talk"
-msgstr "Evaluer la proposition d'intervention"
+msgstr "Evaluer la proposition"
 
 #. Plugin Name of the plugin/theme
 msgid "WordCamp Talk Proposals"
-msgstr "Propositions d'intervention au WordCamp"
+msgstr "Propositions de WordCamp"
 
 #. Plugin URI of the plugin/theme
 msgid "https://github.com/imath/wordcamp-talks/"
@@ -1586,7 +1568,7 @@ msgstr "https://github.com/imath/wordcamp-talks/"
 
 #. Description of the plugin/theme
 msgid "WordCamp Talk Proposals Management Tool"
-msgstr "Outil de gestion des propositions d'intervention à un WordCamp"
+msgstr "Outil de gestion des propositions d'un WordCamp"
 
 #. Author of the plugin/theme
 msgid "imath"
@@ -1604,12 +1586,12 @@ msgstr "%1$s %2$s"
 #: includes/admin/classes/class-wordcamp-talks-admin-comments.php:178
 msgctxt "Main Plugin menu"
 msgid "Talks"
-msgstr "Propositions d'intervention"
+msgstr "Propositions"
 
 #: includes/core/functions.php:330
 msgctxt "Main Plugin menu"
 msgid "Talk Proposals"
-msgstr "Propositions d'intervention"
+msgstr "Propositions"
 
 #: includes/admin/classes/class-wordcamp-talks-admin.php:407
 msgctxt "Talk Publish box date format"
@@ -1661,27 +1643,27 @@ msgctxt "prefix of the downloaded csv"
 msgid "talks"
 msgstr "propositions_intervention"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1278
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1276
 msgctxt "help tab links"
 msgid "%1$sSupport Forums (en)%2$s"
 msgstr "%1$sForum de support (en)%2$s"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1458
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1456
 msgctxt "menu admin accordion box title"
 msgid "Talk Proposals"
 msgstr "Propositions d'intervention"
 
-#: includes/admin/settings.php:210
+#: includes/admin/settings.php:218
 msgctxt "wc_talks settings root slug conflict"
 msgid "this %s"
 msgstr "ce %s"
 
-#: includes/admin/settings.php:220
+#: includes/admin/settings.php:228
 msgctxt "bbPress possible conflict"
 msgid "bbPress forum root slug"
 msgstr "slug racine du forum bbPress"
 
-#: includes/admin/settings.php:234
+#: includes/admin/settings.php:242
 msgctxt "Child blog possible conflict"
 msgid "child blog slug"
 msgstr "slug de site enfant"
@@ -1709,33 +1691,33 @@ msgstr "&rarr;"
 #: includes/core/functions.php:260
 msgctxt "Title of the main archive page."
 msgid "Talk Proposals"
-msgstr "Propositions d'intervention"
+msgstr "Propositions"
 
 #: includes/core/functions.php:1387
 msgctxt "talks tag cloud count text"
 msgid "%s Talk Proposal"
 msgid_plural "%s Talk Proposals"
-msgstr[0] "%s Proposition d'intervention"
-msgstr[1] "%s Propositions d'intervention"
+msgstr[0] "%s Proposition"
+msgstr[1] "%s Propositions"
 
 #: includes/core/functions.php:1530
 msgctxt "Admin bar menu"
 msgid "WordCamp Talk Proposals"
-msgstr "Propositions d'intervention au WordCamp"
+msgstr "Propositions au WordCamp"
 
 #. Translators: This string is used in urls, make sure to avoid using special
 #. chars
 #: includes/core/rewrites.php:177
 msgctxt "default root slug"
 msgid "talk-proposals"
-msgstr "propositions-intervention"
+msgstr "propositions"
 
 #. Translators: This string is used in urls, make sure to avoid using special
 #. chars
 #: includes/core/rewrites.php:210
 msgctxt "default talk slug"
 msgid "talk"
-msgstr "proposition-intervention"
+msgstr "proposition"
 
 #. Translators: This string is used in urls, make sure to avoid using special
 #. chars
@@ -1822,7 +1804,7 @@ msgstr "Lien personnalisé"
 #: includes/core/template-functions.php:1095
 msgctxt "customizer menu section title"
 msgid "Talk Proposals"
-msgstr "Propositions d'intervention"
+msgstr "Propositions"
 
 #: includes/talks/tags.php:699
 msgctxt "talk protected comments message"
@@ -1837,54 +1819,50 @@ msgstr "Commentaires privés"
 #: includes/talks/tags.php:844
 msgctxt "talk rating not logged in message"
 msgid "Please, log in to rate."
-msgstr "Merci de vous connecter pour évaluer la proposition d'intervention"
+msgstr "Merci de vous connecter pour évaluer la proposition"
 
 #. Translators: 1 is category, 2 is tag and 3 is the date.
 #: includes/talks/tags.php:1070
 msgctxt "default talk footer utility text"
 msgid "This Talk Proposal was posted on %3$s."
-msgstr "Cette proposition d'intervention a été déposée le %3$s."
+msgstr "Cette proposition a été déposée le %3$s."
 
 #. Translators: 1 is category, 2 is tag and 3 is the date.
 #: includes/talks/tags.php:1075
 msgctxt "talk attached to at least one category footer utility text"
 msgid "This Talk Proposal was posted in %1$s on %3$s."
-msgstr "Cette proposition d'intervention a été déposée dans %1$s le %3$s."
+msgstr "Cette proposition a été déposée dans %1$s le %3$s."
 
 #. Translators: 1 is category, 2 is tag and 3 is the date.
 #: includes/talks/tags.php:1081
 msgctxt "talk attached to at least one tag footer utility text"
 msgid "This Talk Proposal was tagged %2$s on %3$s."
-msgstr "Cette proposition d'intervention a été étiquetée %2$s le %3$s."
+msgstr "Cette proposition a été étiquetée %2$s le %3$s."
 
 #. Translators: 1 is category, 2 is tag and 3 is the date.
 #: includes/talks/tags.php:1086
 msgctxt ""
 "talk attached to at least one tag and one category footer utility text"
 msgid "This Talk Proposal was posted in %1$s and tagged %2$s on %3$s."
-msgstr ""
-"Cette proposition d'intervention a été déposée dans %1$s et étiquetée %2$s "
-"le %3$s."
+msgstr "Cette proposition a été déposée dans %1$s et étiquetée %2$s le %3$s."
 
 #. Translators: 1 is category, 2 is tag, 3 is the date and 4 is author.
 #: includes/talks/tags.php:1100
 msgctxt "default single talk footer utility text"
 msgid "This Talk Proposal was posted on %3$s by %4$s."
-msgstr "Cette proposition d'intervention a été déposée le %3$s par %4$s."
+msgstr "Cette proposition a été déposée le %3$s par %4$s."
 
 #. Translators: 1 is category, 2 is tag, 3 is the date and 4 is author.
 #: includes/talks/tags.php:1105
 msgctxt "single talk attached to at least one category footer utility text"
 msgid "This Talk Proposal was posted in %1$s on %3$s by %4$s."
-msgstr ""
-"Cette proposition d'intervention a été dépoqée dans %1$s le %3$s par %4$s."
+msgstr "Cette proposition a été dépoqée dans %1$s le %3$s par %4$s."
 
 #. Translators: 1 is category, 2 is tag, 3 is the date and 4 is author.
 #: includes/talks/tags.php:1110
 msgctxt "single talk attached to at least one tag footer utility text"
 msgid "This Talk Proposal was tagged %2$s on %3$s by %4$s."
-msgstr ""
-"Cette proposition d'intervention a été étiquetée %2$s le %3$s par %4$s."
+msgstr "Cette proposition a été étiquetée %2$s le %3$s par %4$s."
 
 #. Translators: 1 is category, 2 is tag, 3 is the date and 4 is author.
 #: includes/talks/tags.php:1114
@@ -1892,8 +1870,7 @@ msgctxt ""
 "single talk attached to at least one tag and one category footer utility text"
 msgid "This Talk Proposal was posted in %1$s and tagged %2$s on %3$s by %4$s."
 msgstr ""
-"Cette proposition d'intervention a été déposée dans %1$s et étiquetée %2$s "
-"le %3$s par %4$s."
+"Cette proposition a été déposée dans %1$s et étiquetée %2$s le %3$s par %4$s."
 
 #: includes/talks/tags.php:1187
 msgctxt "Previous post link"
@@ -1913,7 +1890,7 @@ msgstr "accueil"
 #: includes/users/functions.php:781
 msgctxt "user talks profile slug"
 msgid "talks"
-msgstr "propositions-intervention"
+msgstr "propositions"
 
 #: includes/users/functions.php:1467
 msgctxt "Use the same translation as WP Core"
