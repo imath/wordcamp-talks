@@ -1137,8 +1137,6 @@ class WordCamp_Talks_Admin {
 		// Help urls
 		$plugin_forum         = '<a href="https://github.com/imath/wordcamp-talks/issues">';
 		$help_tabs            = false;
-		$nav_menu_page        = '<a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '">';
-		$widgets_page         = '<a href="' . esc_url( admin_url( 'widgets.php' ) ) . '">';
 
 		/**
 		 * @param array associative array to list the help tabs
@@ -1217,18 +1215,18 @@ class WordCamp_Talks_Admin {
 						'id'      => 'settings-main',
 						'title'   => esc_html__( 'Main Settings', 'wordcamp-talks' ),
 						'content' => array(
-							sprintf( esc_html__( 'Just before the first option, you will find the link to the main archive page of the plugin. If you wish, you can use it to define a new custom link %1$smenu item%2$s.', 'wordcamp-talks' ), $nav_menu_page, '</a>' ),
-							sprintf( esc_html__( 'If you do so, do not forget to update the link in case you change your permalink settings. Another possible option is to use the %1$sWordCamp Talk Proposals Navigation%2$s widget in one of your dynamic sidebars.', 'wordcamp-talks' ), $widgets_page, '</a>' ),
 							esc_html__( 'In the Main Settings you have a number of options:', 'wordcamp-talks' ),
 							array(
 								esc_html__( 'Closing date: define the date when the call for speakers will end.', 'wordcamp-talks' ),
 								esc_html__( 'Rating stars hover captions: fill a comma separated list of captions to replace default one. On front end, the number of rating stars will depend on the number of comma separated captions you defined in this setting.', 'wordcamp-talks' ),
+								esc_html__( 'Speaker editing timeout: select the amount of time a speaker has to edit their talk proposals.', 'wordcamp-talks' ),
+								esc_html__( 'Slack notifications: if your WordCamp organizing team is using Slack, you can use it to send notifications to the channel of your choice. In the setting field, you will only need to paster the incoming webhook URL.', 'wordcamp-talks' ),
 							),
 						),
 					),
 				),
 			),
-			'edit-category-talks' => array(
+			'edit-talk_categories' => array(
 				'add_help_tab' => array(
 					array(
 						'id'      => 'talks-category-overview',
@@ -1245,7 +1243,7 @@ class WordCamp_Talks_Admin {
 					),
 				),
 			),
-			'edit-tag-talks' => array(
+			'edit-talk_tags' => array(
 				'add_help_tab' => array(
 					array(
 						'id'      => 'talks-tag-overview',

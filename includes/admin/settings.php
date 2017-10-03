@@ -71,7 +71,7 @@ function wct_get_settings_fields() {
 
 			// Customize the editing timeout
 			'_wc_talks_editing_timeout' => array(
-				'title'             => __( 'Talk Proposal\'s editing timeout (For speakers)', 'wordcamp-talks' ),
+				'title'             => __( 'Speaker editing timeout', 'wordcamp-talks' ),
 				'callback'          => 'wct_talk_editing_timeout_callback',
 				'sanitize_callback' => 'wct_sanitize_editing_timeout',
 				'args'              => array()
@@ -406,7 +406,7 @@ function wct_talk_slack_webhook_callback() {
 	$slack_url = wct_talk_slack_webhook_url();
 	?>
 
-	<label for="_wc_talks_slack_webhook_url"><?php esc_html_e( 'Add the URL of your webhook to notify your Slack team.', 'wordcamp-talks' ); ?></label>
+	<label for="_wc_talks_slack_webhook_url"><?php esc_html_e( 'Paste the URL of your webhook in this field to notify your Slack team when a new Talk Proposal is submitted.', 'wordcamp-talks' ); ?></label>
 	<input name="_wc_talks_slack_webhook_url" id="_wc_talks_slack_webhook_url" type="text" class="large-text code" value="<?php echo esc_attr( $slack_url ); ?>" />
 
 	<?php
