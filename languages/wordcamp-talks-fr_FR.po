@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WordCamp Talk Proposals 1.1.0-beta1\n"
 "Report-Msgid-Bugs-To: https://github.com/imath/wordcamp-talks/issues\n"
-"POT-Creation-Date: 2017-10-03 19:33:12+00:00\n"
-"PO-Revision-Date: 2017-10-03 22:06+0100\n"
+"POT-Creation-Date: 2017-10-05 05:02:36+00:00\n"
+"PO-Revision-Date: 2017-10-05 07:03+0100\n"
 "Last-Translator: imath <mathchristo@yahoo.fr>\n"
 "Language-Team: FRENCH <imath@cluster.press>\n"
 "Language: fr\n"
@@ -24,43 +24,47 @@ msgstr "﻿Commentaires"
 msgid "Talk Proposal Comments"
 msgstr "Commentaires sur la proposition"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:213
-#: includes/admin/classes/class-wordcamp-talks-admin.php:214
-#: includes/admin/classes/class-wordcamp-talks-admin.php:228
-#: includes/admin/classes/class-wordcamp-talks-admin.php:229
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1880
+#: includes/admin/classes/class-wordcamp-talks-admin.php:215
+#: includes/admin/classes/class-wordcamp-talks-admin.php:216
+#: includes/admin/classes/class-wordcamp-talks-admin.php:230
+#: includes/admin/classes/class-wordcamp-talks-admin.php:231
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1902
 msgid "Settings"
 msgstr "﻿Réglages"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:397
+#: includes/admin/classes/class-wordcamp-talks-admin.php:269
+msgid "Export Sessions & Speakers"
+msgstr "Exporter les Sessions et Orateurs"
+
+#: includes/admin/classes/class-wordcamp-talks-admin.php:419
 msgid "Talk Proposal updated. <a href=\"%s\">View Talk Proposal</a>"
 msgstr "Proposition mise à jour. <a href=\"%s\">Afficher la proposition</a>"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:398
+#: includes/admin/classes/class-wordcamp-talks-admin.php:420
 msgid "Custom field updated."
 msgstr "Champ personnalisé mis à jour"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:399
+#: includes/admin/classes/class-wordcamp-talks-admin.php:421
 msgid "Custom field deleted."
 msgstr "﻿Champ Personnalisé effacé."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:400
+#: includes/admin/classes/class-wordcamp-talks-admin.php:422
 msgid "Talk Proposal updated."
 msgstr "Proposition mise à jour."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:401
+#: includes/admin/classes/class-wordcamp-talks-admin.php:423
 msgid "Talk Proposal restored to revision from %s"
 msgstr "Proposition restaurée à la révision %s"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:402
+#: includes/admin/classes/class-wordcamp-talks-admin.php:424
 msgid "Talk Proposal submitted. <a href=\"%s\">View Talk</a>"
 msgstr "Proposition déposée. <a href=\"%s\">Afficher la proposition</a>"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:403
+#: includes/admin/classes/class-wordcamp-talks-admin.php:425
 msgid "Talk saved."
 msgstr "Proposition enregistrée."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:404
+#: includes/admin/classes/class-wordcamp-talks-admin.php:426
 msgid ""
 "Talk Proposal submitted. <a target=\"_blank\" href=\"%s\">Preview Talk "
 "Proposal</a>"
@@ -68,7 +72,7 @@ msgstr ""
 "Proposition déposée. <a target=\"_blank\" href=\"%s\">Prévisualiser la "
 "proposition</a>"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:406
+#: includes/admin/classes/class-wordcamp-talks-admin.php:428
 msgid ""
 "Talk Proposal scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" "
 "href=\"%2$s\">Preview Talk Proposal</a>"
@@ -76,7 +80,7 @@ msgstr ""
 "Proposition planifiée pour : <strong>%1$s</strong>. <a target=\"_blank\" "
 "href=\"%2$s\">Prévisualiser la proposition</a>"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:410
+#: includes/admin/classes/class-wordcamp-talks-admin.php:432
 msgid ""
 "Talk Proposal draft updated. <a target=\"_blank\" href=\"%s\">Preview Talk "
 "Proposal</a>"
@@ -84,13 +88,13 @@ msgstr ""
 "Brouillon de proposition mis à jour. <a target=\"_blank\" href=\"%s"
 "\">Prévisualiser la proposition</a>"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:432
+#: includes/admin/classes/class-wordcamp-talks-admin.php:454
 msgid "%s Talk Proposal updated."
 msgid_plural "%s Talk Proposals updated."
 msgstr[0] "%s Proposition mise à jour."
 msgstr[1] "%s Propositions mises à jour."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:433
+#: includes/admin/classes/class-wordcamp-talks-admin.php:455
 msgid "%s Talk Proposal not updated; somebody is editing it."
 msgid_plural "%s Talk Proposals not updated; somebody is editing them."
 msgstr[0] ""
@@ -99,38 +103,38 @@ msgstr[1] ""
 "%s Propositions non actualisées ; quelqu'un est déjà en train de les "
 "modifier."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:434
+#: includes/admin/classes/class-wordcamp-talks-admin.php:456
 msgid "%s Talk Proposal permanently deleted."
 msgid_plural "%s Talk Proposals permanently deleted."
 msgstr[0] "%s Proposition supprimée de manière permanente."
 msgstr[1] "%s Propositions supprimées de manière permanente."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:435
+#: includes/admin/classes/class-wordcamp-talks-admin.php:457
 msgid "%s Talk Proposal moved to the Trash."
 msgid_plural "%s Talk Proposals moved to the Trash."
 msgstr[0] "%s Proposition mise à la corbeille."
 msgstr[1] "%s Propositions mises à la corbeille."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:436
+#: includes/admin/classes/class-wordcamp-talks-admin.php:458
 msgid "%s Talk Proposal restored from the Trash."
 msgid_plural "%s Talk Proposals restored from the Trash."
 msgstr[0] "%s Proposition restaurée depuis la corbeille."
 msgstr[1] "%s Propositions restaurées depuis la corbeille."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:499
+#: includes/admin/classes/class-wordcamp-talks-admin.php:521
 msgid "Download all Talk Proposals in a csv spreadsheet"
 msgstr "Télécharger toutes les propositions dans un fichier csv"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:719
+#: includes/admin/classes/class-wordcamp-talks-admin.php:741
 msgid "Average Rating"
 msgstr "Evaluation moyenne"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:921
+#: includes/admin/classes/class-wordcamp-talks-admin.php:943
 #: includes/talks/functions.php:756 includes/talks/tags.php:824
 msgid "Not rated yet"
 msgstr "Pas encore évaluée"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:927
+#: includes/admin/classes/class-wordcamp-talks-admin.php:949
 msgid "%1$s member rated the Talk Proposal. Its Average rating is: %2$s"
 msgid_plural ""
 "%1$s members rated the Talk Proposal. Its Average rating is: %2$s"
@@ -140,27 +144,27 @@ msgstr[1] ""
 "%1$s utilisateurs ont évalué la proposition. Son évaluation moyenne est : "
 "%2$s"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:950
+#: includes/admin/classes/class-wordcamp-talks-admin.php:972
 msgid "Delete this rating"
 msgstr "Supprimer l'évaluation."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1011
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1033
 msgid "Rating successfully deleted"
 msgstr "Evaluation supprimée avec succès."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1012
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1034
 msgid "Something went wrong while trying to delete the rating."
 msgstr "Un problème est survenu pendant la suppression de l'évaluation."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1149
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1197
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1208
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1233
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1250
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1171
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1219
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1230
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1255
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1272
 msgid "Overview"
 msgstr "Vue d'ensemble"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1151
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1173
 msgid ""
 "This screen provides access to all the Talk Proposals users of your site "
 "shared. You can customize the display of this screen to suit your workflow."
@@ -169,7 +173,7 @@ msgstr ""
 "ont partagé dans votre site. Vous pouvez personnaliser son affichage pour "
 "l'adapter à vos préférences."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1152
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1174
 msgid ""
 "You can customize the display of this screen&#39;s contents in a number of "
 "ways:"
@@ -177,7 +181,7 @@ msgstr ""
 "Vous pouvez personnaliser l'affichage du contenu de cet écran de nombreuses "
 "manières :"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1154
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1176
 msgid ""
 "You can hide/display columns based on your needs and decide how many Talk "
 "Proposals to list per screen using the Screen Options tab."
@@ -186,7 +190,7 @@ msgstr ""
 "du nombre de propositions à lister par écran à l'aide de l'onglet &#34;"
 "Options de la écran&#34;."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1155
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1177
 msgid ""
 "You can filter the Talk Proposals by status using the last dropdown box "
 "above the list."
@@ -194,7 +198,7 @@ msgstr ""
 "Vous pouvez filtrer les propositions selon leur statut en utilisant la liste "
 "déroulante correspondante au dessus de la liste."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1156
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1178
 msgid ""
 "You can view Talk Proposals in a simple title list or with an excerpt. "
 "Choose the view you prefer by clicking on the icons at the top of the list "
@@ -204,11 +208,11 @@ msgstr ""
 "extrait de leur contenu. Choisissez le mode d'affichage de votre préférence "
 "en cliquant sur les icônes en haut à droite de la liste."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1162
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1184
 msgid "Actions"
 msgstr "Actions"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1164
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1186
 msgid ""
 "Hovering over a row in the Talk Proposals list will display action links "
 "that allow you to manage a Talk Proposal. You can perform the following "
@@ -218,7 +222,7 @@ msgstr ""
 "d'action qui vous permettent de gérer une proposition. Vous pouvez réaliser "
 "les actions suivantes :"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1166
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1188
 msgid ""
 "Edit takes you to the editing screen for that Talk Proposal. You can also "
 "reach that screen by clicking on the Talk Proposal title."
@@ -226,7 +230,7 @@ msgstr ""
 "Modifier affichera l'écran d'édition d'une proposition. Vous pouvez "
 "également atteindre cet écran en cliquant sur son titre."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1167
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1189
 msgid ""
 "Trash removes the Talk Proposal from this list and places it in the trash, "
 "from which you can permanently delete it."
@@ -234,7 +238,7 @@ msgstr ""
 "Corbeille retire la proposition de cette liste pour la placer dans la "
 "corbeille. Depuis la corbeille, vous pourrez la supprimer définitivement."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1168
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1190
 msgid ""
 "View opens the Talk Proposal in the WordCamp Talk Proposals&#39 part of your "
 "site."
@@ -242,11 +246,11 @@ msgstr ""
 "Afficher ouvre la proposition dans la zone frontale des propositions de "
 "votre site."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1174
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1196
 msgid "Bulk Actions"
 msgstr "Actions de masse"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1176
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1198
 msgid ""
 "You can also move multiple Talk Proposals to the trash at once. Select the "
 "Talk Proposals you want to trash using the checkboxes, then select the &#34;"
@@ -258,11 +262,11 @@ msgstr ""
 "corbeille&#34; depuis le menu des actions de masse avant de cliquer sur le "
 "bouton Appliquer"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1181
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1203
 msgid "Sorting & filtering"
 msgstr "Classer & filter"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1183
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1205
 msgid ""
 "Clicking on specific column headers will sort the Talk Proposals list. You "
 "can sort the Talk Proposals alphabetically using the Title column header or "
@@ -272,7 +276,7 @@ msgstr ""
 "propositions. Ce classement peut se faire de manière alphabétique en "
 "utilisant l'en-tête du champ Titre ou selon leur popularité :"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1185
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1207
 msgid ""
 "Click on the column header having a dialog buble icon to sort by number of "
 "comments."
@@ -280,13 +284,13 @@ msgstr ""
 "Cliquer sur l'en-tête des commentaires pour un classement fonction du nombre "
 "de commentaires."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1186
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1208
 msgid "Click on the column header having a star icon to sort by rating."
 msgstr ""
 "Cliquer sur l'en-tête de colonne contenant une étoile pour classer les "
 "propositions selon leur évaluation moyenne."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1188
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1210
 msgid ""
 "Inside the rows, you can filter the Talk Proposals by categories or tags "
 "clicking on the corresponding terms."
@@ -294,7 +298,7 @@ msgstr ""
 "Dans chacun des rangs de la liste, vous pouvez filtrer les propositions "
 "selon leurs catégories ou mots-clés en cliquant sur les liens correspondants."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1199
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1221
 msgid ""
 "The title field and the big Talk Proposal Editing Area are fixed in place, "
 "but you can reposition all the other boxes using drag and drop. You can also "
@@ -307,14 +311,14 @@ msgstr ""
 "chaque bloc. Utilisez l’onglet &#34;Options de l’écran&#34; pour masquer / "
 "afficher les différents blocs disponibles."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1210
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1232
 msgid ""
 "This is the place where you can customize the behavior of WordCamp Talk "
 "Proposals."
 msgstr ""
 "C'est ici que vous pouvez personnaliser le comportement de l'extension."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1211
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1233
 msgid ""
 "Please see the additional help tabs for more information on each individual "
 "section."
@@ -322,23 +326,23 @@ msgstr ""
 "Merci de consulter les onglets d'aides suivants pour plus d'information au "
 "sujet des différentes sections des réglages."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1216
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1238
 #: includes/admin/settings.php:26
 msgid "Main Settings"
 msgstr "Réglages principaux"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1218
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1240
 msgid "In the Main Settings you have a number of options:"
 msgstr ""
 "La section des réglages principaux vous propose de nombreuses options :"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1220
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1242
 msgid "Closing date: define the date when the call for speakers will end."
 msgstr ""
 "Date de clôture : définissez la date à partir de laquelle déposer une "
 "proposition n'est plus possible."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1221
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1243
 msgid ""
 "Rating stars hover captions: fill a comma separated list of captions to "
 "replace default one. On front end, the number of rating stars will depend on "
@@ -349,7 +353,7 @@ msgstr ""
 "nombre de niveaux d'évaluation disponibles dépendra du nombre de valeurs que "
 "vous aurez définies."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1222
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1244
 msgid ""
 "Speaker editing timeout: select the amount of time a speaker has to edit "
 "their talk proposals."
@@ -357,7 +361,7 @@ msgstr ""
 "Temps d'édition pour l'orateur : définissez l'intervalle de temps au delà "
 "duquel un orateur ne peut plus modifier sa proposition."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1223
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1245
 msgid ""
 "Slack notifications: if your WordCamp organizing team is using Slack, you "
 "can use it to send notifications to the channel of your choice. In the "
@@ -368,7 +372,7 @@ msgstr ""
 "champ de ce réglage, vous devez simplement coller t'URL de votre incoming-"
 "webhook."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1235
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1257
 msgid ""
 "Talk Proposal Categories can only be created by the site Administrator. To "
 "add a new Talk Proposal category please fill the following fields:"
@@ -377,7 +381,7 @@ msgstr ""
 "l'Administrateur du site. Pour ajouter une nouvelle catégorie de "
 "proposition, merci de définir les champs suivants :"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1237
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1259
 msgid ""
 "Name - The name is how it appears on your site (in the category checkboxes "
 "of the Talk Proposal front end submit form, in the Talk Proposal&#39;s "
@@ -389,8 +393,8 @@ msgstr ""
 "proposition particulière ou encore dans le titre d'une page de catégorie de "
 "proposition)."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1238
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1255
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1260
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1277
 msgid ""
 "Slug - The &#34;slug&#34; is the URL-friendly version of the name. It is "
 "usually all lowercase and contains only letters, numbers, and hyphens."
@@ -399,7 +403,7 @@ msgstr ""
 "généralement que des lettres minuscules non accentuées, des chiffres et des "
 "traits d'union."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1239
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1261
 msgid ""
 "Description - If you set a description for your category, it will be "
 "displayed over the list of Talk Proposals in the category archive page."
@@ -408,7 +412,7 @@ msgstr ""
 "sera affichée au dessus de la liste des propositions dans la page d'archive "
 "de la catégorie correspondante."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1241
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1263
 msgid ""
 "You can change the display of this screen using the Screen Options tab to "
 "set how many items are displayed per screen and to display/hide columns in "
@@ -419,7 +423,7 @@ msgstr ""
 "nombre de propositions listées par page et masquer ou afficher certaines "
 "colonnes du tableau."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1252
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1274
 msgid ""
 "Talk Proposal Tags can be created by any logged in user of the site from the "
 "Talk Proposal front end submit form. From this screen, to add a new Talk "
@@ -430,7 +434,7 @@ msgstr ""
 "pour ajouter de nouvelles étiquettes de proposition, merci de remplir des "
 "champs suivants :"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1254
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1276
 msgid ""
 "Name - The name is how it appears on your site (in the tag cloud, in the "
 "tags editor of the Talk Proposal front end submit form, in the Talk "
@@ -442,7 +446,7 @@ msgstr ""
 "propositions d'intervention particulière ou encore dans le titre de la page "
 "d'une étiquette de proposition)."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1256
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1278
 msgid ""
 "Description - If you set a description for your tag, it will be displayed "
 "over the list of Talk Proposals in the tag archive page."
@@ -451,7 +455,7 @@ msgstr ""
 "sera affichée au dessus de la liste des propositions dans la page d'archive "
 "de l'étiquette correspondante."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1258
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1280
 msgid ""
 "You can change the display of this screen using the Screen Options tab to "
 "set how many Talk Proposals are displayed per screen and to display/hide "
@@ -462,11 +466,11 @@ msgstr ""
 "nombre de propositions listées par page et masquer ou afficher certaines "
 "colonnes du tableau."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1274
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1296
 msgid "For more information:"
 msgstr "Pour plus d'informations :"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1300
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1322
 msgid ""
 "The Ratings metabox allows you to manage the ratings the Talk Proposal has "
 "received."
@@ -474,52 +478,95 @@ msgstr ""
 "La metabox des évaluations vous permet de manager les évaluations que la "
 "proposition a reçues."
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1320
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1342
 msgid "Filter by state"
 msgstr "Filtrer par statut"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1347
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1369
 msgid "Talk Proposal status"
 msgstr "Statut de proposition"
 
 #. translators: Publish box date format, see https:secure.php.net/date
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1373
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1395
 msgid "M j, Y @ H:i"
 msgstr "j F Y \\à G \\h i \\m\\i\\n"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1386
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1408
 msgid "Created on:"
 msgstr "Créée le :"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1388
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1410
 msgid "Last Modified:"
 msgstr "Modifiée pour la dernière fois :"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1394
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1546
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1416
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1568
 msgid "Status"
 msgstr "Statut"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1400
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1422
 #: includes/talks/tags.php:1656
 msgid "Update"
 msgstr "Mettre à jour"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1430
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1452
 msgid "Move to Trash"
 msgstr "Déplacer dans la corbeille"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1433
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1455
 msgid "Delete Permanently"
 msgstr "Supprimer définitivement"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1512
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1534
 msgid "Select All"
 msgstr "Tout sélectionner"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1518
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1540
 msgid "Add to menu"
 msgstr "Ajouter au menu"
+
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1915
+msgid ""
+"Clicking on the Export button will generate a file containing Speakers and "
+"Sessions posts out of the selected Talk proposals."
+msgstr ""
+"En cliquant sur le bouton d'Export vous générez un fichier contenant des "
+"articles du type Orateur et Session pour les propositions correspondantes."
+
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1916
+msgid ""
+"Thanks to this file, you will be able to import draft posts for these "
+"Speakers and Sessions into your WordCamp site."
+msgstr ""
+"Grâce à ce fichier, vous pourrez importer des brouillons de ces articles de "
+"type Orateur et Session dans le site de votre WordCamp."
+
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1917
+msgid ""
+"Once done, from your WordCamp site, you will be able to eventually edit "
+"Speaker posts before publishing them."
+msgstr ""
+"Ensuite, toujours depuis le site de votre WordCamp, vous pourrez "
+"éventuellement modifier chacun des articles de type Orateur avant de les "
+"publier."
+
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1918
+msgid ""
+"The last step will consist in editing each imported Sessions to set their "
+"Speakers thanks to the autocomplete field of their Speakers metabox before "
+"publishing them!"
+msgstr ""
+"Enfin, il vous suffira d'éditer chaque article de type Session pour définir "
+"leurs orateurs depuis le champ d'autocompletion de la \"metabox\" Orateur "
+"avant de les publier."
+
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1929
+msgid ""
+"NB: Talks submitted by authors who forgot to fill their biographical "
+"information will not be exported."
+msgstr ""
+"NB : les propositions soumises par des auteurs qui ont omis de remplir leurs "
+"informations biographiques ne seront pas exportées."
 
 #: includes/admin/settings.php:34
 msgid "Network users settings"
@@ -1593,65 +1640,75 @@ msgctxt "Main Plugin menu"
 msgid "Talk Proposals"
 msgstr "Propositions"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:407
+#: includes/admin/classes/class-wordcamp-talks-admin.php:429
 msgctxt "Talk Publish box date format"
 msgid "M j, Y @ G:i"
 msgstr "j M Y @ G:i"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:714
+#: includes/admin/classes/class-wordcamp-talks-admin.php:736
 msgctxt "talks admin category column header"
 msgid "Categories"
 msgstr "Catégories"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:715
+#: includes/admin/classes/class-wordcamp-talks-admin.php:737
 msgctxt "talks admin tag column header"
 msgid "Tags"
 msgstr "Etiquettes"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:742
+#: includes/admin/classes/class-wordcamp-talks-admin.php:764
 msgctxt "downloaded csv content header"
 msgid "Content"
 msgstr "Contenu"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:743
+#: includes/admin/classes/class-wordcamp-talks-admin.php:765
 msgctxt "downloaded csv link header"
 msgid "Link"
 msgstr "Lien"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:751
+#: includes/admin/classes/class-wordcamp-talks-admin.php:773
 msgctxt "downloaded csv comments num header"
 msgid "# comments"
 msgstr "Nbre de commentaires"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:755
+#: includes/admin/classes/class-wordcamp-talks-admin.php:777
 msgctxt "downloaded csv rates num header"
 msgid "Average rating"
 msgstr "Evaluation moyenne"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:824
+#: includes/admin/classes/class-wordcamp-talks-admin.php:846
 msgctxt "separator for tags list"
 msgid ", "
 msgstr ", "
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:895
+#: includes/admin/classes/class-wordcamp-talks-admin.php:917
 msgctxt "Ratings metabox title"
 msgid "Rates"
 msgstr "Evaluations"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1122
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1144
 msgctxt "prefix of the downloaded csv"
 msgid "talks"
 msgstr "propositions_intervention"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1276
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1298
 msgctxt "help tab links"
 msgid "%1$sSupport Forums (en)%2$s"
 msgstr "%1$sForum de support (en)%2$s"
 
-#: includes/admin/classes/class-wordcamp-talks-admin.php:1456
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1478
 msgctxt "menu admin accordion box title"
 msgid "Talk Proposals"
 msgstr "Propositions d'intervention"
+
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1927
+msgctxt "Export Tool Title"
+msgid "Export Sessions & Speakers"
+msgstr "Exporter les Sessions et Orateurs"
+
+#: includes/admin/classes/class-wordcamp-talks-admin.php:1931
+msgctxt "Export Tool button"
+msgid "Export"
+msgstr "Exporter"
 
 #: includes/admin/settings.php:218
 msgctxt "wc_talks settings root slug conflict"
@@ -1703,7 +1760,7 @@ msgstr[1] "%s Propositions"
 #: includes/core/functions.php:1530
 msgctxt "Admin bar menu"
 msgid "WordCamp Talk Proposals"
-msgstr "Propositions au WordCamp"
+msgstr "Propositions pour le WordCamp"
 
 #. Translators: This string is used in urls, make sure to avoid using special
 #. chars

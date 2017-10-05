@@ -151,6 +151,9 @@ class WordCamp_Talks_Admin {
 		// Do some global stuff here (custom css rule)
 		add_action( 'admin_head', array( $this, 'admin_head' ), 10 );
 
+		// Add a specific metabox to manage WordCamp Talk Proposal menus.
+		add_action( 'load-nav-menus.php', array( $this, 'menu_accordion' ), 10, 1 );
+
 		/** Filters *******************************************************************/
 
 		// Updated message
@@ -172,8 +175,7 @@ class WordCamp_Talks_Admin {
 		// Add a link to About & settings page in plugins list
 		add_filter( 'plugin_action_links', array( $this, 'modify_plugin_action_links' ), 10, 2 );
 
-		// Add a specific metabox to manage WordCamp Talk Proposal menus.
-		add_action( 'load-nav-menus.php', array( $this, 'menu_accordion' ), 10, 1 );
+		add_filter( 'export_args', array( $this, 'export_sessions' ), 10, 1 );
 
 		/** Specific case: ratings ****************************************************/
 
@@ -252,6 +254,26 @@ class WordCamp_Talks_Admin {
 
 			foreach ( $menu['actions'] as $key => $action ) {
 				add_action( str_replace( '%page%', $screen_id, $key ), $action );
+			}
+		}
+
+		/**
+		 * For non WordCamp.org sites register a tools submenu page
+		 * to export sessions and speakers out of selected talks.
+		 */
+		if ( ! wct_is_wordcamp_site() ) {
+			// Register a tools submenu page
+			$total_talks = wp_count_posts( $this->post_type );
+
+			if ( ! empty( $total_talks->wct_selected ) ) {
+				$title = __( 'Export Sessions & Speakers', 'wordcamp-talks' );
+				add_management_page(
+					$title,
+					$title,
+					'manage_options',
+					'wct-export-selected',
+					array( $this, 'export_selected' )
+				);
 			}
 		}
 	}
@@ -1527,7 +1549,7 @@ class WordCamp_Talks_Admin {
 	/**
 	 * Add the inline edit workflow state control.
 	 *
-	 * @since  1.O.0
+	 * @since  1.0.0
 	 *
 	 * @param  string $column_name the column name.
 	 * @param  string $post_type   the post type identifier.
@@ -1879,6 +1901,170 @@ class WordCamp_Talks_Admin {
 		return array_merge( $links, array(
 			'settings' => '<a href="' . esc_url( add_query_arg( 'page', 'wc_talks', admin_url( 'options-general.php' ) ) ) . '">' . esc_html__( 'Settings', 'wordcamp-talks' ) . '</a>',
 		) );
+	}
+
+	/**
+	 * Export Tool for WordCamp Sessions and Speakers.
+	 *
+	 * @since  1.1.0
+	 */
+	public function export_selected() {
+		$url = add_query_arg( array( 'content' => $this->post_type . '-to-sessions', 'download' => 1 ), admin_url( 'export.php' ) );
+
+		$guide = array(
+			__( 'Clicking on the Export button will generate a file containing Speakers and Sessions posts out of the selected Talk proposals.', 'wordcamp-talks' ),
+			__( 'Thanks to this file, you will be able to import draft posts for these Speakers and Sessions into your WordCamp site.', 'wordcamp-talks' ),
+			__( 'Once done, from your WordCamp site, you will be able to eventually edit Speaker posts before publishing them.', 'wordcamp-talks' ),
+			__( 'The last step will consist in editing each imported Sessions to set their Speakers thanks to the autocomplete field of their Speakers metabox before publishing them!', 'wordcamp-talks' ),
+		);
+
+		printf( '<div class="wrap">
+				<h1>%1$s</h1>
+				<p class="description">%2$s</p>
+				<p class="attention">%3$s</p>
+				<p><a href="%4$s" class="button button-large button-primary">%5$s</a></p>
+			</div>',
+			esc_html_x( 'Export Sessions & Speakers', 'Export Tool Title', 'wordcamp-talks' ),
+			esc_html( join( ' ', $guide ) ),
+			esc_html__( 'NB: Talks submitted by authors who forgot to fill their biographical information will not be exported.', 'wordcamp-talks' ),
+			esc_url( $url ),
+			esc_html_x( 'Export', 'Export Tool button', 'wordcamp-talks' )
+		);
+	}
+
+	/**
+	 * Resets WordPress objects once the export is ready.
+	 *
+	 * @since 1.1.0
+	 */
+	public function reset_wp_objects() {
+		global $wp_post_types;
+
+		if ( isset( $this->reset_post_types ) ) {
+			$wp_post_type = $this->reset_post_types;
+
+			remove_action( 'rss2_head', array( $this, 'reset_post_types' ) );
+		}
+
+		remove_filter( 'wp_get_nav_menus', array( $this, 'nullify' ) );
+		remove_filter( 'get_terms',        array( $this, 'nullify' ) );
+	}
+
+	/**
+	 * Nullify WordPress Objects during Talks export.
+	 *
+	 * @since  1.1.0
+	 *
+	 * @return array An empty array.
+	 */
+	public function nullify() {
+		return array();
+	}
+
+	/**
+	 * Temporarly creates Sessions and Speakers out of Talks.
+	 *
+	 * @since  1.1.0
+	 *
+	 * @param  array  $args {
+	 *   An array of arguments.
+	 *   @see  export_wp() for the list of arguments.
+	 * }
+	 * @return array A list of export arguments.
+	 */
+	public function export_sessions( $args = array() ) {
+		if ( ! isset( $args['content'] ) || $this->post_type . '-to-sessions' !== $args['content'] ) {
+			return $args;
+		}
+
+		$wcb_types       = array( 'wcb_session', 'wcb_speaker' );
+		$args['content'] ='all';
+
+		foreach ( $wcb_types as $type ) {
+			register_post_type( $type );
+		}
+
+		// Delete any existing sessions and speakers.
+		$get_sessions_speakers      = new WP_Query;
+		$existing_sessions_speakers = $get_sessions_speakers->query( array(
+			'fields'        => 'ids',
+			'post_type'     => $wcb_types,
+			'nopaging'      => true,
+			'no_found_rows' => true,
+		) );
+
+		if ( $existing_sessions_speakers ) {
+			foreach( $existing_sessions_speakers as $s ) {
+				wp_delete_post( $s, true );
+			}
+		}
+
+		// Create sessions and speakers
+		$get_talks      = new WP_Query;
+		$selected_talks = $get_talks->query( array(
+			'post_type'     => $this->post_type,
+			'nopaging'      => true,
+			'no_found_rows' => true,
+			'post_status'   => 'wct_selected',
+		) );
+
+		if ( ! $selected_talks ) {
+			return $args;
+		}
+
+		$speakers = array();
+
+		foreach ( $selected_talks as $talk ) {
+			if ( ! in_array( $talk->post_author, $speakers, true ) ) {
+				$user = get_user_by( 'id', $talk->post_author );
+
+				// Only the descripton can be empty, but we never know!
+				if ( empty( $user->description ) || empty( $user->user_email ) || empty( $user->display_name ) ) {
+					continue;
+				}
+
+				wp_insert_post( array(
+					'post_type'    => 'wcb_speaker',
+					'post_title'   => $user->display_name,
+					'post_content' => $user->description,
+					'post_author'  => get_current_user_id(),
+					'meta_input'   => array(
+						'_wcb_speaker_email' => $user->user_email,
+					)
+				) );
+
+				// Prevent duplicates
+				$speakers[] = $talk->post_author;
+			}
+
+			$session = array_merge( get_object_vars( $talk ), array(
+				'ID'          => 0,
+				'post_type'   => 'wcb_session',
+				'post_status' => 'draft',
+				'post_author' => get_current_user_id(),
+			) );
+
+			wp_insert_post( $session );
+		}
+
+		global $wp_post_types;
+		$this->reset_post_types = $wp_post_types;
+
+		foreach ( $wp_post_types as $key => $supports ) {
+			if ( ! in_array( $key, $wcb_types, true ) ) {
+				$wp_post_types[ $key ]->can_export = false;
+			}
+		}
+
+		// Temporarly hook here to restore the post type's global asap.
+		add_action( 'rss2_head', array( $this, 'reset_wp_objects' ) );
+		remove_action( 'rss2_head', 'rss2_site_icon' );
+
+		// Temporarly nullify objects
+		add_filter( 'wp_get_nav_menus', array( $this, 'nullify' ) );
+		add_filter( 'get_terms',        array( $this, 'nullify' ) );
+
+		return $args;
 	}
 }
 
