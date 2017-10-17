@@ -679,6 +679,26 @@ class WordCamp_Talks_Admin {
 	}
 
 	/**
+	 * Get a specific talk state
+	 *
+	 * @since  1.1.0
+	 *
+	 * @param  WP_Post $talk The talk proposal object.
+	 * @return array         The state of the talk.
+	 */
+	public function get_talk_state( WP_Post $talk ) {
+		$state          = array();
+		$talk_states    = wct_get_statuses();
+		$current_status = get_post_status( $talk );
+
+		if ( isset( $talk_states[$current_status] ) ) {
+			$state =  array( $current_status => $talk_states[$current_status] );
+		}
+
+		return $state;
+	}
+
+	/**
 	 * Edit the current row post states to include Talk Proposals statuses.
 	 *
 	 * @since  1.1.0
@@ -688,15 +708,14 @@ class WordCamp_Talks_Admin {
 	 * @return array          The current row post states.
 	 */
 	public function talk_states( $states = array(), $post ) {
-		if ( $this->post_type !== get_post_type( $post ) ) {
+		if ( $this->post_type !== get_post_type( $post ) || ! empty( $this->downloading_csv ) ) {
 			return $states;
 		}
 
-		$talk_states    = wct_get_statuses();
-		$current_status = get_post_status( $post );
+		$state = $this->get_talk_state( $post );
 
-		if ( isset( $talk_states[$current_status] ) ) {
-			$states = array_merge( $states, array( $current_status => $talk_states[$current_status] ) );
+		if ( $state ) {
+			$states = array_merge( $states, $state );
 		}
 
 		return $states;
@@ -763,6 +782,7 @@ class WordCamp_Talks_Admin {
 					'title'        => $columns['title'],
 					'talk_content' => esc_html_x( 'Content', 'downloaded csv content header', 'wordcamp-talks' ),
 					'talk_link'    => esc_html_x( 'Link', 'downloaded csv link header', 'wordcamp-talks' ),
+					'talk_state'   => esc_html_x( 'Status', 'downloaded csv status header', 'wordcamp-talks' ),
 				);
 			}
 
@@ -860,13 +880,14 @@ class WordCamp_Talks_Admin {
 	 * Add extra info to downloaded csv file.
 	 *
 	 * @since 1.0.0
+	 * @since 1.1.0 Add a column to display the state.
 	 *
 	 * @param  string $column_name the column name.
 	 * @param  int    $talk_id     the ID of the talk (row).
 	 * @return string HTML Output
 	 */
 	public function talk_row_extra_data( $column_name = '', $talk_id = '' ) {
-		if ( 'talk_content' == $column_name ) {
+		if ( 'talk_content' === $column_name ) {
 			// Temporarly remove filters
 			remove_filter( 'the_content', 'wptexturize'     );
 			remove_filter( 'the_content', 'convert_smilies' );
@@ -878,8 +899,14 @@ class WordCamp_Talks_Admin {
 			add_filter( 'the_content', 'wptexturize'     );
 			add_filter( 'the_content', 'convert_smilies' );
 			add_filter( 'the_content', 'convert_chars'   );
-		} else if ( 'talk_link' == $column_name ) {
+		} else if ( 'talk_link' === $column_name ) {
 			the_permalink();
+		} else if ( 'talk_state' === $column_name ) {
+			$state = $this->get_talk_state( get_post() );
+
+			if ( is_array( $state ) ) {
+				echo reset( $state );
+			}
 		}
 	}
 
