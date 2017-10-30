@@ -1225,6 +1225,20 @@ function wct_generate_csv_content( $content = '' ) {
 	// Strip all tags
 	$content = wp_strip_all_tags( $content, true );
 
+	// Make sure =, +, -, @ are not the first char of the field.
+	$triggers   = array( '=', '+', '-', '@' );
+	$delimiters = array( ',', ';', ':', '|', '^', "\n", "\t", " " );
+
+	if ( in_array( mb_substr( $content, 0, 1 ), array_merge( $triggers, $delimiters ), true ) ) {
+		$content = "'" . $content;
+	}
+
+	foreach ( $delimiters as $delimiter ) {
+		foreach ( $triggers as $trigger ) {
+			$content = str_replace( $delimiter . $trigger, $delimiter . "'" . $trigger, $content );
+		}
+	}
+
 	return apply_filters( 'wct_generate_csv_content', $content );
 }
 
