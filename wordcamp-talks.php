@@ -3,9 +3,9 @@
 Plugin Name: WordCamp Talks
 Plugin URI: https://github.com/imath/wordcamp-talks/
 Description: A WordCamp Talk Submission System
-Version: 1.0.0-beta2
+Version: 1.0.0-beta3
 Requires at least: 4.6.1
-Tested up to: 4.7
+Tested up to: 4.9
 License: GNU/GPL 2
 Author: imath
 Author URI: http://imathi.eu/
@@ -76,7 +76,7 @@ final class WordCamp_Talks {
 	 */
 	private function setup_globals() {
 		// Version
-		$this->version = '1.0.0-beta2';
+		$this->version = '1.0.0-beta3';
 
 		// Domain
 		$this->domain = 'wordcamp-talks';
