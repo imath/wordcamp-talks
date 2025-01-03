@@ -1,6 +1,8 @@
 WordCamp Talks
 ==============
 
+This WP Plugin is no more supported and this repository is now archived.
+
 If you need to manage a "Call for Speakers" for a WordCamp you are an organizer of, this plugin can make you save some time and ease your life.
 
 Candidates will be able to sign up to your WordPress site using a form including the custom contact methods you can easily generate from the "Talks > Settings" Administration screen as shown below:
